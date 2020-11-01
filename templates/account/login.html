@@ -1,0 +1,332 @@
+{% load static %}
+
+{% load cart_template_tags%}
+{% load crispy_forms_tags %}
+
+{% load  socialaccount %}
+{% providers_media_js %}
+{% load i18n %}
+{% load account socialaccount %}
+
+
+
+{% block content %}
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+<link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+  <!-- Material Design Bootstrap -->
+  <link href="{% static 'css/mdb.min.css' %}" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Josefin+Sans:300,300i,400,400i,700,700i" rel="stylesheet">
+  <!-- Your custom styles (optional) -->
+  <link href="{%static 'css/style.min.css'%}" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:wght@700&display=swap" rel="stylesheet">
+
+  <style type="text/css">
+  
+    html,
+    body,
+    header,
+    .carousel {
+      height: 60vh;
+      font-family: 'Josefin Sans', sans-serif;
+    }
+    body::-webkit-scrollbar {
+  width: 12px;               /* width of the entire scrollbar */
+}
+body::-webkit-scrollbar-track {
+  background: pink;        /* color of the tracking area */
+}
+body::-webkit-scrollbar-thumb {
+  background-color:lightcoral;    /* color of the scroll thumb */
+  border-radius: 20px;       /* roundness of the scroll thumb */
+  border: 3px solid pink;  /* creates padding around scroll thumb */
+}
+#search{
+  margin-top: -80px;
+}
+
+@media (max-width: 740px) {
+
+#search{
+  margin-top: 10px;
+
+}
+
+
+}
+    
+    @media (max-width: 740px) {
+
+      html,
+      body,
+      header,
+      .carousel {
+        height: 100vh;
+      }
+      .row{
+        width: 400px;
+        float: left;
+      }
+      form{
+        float: left;
+        width: 300px;
+      }
+      .col{
+        offset: none;
+      }
+    }
+    label{
+      display: none;
+    }
+
+    @media (min-width: 800px) and (max-width: 850px) {
+
+      html,
+      body,
+      header,
+      .carousel {
+        height: 100vh;
+      }
+    }
+    #fb-button {
+background: #3b5998;
+color:white;
+border: none;
+height:  50px;
+margin-bottom: 20px;
+}
+  
+
+  </style>
+
+ <nav class="navbar fixed-top navbar-expand-lg navbar-light white scrolling-navbar" style="position: relative;font-weight: 500;">
+  <div class="container">
+
+  
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Links -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+      <div class="image">
+        <img src="{% static 'logo.png'%}" alt="" srcset="" style="height: 100px; width: 100px; margin-top: 22px;">
+       </div>
+      
+      <ul class="navbar-nav mr-auto" style="margin-left: 300px;margin-top: 100px;">
+        
+       
+        <li class="nav-item " style="margin-right: 50px;">
+          <a class="nav-link waves-effect" href="/paintings">Paintings
+            <span class="sr-only">(current)</span>
+          </a>
+        </li>
+        <li class="nav-item" style="margin-right: 50px;">
+          <a class="nav-link waves-effect" href="/photographs" target="_blank">Photographs</a>
+        </li>
+        <li class="nav-item" style="margin-right: 50px;">
+          <a class="nav-link waves-effect" href="/">Sculptures
+            <span class="sr-only">(current)</span>
+          </a>
+        </li>
+        <li class="nav-item" style="margin-right: 50px;">
+          <a class="nav-link waves-effect" href="/prints" target="_blank">Prints</a>
+        </li>
+        <li class="nav-item" style="margin-right: 50px;">
+          <a class="nav-link waves-effect" href="/checkout" target="_blank">Artists</a>
+        </li>
+      
+    
+      </ul >
+
+      <!-- Right -->
+      <ul class="navbar-nav nav-flex-icons" style = "margin-top:-80px;margin-left: -400px;">
+        <li class="nav-item">
+          <a class="nav-link waves-effect" href="{%url 'core:order-summary'%}">
+            <span class="badge red z-depth-1 mr-1"> {{request.user|cart_item_count}}  </span>
+            
+            <i class="fas fa-shopping-cart"></i>
+            <span class="clearfix d-none d-sm-inline-block">  </span>
+          </a>
+        </li>
+        {% if user.is_authenticated %}
+       
+        <li class="nav-item">
+          <a href="{% url 'account_logout'%}" class="nav-link waves-effect" target="_blank">
+            <span class="clearfix d-none d-sm-inline-block">Logout</span>
+          </a>
+        </li>
+        {% else %}
+        <li class="nav-item">
+          <a href="{% url 'account_login'%}" class="nav-link waves-effect" target="_blank">
+            <span class="clearfix d-none d-sm-inline-block">signin </span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="{% url 'account_signup'%}" class="nav-link waves-effect" target="_blank">
+            <span class="clearfix d-none d-sm-inline-block">| Register</span>
+          </a>
+        </li>
+
+        {% endif %}
+        
+     
+      
+      </ul>
+
+    </div>
+
+  </div>
+  <div class="col-sm-4 col-md-4 navbar-right" style = "margin-top:-80px" id = "search">
+
+    <form class="navbar-form" role="search" action="{% url 'core:search_results' %}">
+
+      <div class="input-group md-form form-sm form-2 pl-0">
+        <input type="text" class="form-control" placeholder="Search Item..." name="title" class="form-control my-0 py-1 red-border" style="border: solid 1px red;">
+        <div class="input-group-append">
+          <span class="input-group-text red lighten-3" id="basic-text1"><i class="fas fa-search text-grey"
+              aria-hidden="true"></i></span>
+        </div>
+       
+      </div>
+
+    </form>
+  </div>
+</nav>
+<body>
+  
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '326790765061673',
+      cookie     : true,
+      xfbml      : true,
+      version    : 'v8.0'
+    });
+      
+    FB.AppEvents.logPageView();   
+      
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "https://connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+   FB.getLoginStatus(function(response) {
+    statusChangeCallback(response);
+});
+</script>
+
+
+
+
+<div >
+<section class="text-center mb-4" style="margin-top: 25px;"  >
+
+
+  <!--Grid row-->
+  <div class="row wow fadeIn" style="text-align: center; ">
+
+    <div class="col-md-4 offset-3 col-xs-12" style="border: black solid 1px;margin-top: -20px;">  <br>
+
+    <h1 style="font-weight: normal;font-size: 48px;">Welcome Back!</h1>
+    <hr>
+
+{% get_providers as socialaccount_providers %}
+
+{% if socialaccount_providers %}
+
+
+<div class="socialaccount_ballot" style="text-align: center;">
+
+  
+  <ul class="socialaccount_providers" style="text-align: center;">
+    {% include "socialaccount/snippets/provider_list.html" with process="login" %}
+  </ul>
+
+
+
+</div>
+
+
+
+
+{% else %}
+<p>{% blocktrans %}If you have not created an account yet, then please
+<a href="{{ signup_url }}">sign up</a> first.{% endblocktrans %}</p>
+{% endif %}
+<div class="col-md-12">
+<div class="form" style="text-align: center;display: inline-block;">
+<form class="login" method="POST" action="{% url 'account_login' %}" style="width: 300px;text-align: left; " >
+  {% csrf_token %}
+  {{ form|crispy}}
+  <p style="margin-left: 20px;"> Remember me</p>
+  {% if redirect_field_value %}
+  <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" /> 
+  {% endif %}
+  <button class="btn  btn-lg btn-danger" type="submit" style="width: 100%; margin-top: 30px;">{% trans "Log In" %}</button> <br> <br> 
+  <div style="text-align: center;">
+  <a  href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a>
+</div>
+</form>
+</div>
+</div>
+<strong><hr></strong>
+
+<div style="display: inline-block;">
+  <p>
+    Don't have an account ? <a href="{% url 'account_signup'%}" >
+  <span class="clearfix d-none d-sm-inline-block">Sign Up</span>
+</p>
+</a>
+</div>
+</div>
+</div>
+
+
+
+
+
+  
+
+  </div>
+</section>
+</div>
+  {% endblock %}
+
+
+
+<script type="text/javascript" src="{%static 'js/jquery-3.4.1.min.js'%}"></script>
+<!-- Bootstrap tooltips -->
+<script type="text/javascript" src="{% static 'js/popper.min.js' %}"></script>
+<!-- Bootstrap core JavaScript -->
+<script type="text/javascript" src="{% static 'js/bootstrap.min.js'%}"></script>
+<!-- MDB core JavaScript -->
+<script type="text/javascript" src="{% static 'js/mdb.min.js' %}"></script>
+<!-- Initializations -->
+<script type="text/javascript">
+  // Animations initialization
+  new WOW().init();
+
+</script>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script type="text/javascript">
+  // Load jquery straight from the cdn for this page.
+  $(function() {
+    // We need some mappings for Providers names from AllAuth to the icon class names.
+    $('.btn-google').addClass('btn-google-plus');
+    $('.btn-facebook_oauth2').addClass('btn-facebook');
+    $('.fa-facebook_oauth2').addClass('fa-facebook');
+
+  });
+</script>
+
+
+</body>
+
+

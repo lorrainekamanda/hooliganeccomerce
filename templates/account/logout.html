@@ -1,0 +1,262 @@
+
+{% load static %}
+{% load cart_template_tags%}
+{% load i18n %}
+
+
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>E-Commerce</title>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+  <link href="https://fonts.googleapis.com/css?family=Josefin+Sans:300,300i,400,400i,700,700i" rel="stylesheet">
+  <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+
+  <link href="{% static 'css/mdb.min.css' %}" rel="stylesheet">
+  <!-- Your custom styles (optional) -->
+  <link href="{%static 'css/style.min.css'%}" rel="stylesheet">
+  <link href="{%static 'css/style.css'%}" rel="stylesheet">
+  <style type="text/css">
+    html,
+    body,
+    header,
+    .carousel {
+      height: 60vh;
+      font-family: 'Josefin Sans', sans-serif;
+      scroll-behavior: smooth;
+    }
+    body::-webkit-scrollbar {
+  width: 12px;               /* width of the entire scrollbar */
+}
+body::-webkit-scrollbar-track {
+  background: pink;        /* color of the tracking area */
+}
+body::-webkit-scrollbar-thumb {
+  background-color:lightcoral;    /* color of the scroll thumb */
+  border-radius: 20px;       /* roundness of the scroll thumb */
+  border: 3px solid pink;  /* creates padding around scroll thumb */
+}
+
+ 
+    @media (max-width: 740px) {
+
+      html,
+      body,
+      header,
+      .carousel {
+        height: 100vh;
+      }
+    }
+
+    @media (min-width: 800px) and (max-width: 850px) {
+
+      html,
+      body,
+      header,
+      .carousel {
+        height: 100vh;
+      }
+    }
+
+  </style>
+</head>
+<body>
+  <nav class="navbar fixed-top navbar-expand-lg navbar-light white scrolling-navbar" style="position: relative;font-weight: 500;" id = "overlay">
+    <div class="container">
+
+    
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <!-- Links -->
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+        <div class="image">
+          <img src="{% static 'logo.png'%}" alt="" srcset="" style="height: 100px; width: 100px; margin-top: 22px;">
+         </div>
+        
+        <ul class="navbar-nav mr-auto" style="margin-left: 300px;margin-top: 100px;">
+          
+         
+          <li class="nav-item " style="margin-right: 50px;">
+            <a class="nav-link waves-effect" href="/paintings">Paintings
+              <span class="sr-only">(current)</span>
+            </a>
+          </li>
+          <li class="nav-item" style="margin-right: 50px;">
+            <a class="nav-link waves-effect" href="/photographs" target="_blank">Photographs</a>
+          </li>
+          <li class="nav-item" style="margin-right: 50px;">
+            <a class="nav-link waves-effect" href="/">Sculptures
+              <span class="sr-only">(current)</span>
+            </a>
+          </li>
+          <li class="nav-item" style="margin-right: 50px;">
+            <a class="nav-link waves-effect" href="/prints" target="_blank">Prints</a>
+          </li>
+          <li class="nav-item" style="margin-right: 50px;">
+            <a class="nav-link waves-effect" href="/artists" target="_blank">Artists</a>
+          </li>
+        
+          <!-- <li class="nav-item">
+            <a class="nav-link waves-effect" href="https://mdbootstrap.com/education/bootstrap/" target="_blank">Free
+              tutorials</a>
+          </li> -->
+        </ul >
+
+        <!-- Right -->
+        <ul class="navbar-nav nav-flex-icons" style = "margin-top:-80px;margin-left: -400px;">
+          {% if user.is_authenticated %}
+          <li class="nav-item">
+            <a class="nav-link waves-effect" href="{%url 'core:order-summary'%}">
+              <span class="badge red z-depth-1 mr-1"> {{request.user|cart_item_count}}  </span>
+              
+              <i class="fas fa-shopping-cart"></i>
+              <span class="clearfix d-none d-sm-inline-block">  </span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{% url 'account_logout'%}" class="nav-link waves-effect" target="_blank">
+              <span class="clearfix d-none d-sm-inline-block">Logout</span>
+            </a>
+          </li>
+          {% else %}
+          <li class="nav-item">
+            <a href="{% url 'account_login'%}" class="nav-link waves-effect" target="_blank">
+              <span class="clearfix d-none d-sm-inline-block">signin </span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{% url 'account_signup'%}" class="nav-link waves-effect" target="_blank">
+              <span class="clearfix d-none d-sm-inline-block">| Register</span>
+            </a>
+          </li>
+
+          {% endif %}
+          
+       
+        
+        </ul>
+
+      </div>
+
+    </div>
+    <div class="col-sm-4 col-md-4 navbar-right" style = "margin-top:-80px">
+
+      <form class="navbar-form" role="search" action="{% url 'core:search_results' %}">
+
+        <div class="input-group md-form form-sm form-2 pl-0">
+          <input type="text" class="form-control" placeholder="Search Item..." name="title" class="form-control my-0 py-1 red-border" style="border: solid 1px red;">
+          <div class="input-group-append">
+            <span class="input-group-text red lighten-3" id="basic-text1"><i class="fas fa-search text-grey"
+                aria-hidden="true"></i></span>
+          </div>
+         
+        </div>
+
+      </form>
+    </div>
+  </nav>
+  <div class="row" style="text-align: center;">
+  <div class="col-md-4" style="text-align: center;margin-top: 5%;left: 30%; margin-bottom: 5%;">
+    <div class="card" >
+
+     <img src="{% static 'logout.png'%}" alt="" srcset="" class="card-img-top" style="height: 30%;width: 30%;justify-content: center;">
+  <h1>{% trans "Sign Out" %}</h1>
+
+<p>{% trans 'Are you sure you want to sign out?' %}</p>
+
+<form method="post" action="{% url 'account_logout' %}">
+  {% csrf_token %}
+  {% if redirect_field_value %}
+  <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
+  {% endif %}
+  <button  class = "btn btn-danger" type="submit">{% trans 'Sign Out' %}</button>
+</form>
+</div>
+</div>
+</div>
+<div>
+  <a href="#overlay">
+  <button class="btn btn-danger btn-sm" style="float: right;"><i class="fas fa-level-up-alt"></i></button>
+</div>
+</a>
+<section class="footer" style="background-color: rgb(36, 32, 32); color: white; height: 100%;">
+  <div class="container-fluid" style="margin-bottom: -320px;" >
+    <div class="footer-logo text-center" > <br> <br>
+      
+    </div>
+    <div class="row wow fadeIn"   >
+      <div class="col-lg-3 col-sm-6" >
+        <div class="footer-widget about-widget">
+          <a href="index.html"><img src="{% static 'logo.png'%}" alt="" style="margin-left: 20px;"></a>
+        
+        </div>
+      </div>
+      <div class="col-lg-3 col-sm-6">
+        <div class="footer-widget about-widget" >
+          <h2>About Us</h2>
+          <p>we represent artists from all over the world find amazing photographs,paintings,sculptures and prints.</p>
+          <img src="{% static 'cards.png' %}" alt="">
+          
+    
+        </div>
+      </div>
+      <div class="col-lg-3 col-sm-6">
+        <div class="foot">
+          <h2>Useful Links</h2>
+          <ul>
+            <li><a href="">About Us</a></li>
+            <li><a href="">Track Orders</a></li>
+        
+            <li><a href="">Shipping</a></li>
+            
+          </ul>
+        </div>
+      </div>
+      <div class="col-lg-3 col-sm-6" style="height: 100%;">
+        <div class="footer-widget contact-widget">
+          <h2>Contact Info</h2>
+          <div class="con-info">
+          
+            <p>Hooligan LLC Ltd </p>
+          </div>
+          <div class="con-info">
+          
+            <p>1481 Creekside Lane  Avila Beach </p>
+          </div>
+          <div class="con-info">
+          
+            <p>+53 345 7953 32453</p>
+          </div>
+          <div class="con-info">
+          
+            <p>office@youremail.com</p>
+          </div>
+          <div class="social-links" style="height: 200px; width: 200px; color: white; font-size: 30px;float: right;margin-bottom: -200px;">
+            <a href="" class="instagram"><i class="fab fa-instagram"></i></a>
+        
+            <a href="" class="facebook"><i class="fab fa-facebook"></i></a>
+            <a href="" class="twitter"><i class="fab fa-twitter"></i></a>
+            
+          </div>
+  
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+</body>
+</html>
+
+
+
+{% endblock %}

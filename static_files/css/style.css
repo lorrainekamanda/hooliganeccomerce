@@ -1,0 +1,104 @@
+/* Required height of parents of the Half Page Carousel for proper displaying carousel itself */
+html,
+body,
+.view {
+  height: 100%; }
+
+/* Half Page Carousel itself*/
+.carousel {
+  height: 50%; }
+  .carousel .carousel-inner {
+    height: 100%; }
+    .carousel .carousel-inner .carousel-item,
+    .carousel .carousel-inner .active {
+      height: 100%; }
+
+/* Adjustment for mobile devices*/
+@media (max-width: 776px) {
+  .carousel {
+    height: 100%; } }
+
+/* Footer color for sake of consistency with Navbar */
+.page-footer {
+  background-color: #929FBA; }
+
+.msg{
+  margin-top: 75px;
+}
+#view1a{
+  background-image: url('../timon-klauser-3MAmj1ZKSZA-unsplash.jpg');
+  background-repeat: no-repeat; 
+  background-size: cover;
+  background-position: center center;
+  height: 660px;
+  box-shadow:inset 0 0 0 2000px rgba(26, 21, 24, 0.685);
+}
+
+#view1{
+  background-image: url('../timon-klauser-3MAmj1ZKSZA-unsplash.jpg');
+  background-repeat: no-repeat; 
+  background-size: cover;
+  background-position: center center;
+  height: 660px;
+  box-shadow:inset 0 0 0 2000px rgba(26, 21, 24, 0.685);
+}
+
+#view2{
+  background-image: url('../bg.jpg');
+  background-repeat: no-repeat; 
+  background-size: cover;
+  background-position: center center;
+  height: 660px;
+  box-shadow:inset 0 0 0 2000px rgba(26, 21, 24, 0.685);
+}
+#view3{
+  background-image: url('../bg2.jpg');
+  background-repeat: no-repeat; 
+  background-size: cover;
+  background-position: center center;
+  height: 660px;
+  box-shadow:inset 0 0 0 2000px rgba(26, 21, 24, 0.685);
+}
+.back-to-top {
+  position: fixed;
+  display: none;
+  right: 15px;
+  bottom: 15px;
+  z-index: 3;
+  scroll-behavior: smooth;
+  text-decoration: none;
+  }
+  
+  .back-to-top i {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  width: 40px;
+  height: 40px;
+  border-radius: 4px;
+  background: red;
+  color: #fff;
+  transition: all 0.4s;
+  text-decoration: none;
+  }
+  
+  .back-to-top i:hover {
+  background:rgb(151, 41, 41);
+  color: #fff;
+  text-decoration: none;
+  
+  }
+
+#search{
+  margin-top: -80px;
+}
+
+@media (max-width: 740px) {
+
+#search{
+  margin-top: -30px;
+}
+
+
+}

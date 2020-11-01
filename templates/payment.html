@@ -1,0 +1,532 @@
+{% load static %}
+{% load cart_template_tags%}
+{% load crispy_forms_tags %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>E-Commerce</title>
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+  <link href="https://fonts.googleapis.com/css?family=Josefin+Sans:300,300i,400,400i,700,700i" rel="stylesheet">
+  <!-- Bootstrap core CSS -->
+  <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+  <!-- Material Design Bootstrap -->
+  <link href="{% static 'css/mdb.min.css' %}" rel="stylesheet">
+  <!-- Your custom styles (optional) -->
+  <link href="{%static 'css/style.min.css'%}" rel="stylesheet">
+  <style type="text/css">
+    html,
+    body,
+    header,
+    .carousel {
+      height: 60vh;
+      font-family: 'Josefin Sans', sans-serif;
+      scroll-behavior: smooth;
+    }
+    body::-webkit-scrollbar {
+  width: 12px;               /* width of the entire scrollbar */
+}
+body::-webkit-scrollbar-track {
+  background: pink;        /* color of the tracking area */
+}
+body::-webkit-scrollbar-thumb {
+  background-color:lightcoral;    /* color of the scroll thumb */
+  border-radius: 20px;       /* roundness of the scroll thumb */
+  border: 3px solid pink;  /* creates padding around scroll thumb */
+}
+
+    @media (max-width: 740px) {
+
+      html,
+      body,
+      header,
+      .carousel {
+        height: 100vh;
+      }
+    }
+
+    @media (min-width: 800px) and (max-width: 850px) {
+
+      html,
+      body,
+      header,
+      .carousel {
+        height: 100vh;
+      }
+    }
+
+  </style>
+</head>
+
+<body class="grey lighten-3">
+
+  <nav class="navbar fixed-top navbar-expand-lg navbar-light white scrolling-navbar" style="position: relative; font-weight: 500;" id = "overlay">
+    <div class="container">
+  
+    
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+  
+      <!-- Links -->
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+  
+        <div class="image">
+          <img src="{% static 'logo.png'%}" alt="" srcset="" style="height: 100px; width: 100px; margin-top: 22px;">
+         </div>
+   
+        <ul class="navbar-nav mr-auto" style="margin-left: 250px;margin-top: 100px;">
+          
+         
+          <li class="nav-item " style="margin-right: 50px;">
+            <a class="nav-link waves-effect" href="/paintings">Paintings
+              <span class="sr-only">(current)</span>
+            </a>
+          </li>
+          <li class="nav-item" style="margin-right: 50px;">
+            <a class="nav-link waves-effect" href="/photographs" target="_blank">Photographs</a>
+          </li>
+          <li class="nav-item" style="margin-right: 50px;">
+            <a class="nav-link waves-effect" href="/">Sculptures
+              <span class="sr-only">(current)</span>
+            </a>
+          </li>
+          <li class="nav-item" style="margin-right: 50px;">
+            <a class="nav-link waves-effect" href="/prints" target="_blank">Prints</a>
+          </li>
+          <li class="nav-item" style="margin-right: 50px;">
+            <a class="nav-link waves-effect" href="/artists" target="_blank">Artists</a>
+          </li>
+        
+      
+        </ul >
+  
+        <!-- Right -->
+        <ul class="navbar-nav nav-flex-icons" style = "margin-top:-80px;margin-left: -400px;">
+          <li class="nav-item">
+            <a class="nav-link waves-effect" href="{%url 'core:order-summary'%}">
+              <span class="badge red z-depth-1 mr-1" > {{request.user|cart_item_count}}  </span>
+              
+              <i class="fas fa-shopping-cart" style="height: 20px; width: 20px;"></i>
+              <span class="clearfix d-none d-sm-inline-block">  </span>
+            </a>
+          </li>
+          {% if user.is_authenticated %}
+          
+          <li class="nav-item">
+            <a href="{% url 'account_logout'%}" class="nav-link waves-effect" target="_blank">
+              <span class="clearfix d-none d-sm-inline-block">Logout</span>
+            </a>
+          </li>
+          {% else %}
+          <li class="nav-item">
+            <a href="{% url 'account_login'%}" class="nav-link waves-effect" target="_blank">
+              <span class="clearfix d-none d-sm-inline-block">Signin  </span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{% url 'account_signup'%}" class="nav-link waves-effect" target="_blank">
+              <span class="clearfix d-none d-sm-inline-block">| Create Account</span>
+            </a>
+          </li>
+  
+          {% endif %}
+          
+       
+        
+        </ul>
+  
+      </div>
+  
+    </div>
+    <div class="col-sm-4 col-md-4 navbar-right" style = "margin-top:-80px">
+  
+      <form class="navbar-form" role="search" action="{% url 'core:search_results' %}">
+  
+        <div class="input-group md-form form-sm form-2 pl-0">
+          <input type="text" class="form-control" placeholder="Search Item..." name="title" class="form-control my-0 py-1 red-border" style="border: solid 1px red;">
+          <div class="input-group-append">
+            <span class="input-group-text red lighten-3" id="basic-text1"><i class="fas fa-search text-grey"
+                aria-hidden="true"></i></span>
+          </div>
+         
+        </div>
+  
+      </form>
+    </div>
+  </nav>
+  <style>
+
+    #stripeBtnLabel {
+    
+      font-size: 16px;
+      font-variant: normal;
+      padding: 0;
+      margin: 0;
+      -webkit-font-smoothing: antialiased;
+      font-weight: 500;
+      display: block;
+    }
+    
+    #stripeBtn {
+      border: none;
+      border-radius: 4px;
+      outline: none;
+      text-decoration: none;
+      color: #fff;
+      background: #32325d;
+      white-space: nowrap;
+      display: inline-block;
+      height: 40px;
+      line-height: 40px;
+      box-shadow: 0 4px 6px rgba(50, 50, 93, .11), 0 1px 3px rgba(0, 0, 0, .08);
+      border-radius: 4px;
+      font-size: 15px;
+      font-weight: 600;
+      letter-spacing: 0.025em;
+      text-decoration: none;
+      -webkit-transition: all 150ms ease;
+      transition: all 150ms ease;
+     
+      width: 100%
+    }
+    
+    button:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 7px 14px rgba(50, 50, 93, .10), 0 3px 6px rgba(0, 0, 0, .08);
+      background-color: #43458b;
+    }
+    
+    .stripe-form {
+      padding: 5px 30px;
+    }
+    
+    #card-errors {
+      height: 20px;
+      padding: 4px 0;
+      color: #fa755a;
+    }
+    
+    .stripe-form-row {
+      width: 100%;
+      float: left;
+      margin-top: 5px;
+      margin-bottom: 5px;
+    }
+    
+  
+    .StripeElement {
+      box-sizing: border-box;
+    
+      height: 40px;
+    
+      padding: 10px 12px;
+    
+      border: 1px solid transparent;
+      border-radius: 4px;
+      background-color: white;
+    
+      box-shadow: 0 1px 3px 0 #e6ebf1;
+      -webkit-transition: box-shadow 150ms ease;
+      transition: box-shadow 150ms ease;
+    }
+    
+    .StripeElement--focus {
+      box-shadow: 0 1px 3px 0 #cfd7df;
+    }
+    
+    .StripeElement--invalid {
+      border-color: #fa755a;
+    }
+    
+    .StripeElement--webkit-autofill {
+      background-color: #fefde5 !important;
+    }
+    
+    .current-card-form {
+      display: none;
+    }
+    
+    </style>
+    <div style="margin-top: 75px;">
+ <h2 class="my-5 h2 text-center" >Payment</h2>
+</div>
+      <main >
+        <div class="container wow fadeIn">
+    
+          
+    
+          <div class="row">
+    
+            <div class="col-md-12 mb-4">
+              <div class="card">
+    
+                {% if card %}
+                  <div style="padding: 5px 30px;">
+                    <div class="custom-control custom-checkbox">
+                      <input type="checkbox" class="custom-control-input" name="use_default_card" id="use_default_card">
+                      <label class="custom-control-label" for="use_default_card">Use default card:
+                        **** **** **** {{ card.last4 }} 
+                      <span>Exp: {{ card.exp_month }}/{{ card.exp_year }}</span></label>
+                    </div>
+                  </div>
+                {% endif %}
+    
+                <div class="current-card-form">
+                  <form action="." method="post" class="stripe-form">
+                      {% csrf_token %}
+                      <input type="hidden" name="use_default" value="true">
+                      <div class="stripe-form-row">
+                        <button id="stripeBtn" class="btn btn-md">Submit Payment</button>
+                      </div>
+                      <div id="card-errors" role="alert"></div>
+                  </form>
+                </div>
+    
+                <div class="new-card-form">
+                  <form action="." method="post" class="stripe-form" id="stripe-form">
+                      {% csrf_token %}
+                      <div class="stripe-form-row" id="creditCard">
+                          <label for="card-element" id="stripeBtnLabel">
+                              Credit or debit card
+                          </label>
+                          <div id="card-element" class="StripeElement StripeElement--empty"><div class="__PrivateStripeElement" style="margin: 0px !important; padding: 0px !important; border: none !important; display: block !important; background: transparent !important; position: relative !important; opacity: 1 !important;"><iframe frameborder="0" allowtransparency="true" scrolling="no" name="__privateStripeFrame5" allowpaymentrequest="true" src="https://js.stripe.com/v3/elements-inner-card-19066928f2ed1ba3ffada645e45f5b50.html#style[base][color]=%2332325d&amp;style[base][fontFamily]=%22Helvetica+Neue%22%2C+Helvetica%2C+sans-serif&amp;style[base][fontSmoothing]=antialiased&amp;style[base][fontSize]=16px&amp;style[base][::placeholder][color]=%23aab7c4&amp;style[invalid][color]=%23fa755a&amp;style[invalid][iconColor]=%23fa755a&amp;componentName=card&amp;wait=false&amp;rtl=false&amp;keyMode=test&amp;origin=https%3A%2F%2Fstripe.com&amp;referrer=https%3A%2F%2Fstripe.com%2Fdocs%2Fstripe-js&amp;controllerId=__privateStripeController1" title="Secure payment input frame" style="border: none !important; margin: 0px !important; padding: 0px !important; width: 1px !important; min-width: 100% !important; overflow: hidden !important; display: block !important; height: 19.2px;"></iframe><input class="__PrivateStripeElement-input" aria-hidden="true" aria-label=" " autocomplete="false" maxlength="1" style="border: none !important; display: block !important; position: absolute !important; height: 1px !important; top: 0px !important; left: 0px !important; padding: 0px !important; margin: 0px !important; width: 100% !important; opacity: 0 !important; background: transparent !important; pointer-events: none !important; font-size: 16px !important;"></div></div>
+                      </div>
+                      <div class="stripe-form-row">
+                        <button id="stripeBtn">Submit Payment</button>
+                      </div>
+                      <div class="stripe-form-row">
+                        <div class="custom-control custom-checkbox">
+                          <input type="checkbox" class="custom-control-input" name="save" id="save_card_info">
+                          <label class="custom-control-label" for="save_card_info">Save for future purchases</label>
+                        </div>
+                      </div>
+                      <div id="card-errors" role="alert"></div>
+                  </form>
+                </div>
+    
+              </div>
+            </div>
+    
+            <div class="col-md-12 mb-4">
+              <h4 class="d-flex justify-content-between align-items-center mb-3">
+              <span class="text-muted">Your cart</span>
+              <span class="badge badge-secondary badge-pill">{{ order.items.count }}</span>
+              </h4>
+              <ul class="list-group mb-3 z-depth-1">
+              {% for order_item in order.items.all %}
+              <li class="list-group-item d-flex justify-content-between lh-condensed">
+                  <div>
+                  <h6 class="my-0">{{ order_item.quantity }} x {{ order_item.item.title}}</h6>
+                  <small class="text-muted">{{ order_item.item.description}}</small>
+                  </div>
+                  <span class="text-muted">${{ order_item.get_final_price }}</span>
+              </li>
+              {% endfor %}
+              {% if order.coupon %}
+              <li class="list-group-item d-flex justify-content-between bg-light">
+                  <div class="text-success">
+                  <h6 class="my-0">Promo code</h6>
+                  <small>{{ order.coupon.code }}</small>
+                  </div>
+                  <span class="text-success">-${{ order.coupon.amount }}</span>
+              </li>
+              {% endif %}
+              <li class="list-group-item d-flex justify-content-between">
+                  <span>Total (USD)</span>
+                  <strong>${{ order.get_total }}</strong>
+              </li>
+              </ul>
+          
+            
+          
+          </div>
+    
+          </div>
+    
+        </div>
+      </main>
+
+      <div style="margin-bottom: -55px;">
+        <a href="#overlay">
+        <button class="btn btn-danger btn-sm" style="float: right;"><i class="fas fa-level-up-alt"></i></button>
+      </div>
+    </a>
+      <section class="footer" style="background-color: rgb(36, 32, 32); color: white; height: 100%;margin-top: 50px;">
+        <div class="container-fluid" style="margin-bottom: -320px;" >
+          <div class="footer-logo text-center" > <br> <br>
+            
+          </div>
+          <div class="row wow fadeIn"   >
+            <div class="col-lg-3 col-sm-6" >
+              <div class="footer-widget about-widget">
+                <a href="index.html"><img src="{% static 'logo.png'%}" alt="" style="margin-left: 20px;"></a>
+              
+              </div>
+            </div>
+            <div class="col-lg-3 col-sm-6">
+              <div class="footer-widget about-widget" >
+                <h2>About Us</h2>
+                <p>we represent artists from all over the world find amazing photographs,paintings,sculptures and prints.</p>
+                <img src="{% static 'cards.png' %}" alt="">
+                
+          
+              </div>
+            </div>
+            <div class="col-lg-3 col-sm-6">
+              <div class="foot">
+                <h2>Useful Links</h2>
+                <ul>
+                  <li><a href="">About Us</a></li>
+                  <li><a href="">Track Orders</a></li>
+              
+                  <li><a href="">Shipping</a></li>
+                  
+                </ul>
+              </div>
+            </div>
+            <div class="col-lg-3 col-sm-6" style="height: 100%;">
+              <div class="footer-widget contact-widget">
+                <h2>Contact Info</h2>
+                <div class="con-info">
+                
+                  <p>Hooligan LLC Ltd </p>
+                </div>
+                <div class="con-info">
+                
+                  <p>1481 Creekside Lane  Avila Beach </p>
+                </div>
+                <div class="con-info">
+                
+                  <p>+53 345 7953 32453</p>
+                </div>
+                <div class="con-info">
+                
+                  <p>office@youremail.com</p>
+                </div>
+                <div class="social-links" style="height: 200px; width: 200px; color: white; font-size: 30px;float: right;margin-bottom: -200px;">
+                  <a href="" class="instagram"><i class="fab fa-instagram"></i></a>
+              
+                  <a href="" class="facebook"><i class="fab fa-facebook"></i></a>
+                  <a href="" class="twitter"><i class="fab fa-twitter"></i></a>
+                  
+                </div>
+        
+              </div>
+            </div>
+          </div>
+        </div>
+      
+      </section>
+    
+    
+    <script src="https://js.stripe.com/v3/"></script>
+    <script nonce="">  // Create a Stripe client.
+      var stripe = Stripe('pk_test_51HU7HPATp1v4gLuggTHCOUiTIQAZsJ9cqjHMAPtJAdbGKvmWkZz2GYjUVeDfaOP3aDAwBlKTULSYCYbQORVZQlPa00FImQzLq9');
+    
+      // Create an instance of Elements.
+      var elements = stripe.elements();
+    
+      // Custom styling can be passed to options when creating an Element.
+      // (Note that this demo uses a wider set of styles than the guide below.)
+      var style = {
+        base: {
+          color: '#32325d',
+          fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
+          fontSmoothing: 'antialiased',
+          fontSize: '16px',
+          '::placeholder': {
+            color: '#aab7c4'
+          }
+        },
+        invalid: {
+          color: '#fa755a',
+          iconColor: '#fa755a'
+        }
+      };
+    
+      // Create an instance of the card Element.
+      var card = elements.create('card', {style: style});
+    
+      // Add an instance of the card Element into the `card-element` <div>.
+      card.mount('#card-element');
+    
+      // Handle real-time validation errors from the card Element.
+      card.addEventListener('change', function(event) {
+        var displayError = document.getElementById('card-errors');
+        if (event.error) {
+          displayError.textContent = event.error.message;
+        } else {
+          displayError.textContent = '';
+        }
+      });
+    
+      // Handle form submission.
+      var form = document.getElementById('stripe-form');
+      form.addEventListener('submit', function(event) {
+        event.preventDefault();
+    
+        stripe.createToken(card).then(function(result) {
+          if (result.error) {
+            // Inform the user if there was an error.
+            var errorElement = document.getElementById('card-errors');
+            errorElement.textContent = result.error.message;
+          } else {
+            // Send the token to your server.
+            stripeTokenHandler(result.token);
+          }
+        });
+      });
+    
+      // Submit the form with the token ID.
+      function stripeTokenHandler(token) {
+        // Insert the token ID into the form so it gets submitted to the server
+        var form = document.getElementById('stripe-form');
+        var hiddenInput = document.createElement('input');
+        hiddenInput.setAttribute('type', 'hidden');
+        hiddenInput.setAttribute('name', 'stripeToken');
+        hiddenInput.setAttribute('value', token.id);
+        form.appendChild(hiddenInput);
+    
+        // Submit the form
+        form.submit();
+      }
+    
+      var currentCardForm = $('.current-card-form');
+      var newCardForm = $('.new-card-form');
+      var use_default_card = document.querySelector("input[name=use_default_card]");
+      use_default_card.addEventListener('change', function() {
+        if (this.checked) {
+          newCardForm.hide();
+          currentCardForm.show()
+        } else {
+          newCardForm.show();
+          currentCardForm.hide()
+        }
+      })
+    
+    </script>
+
+  <script type="text/javascript" src="{%static 'js/jquery-3.4.1.min.js'%}"></script>
+  <!-- Bootstrap tooltips -->
+  <script type="text/javascript" src="{% static 'js/popper.min.js' %}"></script>
+  <!-- Bootstrap core JavaScript -->
+  <script type="text/javascript" src="{% static 'js/bootstrap.min.js'%}"></script>
+  <!-- MDB core JavaScript -->
+  <script type="text/javascript" src="{% static 'js/mdb.min.js' %}"></script>
+  <!-- Initializations -->
+  <script type="text/javascript">
+    // Animations initialization
+    new WOW().init();
+
+  </script>
+</body>
+
+</html>

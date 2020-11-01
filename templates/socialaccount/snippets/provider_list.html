@@ -1,0 +1,51 @@
+{% load socialaccount %}
+{% load static %}
+{% get_providers as socialaccount_providers %}
+
+{% for provider in socialaccount_providers %}
+{% if provider.id == "openid" %}
+{% for brand in provider.get_brands %}
+
+  <a title="{{brand.name}}" 
+     class="socialaccount_provider {{provider.id}} {{brand.id}}" 
+     href="{% provider_login_url provider.id openid=brand.openid_url process=process %}"
+     > {{brand.name}}</a>
+
+{% endfor %}
+{% endif %}
+
+
+
+
+
+  
+  <a title="{{provider.name}}" class="socialaccount_provider {{provider.id}}" href="{% provider_login_url provider.id process=process scope=scope auth_params=auth_params %}" >
+   <button class="btn btn-block btn-social btn-md socialaccount_provider btn-{{ provider.id }}" style="width: 90%;height: 50px;margin-bottom: 20PX; color: #000;font: 15px sans-serif; border-radius:10px ;">  <img src="{% static 'download.png' %}" alt="" style="height: 20px; width: 20px;"> LOG IN WITH {{provider.name}}</button>
+
+    </a>
+
+    <div style="margin-right: 30px;">
+
+    <hr>
+
+    <p>  <strong> or</strong> </p>
+ 
+    <hr>
+  </div>
+    
+ 
+
+    
+
+{% endfor %}
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script type="text/javascript">
+  // Load jquery straight from the cdn for this page.
+  $(function() {
+    // We need some mappings for Providers names from AllAuth to the icon class names.
+    $('.btn-google').addClass('btn-google-plus');
+    $('.btn-facebook_oauth2').addClass('btn-facebook');
+    $('.fa-facebook_oauth2').addClass('fa-facebook');
+
+  });
+</script>

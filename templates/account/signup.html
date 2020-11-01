@@ -1,0 +1,295 @@
+{% load static %}
+
+{% load cart_template_tags%}
+{% load crispy_forms_tags %}
+
+{% load i18n %}
+
+
+
+{% block content %}
+
+<link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+  <!-- Material Design Bootstrap -->
+  <link href="{% static 'css/mdb.min.css' %}" rel="stylesheet">
+  <!-- Your custom styles (optional) -->
+  <link href="{%static 'css/style.min.css'%}" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:wght@700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+  <link href="https://fonts.googleapis.com/css?family=Josefin+Sans:300,300i,400,400i,700,700i" rel="stylesheet">
+  <style type="text/css">
+  
+    html,
+    body,
+    header,
+    .carousel {
+      height: 60vh;
+      font-family: 'Josefin Sans', sans-serif;
+    }
+    #search{
+  margin-top: -80px;
+}
+
+@media (max-width: 740px) {
+
+#search{
+  margin-top: 10px;
+}
+
+
+}
+
+    @media (max-width: 740px) {
+
+      html,
+      body,
+      header,
+      .carousel {
+        height: 100vh;
+      }
+      .row{
+        width: 400px;
+        float: left;
+      }
+      form{
+        float: right;
+        width: 300px;
+      }
+      .col{
+        offset: none;
+      }
+    }
+
+    @media (min-width: 800px) and (max-width: 850px) {
+
+      html,
+      body,
+      header,
+      .carousel {
+        height: 100vh;
+      }
+    }
+    body::-webkit-scrollbar {
+  width: 12px;               /* width of the entire scrollbar */
+}
+body::-webkit-scrollbar-track {
+  background: pink;        /* color of the tracking area */
+}
+body::-webkit-scrollbar-thumb {
+  background-color:lightcoral;    /* color of the scroll thumb */
+  border-radius: 20px;       /* roundness of the scroll thumb */
+  border: 3px solid pink;  /* creates padding around scroll thumb */
+}
+    @media (max-width: 300px) {
+     .form{
+       width: 200px;
+       text-align: center;
+       float: left;
+     }
+    }
+    #fb-button {
+background: #3b5998;
+color:white;
+border: none;
+height:  50px;
+margin-bottom: 20px;
+}
+  
+
+  </style>
+ <!-- Navbar -->
+ <nav class="navbar fixed-top navbar-expand-lg navbar-light white scrolling-navbar" style="position: relative;font-weight: 500;">
+  <div class="container">
+
+  
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Links -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+      <div class="image">
+        <img src="{% static 'logo.png'%}" alt="" srcset="" style="height: 100px; width: 100px; margin-top: 22px;">
+       </div>
+      
+      <ul class="navbar-nav mr-auto" style="margin-left: 300px;margin-top: 100px;">
+        
+       
+        <li class="nav-item " style="margin-right: 50px;">
+          <a class="nav-link waves-effect" href="/paintings">Paintings
+            <span class="sr-only">(current)</span>
+          </a>
+        </li>
+        <li class="nav-item" style="margin-right: 50px;">
+          <a class="nav-link waves-effect" href="/photographs" target="_blank">Photographs</a>
+        </li>
+        <li class="nav-item" style="margin-right: 50px;">
+          <a class="nav-link waves-effect" href="/">Sculptures
+            <span class="sr-only">(current)</span>
+          </a>
+        </li>
+        <li class="nav-item" style="margin-right: 50px;">
+          <a class="nav-link waves-effect" href="/prints" target="_blank">Prints</a>
+        </li>
+        <li class="nav-item" style="margin-right: 50px;">
+          <a class="nav-link waves-effect" href="/checkout" target="_blank">Artists</a>
+        </li>
+      
+        <!-- <li class="nav-item">
+          <a class="nav-link waves-effect" href="https://mdbootstrap.com/education/bootstrap/" target="_blank">Free
+            tutorials</a>
+        </li> -->
+      </ul >
+
+      <!-- Right -->
+      <ul class="navbar-nav nav-flex-icons" style = "margin-top:-80px;margin-left: -400px;">
+        <li class="nav-item">
+          <a class="nav-link waves-effect" href="{%url 'core:order-summary'%}">
+            <span class="badge red z-depth-1 mr-1"> {{request.user|cart_item_count}}  </span>
+            
+            <i class="fas fa-shopping-cart"></i>
+            <span class="clearfix d-none d-sm-inline-block">  </span>
+          </a>
+        </li>
+        {% if user.is_authenticated %}
+       
+        <li class="nav-item">
+          <a href="{% url 'account_logout'%}" class="nav-link waves-effect" target="_blank">
+            <span class="clearfix d-none d-sm-inline-block">Logout</span>
+          </a>
+        </li>
+        {% else %}
+        <li class="nav-item">
+          <a href="{% url 'account_login'%}" class="nav-link waves-effect" target="_blank">
+            <span class="clearfix d-none d-sm-inline-block">signin </span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="{% url 'account_signup'%}" class="nav-link waves-effect" target="_blank">
+            <span class="clearfix d-none d-sm-inline-block">| Register</span>
+          </a>
+        </li>
+
+        {% endif %}
+        
+     
+      
+      </ul>
+
+    </div>
+
+  </div>
+  <div class="col-sm-4 col-md-4 navbar-right"  id = "search">
+
+    <form class="navbar-form" role="search" action="{% url 'core:search_results' %}">
+
+      <div class="input-group md-form form-sm form-2 pl-0">
+        <input type="text" class="form-control" placeholder="Search Item..." name="title" class="form-control my-0 py-1 red-border" style="border: solid 1px red;">
+        <div class="input-group-append">
+          <span class="input-group-text red lighten-3" id="basic-text1"><i class="fas fa-search text-grey"
+              aria-hidden="true"></i></span>
+        </div>
+       
+      </div>
+
+    </form>
+  </div>
+</nav>
+
+<section class="text-center mb-4" style="margin-top: 5px;">
+  
+
+  <!--Grid row-->
+  <div class="row wow fadeIn" >
+
+    <div class="col-md-4 offset-3 col-xs-12 " style="border: black solid 1px;">
+      <div style="text-align: center;"> <br> 
+      <h1 style="font-weight: normal;font-size: 48px;">Welcome!</h1>
+    </div>
+
+
+
+<div class="socialaccount_ballot" style="text-align: center;">
+
+  
+  <ul class="socialaccount_providers" >
+    {% include "socialaccount/snippets/provider_list.html" with process="login" %}
+  </ul>
+
+
+
+</div>
+
+<div class="col-md-12">
+
+ <div class="form" style="text-align: center;display: inline-block;width: 100%; padding-right: 20px; display: flex;align-items: center;">
+  <form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}" style="width: 420px;text-align: left;padding-left: 50px;"  >
+  {% csrf_token %}
+  <div style="display: inline-flex;">
+    <div style="margin-right: 20px;">{{ form.first_name|as_crispy_field }}</div>
+  
+  {{ form.last_name|as_crispy_field }}
+</div>
+  {{ form.username|as_crispy_field }}
+  <div id = "email">
+  {{ form.email|as_crispy_field }}
+</div>
+  <div>
+    {{ form.password1|as_crispy_field }}
+   
+  </div>
+ 
+  {{ form.password2|as_crispy_field }}
+
+  {% if redirect_field_value %}
+  <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+  {% endif %}
+  <button class="btn btn-lg btn-danger" type="submit" style="width: 100%;">{% trans "Sign Up" %} </button>
+</form>
+
+
+</div>
+</div>  
+{% endblock %}
+
+
+
+<div style="display: inline-block; bottom: 0;">
+  <p>
+    Already have an account ? <a href="{% url 'account_login'%}" >
+  <span class="clearfix d-none d-sm-inline-block">Sign In</span>
+</p>
+</a>
+</div>
+  
+</div>
+  </div>
+  <!--Grid row-->
+
+
+</section>
+
+
+<script type="text/javascript" src="{%static 'js/jquery-3.4.1.min.js'%}"></script>
+<!-- Bootstrap tooltips -->
+<script type="text/javascript" src="{% static 'js/popper.min.js' %}"></script>
+<!-- Bootstrap core JavaScript -->
+<script type="text/javascript" src="{% static 'js/bootstrap.min.js'%}"></script>
+<!-- MDB core JavaScript -->
+<script type="text/javascript" src="{% static 'js/mdb.min.js' %}"></script>
+<!-- Initializations -->
+<script type="text/javascript">
+  // Animations initialization
+  new WOW().init();
+
+</script>
+
+
+
+
+
+
+
+

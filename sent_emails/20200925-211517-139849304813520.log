@@ -1,0 +1,19 @@
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Subject: [localhost] Password Reset E-mail
+From: webmaster@localhost
+To: worksonme313@gmail.com
+Date: Fri, 25 Sep 2020 21:15:17 -0000
+Message-ID: <160106851734.6339.12908344355643230210@parrot>
+
+Hello from localhost!
+
+You're receiving this e-mail because you or someone else has requested a password for your user account.
+It can be safely ignored if you did not request a password reset. Click the link below to reset your password.
+
+http://127.0.0.1:8000/accounts/password/reset/key/w-5k7-bf7a78f584b7fb3fee9b/
+
+Thank you for using localhost!
+localhost:8000/
+-------------------------------------------------------------------------------
