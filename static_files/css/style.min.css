@@ -15,20 +15,7 @@ input#email:focus {
     background-image:none;
     text-indent:0px
     }
-  .image{
-    
-    
-    width: 0;
-    height: 0;
-    display: flex;
-    justify-content: center ;
-    vertical-align: middle;
-  
-    border-left: 99px solid transparent;
-    border-right: 99px solid transparent;
-    border-bottom: 140px solid black;
-   
-} 
+ 
 
  
 #view1a{

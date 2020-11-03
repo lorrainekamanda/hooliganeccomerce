@@ -3,9 +3,6 @@
 {% load cart_template_tags%}
 {% load crispy_forms_tags %}
 
-
-
-{% block content %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -22,133 +19,16 @@
 
   <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
   <!-- Material Design Bootstrap -->
-  <link href="{% static 'css/mdb.min.css' %}" rel="stylesheet">
+
   <!-- Your custom styles (optional) -->
   <link href="{%static 'css/style.min.css'%}" rel="stylesheet">
   <link href="{%static 'css/style.css'%}" rel="stylesheet">
+  <link href="{%static 'css/navbar.css'%}" rel="stylesheet">
 
-  <style type="text/css">
-    html,
-    body,
-    header,   
-    .carousel {
-      height: 60vh;
-      font-family: 'Josefin Sans', sans-serif;
-      scrollbar-width: thin;          /* "auto" or "thin"  */
-      scrollbar-color: blue orange;   /* scroll thumb & track */
-      scroll-behavior: smooth;
-    }
-    body::-webkit-scrollbar {
-  width: 12px;               /* width of the entire scrollbar */
-}
-.overlay {
-    background-color:rgba(26, 21, 24, 0.685);
-    height: 100%;
-    z-index:2 ;
-    
-}
-.back-to-top {
-  position: fixed;
-  display: none;
-  right: 15px;
-  bottom: 15px;
-  z-index: 3;
-  scroll-behavior: smooth;
-  text-decoration: none;
-  }
-  
-  .back-to-top i {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 24px;
-  width: 40px;
-  height: 40px;
-  border-radius: 4px;
-  background: red;
-  color: #fff;
-  transition: all 0.4s;
-  text-decoration: none;
-  }
-  
-  .back-to-top i:hover {
-  background:rgb(151, 41, 41);
-  color: #fff;
-  text-decoration: none;
-  
-  }
-  #search{
-  margin-top: -80px;
-}
-
-@media (max-width: 740px) {
-
-#search{
-  margin-top: -10px;
-}
-
-
-}
-
-body::-webkit-scrollbar-track {
-  background: pink;        /* color of the tracking area */
-}
-body::-webkit-scrollbar-thumb {
-  background-color:lightcoral;    /* color of the scroll thumb */
-  border-radius: 20px;       /* roundness of the scroll thumb */
-  border: 3px solid pink;  /* creates padding around scroll thumb */
-}
- 
-    @media (max-width: 740px) {
-
-      html,
-      body,
-      header,
-      .carousel {
-        height: 100vh;
-
-      }
-      #intro{
-        align-items: center;
-        
-        width: 500px;
-      }
-      #image{
-        width: 300px;
-        height: 100px;
-        margin: 0;
-      }
-      .responsive{
-        height:80%;
-        
-      }
-     
-    }
-
-    @media (min-width: 800px) and (max-width: 850px) {
-
-      html,
-      body,
-      header,
-      .carousel {
-        height: 100vh;
-      }
-    }
- 
-  </style>
+  <link href="{%static 'css/styles2.css'%}" rel="stylesheet">
+  <link href="{%static 'css/heroz.css'%}" rel="stylesheet">
 </head>
-
-<body class="grey lighten-3">
-
-  {% if messages %}
-<ul class="messages">
-    {% for message in messages %}
-    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-    {% endfor %}
-</ul>
-{% endif %}
-
-  <!-- Navbar -->
+<body>
   <nav class="navbar fixed-top navbar-expand-lg navbar-light white scrolling-navbar" style="position: relative; font-weight: 500;" id = "overlay">
     <div class="container">
   
@@ -164,66 +44,65 @@ body::-webkit-scrollbar-thumb {
         <div class="image">
           <img src="{% static 'logo.png'%}" alt="" srcset="" style="height: 100px; width: 100px; margin-top: 22px;">
          </div>
-   
-        <ul class="navbar-nav mr-auto" style="margin-left: 250px;margin-top: 100px;">
+        
+        <ul class="navbar-nav mr-auto" style="margin-left: 300px;margin-top: 100px;">
           
          
-          <li class="nav-item " style="margin-right: 50px;">
-            <a class="nav-link waves-effect" href="/paintings">Paintings
+            <li class="nav-item " style="margin-right: 50px;font-weight: 500;">
+                <a class="nav-link waves-effect" href="/paintings" style="font-weight: 500;color: black;">Paintings
+                  <span class="sr-only">(current)</span>
+                </a>
+              </li>
+              <li class="nav-item" style="margin-right: 50px;">
+                <a class="nav-link waves-effect" href="/photographs" target="_blank" style="font-weight: 500;color: black;">Photographs</a>
+              </li>
+          <li class="nav-item" style="margin-right: 50px;">
+            <a class="nav-link waves-effect" href="/" style="font-weight: 500;color: black;">Sculptures
               <span class="sr-only">(current)</span>
             </a>
           </li>
           <li class="nav-item" style="margin-right: 50px;">
-            <a class="nav-link waves-effect" href="/photographs" target="_blank">Photographs</a>
+            <a class="nav-link waves-effect" href="/prints" style="font-weight: 500;color: black;" >Prints</a>
           </li>
           <li class="nav-item" style="margin-right: 50px;">
-            <a class="nav-link waves-effect" href="/">Sculptures
-              <span class="sr-only">(current)</span>
-            </a>
+            <a class="nav-link waves-effect" href="/artists" style="font-weight: 500;color: black;">Artists</a>
           </li>
+          {% if user.is_authenticated %}
           <li class="nav-item" style="margin-right: 50px;">
-            <a class="nav-link waves-effect" href="/prints" target="_blank">Prints</a>
+            <a class="nav-link waves-effect" href="{%url 'core:upload'%}" style="font-weight: 500;color: black;">Artists</a>
           </li>
-          <li class="nav-item" style="margin-right: 50px;">
-            <a class="nav-link waves-effect" href="/artists" target="_blank">Artists</a>
-          </li>
-        
+  
+          {%endif%}
       
         </ul >
   
         <!-- Right -->
-        <ul class="navbar-nav nav-flex-icons" style = "margin-top:-80px;margin-left: -400px;">
+        <ul class="navbar-nav nav-flex-icons" style = "margin-top:-80px;margin-left: -420px;">
           <li class="nav-item">
             <a class="nav-link waves-effect" href="{%url 'core:order-summary'%}">
-              <span class="badge red z-depth-1 mr-1" > {{request.user|cart_item_count}}  </span>
+              <span class="badge red z-depth-1 mr-1" style="border-radius: 100px; color: black; font-weight: 500;background-color: red;"> {{request.user|cart_item_count}}  </span>
               
-              <i class="fas fa-shopping-cart" style="height: 20px; width: 20px;"></i>
+              <img src="{% static 'cart.png'%}" alt="" srcset="" style="height: 30px; width: 30px;">
               <span class="clearfix d-none d-sm-inline-block">  </span>
             </a>
           </li>
           {% if user.is_authenticated %}
-
-          <li class="nav-item" style="background-color: greenyellow;">
-            <a href="{% url 'account_logout'%}" class="nav-link waves-effect" >
-              <span class="clearfix d-none d-sm-inline-block">Submit Your  Art</span>
-            </a>
-          </li>
-          
+          <!-- <i class="far fa-user"></i> -->
           <li class="nav-item">
-            <a href="{% url 'account_logout'%}" class="nav-link waves-effect" >
-              <span class="clearfix d-none d-sm-inline-block">Logout</span>
+            <a href="{% url 'account_logout'%}" class="nav-link waves-effect" target="_blank">
+              <span class="clearfix d-none d-sm-inline-block" style="font-weight: 500;color: black;">Logout</span>
             </a>
           </li>
-       
           {% else %}
+          <!-- <button><i class="far fa-user"></i></button> -->
           <li class="nav-item">
-            <a href="{% url 'account_login'%}" class="nav-link waves-effect" >
-              <span class="clearfix d-none d-sm-inline-block">Signin  </span>
+            <a href="{% url 'account_login'%}" class="nav-link waves-effect" target="_blank">
+              <span class="clearfix d-none d-sm-inline-block"  style="font-weight: 500;color: black;">Signin  </span>
             </a>
           </li>
           <li class="nav-item">
-            <a href="{% url 'account_signup'%}" class="nav-link waves-effect">
-              <span class="clearfix d-none d-sm-inline-block">| Create Account</span>
+            <a href="{% url 'account_signup'%}" class="nav-link waves-effect" target="_blank">
+              <span class="clearfix d-none d-sm-inline-block" style="font-weight: 500;color: black;">| Create Account</span>
             </a>
           </li>
   
@@ -236,7 +115,8 @@ body::-webkit-scrollbar-thumb {
       </div>
   
     </div>
-    <div class="col-sm-4 col-md-4 navbar-right"  id = "search">
+    
+    <div class="col-sm-4 col-md-4 navbar-left" style = "margin-top:-80px">
   
       <form class="navbar-form" role="search" action="{% url 'core:search_results' %}">
   
@@ -252,14 +132,17 @@ body::-webkit-scrollbar-thumb {
       </form>
     </div>
   </nav>
+
+
+  <section  class="hero-section">
   
-
-  <div class="row" style="margin-top: 20px;margin-bottom: 20px;">
+  <div class="container"  >
+  <div class="row wow fadeIn"  id = "fill" style="margin-bottom: 20px;" >
       
-    <div class="col-md-7 offset-3">
-        <div class="card"> <br> <br>
+    <div class="col-md-8 ">
+        <div class="card" style="width: 100%;" > <br> <br>
 
-<form action="" method="POST" enctype="multipart/form-data" class="col-md-9 offset-2" >
+<form action="" method="POST" enctype="multipart/form-data" class="col-md-9  " >
    {% csrf_token %}
    <fieldset class="form-group-responsive"> 
      <legend class="border-bottom mb-4" >Upload Your Item !</legend>
@@ -274,77 +157,88 @@ body::-webkit-scrollbar-thumb {
 </div>
 </div>
 </div> 
-     
+</div>
 
-	<section class="footer" style="background-color: rgb(36, 32, 32); color: white; height: 100%;">
-		<div class="container-fluid" style="margin-bottom: -320px;" >
-			<div class="footer-logo text-center" > <br> <br>
-				
-			</div>
-			<div class="row wow fadeIn"   >
-				<div class="col-lg-3 col-sm-6" >
-					<div class="footer-widget about-widget">
-            <a href="index.html"><img src="{% static 'logo.png'%}" alt="" style="margin-left: 20px;"></a>
-					
-					</div>
-				</div>
-				<div class="col-lg-3 col-sm-6">
-					<div class="footer-widget about-widget" >
-            <h2>About Us</h2>
-						<p>we represent artists from all over the world find amazing photographs,paintings,sculptures and prints.</p>
-						<img src="{% static 'cards.png' %}" alt="">
-						
-			
-					</div>
-				</div>
-				<div class="col-lg-3 col-sm-6">
-					<div class="foot">
-            <h2>Useful Links</h2>
-						<ul >
-							<li><a href="">About Us</a></li>
-							<li><a href="">Track Orders</a></li>
-					
-							<li><a href="">Shipping</a></li>
-							
-						</ul>
-					</div>
-				</div>
-				<div class="col-lg-3 col-sm-6" style="height: 100%;">
-					<div class="footer-widget contact-widget">
-						<h2>Contact Info</h2>
-						<div class="con-info">
-						
-							<p>Hooligan LLC </p>
-						</div>
-						<div class="con-info">
-						
-							<p>1481 Creekside Lane  Avila Beach </p>
-						</div>
-						<div class="con-info">
-						
-							<p>+53 345 7953 32453</p>
-						</div>
-						<div class="con-info">
-						
-							<p>office@youremail.com</p>
-            </div>
-            <div class="social-links" style="height: 200px; width: 200px; color: white; font-size: 30px;float: right;margin-bottom: -200px;">
-              <a href="" class="instagram"><i class="fab fa-instagram"></i></a>
-          
-              <a href="" class="facebook"><i class="fab fa-facebook"></i></a>
-              <a href="" class="twitter"><i class="fab fa-twitter"></i></a>
-              
-            </div>
-    
-					</div>
-				</div>
-			</div>
-		</div>
 
-	</section>
-
+<section class="footer-section">
+  <div class="container-fluid">
   
-  <a href="#" class="back-to-top"><i class="fas fa-level-up-alt"></i></a>
+    <div class="row">
+
+      <div class="col-lg-3 col-sm-6">
+        <div class="footer-widget about-widget">
+          <a href="index.html"><img src="{% static 'logo.png'%}" alt="" style="margin-left: 20px;height: 70%; width: 70%;"></a>
+        </div>
+      </div>
+      <div class="col-lg-3 col-sm-6">
+        <div class="footer-widget about-widget">
+          <h2>About Us</h2>
+          <p>Welcome to Hooligan LLC we represent artists from all over the world find amazing photographs,paintings,sculptures and prints.</p>
+          <img src="{% static 'cards.png' %}" alt="" style="height: 50%;width: 50%;">
+        </div>
+      </div>
+      
+      <div class="col-lg-3 col-sm-6">
+        <div class="footer-widget about-widget">
+          <h2>DON'T GET LOST</h2>
+          <ul>
+            <li><a href="">Photographs</a></li>
+            <li><a href="">Artists</a></li>
+            <li><a href="">Paintings</a></li>
+            <li><a href="">Sculptures</a></li>
+            <li><a href="">Order Summary</a></li>
+          
+          </ul>
+          
+        </div>
+      </div>
+    
+      <div class="col-lg-3 col-sm-6">
+        <div class="footer-widget contact-widget">
+          <h2>Contact Info</h2>
+          <div class="con-info">
+          
+            <p>Hooligan LLC </p>
+          </div>
+          <div class="con-info">
+            
+            <p>1481 Creekside Lane  Avila Beach, CA 93424, P.O. BOX 68 </p>
+          </div>
+          <div class="con-info">
+            
+            <p>+53 345 7953 32453</p>
+          </div>
+          <div class="con-info">
+          
+            <p>office@youremail.com</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="social-links-warp">
+    <div class="container">
+      <div class="social-links">
+        <a href="" class="instagram"><i class="fa fa-instagram"></i><span>instagram</span></a>
+      
+        <a href="" class="facebook"><i class="fa fa-facebook"></i><span>facebook</span></a>
+        <a href="" class="twitter"><i class="fa fa-twitter"></i><span>twitter</span></a>
+      
+      </div>
+
+
+
+    </div>
+  </div>
+</section>
+
+
+
+
+
+
+
+<a href="#" class="back-to-top"><i class="fas fa-level-up-alt"></i></a>
 
 
 </body>
@@ -372,4 +266,3 @@ $(window).scroll(function() {
 
 </script>
 </html>
-{% endblock content %}

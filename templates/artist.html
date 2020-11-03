@@ -24,6 +24,7 @@
   <link href="{%static 'css/style.min.css'%}" rel="stylesheet">
   <link href="{%static 'css/style.css'%}" rel="stylesheet">
   <link href="{%static 'css/styles2.css'%}" rel="stylesheet">
+  <link href="{%static 'css/heroz.css'%}" rel="stylesheet">
   <style type="text/css">
     html,
     body,
@@ -241,11 +242,11 @@ body::-webkit-scrollbar-thumb {
       <section class="text-center mb-4">
 
         <!--Grid row-->
-        <div class="row wow fadeIn" style="margin: 80px; margin-bottom: 160px;" >
+        <div class="row wow fadeIn" style="margin: 20px; margin-bottom: 160px;" >
 
           {% for item in object_list %}
           
-          <div class="col-md-4 " style="height: 400px; width: 600px;" >
+          <div class="col-md-4 " style="height: 400px; width: 600px;margin-bottom: 150px;" >
             <h1 style="font-weight: 500;">{{item.first_name }} {{item.last_name}}</h1>
             <div class="view overlay">
          
@@ -307,76 +308,85 @@ body::-webkit-scrollbar-thumb {
     </div>
   </main>
   <div>
-    <a href="#overlay">
-    <button class="btn btn-danger btn-sm" style="float: right;"><i class="fas fa-level-up-alt"></i></button>
-  </div>
-</a>
-  <section class="footer" style="background-color: rgb(36, 32, 32); color: white; height: 100%;margin-top: 50px;">
-    <div class="container-fluid" style="margin-bottom: -320px;" >
-      <div class="footer-logo text-center" > <br> <br>
-        
-      </div>
-      <div class="row wow fadeIn"   >
-        <div class="col-lg-3 col-sm-6" >
-          <div class="footer-widget about-widget">
-            <a href="index.html"><img src="{% static 'logo.png'%}" alt="" style="margin-left: 20px;"></a>
-          
-          </div>
-        </div>
-        <div class="col-lg-3 col-sm-6">
-          <div class="footer-widget about-widget" >
-            <h2>About Us</h2>
-            <p>we represent artists from all over the world find amazing photographs,paintings,sculptures and prints.</p>
-            <img src="{% static 'cards.png' %}" alt="">
-            
+    <section class="footer-section">
+      <div class="container-fluid">
       
+        <div class="row">
+  
+          <div class="col-lg-3 col-sm-6">
+            <div class="footer-widget about-widget">
+              <a href="index.html"><img src="{% static 'logo.png'%}" alt="" style="margin-left: 20px;height: 70%; width: 70%;"></a>
+            </div>
           </div>
-        </div>
-        <div class="col-lg-3 col-sm-6">
-          <div class="foot">
-            <h2>Useful Links</h2>
-            <ul>
-              <li><a href="">About Us</a></li>
-              <li><a href="">Track Orders</a></li>
+          <div class="col-lg-3 col-sm-6">
+            <div class="footer-widget about-widget">
+              <h2>About Us</h2>
+              <p>Welcome to Hooligan LLC we represent artists from all over the world find amazing photographs,paintings,sculptures and prints.</p>
+              <img src="{% static 'cards.png' %}" alt="" style="height: 50%;width: 50%;">
+            </div>
+          </div>
           
-              <li><a href="">Shipping</a></li>
+          <div class="col-lg-3 col-sm-6">
+            <div class="footer-widget about-widget">
+              <h2>DON'T GET LOST</h2>
+              <ul>
+                <li><a href="">Photographs</a></li>
+                <li><a href="">Artists</a></li>
+                <li><a href="">Paintings</a></li>
+                <li><a href="">Sculptures</a></li>
+                <li><a href="">Order Summary</a></li>
               
-            </ul>
-          </div>
-        </div>
-        <div class="col-lg-3 col-sm-6" style="height: 100%;">
-          <div class="footer-widget contact-widget">
-            <h2>Contact Info</h2>
-            <div class="con-info">
-            
-              <p>Hooligan LLC Ltd </p>
-            </div>
-            <div class="con-info">
-            
-              <p>1481 Creekside Lane  Avila Beach </p>
-            </div>
-            <div class="con-info">
-            
-              <p>+53 345 7953 32453</p>
-            </div>
-            <div class="con-info">
-            
-              <p>office@youremail.com</p>
-            </div>
-            <div class="social-links" style="height: 200px; width: 200px; color: white; font-size: 30px;float: right;margin-bottom: -200px;">
-              <a href="" class="instagram"><i class="fab fa-instagram"></i></a>
-          
-              <a href="" class="facebook"><i class="fab fa-facebook"></i></a>
-              <a href="" class="twitter"><i class="fab fa-twitter"></i></a>
+              </ul>
               
             </div>
-    
+          </div>
+        
+          <div class="col-lg-3 col-sm-6">
+            <div class="footer-widget contact-widget">
+              <h2>Contact Info</h2>
+              <div class="con-info">
+              
+                <p>Hooligan LLC </p>
+              </div>
+              <div class="con-info">
+                
+                <p>1481 Creekside Lane  Avila Beach, CA 93424, P.O. BOX 68 </p>
+              </div>
+              <div class="con-info">
+                
+                <p>+53 345 7953 32453</p>
+              </div>
+              <div class="con-info">
+              
+                <p>office@youremail.com</p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+      <div class="social-links-warp">
+        <div class="container">
+          <div class="social-links">
+            <a href="" class="instagram"><i class="fa fa-instagram"></i><span>instagram</span></a>
+          
+            <a href="" class="facebook"><i class="fa fa-facebook"></i><span>facebook</span></a>
+            <a href="" class="twitter"><i class="fa fa-twitter"></i><span>twitter</span></a>
+          
+          </div>
   
-  </section>
+  
+  
+        </div>
+      </div>
+    </section>
+  
+  
+  
+  
+  
+  
+  
+    <a href="#" class="back-to-top"><i class="fas fa-level-up-alt"></i></a>
 
 
   <script src="https://code.jquery.com/jquery-3.4.1.js"></script>

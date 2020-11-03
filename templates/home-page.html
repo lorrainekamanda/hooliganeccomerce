@@ -19,123 +19,17 @@
 
   <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
   <!-- Material Design Bootstrap -->
-  <link href="{% static 'css/mdb.min.css' %}" rel="stylesheet">
+
   <!-- Your custom styles (optional) -->
   <link href="{%static 'css/style.min.css'%}" rel="stylesheet">
   <link href="{%static 'css/style.css'%}" rel="stylesheet">
+  <link href="{% static 'css/mdb.min.css' %}" rel="stylesheet">
+  <!-- Your custom styles (optional) -->
+  <link href="{%static 'css/style.min.css'%}" rel="stylesheet">
 
-  <style type="text/css">
-    html,
-    body,
-    header,   
-    .carousel {
-      height: 60vh;
-      font-family: 'Josefin Sans', sans-serif;
-      scrollbar-width: thin;          /* "auto" or "thin"  */
-      scrollbar-color: blue orange;   /* scroll thumb & track */
-      scroll-behavior: smooth;
-    }
-    body::-webkit-scrollbar {
-  width: 12px;               /* width of the entire scrollbar */
-}
-.overlay {
-    background-color:rgba(26, 21, 24, 0.685);
-    height: 100%;
-    z-index:2 ;
-    
-}
-.back-to-top {
-  position: fixed;
-  display: none;
-  right: 15px;
-  bottom: 15px;
-  z-index: 3;
-  scroll-behavior: smooth;
-  text-decoration: none;
-  }
-  
-  .back-to-top i {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 24px;
-  width: 40px;
-  height: 40px;
-  border-radius: 4px;
-  background: red;
-  color: #fff;
-  transition: all 0.4s;
-  text-decoration: none;
-  }
-  
-  .back-to-top i:hover {
-  background:rgb(151, 41, 41);
-  color: #fff;
-  text-decoration: none;
-  
-  }
-  #search{
-  margin-top: -80px;
-}
+  <link href="{%static 'css/styles2.css'%}" rel="stylesheet">
+  <link href="{%static 'css/heroz.css'%}" rel="stylesheet">
 
-@media (max-width: 740px) {
-
-#search{
-  margin-top: -10px;
-}
-#intro{
-  margin-left: -200px;
-}
-
-
-}
-
-body::-webkit-scrollbar-track {
-  background: pink;        /* color of the tracking area */
-}
-body::-webkit-scrollbar-thumb {
-  background-color:lightcoral;    /* color of the scroll thumb */
-  border-radius: 20px;       /* roundness of the scroll thumb */
-  border: 3px solid pink;  /* creates padding around scroll thumb */
-}
- 
-    @media (max-width: 740px) {
-
-      html,
-      body,
-      header,
-      .carousel {
-        height: 100vh;
-
-      }
-      #intro{
-        align-items: center;
-        
-        width: 500px;
-      }
-      #image{
-        width: 300px;
-        height: 100px;
-        margin: 0;
-      }
-      .responsive{
-        height:80%;
-        
-      }
-     
-    }
-
-    @media (min-width: 800px) and (max-width: 850px) {
-
-      html,
-      body,
-      header,
-      .carousel {
-        height: 100vh;
-      }
-    }
- 
-  </style>
 </head>
 
 <body class="grey lighten-3">
@@ -147,123 +41,122 @@ body::-webkit-scrollbar-thumb {
     {% endfor %}
 </ul>
 {% endif %}
+ <!-- Navbar -->
+ <nav class="navbar fixed-top navbar-expand-lg navbar-light white scrolling-navbar" style="position: relative; font-weight: 500;" id = "overlay">
+  <div class="container">
 
-  <!-- Navbar -->
-  <nav class="navbar fixed-top navbar-expand-lg navbar-light white scrolling-navbar" style="position: relative; font-weight: 500;" id = "overlay">
-    <div class="container">
   
-    
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-  
-      <!-- Links -->
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-  
-        <div class="image">
-          <img src="{% static 'logo.png'%}" alt="" srcset="" style="height: 100px; width: 100px; margin-top: 22px;">
-         </div>
-   
-        <ul class="navbar-nav mr-auto" style="margin-left: 250px;margin-top: 100px;">
-          
-         
-          <li class="nav-item " style="margin-right: 50px;">
-            <a class="nav-link waves-effect" href="/paintings">Paintings
-              <span class="sr-only">(current)</span>
-            </a>
-          </li>
-          <li class="nav-item" style="margin-right: 50px;">
-            <a class="nav-link waves-effect" href="/photographs" target="_blank">Photographs</a>
-          </li>
-          <li class="nav-item" style="margin-right: 50px;">
-            <a class="nav-link waves-effect" href="/">Sculptures
-              <span class="sr-only">(current)</span>
-            </a>
-          </li>
-          <li class="nav-item" style="margin-right: 50px;">
-            <a class="nav-link waves-effect" href="/prints" target="_blank">Prints</a>
-          </li>
-          <li class="nav-item" style="margin-right: 50px;">
-            <a class="nav-link waves-effect" href="/artists" target="_blank">Artists</a>
-          </li>
-        
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Links -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+      <div class="image">
+        <img src="{% static 'logo.png'%}" alt="" srcset="" style="height: 100px; width: 100px; margin-top: 22px;">
+       </div>
       
-        </ul >
-  
-        <!-- Right -->
-        <ul class="navbar-nav nav-flex-icons" style = "margin-top:-80px;margin-left: -400px;">
-          <li class="nav-item">
-            <a class="nav-link waves-effect" href="{%url 'core:order-summary'%}">
-              <span class="badge red z-depth-1 mr-1" > {{request.user|cart_item_count}}  </span>
-              
-              <i class="fas fa-shopping-cart" style="height: 20px; width: 20px;"></i>
-              <span class="clearfix d-none d-sm-inline-block">  </span>
-            </a>
-          </li>
-          {% if user.is_authenticated %}
-
-          <li class="nav-item" style="background-color: greenyellow;">
-            <a href="{% url 'core:upload'%}" class="nav-link waves-effect" >
-              <span class="clearfix d-none d-sm-inline-block">Submit Your  Art</span>
-            </a>
-          </li>
-          
-          <li class="nav-item">
-            <a href="{% url 'account_logout'%}" class="nav-link waves-effect" >
-              <span class="clearfix d-none d-sm-inline-block">Logout</span>
-            </a>
-          </li>
-       
-          {% else %}
-          <li class="nav-item">
-            <a href="{% url 'account_login'%}" class="nav-link waves-effect" >
-              <span class="clearfix d-none d-sm-inline-block">Signin  </span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="{% url 'account_signup'%}" class="nav-link waves-effect">
-              <span class="clearfix d-none d-sm-inline-block">| Create Account</span>
-            </a>
-          </li>
-  
-          {% endif %}
-          
-       
+      <ul class="navbar-nav mr-auto" style="margin-left: 300px;margin-top: 100px;">
         
-        </ul>
-  
-      </div>
-  
-    </div>
-    <div class="col-sm-4 col-md-4 navbar-right"  id = "search">
-  
-      <form class="navbar-form" role="search" action="{% url 'core:search_results' %}">
-  
-        <div class="input-group md-form form-sm form-2 pl-0">
-          <input type="text" class="form-control" placeholder="Search Item..." name="title" class="form-control my-0 py-1 red-border" style="border: solid 1px red;">
-          <div class="input-group-append">
-            <span class="input-group-text red lighten-3" id="basic-text1"><i class="fas fa-search text-grey"
-                aria-hidden="true"></i></span>
-          </div>
-         
-        </div>
-  
-      </form>
-    </div>
-  </nav>
-  
+       
+          <li class="nav-item " style="margin-right: 50px;font-weight: 500;">
+              <a class="nav-link waves-effect" href="/paintings" style="font-weight: 500;color: black;">Paintings
+                <span class="sr-only">(current)</span>
+              </a>
+            </li>
+            <li class="nav-item" style="margin-right: 50px;">
+              <a class="nav-link waves-effect" href="/photographs" target="_blank" style="font-weight: 500;color: black;">Photographs</a>
+            </li>
+        <li class="nav-item" style="margin-right: 50px;">
+          <a class="nav-link waves-effect" href="/" style="font-weight: 500;color: black;">Sculptures
+            <span class="sr-only">(current)</span>
+          </a>
+        </li>
+        <li class="nav-item" style="margin-right: 50px;">
+          <a class="nav-link waves-effect" href="/prints" style="font-weight: 500;color: black;" >Prints</a>
+        </li>
+        <li class="nav-item" style="margin-right: 50px;">
+          <a class="nav-link waves-effect" href="/artists" style="font-weight: 500;color: black;">Artists</a>
+        </li>
+        {% if user.is_authenticated %}
+        <li class="nav-item" style="margin-right: 50px;">
+          <a class="nav-link waves-effect" href="{%url 'core:upload'%}" style="font-weight: 500;color: black;">Artists</a>
+        </li>
 
-
-  <div id="carousel-example-1z" class="carousel slide carousel-fade pt-4" data-ride="carousel" style="margin-top: -30px;" >
-
-    <!--Indicators-->
-     
-    <!--/.Indicators-->
+        {%endif%}
     
-    <!--Slides-->
-    <div class="overlay">
-    <div class="carousel-inner" role="listbox" style="height: 670px;">
+      </ul >
+
+      <!-- Right -->
+      <ul class="navbar-nav nav-flex-icons" style = "margin-top:-80px;margin-left: -420px;">
+        <li class="nav-item">
+          <a class="nav-link waves-effect" href="{%url 'core:order-summary'%}">
+            <span class="badge red z-depth-1 mr-1" style="border-radius: 100px; color: black; font-weight: 500;background-color: red;"> {{request.user|cart_item_count}}  </span>
+            
+            <img src="{% static 'cart.png'%}" alt="" srcset="" style="height: 30px; width: 30px;">
+            <span class="clearfix d-none d-sm-inline-block">  </span>
+          </a>
+        </li>
+        {% if user.is_authenticated %}
+        <!-- <i class="far fa-user"></i> -->
+        <li class="nav-item">
+          <a href="{% url 'account_logout'%}" class="nav-link waves-effect" target="_blank">
+            <span class="clearfix d-none d-sm-inline-block" style="font-weight: 500;color: black;">Logout</span>
+          </a>
+        </li>
+        {% else %}
+        <!-- <button><i class="far fa-user"></i></button> -->
+        <li class="nav-item">
+          <a href="{% url 'account_login'%}" class="nav-link waves-effect" target="_blank">
+            <span class="clearfix d-none d-sm-inline-block"  style="font-weight: 500;color: black;">Signin  </span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="{% url 'account_signup'%}" class="nav-link waves-effect" target="_blank">
+            <span class="clearfix d-none d-sm-inline-block" style="font-weight: 500;color: black;">| Create Account</span>
+          </a>
+        </li>
+
+        {% endif %}
+        
+     
+      
+      </ul>
+
+    </div>
+
+  </div>
+  
+  <div class="col-sm-4 col-md-4 navbar-left" style = "margin-top:-80px">
+
+    <form class="navbar-form" role="search" action="{% url 'core:search_results' %}">
+
+      <div class="input-group md-form form-sm form-2 pl-0">
+        <input type="text" class="form-control" placeholder="Search Item..." name="title" class="form-control my-0 py-1 red-border" style="border: solid 1px red;">
+        <div class="input-group-append">
+          <span class="input-group-text red lighten-3" id="basic-text1"><i class="fas fa-search text-grey"
+              aria-hidden="true"></i></span>
+        </div>
+       
+      </div>
+
+    </form>
+  </div>
+</nav>
+
+
+
+
+
+   <div id="carousel-example-1z" class="carousel slide carousel-fade pt-4" data-ride="carousel" style="margin-top: -30px;" >
+
+ 
+    
+  
+     <div class="overlay" >
+    <div class="carousel-inner" role="listbox" style="height: 670px;"  id = "down">
 
       <div class="carousel-item active">
         <div class="view" id = view1 style="justify-content: left;">
@@ -272,11 +165,11 @@ body::-webkit-scrollbar-thumb {
 						<div class=" text-white" style="margin-top: 50px; width: 480px;margin-left: 50px; opacity: .9;" id = "intro" > <br> 
 					
 											
-              <h1 style="font-weight: 400; margin-left: 10px;"> HOOLIGAN LLC, <br> <span style="color: greenyellow;border-bottom: black solid 1px;">ART</span></h1>
-              <p style="margin-left: 10px;font-size: 20px;">Welcome to Hooligan LLC<br> we represent artists from all over the world <br>find amazing photographs,paintings,sculptures and prints. <br> </p>
+              <h1 style="font-weight: 600; margin-left: 10px;"> HOOLIGAN LLC, <br> <span style="color: greenyellow;border-bottom: black solid 1px;">ART</span></h1>
+              <p style="margin-left: 10px;font-size: 25px;">Welcome to Hooligan LLC<br> we represent artists from all over <br>the world find amazing  photographs,<br>paintings,sculptures and prints. <br> </p>
               
-              <a href="#explore" class="site-btn sb-line" style="color: white; font-size: 13px;">
-                <button class="btn btn-danger btn-md "> DISCOVER MORE</button>
+              <a href="#explore" class="site-btn sb-line" style="color: white; font-size: 12px;">
+                <button class="btn btn-danger btn-md " style="color: white; font-size: 12px;"> DISCOVER MORE</button>
                 </a>
           
 						</div>
@@ -284,9 +177,7 @@ body::-webkit-scrollbar-thumb {
         </div>
          </div>
       </div>
-      <!--/First slide-->
-
-      <!--Second slide-->
+    
       <div class="carousel-item" >
 
         <div class="view" id = "view2">
@@ -294,57 +185,54 @@ body::-webkit-scrollbar-thumb {
           <div class="row wow fadeIn">
 						<div class=" text-white" style="margin-top: 50px;margin-left: 50px; width: 480px; opacity: .9;"> <br>
 						
-              <h1 style="font-weight: 400; margin-left: 10px;"> HOOLIGAN LLC, <br> <span style="color: greenyellow;border-bottom: black solid 1px;">CREATIVITY</span></h1>
-              <p style="margin-left: 10px;font-size: 20px;">Welcome to Hooligan LLC<br> we represent artists from all over the world <br>find amazing photographs,paintings,sculptures and prints. <br> </p>
+              <h1 style="font-weight: 600; margin-left: 10px;"> HOOLIGAN LLC, <br> <span style="color: greenyellow;border-bottom: black solid 1px;">ART</span></h1>
+              <p style="margin-left: 10px;font-size: 25px;">Welcome to Hooligan LLC<br> we represent artists from all over <br>the world find amazing  photographs,<br>paintings,sculptures and prints. <br> </p>
               
-                <a href="#explore" class="site-btn sb-line" style="color: white;font-size: 13px;"> 
-                  <button class="btn btn-danger btn-md ">DISCOVER MORE</button>
-                  </a>
+              <a href="#explore" class="site-btn sb-line" style="color: white; font-size: 13px;">
+                <button class="btn btn-danger btn-md "> DISCOVER MORE</button>
+                </a>
             
 						</div>
 					</div>
           <div class=" d-flex justify-content-center align-items-center">
 
-            <!-- Content -->
+         
             <div class="text-center white-text mx-5 wow fadeIn">
             
                
             </div>
-            <!-- Content -->
+          
 
           </div>
-          <!-- Mask & flexbox options-->
+       
 
         </div>
       </div>
-      <!--/Second slide-->
-
-      <!--Third slide-->
+    
       <div class="carousel-item" >
         <div class="view" id = "view3">
 
           <div class="row wow fadeIn" >
 						<div class="text-white" style="margin-top: 50px; margin-left: 50px; width:480px;opacity: .9;"> <br>
 						
-              <h1 style="font-weight: 400;margin-left: 10px;"> HOOLIGAN LLC, <br><span style="color: greenyellow;border-bottom: black solid 1px;">LIFE</span></h1>
-              <p style="margin-left: 10px; font-size: 20px;">Welcome to Hooligan LLC<br> we represent artists from all over the world <br>find amazing photographs,paintings,sculptures and prints. <br> </p>
+              <h1 style="font-weight: 600; margin-left: 10px;"> HOOLIGAN LLC, <br> <span style="color: greenyellow;border-bottom: black solid 1px;">ART</span></h1>
+              <p style="margin-left: 10px;font-size: 25px;">Welcome to Hooligan LLC<br> we represent artists from all over <br>the world find amazing  photographs,<br>paintings,sculptures and prints. <br> </p>
               
-                <a href="#explore" class="site-btn sb-line" style="color: white;font-size: 13px;"> 
-                  <button class="btn btn-danger btn-md "> DISCOVER MORE</button>
-                 </a>
-          
+              <a href="#explore" class="site-btn sb-line" style="color: white; font-size: 13px;">
+                <button class="btn btn-danger btn-md "> DISCOVER MORE</button>
+                </a>
 						</div>
 					</div>
           <div class="d-flex justify-content-center align-items-center">
 
-            <!-- Content -->
+          
             <div class="text-center white-text mx-5 wow fadeIn">
               
             </div>
-            <!-- Content -->
+            
 
           </div>
-          <!-- Mask & flexbox options-->
+          
 
         </div>
         <ol class="carousel-indicator" style="margin-top: 10px;color: #000; display: inline-flex;">
@@ -355,37 +243,78 @@ body::-webkit-scrollbar-thumb {
 
       </div>
     
-      <!--/Third slide-->
+     
    
 
     </div>
     
-    <!--/.Slides-->
-
-    <!--Controls-->
-    <a class="carousel-control-prev" href="#carousel-example-1z" role="button" data-slide="prev">
+    
+    <!-- <a class="carousel-control-prev" href="#carousel-example-1z" role="button" data-slide="prev">
       <span class="carousel-control-prev-icon" aria-hidden="true"></span>
       <span class="sr-only">Previous</span>
     </a>
     <a class="carousel-control-next" href="#carousel-example-1z" role="button" data-slide="next">
       <span class="carousel-control-next-icon" aria-hidden="true"></span>
       <span class="sr-only">Next</span>
-    </a>
-    <!--/.Controls-->
+    </a> -->
+
 
   </div>
 
 </div>
+<section class="section" style="margin-top: 200px;" id = "explore">
+  <div class="container">
+
+    <div class="row  mb-5">
+      <div class="col-md-5" >
+        <h2 class="section-heading" style="text-align: left;">Explore Dagallarey</h2>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-4" >
+        <div class="feature-1 text-center">
+          <div class="wrap-icon icon-1" >
+            
+            <span class="fas fa-users" style="font-size: 30px;margin-top: 30px;"></span>
+          </div>
+          <h3 class="mb-3" style="font-weight: 500;">Diversity</h3>
+          <p style="text-align: center;">Meet and support artists from all over the world.</p>
+        </div>
+      </div>
+      <div class="col-md-4" >
+        <div class="feature-1 text-center">
+          <div class="wrap-icon icon-1">
+         
+            <span class="fas fa-chart-area" style="font-size: 30px;margin-top: 30px;"></span>
+          </div>
+          <h3 class="mb-3" style="font-weight: 500;">Find unique Art</h3>
+          <p style="text-align: center;">Find unique paintings,sculptures,photographs and prints</p>
+        </div>
+      </div>
+      <div class="col-md-4" >
+        <div class="feature-1 text-center">
+          <div class="wrap-icon icon-1">
+           
+            <span class="fab fa-cc-visa" style="font-size: 30px;margin-top: 30px;"></span>
+          </div>
+          <h3 class="mb-3" style="font-weight: 500;">Safe Transaction</h3>
+          <p style="text-align: center;">We ensure safe transactions.Full peace of mind and swift delivery</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
 
  
-  <main>
-    <!-- <div class="row wow fadeIn" style="margin-top: -55px; right: 12px; float: left; margin-bottom: 30px; margin-right: 10px;">
+  <main> 
+     <div class="row wow fadeIn" style="margin-top: -55px; right: 12px; float: left; margin-bottom: 30px; margin-right: 10px;">
     <div class="col-xs-6" style="align-items: center;justify-content: center;">
       
     </div>
-  </div> -->
-
-    <div class="row wow fadeIn" style="margin-top: -90px; right: 12px; float: right; margin-bottom: 30px; margin-right: 10px;">
+  </div> 
+<!-- <div class="row wow fadeIn" style="margin-top: -90px; right: 12px; float: right; margin-bottom: 30px; margin-right: 10px;">
     
       <div class="col-xs-3-offset-8">
       <div class="dropdown" style="float: right;">
@@ -399,31 +328,93 @@ body::-webkit-scrollbar-thumb {
         </div>
       </div>
     </div>
-    </div> 
-    
-    <div class="cont" style="margin-top: 350px;">
-    
-    
-     
-     
-     
-      <section class="text-center mb-4" id = "explore">
+    </div>  -->
+    <div class="row wow fadeIn">
+      <div class="col-md-12" style="background: rgb(209, 209, 209);height: 200px;text-align: center;">
+        <h1 style="text-align: center;font-weight: 500;margin-top: 40px;">Shop original art from independent <br> artists around the world.</h1>
+      </div>
+    </div>
 
-       <div><h1 style="font-weight: 400;">OUR PRODUCTS</h1></div>
-        <div class="row wow fadeIn" style="margin: 80px;margin-bottom: 90px;" >
+
+    
+    <div class="cont" >
+      <div class="row  wow fadeIn" style="margin-left: 50px; margin-top: 90px;">
+        <div class="col-md-5" >
+          <h2 class="section-heading" style="text-align: left;margin-left: 10px;">Shop by Category</h2>
+        </div>
+      </div>
+      <!-- Sierra Web Development • Owner -->
+      <div class="container-fluid">
+       
+          <div class="row" style="margin: 30px;">
+            <div class="col-md-3 col-sm-12 col-xs-12" style="margin-bottom: 20px;" >
+              <a href="/photographs">
+              <div class="card card-block">
+            
+            <img src="{% static 'camera.jpg'%}" alt="Photo of sunset" style="height:300px;">
+                <h2 class="card-title mt-3 mb-3" style="font-weight: 500; font-size: 20px;color: #000;">Photographs</h2>
+               
+          </div>
+        </a>
+            </div>
+            <div class="col-md-3 col-sm-12 col-xs-12" style="margin-bottom: 20px;" >
+              <a href="/prints">
+              <div class="card card-block">
+              
+            <img src="{% static 'prints.jpg'%}" alt="Photo of sunset" style="height:300px;">
+                <h2 class="card-title  mt-3 mb-3" style="font-weight: 500; font-size: 20px;color: #000;">Prints</h2>
+              
+          </div>
+        </a>
+            </div>
+            <div class="col-md-3 col-sm-12 col-xs-12" style="margin-bottom: 20px;" >
+              <a href="/paintings">
+              <div class="card card-block">
+            
+            <img src="{% static 'painting.jpg'%}" alt="Photo of sunset" style="height:300px;">
+                <h2 class="card-title  mt-3 mb-3" style="font-weight: 500; font-size: 20px;color: #000;">Paintings</h2>
+           
+          </div>
+        </a>
+            </div>
+            <div class="col-md-3 col-sm-12 col-xs-12" style="margin-bottom: 20px;" >
+              <a href="/sculptures">
+              <div class="card card-block">
+        
+            <img src="{% static 'sculptures.jpg'%}" alt="Photo of sunset" style="height:300px;">
+                <h2 class="card-title  mt-3 mb-3" style="font-weight: 500; font-size: 20px;color: #000;">Sculptures</h2>
+               
+          </div>
+        </a>
+            </div>    
+          </div>
+          
+        </div>
+        
+     
+        <div class="row  wow fadeIn" style="margin-left: 50px; margin-top: 90px;">
+          <div class="col-md-5" >
+            <h2 class="section-heading" style="text-align: left;margin-left: 20px;">Featured Products</h2>
+          </div>
+        </div>
+     
+      <section class="text-center" >
+
+     
+        <div class="row " style="margin-top: 50px;margin-bottom: 90px;margin: 20px;margin-bottom: 70px;" >
 
          
 
           {% for item in object_list %}
 
-          <div class="col-md-4 col-" style="height: 400px; width: 600px; margin-bottom: 50px;background: transparent;" id = "image" >
+          <div class="col-md-4 col-sm-12 col-xs-12" style="height: 400px; width: 600px; margin-bottom: 50px;background: transparent;margin-top: 50px;margin-bottom: 70px;" >
             <div class="view ">
-            <img src="{{item.image.url}}" class="responsive" alt="" style="height: 80%;width: 100%;"> <br><br>
+            <img src="{{item.image.url}}" class="responsive" alt="" style="height: 100%;width: 100%;"> <br><br>
             <a href="{{item.get_absolute_url}}">
               <div class="mask rgba-white-slight"></div>
               </a>
             </div>
-            <div class=" text-center"  style="margin-top: -60px;" >
+            <div class=" text-center"  style="margin-top: 10px;" >
               <!--Category & Title-->
             
               <h5>
@@ -456,9 +447,9 @@ body::-webkit-scrollbar-thumb {
 
       </section>
      
-      <div class="row wow fadeIn" style="margin: 80px;">
+      <div class="row " style="margin: 10px; margin-top: 60px;">
        <div class="col-md-12">
-         <img src="{%static 'to.jpg'%}" alt="" srcset="" style="height: 80%; width: 100%;">
+         <img src="{%static 'to.jpg'%}" alt="" srcset="" style="height: 70%; width: 100%;">
        </div>
 
       </div>
@@ -498,40 +489,40 @@ body::-webkit-scrollbar-thumb {
   </main> 
      
 
-	<section class="footer" style="background-color: rgb(36, 32, 32); color: white; height: 100%;">
-		<div class="container-fluid" style="margin-bottom: -320px;" >
-			<div class="footer-logo text-center" > <br> <br>
-				
-			</div>
-			<div class="row wow fadeIn"   >
-				<div class="col-lg-3 col-sm-6" >
+   <section class="footer-section" style="margin-top: 50px;">
+		<div class="container-fluid">
+		
+			<div class="row">
+
+        <div class="col-lg-3 col-sm-6">
 					<div class="footer-widget about-widget">
-            <a href="index.html"><img src="{% static 'logo.png'%}" alt="" style="margin-left: 20px;"></a>
-					
+            <a href="index.html"><img src="{% static 'logo.png'%}" alt="" style="margin-left: 20px;height: 70%; width: 70%;"></a>
 					</div>
-				</div>
+        </div>
 				<div class="col-lg-3 col-sm-6">
-					<div class="footer-widget about-widget" >
-            <h2>About Us</h2>
-						<p>we represent artists from all over the world find amazing photographs,paintings,sculptures and prints.</p>
-						<img src="{% static 'cards.png' %}" alt="">
+					<div class="footer-widget about-widget">
+						<h2>About Us</h2>
+						<p>Welcome to Hooligan LLC we represent artists from all over the world find amazing photographs,paintings,sculptures and prints.</p>
+						<img src="{% static 'cards.png' %}" alt="" style="height: 50%;width: 50%;">
+					</div>
+        </div>
+        
+				<div class="col-lg-3 col-sm-6">
+					<div class="footer-widget about-widget">
+						<h2>DON'T GET LOST</h2>
+						<ul>
+							<li><a href="">Photographs</a></li>
+							<li><a href="">Artists</a></li>
+							<li><a href="">Paintings</a></li>
+							<li><a href="">Sculptures</a></li>
+							<li><a href="">Order Summary</a></li>
 						
-			
-					</div>
-				</div>
-				<div class="col-lg-3 col-sm-6">
-					<div class="foot">
-            <h2>Useful Links</h2>
-						<ul >
-							<li><a href="">About Us</a></li>
-							<li><a href="">Track Orders</a></li>
-					
-							<li><a href="">Shipping</a></li>
-							
 						</ul>
+						
 					</div>
 				</div>
-				<div class="col-lg-3 col-sm-6" style="height: 100%;">
+			
+				<div class="col-lg-3 col-sm-6">
 					<div class="footer-widget contact-widget">
 						<h2>Contact Info</h2>
 						<div class="con-info">
@@ -539,33 +530,43 @@ body::-webkit-scrollbar-thumb {
 							<p>Hooligan LLC </p>
 						</div>
 						<div class="con-info">
-						
-							<p>1481 Creekside Lane  Avila Beach </p>
+							
+							<p>1481 Creekside Lane  Avila Beach, CA 93424, P.O. BOX 68 </p>
 						</div>
 						<div class="con-info">
-						
+							
 							<p>+53 345 7953 32453</p>
 						</div>
 						<div class="con-info">
 						
 							<p>office@youremail.com</p>
-            </div>
-            <div class="social-links" style="height: 200px; width: 200px; color: white; font-size: 30px;float: right;margin-bottom: -200px;">
-              <a href="" class="instagram"><i class="fab fa-instagram"></i></a>
-          
-              <a href="" class="facebook"><i class="fab fa-facebook"></i></a>
-              <a href="" class="twitter"><i class="fab fa-twitter"></i></a>
-              
-            </div>
-    
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
+		<div class="social-links-warp">
+			<div class="container">
+				<div class="social-links">
+					<a href="" class="instagram"><i class="fa fa-instagram"></i><span>instagram</span></a>
+				
+					<a href="" class="facebook"><i class="fa fa-facebook"></i><span>facebook</span></a>
+					<a href="" class="twitter"><i class="fa fa-twitter"></i><span>twitter</span></a>
+				
+				</div>
 
+
+
+			</div>
+		</div>
 	</section>
 
-  
+
+
+
+
+
+
   <a href="#" class="back-to-top"><i class="fas fa-level-up-alt"></i></a>
 
 
