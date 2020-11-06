@@ -32,7 +32,7 @@
     body,
    
     .carousel {
-      height: 60vh;
+     
       font-family: 'Josefin Sans', sans-serif;
       scroll-behavior: smooth;
    
@@ -48,6 +48,19 @@ body::-webkit-scrollbar-thumb {
   background-color:lightcoral;    /* color of the scroll thumb */
   border-radius: 20px;       /* roundness of the scroll thumb */
   border: 3px solid pink;  /* creates padding around scroll thumb */
+}
+.collapse-content .fab.fa-facebook{
+  color: rgb(72, 134, 170) !important;
+  
+}
+.collapse-content .fab.fa-facebook:hover {
+  color: rgb(0, 217, 255) !important;
+}
+.collapse-content .fab.fa-twitter{
+  color: rgb(0, 140, 255) !important;
+}
+.collapse-content .fab.fa-twitter:hover {
+  color: #0d47a1 !important;
 }
 
  
@@ -123,23 +136,23 @@ body::-webkit-scrollbar-thumb {
   <div id="carousel-example-1z" class="carousel slide carousel-fade pt-4" data-ride="carousel" style="margin-top: -30px;" >
 
    
-    <div class="carousel-inner" role="listbox" style="height: 670px;">
+    <div class="carousel-inner" role="listbox" style="height: 300px;">
 
       
 
       <div class="carousel-item active">
 
        
-        <div class="view" id = view1a>
+        <div class="view" id = view2a>
          
         
 
             <span>
-              <div class="artists" style="position: fixed;font-size: 45px;">
+              <div class="artists" style="position: fixed;font-size: 75px;">
     
-                <h1>Meet our talented Artists  from All over The World</h1> <br>
+                <h1 style="font-size: 65px;" >Meet our talented Artists  from All over The World</h1> <br>
     
-                <h1>Art,Creativity,Life</h1>
+                <h1  style="font-size: 65px;color: coral;">Art,Creativity,Life</h1>
         
               </div>
             </span>
@@ -171,27 +184,64 @@ body::-webkit-scrollbar-thumb {
 
 
 </div>
- 
-  <main>
-   
 
-   
-    
-    <div class="container-fluid" style="margin-top: 350px;">
-    
-    
-     
-     
-     
-      <section class="text-center mb-4">
+   <div class="container-fluid" style="margin-top: 10px;">
+    <section class="text-center mb-4" style="margin-bottom: 200px;">
 
         <!--Grid row-->
         <div class="row wow fadeIn" style="margin: 20px; margin-bottom: 160px;" >
 
           {% for item in object_list %}
           
-          <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12 " style="margin-top: 170px;height: 500px;width: 500px;" >
-            <h1 style="font-weight: 500;">{{item.first_name }} {{item.last_name}}</h1>
+          <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 " style="margin-bottom: 30px;" >
+           
+           <!-- Card -->
+<div class="card promoting-card">
+
+ 
+  <div class="view overlay">
+    <img class="card-img-top rounded-0" src="{{item.image_artist.url}}" alt="Card image cap" style="height: 500px;">
+    <a href="{{item.get_absolute_url}}">
+      <div class="mask rgba-white-slight"></div>
+    </a>
+  </div>
+
+  <!-- Card content -->
+  <div class="card-body">
+
+    <div class="collapse-content">
+
+      <h4 class="card-title font-weight-bold"><a>{{item.first_name }} {{item.last_name}}</a></h4>
+      <p class="card-text" >{{item.bio}}</p>
+      <!-- Button -->
+      <a href="{{item.get_absolute_url}}" style="float: left;color: red;">Read More</a>
+      
+      <i class="fab fa-facebook text-muted float-right p-1 my-1" data-toggle="tooltip" data-placement="top" title="my facebook"></i>
+      <i class="fab fa-twitter text-muted float-right p-1 my-1 mr-3" data-toggle="tooltip" data-placement="top" title="my twitter"></i>
+
+    </div>
+
+  </div>
+
+</div>
+<!-- Card -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <!-- <h1 style="font-weight: 500;">{{item.first_name }} {{item.last_name}}</h1>
             <div class="view overlay">
          
               <a href="{{item.get_absolute_url}}">
@@ -205,7 +255,7 @@ body::-webkit-scrollbar-thumb {
               </a>
             
   
-            </div>
+            </div> -->
             </div>
         
 
@@ -250,8 +300,7 @@ body::-webkit-scrollbar-thumb {
      {%endif%}
 
     </div>
-  </main>
-  <div>
+
     <section class="footer-section">
       <div class="container-fluid">
       
@@ -316,7 +365,7 @@ body::-webkit-scrollbar-thumb {
           <div class="social-links">
             <a href="https://www.instagram.com/hooliganlivefree/?hl=en" class="instagram"><i class="fab fa-instagram"></i><span>instagram</span></a>
         
-            <a href="https://www.facebook.com/HooliganLLC/" class="facebook"><i class="fab fa-facebook-f"></i><span>facebook</span></a>
+            <a href="https://www.facebook.com/HooliganLLC/" class="facebook"><i class="fab fa-facebook"></i><span>facebook</span></a>
             <a href="https://twitter.com/HooliganLLC" class="twitter"><i class="fab fa-twitter"></i><span>twitter</span></a>
           
           </div>

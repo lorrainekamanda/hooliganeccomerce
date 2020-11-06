@@ -155,55 +155,6 @@ class homeview(ListView):
     template_name = "home-page.html"
 
 
-# class CreateDetail(LoginRequiredMixin,CreateView):
-#  def CreateDetail(request):
-#     if request.method=='post':
-#         form=DocumentForm(request.POST, user=request.user)
-#         if form.is_valid():
-#             item = form.cleaned_data.get('item')
-#             price = form.cleaned_data.get('price')
-#             discount_price = form.cleaned_data.get('discount_price')
-#             doc_code= Artist(first_name=first_name,last_name=last_name,email=email,bio=bio,Adress=Adress,phone=phone,instagram=instagram,facebook=facebook,tweeter=tweeter,slug=slug,image_artist=image_artist)
-#             category = form.cleaned_data.get('category')
-#             label= = form.cleaned_data.get(' label')
-#             description = form.cleaned_data.get('description')
-#             image = form.cleaned_data.get('image')
-#             doc_code.save()
-#             doc = form.save(commit=False)
-#             doc.code = doc_code
-#             doc.save()
-#             return HttpResponse('success')
-#     else:
-#         form=DocumentForm(user=request.user)
-
-#     context = { 'form':form, }
-
-#     return render_to_response('item.html, context, 
-#         context_instance=RequestContext(request))
-
-# class RelatedFieldWidgetCanAdd(widgets.Select):
-
-#  def __init__(self, related_model, related_url=None, *args, **kw):
-
-#     super(RelatedFieldWidgetCanAdd, self).__init__(*args, **kw)
-
-#     if not related_url:
-#         rel_to = related_model
-#         info = (rel_to._meta.app_label, rel_to._meta.object_name.lower())
-#         related_url = 'admin:%s_%s_add' % info
-
-#     # Be careful that here "reverse" is not allowed
-#     self.related_url = related_url
-
-#  def render(self, name, value, *args, **kwargs):
-#     self.related_url = reverse(self.related_url)
-#     output = [super(RelatedFieldWidgetCanAdd, self).render(name, value, *args, **kwargs)]
-#     output.append('<a href="%s?_to_field=id&_popup=1" class="add-another" id="add_id_%s" onclick="return showAddAnotherPopup(this);"> ' % \
-#         (self.related_url, name))
-#     output.append('<img src="%sadmin/img/icon_addlink.gif" width="10" height="10" alt="%s"/></a>' % (settings.STATIC_URL, 'Add Another'))
-#     return mark_safe(''.join(output))
-
-
     
 
 class artists(ListView):
@@ -240,6 +191,8 @@ class profile(DetailView):
         context = super(profile, self).get_context_data(**kwargs)
         context['products'] = Item.objects.all()
         return context
+  
+    
 
 def productview(request):
    context = {

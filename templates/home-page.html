@@ -35,6 +35,18 @@
 </head>
 
 <style>
+      body::-webkit-scrollbar {
+  width: 12px;               /* width of the entire scrollbar */
+}
+body::-webkit-scrollbar-track {
+  background: pink;        /* color of the tracking area */
+}
+body::-webkit-scrollbar-thumb {
+  background-color:lightcoral;    /* color of the scroll thumb */
+  border-radius: 20px;       /* roundness of the scroll thumb */
+  border: 3px solid pink;  /* creates padding around scroll thumb */
+}
+
  .row.display-flex {
   display: flex;
   flex-wrap: wrap;
