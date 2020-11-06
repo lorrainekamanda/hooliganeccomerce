@@ -1,6 +1,7 @@
 from django.db import models
 from django.conf import settings
 from django.shortcuts import reverse
+from cloudinary.models import CloudinaryField
 from django_countries.fields import CountryField
 
 CATEGORY_CHOICES = (
@@ -28,7 +29,7 @@ class Artist(models.Model):
     facebook = models.URLField(max_length = 200,blank = True,null = True)
     tweeter = models.URLField(max_length = 200,blank = True,null = True)
     tag = models.SlugField()
-    image_artist = models.ImageField(upload_to = "images/",default = "https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/12.jpg")
+    image_artist = CloudinaryField("image")
     
     def __str__(self):
        return self.first_name
@@ -46,7 +47,7 @@ class Item(models.Model):
    artist = models.ForeignKey(Artist,on_delete = models.CASCADE,null= True)
    slug = models.SlugField()
    description = models.TextField()
-   image = models.ImageField(upload_to = "images/",default = "https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/12.jpg")
+   image = CloudinaryField("image")
    
 
    def __str__(self):

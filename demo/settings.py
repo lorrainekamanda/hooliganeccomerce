@@ -1,4 +1,5 @@
 import os
+import cloudinary
 import django_heroku
 import dj_database_url
 from decouple import config,Csv
@@ -29,6 +30,7 @@ INSTALLED_APPS = [
     'django_countries',
     'stripe',
     'social_django',
+    'cloudinary'
 ]
 
 MIDDLEWARE = [
@@ -189,3 +191,10 @@ ACCOUNT_FORMS = {
 
 
 django_heroku.settings(locals())
+
+
+cloudinary.config( 
+  cloud_name = "dqj36cjxw", 
+  api_key = "916162855945684", 
+  api_secret = "8D2h4MB2jmA6_Twft8yemnYN2dY" 
+)
