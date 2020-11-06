@@ -291,7 +291,7 @@ a:hover {
                 <div class="row main align-items-center">
                 <div class="col-2"><img class="img-fluid" src="{{order_item.item.image.url}}"></div>
                     <div class="col">
-                        <!-- <div class="row text-muted">Shirt</div> -->
+                     
                         <div class="row">{{order_item.item.title}}</div>
                     </div>
                     <div class="col"> <a href="{% url 'core:remove-single-item-from-cart' order_item.item.slug %}">-</a><a href="#" class="border">{{order_item.quantity}}</a><a href="{% url 'core:add-to-cart' order_item.item.slug %}">+</a> </div>
@@ -343,7 +343,7 @@ a:hover {
             
           </div>
           <div class="col text-right"  style="margin-top: 30px;">
-            Thankyou for Shooping with us
+            Thank you for Shopping with us
           </div>
         </div>
         </div>
