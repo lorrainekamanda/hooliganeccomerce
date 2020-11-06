@@ -16,7 +16,11 @@ from django.dispatch import receiver
 from django.http import HttpRequest
 from django.middleware.csrf import get_token
 from django.views.generic import ListView,DetailView,CreateView,UpdateView,DeleteView
-
+from django.urls import reverse
+from django.utils.safestring import mark_safe
+from django.forms import widgets
+from django.conf import settings
+from .forms import ItemForm
 import stripe
 
 stripe.api_key =  settings.STRIPE_SECRET_KEY
@@ -79,24 +83,125 @@ class CheckoutView(View):
         return redirect('core:checkout')
 
 
+
+
+class CreateDetail(LoginRequiredMixin,View):
+    def get(self,*args,**kwargs):
+        form = ItemForm()
+        item = Item.objects.get
+        context = {
+            'form':form,
+            'item':item
+           
+        }
+     
+        return render(self.request,'item.html',context)
+        
+        
+    def post(self,*args,**kwargs):
+        form = ItemForm(self.request.POST or None)
+        item = Item.objects.get
+        if form.is_valid():
+            
+            title = form.cleaned_data.get('title')
+            price = form.cleaned_data.get('price')
+            discount_price = form.cleaned_data.get('discount_price')
+            category = form.cleaned_data.get('category')
+            label= form.cleaned_data.get('label')
+            slug= form.cleaned_data.get('slug')
+            description = form.cleaned_data.get('description')
+            first_name = form.cleaned_data.get('first_name')
+            last_name= form.cleaned_data.get('last_name')
+            tag= form.cleaned_data.get('tag')
+            email = form.cleaned_data.get('email')
+            tweeter= form.cleaned_data.get('tweeter')
+            instagram= form.cleaned_data.get('instagram')
+            facebook= form.cleaned_data.get('facebook')
+            bio= form.cleaned_data.get('bio')
+            Adress= form.cleaned_data.get('Adress')
+            phone = form.cleaned_data.get('phone')
+            image_artist = form.cleaned_data.get('image_artist')
+            
+            artist = Artist(
+                user = self.request.user,
+                first_name=first_name,
+                last_name=last_name,
+                email=email,
+                bio=bio,
+                Adress=Adress,
+                phone=phone,
+                instagram=instagram,
+                facebook=facebook,
+                tweeter=tweeter,
+                slug=slug,
+                image_artist=image_artist
+                
+              )
+            item.artist = artist
+            item.save()
+            artist.save()
+            return redirect('core:home')
+        else:
+            return redirect('core:home')
+
+      
+      
+
+
+
 class homeview(ListView):
     model = Item
     paginate_by = 6
     template_name = "home-page.html"
 
 
-class CreateDetail(LoginRequiredMixin,CreateView):
-    model = Item
-    template_name = "item.html"
-    fields = ['title','price','discount_price','category','label','artist','slug','description','image']
-    
+# class CreateDetail(LoginRequiredMixin,CreateView):
+#  def CreateDetail(request):
+#     if request.method=='post':
+#         form=DocumentForm(request.POST, user=request.user)
+#         if form.is_valid():
+#             item = form.cleaned_data.get('item')
+#             price = form.cleaned_data.get('price')
+#             discount_price = form.cleaned_data.get('discount_price')
+#             doc_code= Artist(first_name=first_name,last_name=last_name,email=email,bio=bio,Adress=Adress,phone=phone,instagram=instagram,facebook=facebook,tweeter=tweeter,slug=slug,image_artist=image_artist)
+#             category = form.cleaned_data.get('category')
+#             label= = form.cleaned_data.get(' label')
+#             description = form.cleaned_data.get('description')
+#             image = form.cleaned_data.get('image')
+#             doc_code.save()
+#             doc = form.save(commit=False)
+#             doc.code = doc_code
+#             doc.save()
+#             return HttpResponse('success')
+#     else:
+#         form=DocumentForm(user=request.user)
 
-    def form_valid(self,form):
-        form.instance.username = self.request.user
-        
-        return super().form_valid(form)
+#     context = { 'form':form, }
 
+#     return render_to_response('item.html, context, 
+#         context_instance=RequestContext(request))
 
+# class RelatedFieldWidgetCanAdd(widgets.Select):
+
+#  def __init__(self, related_model, related_url=None, *args, **kw):
+
+#     super(RelatedFieldWidgetCanAdd, self).__init__(*args, **kw)
+
+#     if not related_url:
+#         rel_to = related_model
+#         info = (rel_to._meta.app_label, rel_to._meta.object_name.lower())
+#         related_url = 'admin:%s_%s_add' % info
+
+#     # Be careful that here "reverse" is not allowed
+#     self.related_url = related_url
+
+#  def render(self, name, value, *args, **kwargs):
+#     self.related_url = reverse(self.related_url)
+#     output = [super(RelatedFieldWidgetCanAdd, self).render(name, value, *args, **kwargs)]
+#     output.append('<a href="%s?_to_field=id&_popup=1" class="add-another" id="add_id_%s" onclick="return showAddAnotherPopup(this);"> ' % \
+#         (self.related_url, name))
+#     output.append('<img src="%sadmin/img/icon_addlink.gif" width="10" height="10" alt="%s"/></a>' % (settings.STATIC_URL, 'Add Another'))
+#     return mark_safe(''.join(output))
 
 
     

@@ -4,7 +4,10 @@ from django_countries.fields import CountryField
 from django_countries.widgets import CountrySelectWidget
 from django.db import models
 from django.conf import settings
-from .models import Item
+from .models import Item,Artist,Order
+from django.forms import widgets
+from django.forms import ModelChoiceField
+
 
 class CustomSignupForm(SignupForm):
     def __init__(self, *args, **kwargs):
@@ -26,6 +29,20 @@ PAYMENT_CHOICES = (
     ('P','Paypal')
 )
 
+CATEGORY_CHOICES = (
+    ('Pa','Painting'),
+    ('Ph','photograph'),
+    ('sc','sculpture'),
+    ('pr','prints')
+)
+
+LABEL_CHOICES = (   
+    ('P','primary'),
+    ('S','secondary'),
+    ('D','danger')
+
+)
+
 class CheckoutForm(forms.Form):
     street_adress = forms.CharField(widget = forms.TextInput(attrs = {'placeholder':'1234 Main st'}))
     apartment_adress = forms.CharField(required = False,widget = forms.TextInput(attrs = {'placeholder':'Apartment or Suite'}))
@@ -36,4 +53,29 @@ class CheckoutForm(forms.Form):
     payment_option = forms.ChoiceField(widget = forms.RadioSelect(),choices = PAYMENT_CHOICES)
 
 
+class ItemForm(forms.Form):
+    title = forms.CharField(required = True,widget = forms.TextInput())
+    price = forms.FloatField(required = True,widget = forms.TextInput())
+    discount_price = forms.FloatField(required = False,widget = forms.TextInput())
+    description= forms.CharField(widget = forms.Textarea(attrs = {'class':'form-control'}))
+    image = forms.ImageField(label = "Item Image")
+    # country = CountryField(blank_label = '(select country...)').formfield(widget = CountrySelectWidget(attrs = {'class':'custom-select d-block w-100'}))
+    slug= forms.CharField(label='Image Tag',widget = forms.TextInput(attrs = {'class':'form-control'}))
+    lable= forms.ChoiceField(choices = LABEL_CHOICES)
+    category= forms.ChoiceField(choices = CATEGORY_CHOICES)
+    first_name = forms.CharField(required = True,widget = forms.TextInput())
+    last_name = forms.CharField(required = True,widget = forms.TextInput())
+    phone = forms.CharField(required = True,widget = forms.TextInput())
+    email = forms.EmailField(required = True,widget = forms.TextInput())
+    bio = forms.CharField(widget = forms.Textarea(attrs = {'class':'form-control'}))
+    tweeter = forms.URLField(label = "twitter",required = True,widget = forms.TextInput())
+    instagram = forms.URLField(required = True,widget = forms.TextInput())
+    facebook= forms.URLField(required = True,widget = forms.TextInput())
+    image_artist = forms.ImageField(label = "Your Image")
 
+    tag= forms.CharField(label='Your Tag',widget = forms.TextInput(attrs = {'class':'form-control'}))
+    # bio = forms.CharField(widget = forms.TextInput(attrs = {'class':'form-control'}))
+    # country = CountryField(blank_label = '(select country...)').formfield(widget = CountrySelectWidget(attrs = {'class':'custom-select d-block w-100'}))
+
+ 
+#        

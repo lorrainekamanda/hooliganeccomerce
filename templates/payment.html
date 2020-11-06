@@ -10,8 +10,9 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
-  <title>E-Commerce</title>
+  <title>Dagallery-payment</title>
   <!-- Font Awesome -->
+  <link rel="shortcut icon" href="{% static 'logos.png'%}" type="image/4x-icon">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
   <link href="https://fonts.googleapis.com/css?family=Josefin+Sans:300,300i,400,400i,700,700i" rel="stylesheet">
   <!-- Bootstrap core CSS -->
@@ -20,6 +21,7 @@
   <link href="{% static 'css/mdb.min.css' %}" rel="stylesheet">
   <!-- Your custom styles (optional) -->
   <link href="{%static 'css/style.min.css'%}" rel="stylesheet">
+  <link href="{%static 'css/hero.css'%}" rel="stylesheet">
   <style type="text/css">
     html,
     body,
@@ -354,77 +356,87 @@ body::-webkit-scrollbar-thumb {
         </div>
       </main>
 
-      <div style="margin-bottom: -55px;">
-        <a href="#overlay">
-        <button class="btn btn-danger btn-sm" style="float: right;"><i class="fas fa-level-up-alt"></i></button>
-      </div>
-    </a>
-      <section class="footer" style="background-color: rgb(36, 32, 32); color: white; height: 100%;margin-top: 50px;">
-        <div class="container-fluid" style="margin-bottom: -320px;" >
-          <div class="footer-logo text-center" > <br> <br>
-            
-          </div>
-          <div class="row wow fadeIn"   >
-            <div class="col-lg-3 col-sm-6" >
+      <section class="footer-section" style="color: white;">
+        <div class="container-fluid">
+        
+          <div class="row">
+      
+            <div class="col-lg-3 col-sm-6">
               <div class="footer-widget about-widget">
-                <a href="index.html"><img src="{% static 'logo.png'%}" alt="" style="margin-left: 20px;"></a>
-              
+               
+                <a href="https://hooliganlivefree.com" target="_blank"><img src="{% static 'logo.png'%}" alt="" style="margin-left: 20px;height: 70%; width: 70%;"></a>
               </div>
             </div>
             <div class="col-lg-3 col-sm-6">
-              <div class="footer-widget about-widget" >
+              <div class="footer-widget about-widget">
                 <h2>About Us</h2>
-                <p>we represent artists from all over the world find amazing photographs,paintings,sculptures and prints.</p>
-                <img src="{% static 'cards.png' %}" alt="">
-                
-          
+                <p>Welcome to Hooligan LLC we represent artists from all over the world find amazing photographs,paintings,sculptures and prints.</p>
+                <img src="{% static 'cards.png' %}" alt="" style="height: 50%;width: 50%;">
               </div>
             </div>
+            
             <div class="col-lg-3 col-sm-6">
-              <div class="foot">
-                <h2>Useful Links</h2>
+              <div class="footer-widget about-widget">
+                <h2>DON'T GET LOST</h2>
                 <ul>
-                  <li><a href="">About Us</a></li>
-                  <li><a href="">Track Orders</a></li>
-              
-                  <li><a href="">Shipping</a></li>
-                  
+                  <li><a href="/">Home</a></li>
+                  <li><a href="/photographs">Photographs</a></li>
+                  <li><a href="/artists">Artists</a></li>
+                  <li><a href="/paintings">Paintings</a></li>
+                  <li><a href="/">Sculptures</a></li>
+                  <li><a href="{%url 'core:order-summary'%}">Order Summary</a></li>
+                
                 </ul>
+                
               </div>
             </div>
-            <div class="col-lg-3 col-sm-6" style="height: 100%;">
+          
+            <div class="col-lg-3 col-sm-6">
               <div class="footer-widget contact-widget">
                 <h2>Contact Info</h2>
                 <div class="con-info">
                 
-                  <p>Hooligan LLC Ltd </p>
-                </div>
-                <div class="con-info">
+                  <p> <i class="fas fa-home" style="margin-right: 10px;"></i>Hooligan LLC </p>
+              </div>
+              <div class="con-info">
                 
-                  <p>1481 Creekside Lane  Avila Beach </p>
-                </div>
-                <div class="con-info">
+                <p> <i class="fas fa-map-marker-alt" style="margin-right: 10px;"></i>New York,USA </p>
+              </div>
+              <div class="con-info">
                 
-                  <p>+53 345 7953 32453</p>
-                </div>
-                <div class="con-info">
-                
-                  <p>office@youremail.com</p>
-                </div>
-                <div class="social-links" style="height: 200px; width: 200px; color: white; font-size: 30px;float: right;margin-bottom: -200px;">
-                  <a href="" class="instagram"><i class="fab fa-instagram"></i></a>
+                <p> <i class="fas fa-phone-alt" style="margin-right: 10px;"></i>+1 347 981 3342</p>
+              </div>
+              <div class="con-info">
               
-                  <a href="" class="facebook"><i class="fab fa-facebook"></i></a>
-                  <a href="" class="twitter"><i class="fab fa-twitter"></i></a>
-                  
+                <p> <i class="far fa-envelope" style="margin-right: 10px;"></i>451hugo@gmail.com</p>
                 </div>
-        
               </div>
             </div>
           </div>
         </div>
+        <div class="social-links-warp">
+          <div class="container">
+            <div class="social-links">
+              <a href="https://www.instagram.com/hooliganlivefree/?hl=en" class="instagram"><i class="fab fa-instagram"></i><span>instagram</span></a>
+            
+              <a href="https://www.facebook.com/HooliganLLC/" class="facebook"><i class="fab fa-facebook-f"></i><span>facebook</span></a>
+              <a href="https://twitter.com/HooliganLLC" class="twitter"><i class="fab fa-twitter"></i><span>twitter</span></a>
+            
+            </div>
       
+      
+      
+          </div>
+        </div>
       </section>
+      
+      
+      
+      
+      
+      
+      
+      <a href="#" class="back-to-top"><i class="fas fa-chevron-up"></i></a>
     
     
     <script src="https://js.stripe.com/v3/"></script>
@@ -523,7 +535,13 @@ body::-webkit-scrollbar-thumb {
   <script type="text/javascript" src="{% static 'js/mdb.min.js' %}"></script>
   <!-- Initializations -->
   <script type="text/javascript">
-    // Animations initialization
+        $(window).scroll(function() {
+    if ($(this).scrollTop() > 100) {
+      $('.back-to-top').fadeIn('slow');
+    } else {
+      $('.back-to-top').fadeOut('slow');
+    }
+  });
     new WOW().init();
 
   </script>

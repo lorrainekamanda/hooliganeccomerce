@@ -27,14 +27,14 @@ class Artist(models.Model):
     instagram = models.URLField(max_length = 200,blank = True,null = True)
     facebook = models.URLField(max_length = 200,blank = True,null = True)
     tweeter = models.URLField(max_length = 200,blank = True,null = True)
-    slug = models.SlugField()
+    tag = models.SlugField()
     image_artist = models.ImageField(upload_to = "images/",default = "https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/12.jpg")
     
     def __str__(self):
        return self.first_name
 
     def get_absolute_url(self):
-       return reverse("core:profile",kwargs = {'slug':self.slug})
+       return reverse("core:profile",kwargs = {'tag':self.tag})
 
 
 class Item(models.Model):
@@ -44,7 +44,7 @@ class Item(models.Model):
    category = models.CharField(choices = CATEGORY_CHOICES,max_length = 2)
    label= models.CharField(choices = LABEL_CHOICES,max_length = 2)
    artist = models.ForeignKey(Artist,on_delete = models.CASCADE,null= True)
-   slug = models.SlugField(default = 'please enter a tag...')
+   slug = models.SlugField()
    description = models.TextField()
    image = models.ImageField(upload_to = "images/",default = "https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/12.jpg")
    

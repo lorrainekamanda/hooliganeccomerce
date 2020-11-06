@@ -1,7 +1,4 @@
-.view,body,html{height:100%}.carousel{height:50%}.carousel .carousel-inner,.carousel .carousel-inner .active,.carousel .carousel-inner .carousel-item{height:100%}@media (max-width:776px){.carousel{height:100%}}.page-footer{background-color:#929FBA}
-.msg{
-    margin-top: 75px;
-  }
+
   .input-group.md-form.form-sm.form-2 input.amber-border {
     border: 1px solid #ffca28;
   }
@@ -47,17 +44,34 @@ input#email:focus {
 body{
   font-family: 'Josefin Sans', sans-serif;
   scrollbar-width: thin;          /* "auto" or "thin"  */
-  scrollbar-color: blue orange;   /* scroll thumb & track */
+
 }
 
-body::-webkit-scrollbar {
-  width: 12px;               /* width of the entire scrollbar */
-}
 body::-webkit-scrollbar-track {
-  background: orange;        /* color of the tracking area */
-}
-body::-webkit-scrollbar-thumb {
-  background-color: blue;    /* color of the scroll thumb */
+  background: pink;        /* color of the tracking area */
+  }
+  body::-webkit-scrollbar-thumb {
+  background-color:lightcoral;    /* color of the scroll thumb */
   border-radius: 20px;       /* roundness of the scroll thumb */
-  border: 3px solid orange;  /* creates padding around scroll thumb */
-}
+  border: 3px solid pink;  /* creates padding around scroll thumb */
+  }
+
+  body::-webkit-scrollbar-track {
+    background: pink;        /* color of the tracking area */
+    }
+    body::-webkit-scrollbar-thumb {
+    background-color:lightcoral;    /* color of the scroll thumb */
+    border-radius: 20px;       /* roundness of the scroll thumb */
+    border: 3px solid pink;  /* creates padding around scroll thumb */
+    }
+    .carousel-item {
+      height: 100vh;
+      min-height: 350px;
+      background: no-repeat center center scroll;
+      -webkit-background-size: cover;
+      -moz-background-size: cover;
+      -o-background-size: cover;
+      background-size: cover;
+    }
+
+

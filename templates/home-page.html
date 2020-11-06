@@ -11,26 +11,88 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
-  <title>E-Commerce</title>
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+  <title>Dagallery-Home</title>
+
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <link href="https://fonts.googleapis.com/css?family=Josefin+Sans:300,300i,400,400i,700,700i" rel="stylesheet">
+  <link rel="shortcut icon" href="{% static 'logos.png'%}" type="image/4x-icon">
+  
+ 
+  <link href="https://fonts.googleapis.com/css2?family=Courgette&display=swap" rel="stylesheet">
 
-  <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
-  <!-- Material Design Bootstrap -->
 
-  <!-- Your custom styles (optional) -->
-  <link href="{%static 'css/style.min.css'%}" rel="stylesheet">
-  <link href="{%static 'css/style.css'%}" rel="stylesheet">
-  <link href="{% static 'css/mdb.min.css' %}" rel="stylesheet">
-  <!-- Your custom styles (optional) -->
-  <link href="{%static 'css/style.min.css'%}" rel="stylesheet">
+  <link href="{%static 'css/navbar.css'%}" rel="stylesheet">
+ <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
 
-  <link href="{%static 'css/styles2.css'%}" rel="stylesheet">
-  <link href="{%static 'css/heroz.css'%}" rel="stylesheet">
+    <!-- Material Design Bootstrap -->
+    <link href="{% static 'css/mdb.min.css' %}" rel="stylesheet">
+    <!-- Your custom styles (optional) -->
+    <link href="{%static 'css/style.min.css'%}" rel="stylesheet">
+    <link href="{%static 'css/style.css'%}" rel="stylesheet">
+    <link href="{%static 'css/hero.css'%}" rel="stylesheet">
+
 
 </head>
+
+<style>
+ .row.display-flex {
+  display: flex;
+  flex-wrap: wrap;
+}
+.row.display-flex > [class*='col-'] {
+  display: flex;
+  flex-direction: column;
+}
+ #card{
+	transition:0.5s;
+	cursor:pointer;
+	}
+	#card-title{  
+	font-size:15px;
+	transition:1s;
+	cursor:pointer;
+	}
+	#card-title i{  
+	font-size:15px;
+	transition:1s;
+	cursor:pointer;
+	color:#ffa710
+	}
+	#card-title i:hover{
+	transform: scale(1.25) rotate(100deg); 
+	color:#18d4ca;
+	
+	}
+	#card:hover{
+	transform: scale(1.05);
+	box-shadow: 10px 10px 15px rgba(0,0,0,0.3);
+	}
+	#card-text{
+	height:80px;  
+	}
+	
+	#card::before, .card::after {
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	transform: scale3d(0, 0, 1);
+	transition: transform .3s ease-out 0s;
+	background: rgba(255, 255, 255, 0.1);
+	content: '';
+	pointer-events: none;
+	}
+	#card::before {
+	transform-origin: left top;
+	}
+	#card::after {
+	transform-origin: right bottom;
+	}
+	#card:hover::before, .card:hover::after, .card:focus::before, .card:focus::after {
+	transform: scale3d(1, 1, 1);
+	}
+</style>
 
 <body class="grey lighten-3">
 
@@ -41,228 +103,179 @@
     {% endfor %}
 </ul>
 {% endif %}
- <!-- Navbar -->
- <nav class="navbar fixed-top navbar-expand-lg navbar-light white scrolling-navbar" style="position: relative; font-weight: 500;" id = "overlay">
-  <div class="container">
 
-  
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
 
-    <!-- Links -->
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-
-      <div class="image">
-        <img src="{% static 'logo.png'%}" alt="" srcset="" style="height: 100px; width: 100px; margin-top: 22px;">
-       </div>
-      
-      <ul class="navbar-nav mr-auto" style="margin-left: 300px;margin-top: 100px;">
-        
-       
-          <li class="nav-item " style="margin-right: 50px;font-weight: 500;">
-              <a class="nav-link waves-effect" href="/paintings" style="font-weight: 500;color: black;">Paintings
-                <span class="sr-only">(current)</span>
-              </a>
-            </li>
-            <li class="nav-item" style="margin-right: 50px;">
-              <a class="nav-link waves-effect" href="/photographs" target="_blank" style="font-weight: 500;color: black;">Photographs</a>
-            </li>
-        <li class="nav-item" style="margin-right: 50px;">
-          <a class="nav-link waves-effect" href="/" style="font-weight: 500;color: black;">Sculptures
-            <span class="sr-only">(current)</span>
+<header class="header-section">
+  <div class="header-top">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-2 text-center text-lg-left">
+          <!-- logo -->
+          <a href="https://hooliganlivefree.com" class="site-logo">
+            <h3 style="font-family: 'Courgette', cursive;color: #000;font-family: 800;">HOOLIGAN <br> LLC.</h3>
           </a>
-        </li>
-        <li class="nav-item" style="margin-right: 50px;">
-          <a class="nav-link waves-effect" href="/prints" style="font-weight: 500;color: black;" >Prints</a>
-        </li>
-        <li class="nav-item" style="margin-right: 50px;">
-          <a class="nav-link waves-effect" href="/artists" style="font-weight: 500;color: black;">Artists</a>
-        </li>
-        {% if user.is_authenticated %}
-        <li class="nav-item" style="margin-right: 50px;">
-          <a class="nav-link waves-effect" href="{%url 'core:upload'%}" style="font-weight: 500;color: black;">Artists</a>
-        </li>
+        </div>
+        <div class="col-xl-6 col-lg-5">
+          <form class="header-search-form" role="search" action="{% url 'core:search_results' %}">
+            <input type="text" placeholder="Search product ...." name="title" style="border: 1px solid coral;">
+            <button><i class="fas fa-search"></i></button>
+          </form>
+        </div>
+        <div class="col-xl-4 col-lg-5">
+          <div class="user-panel">
+            <div class="up-item">
+              <i class="far fa-user"></i>
+              {% if user.is_authenticated %}
 
+              <a href="{% url 'account_logout'%}">Logout</a>
+              {% else %}
+              <a href="{% url 'account_login'%}">Sign In</a>  or <a href="{% url 'account_signup'%}">Create Account</a>
+              {%endif%}
+            </div>
+            <div class="up-item">
+              <div class="shopping-card">
+                <a href="{%url 'core:order-summary'%}">
+                  <i class="fas fa-shopping-bag"></i>
+              
+                
+                <span style="font-weight: 500;">{{request.user|cart_item_count}} </span>
+              </div>
+             Shopping Cart</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <nav class="main-navbar" style="height: 70px;">
+    <div class="container">
+      <!-- menu -->
+      <ul class="main-menu">
+        <li><a href="/">Home</a></li>
+        <li><a href="/paintings">Paintings</a></li>
+        <li><a href="/photographs">Photographs</a></li>
+        <li><a href="/prints">Prints</a></li>
+        <li><a href="/sculptures">Sculptures</a></li>
+        <li><a href="/artists">Artists</a></li>
+        {% if user.is_authenticated %}
+        <li><a href="/upload" style="background-color:coral;width: 120%;text-align: center;font-weight: 400;">Upload Art!</a></li>
         {%endif%}
-    
-      </ul >
-
-      <!-- Right -->
-      <ul class="navbar-nav nav-flex-icons" style = "margin-top:-80px;margin-left: -420px;">
-        <li class="nav-item">
-          <a class="nav-link waves-effect" href="{%url 'core:order-summary'%}">
-            <span class="badge red z-depth-1 mr-1" style="border-radius: 100px; color: black; font-weight: 500;background-color: red;"> {{request.user|cart_item_count}}  </span>
-            
-            <img src="{% static 'cart.png'%}" alt="" srcset="" style="height: 30px; width: 30px;">
-            <span class="clearfix d-none d-sm-inline-block">  </span>
-          </a>
-        </li>
-        {% if user.is_authenticated %}
-        <!-- <i class="far fa-user"></i> -->
-        <li class="nav-item">
-          <a href="{% url 'account_logout'%}" class="nav-link waves-effect" target="_blank">
-            <span class="clearfix d-none d-sm-inline-block" style="font-weight: 500;color: black;">Logout</span>
-          </a>
-        </li>
-        {% else %}
-        <!-- <button><i class="far fa-user"></i></button> -->
-        <li class="nav-item">
-          <a href="{% url 'account_login'%}" class="nav-link waves-effect" target="_blank">
-            <span class="clearfix d-none d-sm-inline-block"  style="font-weight: 500;color: black;">Signin  </span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a href="{% url 'account_signup'%}" class="nav-link waves-effect" target="_blank">
-            <span class="clearfix d-none d-sm-inline-block" style="font-weight: 500;color: black;">| Create Account</span>
-          </a>
-        </li>
-
-        {% endif %}
-        
-     
-      
       </ul>
-
     </div>
+  </nav>
+</header>
+<!-- Header section end -->
 
-  </div>
-  
-  <div class="col-sm-4 col-md-4 navbar-left" style = "margin-top:-80px">
+   <div id="carousel-example-1z" class="carousel slide carousel-fade pt-4" data-ride="carousel" style="margin-top: -40px;" > 
+ <div class="overlay" >
+ <div class="carousel-inner" role="listbox"  id = "down">
 
-    <form class="navbar-form" role="search" action="{% url 'core:search_results' %}">
-
-      <div class="input-group md-form form-sm form-2 pl-0">
-        <input type="text" class="form-control" placeholder="Search Item..." name="title" class="form-control my-0 py-1 red-border" style="border: solid 1px red;">
-        <div class="input-group-append">
-          <span class="input-group-text red lighten-3" id="basic-text1"><i class="fas fa-search text-grey"
-              aria-hidden="true"></i></span>
+   <div class="carousel-item active">
+     <div class="view" id = view1 >
+      <div class="row wow fadeIn">
+        <div class=" text-white" style="margin-top: 50px;margin-left: 50px; width: 480px; opacity: .9;"> <br>
+        
+          <h1 style="font-weight: 600; margin-left: 10px;"> HOOLIGAN LLC, <br> <span style="color: greenyellow;border-bottom: black solid 1px;">ART</span></h1>
+          <p style="margin-left: 10px;font-size: 25px;">Welcome to Hooligan LLC<br> we represent artists from all over <br>the world find amazing  photographs,<br>paintings,sculptures and prints. <br> </p>
+          
+          <a href="#explore" class="site-btn sb-line" style="color: white; font-size: 13px;">
+            <button class="btn btn-danger btn-md "> DISCOVER MORE</button>
+            </a>
+        
         </div>
-       
       </div>
-
-    </form>
-  </div>
-</nav>
-
-
-
-
-
-   <div id="carousel-example-1z" class="carousel slide carousel-fade pt-4" data-ride="carousel" style="margin-top: -30px;" >
-
  
-    
-  
-     <div class="overlay" >
-    <div class="carousel-inner" role="listbox" style="height: 670px;"  id = "down">
-
-      <div class="carousel-item active">
-        <div class="view" id = view1 style="justify-content: left;">
-          <div class="row wow fadeIn">
-          
-						<div class=" text-white" style="margin-top: 50px; width: 480px;margin-left: 50px; opacity: .9;" id = "intro" > <br> 
-					
-											
-              <h1 style="font-weight: 600; margin-left: 10px;"> HOOLIGAN LLC, <br> <span style="color: greenyellow;border-bottom: black solid 1px;">ART</span></h1>
-              <p style="margin-left: 10px;font-size: 25px;">Welcome to Hooligan LLC<br> we represent artists from all over <br>the world find amazing  photographs,<br>paintings,sculptures and prints. <br> </p>
-              
-              <a href="#explore" class="site-btn sb-line" style="color: white; font-size: 12px;">
-                <button class="btn btn-danger btn-md " style="color: white; font-size: 12px;"> DISCOVER MORE</button>
-                </a>
-          
-						</div>
-		
-        </div>
-         </div>
+     </div>
       </div>
-    
-      <div class="carousel-item" >
+   </div>
+ 
+   <div class="carousel-item" >
 
-        <div class="view" id = "view2">
+     <div class="view" id = "view2">
 
-          <div class="row wow fadeIn">
-						<div class=" text-white" style="margin-top: 50px;margin-left: 50px; width: 480px; opacity: .9;"> <br>
-						
-              <h1 style="font-weight: 600; margin-left: 10px;"> HOOLIGAN LLC, <br> <span style="color: greenyellow;border-bottom: black solid 1px;">ART</span></h1>
-              <p style="margin-left: 10px;font-size: 25px;">Welcome to Hooligan LLC<br> we represent artists from all over <br>the world find amazing  photographs,<br>paintings,sculptures and prints. <br> </p>
-              
-              <a href="#explore" class="site-btn sb-line" style="color: white; font-size: 13px;">
-                <button class="btn btn-danger btn-md "> DISCOVER MORE</button>
-                </a>
-            
-						</div>
-					</div>
-          <div class=" d-flex justify-content-center align-items-center">
-
+       <div class="row wow fadeIn">
+         <div class=" text-white" style="margin-top: 50px;margin-left: 50px; width: 480px; opacity: .9;"> <br>
          
-            <div class="text-center white-text mx-5 wow fadeIn">
-            
-               
-            </div>
-          
+           <h1 style="font-weight: 600; margin-left: 10px;"> HOOLIGAN LLC, <br> <span style="color: greenyellow;border-bottom: black solid 1px;">ART</span></h1>
+           <p style="margin-left: 10px;font-size: 25px;">Welcome to Hooligan LLC<br> we represent artists from all over <br>the world find amazing  photographs,<br>paintings,sculptures and prints. <br> </p>
+           
+           <a href="#explore" class="site-btn sb-line" style="color: white; font-size: 13px;">
+             <button class="btn btn-danger btn-md "> DISCOVER MORE</button>
+             </a>
+         
+         </div>
+       </div>
+  
+    
 
-          </div>
+     </div>
+   </div>
+ 
+    <div class="carousel-item" >
+     <div class="view" id = "view3">
+
+       <div class="row wow fadeIn" >
+         <div class="text-white" style="margin-top: 50px; margin-left: 50px; width:480px;opacity: .9;"> <br>
+         
+           <h1 style="font-weight: 600; margin-left: 10px;"> HOOLIGAN LLC, <br> <span style="color: greenyellow;border-bottom: black solid 1px;">ART</span></h1>
+           <p style="margin-left: 10px;font-size: 25px;">Welcome to Hooligan LLC<br> we represent artists from all over <br>the world find amazing  photographs,<br>paintings,sculptures and prints. <br> </p>
+           
+           <a href="#explore" class="site-btn sb-line" style="color: white; font-size: 13px;">
+             <button class="btn btn-danger btn-md "> DISCOVER MORE</button>
+             </a>
+         </div>
+       </div>
+       <div class="d-flex justify-content-center align-items-center">
+
+       
+         <div class="text-center white-text mx-5 wow fadeIn">
+           
+         </div>
+         
+
+       </div>
        
 
-        </div>
-      </div>
+     </div>
+     <ol class="carousel-indicator" style="margin-top: 10px;color: #000; display: inline-flex;">
+       <li data-target="#carousel-example-1z" data-slide-to="0" style="background-color: black;border-radius: 100px; margin-right: 15px;" ></li>
+       <li data-target="#carousel-example-1z" data-slide-to="1" style="background-color: black;border-radius: 50%;margin-right: 15px;"></li>
+       <li data-target="#carousel-example-1z" data-slide-to="2" style="background-color: black;border-radius: 50%;"></li>
+     </ol>
+
+   </div>
+ 
+  
+
+
+ </div> 
+  
+
+
+
+
+
+
+  
     
-      <div class="carousel-item" >
-        <div class="view" id = "view3">
-
-          <div class="row wow fadeIn" >
-						<div class="text-white" style="margin-top: 50px; margin-left: 50px; width:480px;opacity: .9;"> <br>
-						
-              <h1 style="font-weight: 600; margin-left: 10px;"> HOOLIGAN LLC, <br> <span style="color: greenyellow;border-bottom: black solid 1px;">ART</span></h1>
-              <p style="margin-left: 10px;font-size: 25px;">Welcome to Hooligan LLC<br> we represent artists from all over <br>the world find amazing  photographs,<br>paintings,sculptures and prints. <br> </p>
-              
-              <a href="#explore" class="site-btn sb-line" style="color: white; font-size: 13px;">
-                <button class="btn btn-danger btn-md "> DISCOVER MORE</button>
-                </a>
-						</div>
-					</div>
-          <div class="d-flex justify-content-center align-items-center">
-
-          
-            <div class="text-center white-text mx-5 wow fadeIn">
-              
-            </div>
-            
-
-          </div>
-          
-
-        </div>
-        <ol class="carousel-indicator" style="margin-top: 10px;color: #000; display: inline-flex;">
-          <li data-target="#carousel-example-1z" data-slide-to="0" style="background-color: black;border-radius: 100px; margin-right: 15px;" ></li>
-          <li data-target="#carousel-example-1z" data-slide-to="1" style="background-color: black;border-radius: 50%;margin-right: 15px;"></li>
-          <li data-target="#carousel-example-1z" data-slide-to="2" style="background-color: black;border-radius: 50%;"></li>
-        </ol>
-
-      </div>
-    
-     
-   
-
-    </div>
-    
-    
-    <!-- <a class="carousel-control-prev" href="#carousel-example-1z" role="button" data-slide="prev">
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+     <a class="carousel-control-prev" href="#carousel-example-1z" role="button" data-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"  style="margin-top: 400px;"></span>
       <span class="sr-only">Previous</span>
     </a>
     <a class="carousel-control-next" href="#carousel-example-1z" role="button" data-slide="next">
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="carousel-control-next-icon" aria-hidden="true"  style="margin-top: 400px;"></span>
       <span class="sr-only">Next</span>
-    </a> -->
+    </a> 
 
 
   </div>
 
-</div>
-<section class="section" style="margin-top: 200px;" id = "explore">
+</div>    <br> <br> <br>
+
+
+
+
+<section class="section" style="margin-top: -100px;" id = "explore">
   <div class="container">
 
     <div class="row  mb-5">
@@ -279,7 +292,7 @@
             <span class="fas fa-users" style="font-size: 30px;margin-top: 30px;"></span>
           </div>
           <h3 class="mb-3" style="font-weight: 500;">Diversity</h3>
-          <p style="text-align: center;">Meet and support artists from all over the world.</p>
+          <p style="text-align: center;color: #000;">Meet and support artists from all over the world.</p>
         </div>
       </div>
       <div class="col-md-4" >
@@ -289,7 +302,7 @@
             <span class="fas fa-chart-area" style="font-size: 30px;margin-top: 30px;"></span>
           </div>
           <h3 class="mb-3" style="font-weight: 500;">Find unique Art</h3>
-          <p style="text-align: center;">Find unique paintings,sculptures,photographs and prints</p>
+          <p style="text-align: center;color: #000;">Find unique paintings,sculptures,photographs and prints</p>
         </div>
       </div>
       <div class="col-md-4" >
@@ -299,7 +312,7 @@
             <span class="fab fa-cc-visa" style="font-size: 30px;margin-top: 30px;"></span>
           </div>
           <h3 class="mb-3" style="font-weight: 500;">Safe Transaction</h3>
-          <p style="text-align: center;">We ensure safe transactions.Full peace of mind and swift delivery</p>
+          <p style="text-align: center;color: #000;">We ensure safe transactions.Full peace of mind and swift delivery</p>
         </div>
       </div>
     </div>
@@ -314,21 +327,7 @@
       
     </div>
   </div> 
-<!-- <div class="row wow fadeIn" style="margin-top: -90px; right: 12px; float: right; margin-bottom: 30px; margin-right: 10px;">
-    
-      <div class="col-xs-3-offset-8">
-      <div class="dropdown" style="float: right;">
-        <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">
-          SORT BY
-        </button>
-        <div class="dropdown-menu">
-          <a class="dropdown-item" href="order()" onclick="order()">price </a>
-          <a class="dropdown-item" href="#">Link 2</a>
-          <a class="dropdown-item" href="#">Link 3</a>
-        </div>
-      </div>
-    </div>
-    </div>  -->
+
     <div class="row wow fadeIn">
       <div class="col-md-12" style="background: rgb(209, 209, 209);height: 200px;text-align: center;">
         <h1 style="text-align: center;font-weight: 500;margin-top: 40px;">Shop original art from independent <br> artists around the world.</h1>
@@ -347,9 +346,9 @@
       <div class="container-fluid">
        
           <div class="row" style="margin: 30px;">
-            <div class="col-md-3 col-sm-12 col-xs-12" style="margin-bottom: 20px;" >
+            <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12" style="margin-bottom: 20px;" >
               <a href="/photographs">
-              <div class="card card-block">
+              <div class="card card-block" id = "card">
             
             <img src="{% static 'camera.jpg'%}" alt="Photo of sunset" style="height:300px;">
                 <h2 class="card-title mt-3 mb-3" style="font-weight: 500; font-size: 20px;color: #000;">Photographs</h2>
@@ -357,9 +356,9 @@
           </div>
         </a>
             </div>
-            <div class="col-md-3 col-sm-12 col-xs-12" style="margin-bottom: 20px;" >
+            <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12" style="margin-bottom: 20px;" >
               <a href="/prints">
-              <div class="card card-block">
+              <div class="card card-block" id = "card">
               
             <img src="{% static 'prints.jpg'%}" alt="Photo of sunset" style="height:300px;">
                 <h2 class="card-title  mt-3 mb-3" style="font-weight: 500; font-size: 20px;color: #000;">Prints</h2>
@@ -367,9 +366,9 @@
           </div>
         </a>
             </div>
-            <div class="col-md-3 col-sm-12 col-xs-12" style="margin-bottom: 20px;" >
+            <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12" style="margin-bottom: 20px;" >
               <a href="/paintings">
-              <div class="card card-block">
+              <div class="card card-block" id = "card">
             
             <img src="{% static 'painting.jpg'%}" alt="Photo of sunset" style="height:300px;">
                 <h2 class="card-title  mt-3 mb-3" style="font-weight: 500; font-size: 20px;color: #000;">Paintings</h2>
@@ -377,9 +376,9 @@
           </div>
         </a>
             </div>
-            <div class="col-md-3 col-sm-12 col-xs-12" style="margin-bottom: 20px;" >
+            <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12" style="margin-bottom: 20px;" >
               <a href="/sculptures">
-              <div class="card card-block">
+              <div class="card card-block" id = "card">
         
             <img src="{% static 'sculptures.jpg'%}" alt="Photo of sunset" style="height:300px;">
                 <h2 class="card-title  mt-3 mb-3" style="font-weight: 500; font-size: 20px;color: #000;">Sculptures</h2>
@@ -397,55 +396,63 @@
             <h2 class="section-heading" style="text-align: left;margin-left: 20px;">Featured Products</h2>
           </div>
         </div>
-     
-      <section class="text-center" >
 
+
+        
+        
+        <!-- End Portfolio Section -->
+        
      
-        <div class="row " style="margin-top: 50px;margin-bottom: 90px;margin: 20px;margin-bottom: 70px;" >
+      
+     <section class="text-center mb-4" style="margin: auto;">
+     
+        <div class="row wow fadeIn" style="margin: 20px;" >
 
          
 
           {% for item in object_list %}
+  
+          <div class="col-lg-4 " style="height: 500px; width: 600px;">
+          
+            <div class="view">
+            <img src="{{item.image.url}}" class="responsive"   alt="" style="height: 400px; width: 100%;"  >
 
-          <div class="col-md-4 col-sm-12 col-xs-12" style="height: 400px; width: 600px; margin-bottom: 50px;background: transparent;margin-top: 50px;margin-bottom: 70px;" >
-            <div class="view ">
-            <img src="{{item.image.url}}" class="responsive" alt="" style="height: 100%;width: 100%;"> <br><br>
             <a href="{{item.get_absolute_url}}">
               <div class="mask rgba-white-slight"></div>
-              </a>
             </div>
-            <div class=" text-center"  style="margin-top: 10px;" >
+            <div class=" text-center" style="margin-top: 10px;">
               <!--Category & Title-->
-            
+              
               <h5>
                 <strong>
-                  <a href="{{item.get_absolute_url}}" > <h4 class="text-muted">{{item.title}}</h4>
-                    
+                  <a href="{{item.get_absolute_url}}" class="dark-grey-text">{{item.title}}
+                    <span class="badge badge-pill {{item.get_label_display}}-color">{{item.get_category_display}}</span>
                   </a>
                 </strong>
               </h5>
   
               <h4 class="font-weight-bold blue-text">
-                <strong>
+                <strong>$  
                 
                   
-                  ${{item.get_with}}
+                  {{item.get_with}}
   
-                  <!-- <span class="badge badge-pill {{item.get_label_display}}-color">NEW</span> -->
+                
                 
                 </strong>
               </h4>
   
             </div>
             </div>
-        
+    
+         
 
         {% endfor%}
-
-        </div>
+        <div class="clearfix"></div>
+        </div> 
        
 
-      </section>
+    
      
       <div class="row " style="margin: 10px; margin-top: 60px;">
        <div class="col-md-12">
@@ -453,7 +460,8 @@
        </div>
 
       </div>
-      <!--Pagination-->
+    </section>
+      <!-- -Pagination -->
       {% if is_paginated %}
       <nav class="d-flex justify-content-center wow fadeIn">
         <ul class="pagination pg-blue">
@@ -496,7 +504,7 @@
 
         <div class="col-lg-3 col-sm-6">
 					<div class="footer-widget about-widget">
-            <a href="index.html"><img src="{% static 'logo.png'%}" alt="" style="margin-left: 20px;height: 70%; width: 70%;"></a>
+            <a href="https://hooliganlivefree.com" target="_blank"><img src="{% static 'logo.png'%}" alt="" style="margin-left: 20px;height: 70%; width: 70%;"></a>
 					</div>
         </div>
 				<div class="col-lg-3 col-sm-6">
@@ -511,12 +519,12 @@
 					<div class="footer-widget about-widget">
 						<h2>DON'T GET LOST</h2>
 						<ul>
-							<li><a href="">Photographs</a></li>
-							<li><a href="">Artists</a></li>
-							<li><a href="">Paintings</a></li>
-							<li><a href="">Sculptures</a></li>
-							<li><a href="">Order Summary</a></li>
-						
+              <li><a href="/">Home</a></li>
+              <li><a href="/photographs">Photographs</a></li>
+              <li><a href="/artists">Artists</a></li>
+              <li><a href="/paintings">Paintings</a></li>
+              <li><a href="/">Sculptures</a></li>
+              <li><a href="{%url 'core:order-summary'%}">Order Summary</a></li>
 						</ul>
 						
 					</div>
@@ -527,19 +535,19 @@
 						<h2>Contact Info</h2>
 						<div class="con-info">
 						
-							<p>Hooligan LLC </p>
+							<p> <i class="fas fa-home" style="margin-right: 10px;"></i>Hooligan LLC </p>
 						</div>
 						<div class="con-info">
 							
-							<p>1481 Creekside Lane  Avila Beach, CA 93424, P.O. BOX 68 </p>
+							<p> <i class="fas fa-map-marker-alt" style="margin-right: 10px;"></i>New York,USA </p>
 						</div>
 						<div class="con-info">
 							
-							<p>+53 345 7953 32453</p>
+							<p> <i class="fas fa-phone" style="margin-right: 10px;"></i>+1 347 981 3342</p>
 						</div>
 						<div class="con-info">
 						
-							<p>office@youremail.com</p>
+							<p> <i class="far fa-envelope" style="margin-right: 10px;"></i>451hugo@gmail.com</p>
 						</div>
 					</div>
 				</div>
@@ -548,11 +556,11 @@
 		<div class="social-links-warp">
 			<div class="container">
 				<div class="social-links">
-					<a href="" class="instagram"><i class="fa fa-instagram"></i><span>instagram</span></a>
-				
-					<a href="" class="facebook"><i class="fa fa-facebook"></i><span>facebook</span></a>
-					<a href="" class="twitter"><i class="fa fa-twitter"></i><span>twitter</span></a>
-				
+          <a href="https://www.instagram.com/hooliganlivefree/?hl=en" class="instagram"><i class="fab fa-instagram"></i><span>instagram</span></a>
+        
+          <a href="https://www.facebook.com/HooliganLLC/" class="facebook"><i class="fab fa-facebook"></i><span>facebook</span></a>
+          <a href="https://twitter.com/HooliganLLC" class="twitter"><i class="fab fa-twitter"></i><span>twitter</span></a>
+        
 				</div>
 
 
@@ -567,10 +575,11 @@
 
 
 
-  <a href="#" class="back-to-top"><i class="fas fa-level-up-alt"></i></a>
+  <a href="#" class="back-to-top"><i class="fas fa-chevron-up"></i></a>
 
 
 </body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/TweenMax.min.js"></script>
 <script type="text/javascript" src="{%static 'js/jquery-3.4.1.min.js'%}"></script>
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <!-- Bootstrap tooltips -->
@@ -590,6 +599,7 @@ $(window).scroll(function() {
       $('.back-to-top').fadeOut('slow');
     }
   });
+
   // Animations initialization
   new WOW().init();
 
