@@ -73,9 +73,6 @@ class ItemForm(forms.Form):
     facebook= forms.URLField(required = True,widget = forms.TextInput())
     image_artist = forms.ImageField(label = "Your Image")
 
-    tag= forms.CharField(label='Your Tag',widget = forms.TextInput(attrs = {'class':'form-control'}))
-    # bio = forms.CharField(widget = forms.TextInput(attrs = {'class':'form-control'}))
-    # country = CountryField(blank_label = '(select country...)').formfield(widget = CountrySelectWidget(attrs = {'class':'custom-select d-block w-100'}))
-
+   
  
 #        

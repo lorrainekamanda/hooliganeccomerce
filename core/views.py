@@ -133,7 +133,6 @@ class CreateDetail(LoginRequiredMixin,View):
                 instagram=instagram,
                 facebook=facebook,
                 tweeter=tweeter,
-                slug=slug,
                 image_artist=image_artist
                 
               )
