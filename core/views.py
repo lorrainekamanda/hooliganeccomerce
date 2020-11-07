@@ -20,7 +20,7 @@ from django.urls import reverse
 from django.utils.safestring import mark_safe
 from django.forms import widgets
 from django.conf import settings
-from .forms import ItemForm
+
 import stripe
 
 stripe.api_key =  settings.STRIPE_SECRET_KEY

@@ -18,6 +18,9 @@ LABEL_CHOICES = (
 
 )
 class Artist(models.Model):
+    
+    first_name = models.CharField(max_length = 100,blank = True,null = True)
+    last_name = models.CharField(max_length = 100,blank = True,null = True)
     bio = models.CharField(max_length = 200,blank = True,null = True)
     phone = models.CharField(max_length = 200,blank = True,null = True)
     instagram = models.URLField(max_length = 200,blank = True,null = True)
@@ -28,7 +31,7 @@ class Artist(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete = models.CASCADE)
     
     def __str__(self):
-       return self.user.username
+       return self.first_name
 
     
     def get_absolute_url(self):
