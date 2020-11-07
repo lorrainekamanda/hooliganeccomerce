@@ -85,65 +85,19 @@ class CheckoutView(View):
 
 
 
-class CreateDetail(LoginRequiredMixin,View):
-    def get(self,*args,**kwargs):
-        form = ItemForm()
-        item = Item.objects.get
-        context = {
-            'form':form,
-            'item':item
-           
-        }
-     
-        return render(self.request,'item.html',context)
-        
-        
-    def post(self,*args,**kwargs):
-        form = ItemForm(self.request.POST or None)
-        item = Item.objects.get
-        if form.is_valid():
-            
-            title = form.cleaned_data.get('title')
-            price = form.cleaned_data.get('price')
-            discount_price = form.cleaned_data.get('discount_price')
-            category = form.cleaned_data.get('category')
-            label= form.cleaned_data.get('label')
-            slug= form.cleaned_data.get('slug')
-            description = form.cleaned_data.get('description')
-            first_name = form.cleaned_data.get('first_name')
-            last_name= form.cleaned_data.get('last_name')
-            tag= form.cleaned_data.get('tag')
-            email = form.cleaned_data.get('email')
-            tweeter= form.cleaned_data.get('tweeter')
-            instagram= form.cleaned_data.get('instagram')
-            facebook= form.cleaned_data.get('facebook')
-            bio= form.cleaned_data.get('bio')
-            Adress= form.cleaned_data.get('Adress')
-            phone = form.cleaned_data.get('phone')
-            image_artist = form.cleaned_data.get('image_artist')
-            
-            artist = Artist(
-                user = self.request.user,
-                first_name=first_name,
-                last_name=last_name,
-                email=email,
-                bio=bio,
-                Adress=Adress,
-                phone=phone,
-                instagram=instagram,
-                facebook=facebook,
-                tweeter=tweeter,
-                image_artist=image_artist
-                
-              )
-            item.artist = artist
-            item.save()
-            artist.save()
-            return redirect('core:home')
-        else:
-            return redirect('core:home')
+class CreateDetail(LoginRequiredMixin,CreateView):
+    model = Item
+    template_name = "item.html"
+    fields = ['title','price','discount_price','category','label','slug','description','image']
+    
 
-      
+    def form_valid(self,form):
+        form.instance.username = self.request.user
+        
+        return super().form_valid(form)
+
+
+
       
 
 

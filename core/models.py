@@ -18,21 +18,17 @@ LABEL_CHOICES = (
 
 )
 class Artist(models.Model):
-    id = models.AutoField(primary_key=True)
-    first_name = models.CharField(max_length = 100,blank = True,null = True)
-    last_name = models.CharField(max_length = 100,blank = True,null = True)
-    email = models.CharField(max_length = 200,blank = True,null = True)
     bio = models.CharField(max_length = 200,blank = True,null = True)
-    Adress = models.CharField(max_length = 200,blank = True,null = True)
     phone = models.CharField(max_length = 200,blank = True,null = True)
     instagram = models.URLField(max_length = 200,blank = True,null = True)
     facebook = models.URLField(max_length = 200,blank = True,null = True)
     tweeter = models.URLField(max_length = 200,blank = True,null = True)
     tag = models.SlugField()
     image_artist = CloudinaryField("image")
+    user = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete = models.CASCADE)
     
     def __str__(self):
-       return self.first_name
+       return self.user.username
 
     
     def get_absolute_url(self):
@@ -45,6 +41,7 @@ class Item(models.Model):
    category = models.CharField(choices = CATEGORY_CHOICES,max_length = 2)
    label= models.CharField(choices = LABEL_CHOICES,max_length = 2)
    artist = models.ForeignKey(Artist,on_delete = models.CASCADE,null= True)
+   user = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete = models.CASCADE)
    slug = models.SlugField()
    description = models.TextField()
    image = CloudinaryField("image")
