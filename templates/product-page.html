@@ -142,14 +142,13 @@
             <p>{{object.description}}</p>
             <hr>
             <a href="{{object.artist.get_absolute_url}}">
-            <p class="lead font-weight-bold">By {{object.artist.first_name}} {{object.artist.last_name}}</p>
+            <!-- <p class="lead font-weight-bold">By {{object.artist.first_name}} {{object.artist.last_name}}</p> -->
+          
           </a>
             <div style="display: inline-flex;">
-            <img src="{{object.artist.image_artist.url}}" alt="" srcset="" class="img-rounded" style="height: 100px; width: 100px;border-radius:50px;">
            
-            <img src="{%static 'instagram.png'%}" alt="" srcset="" style="height: 6.5%;width: 6.5%;margin-top: 15px;margin-right: 2px;margin-left: 5px;">
-            <img src="{%static 'face2.png'%}" alt="" srcset="" style="height: 10%;width: 10%;margin-top: 10px;">
-            <img src="{%static 'twitter.png'%}" alt="" srcset="" style="height: 10%;width: 10%;margin-top: 10px;">
+           
+            
           </div>
 
             <a href="{{object.get_add_to_cart_url}}" class="btn btn-danger btn-md my-0 p"  style="width: 80%;">Add to cart

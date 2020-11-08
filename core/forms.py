@@ -1,5 +1,5 @@
 from django import forms
-from allauth.account.forms import SignupForm
+from allauth.account.forms import SignupForm,LoginForm
 from django_countries.fields import CountryField
 from django_countries.widgets import CountrySelectWidget
 from django.db import models
@@ -23,7 +23,15 @@ class CustomSignupForm(SignupForm):
         user.last_name = self.cleaned_data['last_name']
         user.save()
         return user
- 
+
+
+class YourLoginForm(LoginForm):
+    def __init__(self, *args, **kwargs):
+        super(YourLoginForm, self).__init__(*args, **kwargs)
+        self.fields['login'].label = False
+        self.fields['password'].label = False
+
+   
 PAYMENT_CHOICES = (
     ('S','Stripe'),
     ('P','Paypal')

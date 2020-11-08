@@ -24,7 +24,8 @@ from django.conf import settings
 import stripe
 
 stripe.api_key =  settings.STRIPE_SECRET_KEY
-
+def is_users(item_user, logged_user):
+    return item_user == logged_user
 
 
 
@@ -138,13 +139,9 @@ def prints(request):
    
 class profile(DetailView):
 
-    model = Artist
+    model = Item
     template_name = "profile.html"
-    def get_context_data(self, **kwargs):
-        context = super(profile, self).get_context_data(**kwargs)
-        context['products'] = Item.objects.all()
-        return context
-  
+    
     
 
 def productview(request):

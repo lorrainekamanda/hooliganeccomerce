@@ -200,7 +200,7 @@ body::-webkit-scrollbar-thumb {
 
  
   <div class="view overlay">
-    <img class="card-img-top rounded-0" src="{{item.image_artist.url}}" alt="Card image cap" style="height: 500px;">
+    <img class="card-img-top rounded-0" src="{{item.artist.image_artist.url}}" alt="Card image cap" style="height: 500px;">
     <a href="{{item.get_absolute_url}}">
       <div class="mask rgba-white-slight"></div>
     </a>
@@ -214,14 +214,15 @@ body::-webkit-scrollbar-thumb {
       <h4 class="card-title font-weight-bold"><a>{{item.user.first_name }} {{item.user.last_name}}</a></h4>
       {%else%}
       <h4 class="card-title font-weight-bold"><a>{{item.user.username }}</a></h4>
-      <p class="card-text" >{{item.bio}}</p>
+      {%endif%}
+      <p class="card-text" >{{item.artist.bio}}</p>
       <!-- Button -->
-      <a href="{{item.get_absolute_url}}" style="float: left;color: red;">Read More</a>
-      <a href="{{item.facebook}}">
+      <a href="{{item.artist.get_absolute_url}}" style="float: left;color: red;">Read More</a>
+      <a href="{{item.artist.facebook}}">
       <i class="fab fa-facebook text-muted float-right p-1 my-1" data-toggle="tooltip" data-placement="top" title="my facebook"></i>
     </a>
 
-    <a href="{{item.tweeter}}">
+    <a href="{{item.artist.tweeter}}">
       <i class="fab fa-twitter text-muted float-right p-1 my-1 mr-3" data-toggle="tooltip" data-placement="top" title="my twitter"></i>
     </a>
     </div>
@@ -229,38 +230,7 @@ body::-webkit-scrollbar-thumb {
   </div>
 
 </div>
-<!-- Card -->
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            <!-- <h1 style="font-weight: 500;">{{item.first_name }} {{item.last_name}}</h1>
-            <div class="view overlay">
-         
-              <a href="{{item.get_absolute_url}}">
-            <img src="{{item.image_artist.url}}" class="img-fluid" alt="" style="height: 100%;width: 100%;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
-           
-          </a>
-            </div>
-            <div class=" text-center" >
-              <a href="{{item.get_absolute_url}}">
-                <button class = "btn btn-secondary btn-md waves-effect btn-md">View More</button>
-              </a>
-            
-  
-            </div> -->
             </div>
         
 
@@ -415,3 +385,4 @@ body::-webkit-scrollbar-thumb {
 
 </html>
 {% endblock content %}
+

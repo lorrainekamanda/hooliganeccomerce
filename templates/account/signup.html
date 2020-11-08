@@ -21,6 +21,7 @@
   <link href="{%static 'css/heroz.css'%}" rel="stylesheet">
   <link href="{%static 'css/navbar.css'%}" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Courgette&display=swap" rel="stylesheet">
+  <link href="{%static 'css/sign.css'%}" rel="stylesheet">
   <style type="text/css">
   
     html,
@@ -127,79 +128,72 @@ margin-bottom: 20px;
     </div>
   </nav>
 </header>
-<section class="text-center mb-4" style="margin-top: 5px;">
-  
-
-  <!--Grid row-->
-  <div class="row wow fadeIn" style="margin:20px;" >
-
-    <div class="col-lg-4 col-md-5 col-xs-12- col-sm-12 " style="border: black solid 1px;">
-      <div style="text-align: center;"> <br> 
-      <h1 style="font-weight: normal;font-size: 48px;">Welcome!</h1>
-    </div>
 
 
-
-<div class="socialaccount_ballot" style="text-align: center;">
-
-  
-  <ul class="socialaccount_providers" >
-    {% include "socialaccount/snippets/provider_list.html" with process="login" %}
-  </ul>
-
-
-
-</div>
-<div ></div>
-<div class="col-md-12">
-
- <div class="form" style="text-align: center;display: inline-block;width: 100%; padding-right: 20px; display: flex;align-items: center;">
-  <form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}" style="width: 420px;text-align: left;padding-left: 50px;"  >
-  {% csrf_token %}
-  <div style="display: inline-flex;">
-    <div style="margin-right: 20px;">{{ form.first_name|as_crispy_field }}</div>
-  
-  {{ form.last_name|as_crispy_field }}
-</div>
-  {{ form.username|as_crispy_field }}
-  <div id = "email">
-  {{ form.email|as_crispy_field }}
-</div>
-  <div>
-    {{ form.password1|as_crispy_field }}
-   
+<div class="wrapper" style="margin-top: 30px;">
+  <div class="inner" style="border: solid black 2px;"> <br> <br>
+    <h3 style="font-weight:500 ; font-size: 40px;">Welcome</h3>
+    <div style="text-align: center;margin-left: 32px;">
+      <ul>
+        {% include "socialaccount/snippets/provider_list.html" with process="login" %}
+      </ul>
+    
   </div>
+ {% csrf_token %}
+    <form method="post" action="{% url 'account_signup' %}" class="form" >
+      {% csrf_token %}
+      
+       <div class="form-holder">
+      
+        <span class="far fa-user-circle"></span>
+        {{ form.first_name|as_crispy_field}}
+      </div>
+      <div class="form-holder">
+        <span class="far fa-user-circle"></span>
+        {{ form.last_name|as_crispy_field }}
+      </div>
+    
+      <div class="form-holder">
+        <span class="far fa-user"></span>
+        {{ form.username|as_crispy_field }}
+      </div>
+    
+      <div class="form-holder">
+        
+        <span class="far fa-envelope"></span>
+        {{ form.email|as_crispy_field }}
+      </div>
+      <div class="form-holder">
+       
+        <span class="fas fa-lock"></span>
+        {{ form.password1|as_crispy_field }}
+      </div>
+      <div class="form-holder">
+        <span class="fas fa-lock"></span>
+        {{ form.password2|as_crispy_field }}
+      </div>
+      {% if redirect_field_value %}
+      <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+      {% endif %}
+      <button class="btn btn-lg btn-danger">
+        <span>{% trans "Sign Up" %}</span>
+      
+      </button>
  
-  {{ form.password2|as_crispy_field }}
-
-  {% if redirect_field_value %}
-  <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
-  {% endif %}
-  <button class="btn btn-lg btn-danger" type="submit" style="width: 100%;">{% trans "Sign Up" %} </button>
-</form>
-
-
-</div>
-</div>  
-
-
-
-
-<div style="display: inline-block; bottom: 0;">
-  <p>
-    Already have an account ? <a href="{% url 'account_login'%}" >
-  <span class="clearfix d-none d-sm-inline-block">Sign In</span>
-</p>
-</a>
-</div>
+    </form>
+    <div style="text-align: center;">
+      <p style="color: black;margin-top: -15px;font-size: 20px;">
+        Already have an account ? <a href="{% url 'account_login'%}" >
+      <span class="clearfix d-none d-sm-inline-block">Sign In</span>
+    </p>
+  </div>
+  
+  </div>
   
 </div>
-  </div>
-  <!--Grid row-->
 
 
-</section>
-
+<a href="#" class="back-to-top"><i class="fas fa-chevron-up"></i></a>
 
 <script type="text/javascript" src="{%static 'js/jquery-3.4.1.min.js'%}"></script>
 <!-- Bootstrap tooltips -->

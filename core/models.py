@@ -26,14 +26,33 @@ class Artist(models.Model):
     instagram = models.URLField(max_length = 200,blank = True,null = True)
     facebook = models.URLField(max_length = 200,blank = True,null = True)
     tweeter = models.URLField(max_length = 200,blank = True,null = True)
-    tag = models.SlugField()
-    image_artist = CloudinaryField("image")
-    user = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete = models.CASCADE)
+    image_artist = CloudinaryField("image",default = 'profile.jpg',blank = True,null = True)
+    user = models.OneToOneField(settings.AUTH_USER_MODEL,on_delete = models.CASCADE,null=True,blank=True)
     
     def __str__(self):
        return self.first_name
 
     
+    def get_absolute_url(self):
+        return reverse ('core:profile', kwargs = {'pk':self.pk})
+
+
+class Profile(models.Model):
+    first_name = models.CharField(max_length = 100,blank = True,null = True)
+    last_name = models.CharField(max_length = 100,blank = True,null = True)
+    bio = models.CharField(max_length = 200,blank = True,null = True)
+    phone = models.CharField(max_length = 200,blank = True,null = True)
+    instagram = models.URLField(max_length = 200,blank = True,null = True)
+    facebook = models.URLField(max_length = 200,blank = True,null = True)
+    tweeter = models.URLField(max_length = 200,blank = True,null = True)
+    image_artist = CloudinaryField("image",default = 'profile.jpg',blank = True,null = True)
+    time_stamp = models.DateTimeField(auto_now_add = True)
+    
+
+    def __str__(self):
+        return str(self.user.username)
+
+         
     def get_absolute_url(self):
         return reverse ('core:profile', kwargs = {'pk':self.pk})
 
@@ -43,8 +62,6 @@ class Item(models.Model):
    discount_price = models.FloatField(blank = True,null = True)
    category = models.CharField(choices = CATEGORY_CHOICES,max_length = 2)
    label= models.CharField(choices = LABEL_CHOICES,max_length = 2)
-   artist = models.ForeignKey(Artist,on_delete = models.CASCADE,null= True)
-   user = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete = models.CASCADE)
    slug = models.SlugField()
    description = models.TextField()
    image = CloudinaryField("image")
@@ -146,3 +163,5 @@ class Payment(models.Model):
 
     def __str__(self):
         return str(self.amount)
+
+

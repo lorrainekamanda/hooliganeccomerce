@@ -168,7 +168,7 @@ body::-webkit-scrollbar-thumb {
         <li><a href="/photographs">Photographs</a></li>
         <li><a href="/prints">Prints</a></li>
         <li><a href="/sculptures">Sculptures</a></li>
-        <li><a href="/artists">Artists</a></li>
+        
         {% if user.is_authenticated %}
         <li><a href="/upload" style="background-color:coral;width: 120%;text-align: center;font-weight: 400;">Upload Art!</a></li>
         {%endif%}
@@ -507,7 +507,7 @@ body::-webkit-scrollbar-thumb {
 
     </div>
   </main> 
-     
+    <h1></h1>
 
    <section class="footer-section" style="margin-top: 50px;">
 		<div class="container-fluid">
@@ -533,7 +533,6 @@ body::-webkit-scrollbar-thumb {
 						<ul>
               <li><a href="/">Home</a></li>
               <li><a href="/photographs">Photographs</a></li>
-              <li><a href="/artists">Artists</a></li>
               <li><a href="/paintings">Paintings</a></li>
               <li><a href="/">Sculptures</a></li>
               <li><a href="{%url 'core:order-summary'%}">Order Summary</a></li>

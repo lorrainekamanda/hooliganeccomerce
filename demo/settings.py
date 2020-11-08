@@ -113,17 +113,6 @@ DATABASES['default'].update(db_from_env)
 
 ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=Csv())
 
-# if ENVIRONMENT == 'production':
-#     DEBUG = False
-#     SECRET_KEY = os.getenv('SECRET_KEY')
-#     SESSION_COOKIE_SECURE = True
-#     SECURE_BROWSER_XSS_FILTER = True
-#     SECURE_CONTENT_TYPE_NOSNIFF = True
-#     SECURE_HSTS_INCLUDE_SUBDOMAINS = True
-#     SECURE_HSTS_SECONDS = 31536000
-#     SECURE_REDIRECT_EXEMPT = []
-#     SECURE_SSL_REDIRECT = True
-#     SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 AUTHENTICATION_BACKENDS = (
    
@@ -153,7 +142,7 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
-SITE_ID = 1
+SITE_ID = 2
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
@@ -187,6 +176,7 @@ EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 
 ACCOUNT_FORMS = {
 'signup': 'core.forms.CustomSignupForm',
+'login': 'core.forms.YourLoginForm'
 }
 
 
