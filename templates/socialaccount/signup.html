@@ -1,22 +1,133 @@
-{% extends "socialaccount/base.html" %}
+{% load static %}
 
+{% load cart_template_tags%}
+{% load crispy_forms_tags %}
+
+{% load  socialaccount %}
+{% providers_media_js %}
 {% load i18n %}
+{% load account socialaccount %}
 
-{% block head_title %}{% trans "Signup" %}{% endblock %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Signup</title>
+  <header class="header-section">
+    <div class="header-top">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-2 text-center text-lg-left">
+            <!-- logo -->
+            <a href="https://hooliganlivefree.com" class="site-logo">
+              <h3 style="font-family: 'Courgette', cursive;color: #000;font-family: 800;">HOOLIGAN <br> LLC.</h3>
+            </a>
+          </div>
+          <div class="col-xl-6 col-lg-5">
+            <form class="header-search-form" role="search" action="{% url 'core:search_results' %}">
+              <input type="text" placeholder="Search product ...." name="title" style="border: 1px solid coral;">
+              <button><i class="fas fa-search"></i></button>
+            </form>
+          </div>
+          <div class="col-xl-4 col-lg-5">
+            <div class="user-panel">
+              <div class="up-item">
+                <i class="far fa-user"></i>
+                {% if user.is_authenticated %}
+  
+                <a href="{% url 'account_logout'%}">Logout</a>
+                {% else %}
+                <a href="{% url 'account_login'%}">Sign In</a>  or <a href="{% url 'account_signup'%}">Create Account</a>
+                {%endif%}
+              </div>
+              <div class="up-item">
+                <div class="shopping-card">
+                  <a href="{%url 'core:order-summary'%}">
+                    <i class="fas fa-shopping-bag"></i>
+                
+                  
+                  <span style="font-weight: 500;">{{request.user|cart_item_count}} </span>
+                </div>
+               Shopping Cart</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <nav class="main-navbar">
+      <div class="container">
+        <!-- menu -->
+        <ul class="main-menu">
+          <li><a href="/">Home</a></li>
+          <li><a href="/paintings">Paintings</a></li>
+          <li><a href="/photographs">Photographs</a></li>
+          <li><a href="/prints">Prints</a></li>
+          <li><a href="/sculptures">Sculptures</a></li>
+          
+          {% if user.is_authenticated %}
+          <li><a href="/upload" style="background-color:coral;width: 120%;text-align: center;font-weight: 400;">Upload Art!</a></li>
+          {%endif%}
+        </ul>
+      </div>
+    </nav>
+  </header>
+  
+</head>
+<body>
+  
+</body>
+</html>
 
-{% block content %}
-    <h1>{% trans "Sign Up" %}</h1>
+
+
+
+
 
 <p>{% blocktrans with provider_name=account.get_provider.name site_name=site.name %}You are about to use your {{provider_name}} account to login to
 {{site_name}}. As a final step, please complete the following form:{% endblocktrans %}</p>
 
-<form class="signup" id="signup_form" method="post" action="{% url 'socialaccount_signup' %}">
-  {% csrf_token %}
-  {{ form.as_p }}
-  {% if redirect_field_value %}
-  <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
-  {% endif %}
-  <button type="submit">{% trans "Sign Up" %} &raquo;</button>
-</form>
+<div class="wrapper" style="margin-top: 30px;">
+  <div class="inner" style="border: solid black 2px;"> <br> <br>
+    <p>{% blocktrans with provider_name=account.get_provider.name site_name=site.name %}You are about to use your {{provider_name}} account to login to
+      {{site_name}}. As a final step, please complete the following form:{% endblocktrans %}</p>
+   
+   
+    <form method="post" action="{% url 'socialaccount_signup' %}" class="form" >
+   
+      
+      {% csrf_token %}
+  
+      <div class="form-holder">
+        
+  
+        {{ form|crispy }}
+       
+      </div>
+   
+  
+      {% if redirect_field_value %}
+      <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+      {% endif %}
+      <button class="btn btn-lg btn-danger">
+        <span>{% trans "Sign Up" %}</span>
+      
+      </button>
+ 
+    </form>
+  
+ 
+  
+  </div>
+  
+</div>
 
-{% endblock %}
+
+
+
+
+
+
+
+
