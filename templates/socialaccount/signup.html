@@ -99,12 +99,12 @@
 
 
 
-<p style="color: black;font-size: 18px;">{% blocktrans with provider_name=account.get_provider.name site_name=site.name %}You are about to use your {{provider_name}} account to login to
+<p >{% blocktrans with provider_name=account.get_provider.name site_name=site.name %}You are about to use your {{provider_name}} account to login to
 {{site_name}}. As a final step, please complete the following form:{% endblocktrans %}</p>
 
 <div class="wrapper" style="margin-top: 30px;">
   <div class="inner" style="border: solid black 2px;"> <br> <br>
-    <p>{% blocktrans with provider_name=account.get_provider.name site_name=site.name %}You are about to use your {{provider_name}} account to login to
+    <p style="color: black;font-size: 18px;">{% blocktrans with provider_name=account.get_provider.name site_name=site.name %}You are about to use your {{provider_name}} account to login to
       {{site_name}}. As a final step, please complete the following form:{% endblocktrans %}</p>
    
    
