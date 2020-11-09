@@ -136,6 +136,13 @@ def prints(request):
         'items':Item.objects.filter(category ='pr')
     }
     return render(request,'prints.html',context)
+
+def sculptures(request):
+
+    context = {
+        'items':Item.objects.filter(category ='sc')
+    }
+    return render(request,'sculptures.html',context)
    
 class profile(DetailView):
 

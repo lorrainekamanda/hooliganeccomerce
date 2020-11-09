@@ -108,13 +108,13 @@ body::-webkit-scrollbar-thumb {
 
 <body class="grey lighten-3">
 
-  {% if messages %}
+  <!-- {% if messages %}
 <ul class="messages">
     {% for message in messages %}
     <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
     {% endfor %}
 </ul>
-{% endif %}
+{% endif %} -->
 
 
 <header class="header-section">
@@ -534,7 +534,7 @@ body::-webkit-scrollbar-thumb {
               <li><a href="/">Home</a></li>
               <li><a href="/photographs">Photographs</a></li>
               <li><a href="/paintings">Paintings</a></li>
-              <li><a href="/">Sculptures</a></li>
+              <li><a href="/sculptures">Sculptures</a></li>
               <li><a href="{%url 'core:order-summary'%}">Order Summary</a></li>
 						</ul>
 						
