@@ -25,11 +25,16 @@ class CustomSignupForm(SignupForm):
         return user
 
 
+
+
+
+
 class YourLoginForm(LoginForm):
     def __init__(self, *args, **kwargs):
-        super(YourLoginForm, self).__init__(*args, **kwargs)
-        self.fields['login'].label = False
-        self.fields['password'].label = False
+        super().__init__(*args, **kwargs)
+
+        self.fields["login"].label = False
+        self.fields["password"].label = False
 
    
 PAYMENT_CHOICES = (
