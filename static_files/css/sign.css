@@ -1,8 +1,9 @@
 
   body {
    height: 100%;
+   width: 100%;
     font-size: 14px;
-    margin: 0;
+    margin: 10;
     color: #999; }
 
   
@@ -44,7 +45,7 @@
     position: absolute;
     bottom: -12px;
     left: -191px;
-    z-index: 99; }
+    z-index: 0; }
   
   .image-2 {
     position: absolute;
@@ -54,7 +55,7 @@
   .form {
     width: 100%;
     position: relative;
-    z-index: 9;
+    z-index: 0;
     padding: 77px 61px 66px;
     background: #fff;
   }
