@@ -20,7 +20,10 @@
  
   <link href="https://fonts.googleapis.com/css2?family=Courgette&display=swap" rel="stylesheet">
 
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/SlickNav/1.0.10/slicknav.min.css" rel="stylesheet">
 
+  <link href="{%static 'css/flaticon.css'%}" rel="stylesheet">
+  
   <link href="{%static 'css/navbar.css'%}" rel="stylesheet">
  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
 
@@ -30,7 +33,7 @@
     <link href="{%static 'css/style.min.css'%}" rel="stylesheet">
     <link href="{%static 'css/style.css'%}" rel="stylesheet">
     <link href="{%static 'css/hero.css'%}" rel="stylesheet">
-
+    <link href="{%static 'css/responsive.css'%}" rel="stylesheet">
 
 </head>
 
@@ -134,7 +137,7 @@ body::-webkit-scrollbar-thumb {
           </form>
         </div>
         <div class="col-xl-4 col-lg-5">
-          <div class="user-panel">
+          <div class="user-panel"  style="margin-top: 10px; margin-left: 10px;">
             <div class="up-item">
               <i class="far fa-user"></i>
               {% if user.is_authenticated %}
@@ -522,7 +525,7 @@ body::-webkit-scrollbar-thumb {
 				<div class="col-lg-3 col-sm-6">
 					<div class="footer-widget about-widget">
 						<h2>About Us</h2>
-						<p>Welcome to Hooligan LLC we represent artists from all over the world find amazing photographs,paintings,sculptures and prints.</p>
+						<p >Welcome to Hooligan LLC <br> we represent artists from all <br> over  the world find amazing photographs,paintings,sculptures and prints.</p>
 						<img src="{% static 'cards.png' %}" alt="" style="height: 50%;width: 50%;">
 					</div>
         </div>
@@ -566,7 +569,7 @@ body::-webkit-scrollbar-thumb {
 		</div>
 		<div class="social-links-warp">
 			<div class="container">
-				<div class="social-links">
+				<div class="social-links" style="text-align: center;">
           <a href="https://www.instagram.com/hooliganlivefree/?hl=en" class="instagram"><i class="fab fa-instagram"></i><span>instagram</span></a>
         
           <a href="https://www.facebook.com/HooliganLLC/" class="facebook"><i class="fab fa-facebook"></i><span>facebook</span></a>
@@ -597,6 +600,8 @@ body::-webkit-scrollbar-thumb {
 <script type="text/javascript" src="{% static 'js/popper.min.js' %}"></script>
 <!-- Bootstrap core JavaScript -->
 <script type="text/javascript" src="{% static 'js/bootstrap.min.js'%}"></script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/SlickNav/1.0.10/jquery.slicknav.min.js"></script>
 <!-- MDB core JavaScript -->
 <script type="text/javascript" src="{% static 'js/mdb.min.js' %}"></script>
 

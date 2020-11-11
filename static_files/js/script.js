@@ -37,8 +37,8 @@ $(window).scroll(function() {
    --------------------*/
    $('.main-menu').slicknav({
      prependTo:'.main-navbar .container',
-     closedSymbol: '<i class="flaticon-right-arrow"></i>',
-     openedSymbol: '<i class="flaticon-down-arrow"></i>'
+     closedSymbol: '<i class="fas fa-bars"></i>',
+     openedSymbol: '<i class="fas fa-bars"></i>'
    });
  
  

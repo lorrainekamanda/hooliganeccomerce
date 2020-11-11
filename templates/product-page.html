@@ -49,7 +49,7 @@
           </form>
         </div>
         <div class="col-xl-4 col-lg-5">
-          <div class="user-panel">
+          <div class="user-panel" style="margin-top: 10px; margin-left: 10px;">
             <div class="up-item">
               <i class="far fa-user"></i>
               {% if user.is_authenticated %}
@@ -140,6 +140,21 @@
             <p class="lead font-weight-bold">Description</p>
 
             <p>{{object.description}}</p>
+            <hr>
+            <p class="lead font-weight-bold">Details</p>
+           <p>
+            This  {{object.get_category_display}} was uploaded by Lorraine Kamanda on date 12/4/23
+
+            The painting is 40cm long and 15cm wide
+            
+           </p> 
+            <img src="{% static 'cards.png' %}" alt="" style="height: 70%;width: 70%;">
+           <hr>
+            <p class="lead font-weight-bold">Refunds and Delivery</p>
+
+            <p>Home-Delivery</p> 
+            <p>Payment is through Visa and Debit Cards.We ensure that the product is in mint condition upon delivery</p>
+            <p> We offer free delivery..upon dissatisfaction with the product we offer Refunds</p>  
             <hr>
             <a href="{{object.artist.get_absolute_url}}">
             <!-- <p class="lead font-weight-bold">By {{object.artist.first_name}} {{object.artist.last_name}}</p> -->
