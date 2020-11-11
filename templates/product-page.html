@@ -28,6 +28,16 @@
 <link href="{%static 'css/hero.css'%}" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Courgette&display=swap" rel="stylesheet">
 </head>
+<style>
+  .col-container {
+    display: table; /* Make the container element behave like a table */
+    width: 100%; /* Set full-width to expand the whole page */
+}
+
+.col {
+    display: table-cell; /* Make elements inside the container behave like table cells */
+}
+</style>
 
 <body style="width: 100%;">
 
@@ -102,7 +112,8 @@
       <div class="row wow fadeIn" style="margin: 20px;">
 
         <!--Grid column-->
-        <div class="col-md-7 " >
+  
+        <div class="col-md-7" >
 
           <img src="{{object.image.url}}" class="img-fluid" alt="" style="height: 100%; width: 100%;">
 
@@ -110,7 +121,7 @@
         <!--Grid column-->
 
         <!--Grid column-->
-        <div class="col-md-5">
+        <div class="col-md-5 ">
 
           <h3 style="font-weight: 500;">{{object.title}}  <span class="badge purple mr-1 mb-3" 
             style="font-size: 12px;">{{object.get_category_display}}</span></h4>
@@ -148,7 +159,7 @@
             The painting is 40cm long and 15cm wide
             
            </p> 
-            <img src="{% static 'cards.png' %}" alt="" style="height: 70%;width: 70%;">
+            <img src="{% static 'cards.png' %}" alt="" style="height: 50%;width: 50%;">
            <hr>
             <p class="lead font-weight-bold">Refunds and Delivery</p>
 
@@ -176,7 +187,7 @@
 
         </div>
        
-
+      
       </div>
     
 
