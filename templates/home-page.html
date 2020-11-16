@@ -21,6 +21,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Courgette&display=swap" rel="stylesheet">
 
   <link href="https://cdnjs.cloudflare.com/ajax/libs/SlickNav/1.0.10/slicknav.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/static_files/css/slicknav.min.css">
 
   <link href="{%static 'css/flaticon.css'%}" rel="stylesheet">
   
@@ -106,7 +107,11 @@ body::-webkit-scrollbar-thumb {
 	}
 	#card:hover::before, .card:hover::after, .card:focus::before, .card:focus::after {
 	transform: scale3d(1, 1, 1);
-	}
+  }
+ .dis{
+   display: none;
+   float: right;
+ }
 </style>
 
 <body class="grey lighten-3">
@@ -143,6 +148,7 @@ body::-webkit-scrollbar-thumb {
               {% if user.is_authenticated %}
 
               <a href="{% url 'account_logout'%}">Logout</a>
+           
               {% else %}
               <a href="{% url 'account_login'%}">Sign In</a>  or <a href="{% url 'account_signup'%}">Create Account</a>
               {%endif%}
@@ -171,10 +177,15 @@ body::-webkit-scrollbar-thumb {
         <li><a href="/photographs">Photographs</a></li>
         <li><a href="/prints">Prints</a></li>
         <li><a href="/sculptures">Sculptures</a></li>
+        <li><a href="/artists">Artists</a></li>
+        
         
         {% if user.is_authenticated %}
-        <li><a href="/upload" style="background-color:coral;width: 120%;text-align: center;font-weight: 400;">Upload Art!</a></li>
+        <li style="margin-right: 50px;"><a href="/upload" style="background: coral;width: 120%;text-align: center;font-weight: 400;">Upload Art!</a></li>
+        <li><a href="/myprofile" style="background: coral;width: 120%;text-align: center;font-weight: 400;"> <i class="far fa-user"></i> Profile</a></li>
+        
         {%endif%}
+   
       </ul>
     </div>
   </nav>
@@ -404,6 +415,30 @@ body::-webkit-scrollbar-thumb {
           </div>
           
         </div>
+
+        <div class="cont" >
+          <div class="row  wow fadeIn" style="margin-left: 50px; margin-top: 90px;">
+            <div class="col-md-5" >
+              <h2 class="section-heading" style="text-align: left;margin-left: 10px;">Shop by Artist</h2>
+            </div>
+          </div>
+
+          <div class="row" style="margin: 30px;">
+            {% for item in products %}
+            <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12" style="margin-bottom: 20px;" >
+              <a href="{{item.user.artist.get_absolute_url}}">
+              <div class="card card-block" id = "card">
+
+            <img src="{{item.user.artist.image_artist.url}}" alt="Photo of sunset" style="height:350px;">
+                <h2 class="card-title mt-3 mb-3" style="font-weight: 500; font-size: 20px;color: #000;">{{item.user.first_name}} {{item.user.last_name}}</h2>
+               
+          </div>
+        </a>
+            </div>
+            {% endfor %}
+          </div>
+
+
         
      
         <div class="row  wow fadeIn" style="margin-left: 50px; margin-top: 90px;">
@@ -593,6 +628,7 @@ body::-webkit-scrollbar-thumb {
 
 
 </body>
+<script src="/static_files/js/jquery.slicknav.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/TweenMax.min.js"></script>
 <script type="text/javascript" src="{%static 'js/jquery-3.4.1.min.js'%}"></script>
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
@@ -622,3 +658,5 @@ $(window).scroll(function() {
 </script>
 </html>
 {% endblock content %}
+
+

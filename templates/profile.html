@@ -25,8 +25,9 @@
   <!-- Your custom styles (optional) -->
   <link href="https://fonts.googleapis.com/css2?family=Courgette&display=swap" rel="stylesheet">
   <link href="{%static 'css/style.min.css'%}" rel="stylesheet">
-  <link href="{%static 'css/hero.css'%}" rel="stylesheet">
+
   <link href="{%static 'css/navbar.css'%}" rel="stylesheet">
+  <link href="{%static 'css/profile.css'%}" rel="stylesheet">
   <style type="text/css">
     html,
     body,
@@ -108,18 +109,149 @@
           <li><a href="/artists">Artists</a></li>
           {% if user.is_authenticated %}
           <li><a href="/upload" style="background-color:coral;width: 120%;text-align: center;font-weight: 400;">Upload Art!</a></li>
+          <li><a href="/myprofile" style="background: coral;width: 120%;text-align: center;font-weight: 400;"> <i class="far fa-user"></i> Profile</a></li>
           {%endif%}
         </ul>
       </div>
     </nav>
   </header>
+
+
+  <section class="profile" style="margin-top: 100px;margin-bottom: 50px;"> <br> <br> <br>
+  <div class="pag" style="background-image:url('https://images.unsplash.com/photo-1522482178516-7a04ae0dce7a?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=e8df38f27be5905834e46811756783e2&auto=format&fit=crop&w=4096&q=80 4096w');" style="margin-top: 100px;">
+  
+  </div>
+  <div class="main main-raised">
+    <div class="profile-content">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6 ml-auto mr-auto">
+            <div class="profile">
+              <div class="avatar">
+              
+                <img src="{{object.image_artist.url}}" class="img-raised rounded-circle img-fluid" alt="" style="height:100%; width: 100%;" >
+              </div>
+              <div class="name" style="text-align: center;">
+                <h1 class="title"> {{object.first_name}} {{object.last_name}}</h1>
+                {%if object.profession%}
+                <h3 class="title">{{object.profession}}</h3>
+                {%else%}
+                <h4 class="title">Artist</h4>
+
+                {%endif%}
+                <a href="{{object.instagram}}"><i class="fab fa-instagram" style="font-size: 20px;margin: 15px;"></i></a>
+                <a href="{{object.facebook}}"><i class="fab fa-facebook-f" style="font-size: 20px;margin: 15px;"></i></a>
+                <a href="{{object.tweeter}}"><i class="fab fa-twitter" style="font-size: 20px;margin: 15px;"></i> </a>
+              </div>
+            </div>
+          
+          </div>
+        </div>
+
+        <div class="description text-center">
+          {% if object.bio %}
+        <h5>{{object.bio}}</h5>
+          {%endif%}
+        </div>
+
+        <div class="tab-content tab-space">
+          <div class="tab-pane work active show" id="work">
+            <div class="row">
+              <div class="col-md-7 ml-auto mr-auto ">
+                <h4 class="title">Latest Collections</h4>
+                <div class="row collections">
+                  {% for item  in products %}
+
+                
+
+                  {% if item.artist.user.username == object.username.username %}
+                  <div class="col-md-6">
+                    <div class="card " >
+                      <a href="{{item.get_absolute_url}}">
+                      <img src="{{item.image.url}}" class="responsive"   alt="" >
+                      </a>
+
+                      <div class=" text-center" style="margin-top: 10px;">
+          
+            
+                        <h5>
+                          <strong>
+                            <a href="{{item.get_absolute_url}}" class="dark-grey-text">{{item.title}}
+                              <span class="badge badge-pill {{item.get_label_display}}-color">{{item.get_category_display}}</span>
+                            </a>
+                          </strong>
+                        </h5>
+            
+                        <h4 class="font-weight-bold blue-text">
+                          <strong>$  
+                          
+                            
+                            {{item.get_with}}
+            
+                          
+                          
+                          </strong>
+                        </h4>
+            
+                      </div>
+                     
+                    </div>
+                  </div>
+                  {%endif%}
+                  {%endfor%}
+              
+                
+                </div>
+              </div>
+
+              <div class="col-md-2 mr-auto ml-auto stats">
+             
+            
+                <hr>
+                <h4 class="title">About his Work</h4>
+                {% if user.artist.about_your_work %}
+                <p class="description">{{user.artist.about_your_work}}.</p>
+                {%else%}
+                <p class="description">This user prefers to keep an air of mystery about his work.</p>
+                {%endif%}
+                <hr>
+                <h4 class="title">Focus</h4>
+                {%if user.artist.focus %}
+                <span class="badge badge-rose">{{user.artist.focus}}</span>
+                {%else%}
+                <span class="badge badge-rose">Artistry</span>
+                {%endif%}
+              </div>
+
+            </div>
+          </div>
+       
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
  
 
-  <!--Main layout-->
+<!-- 
   <main class="mt-5 ">
     <div class="container-fluid dark-grey-text mt-5">
 
-      <!--Grid row-->
+      
       <div class="row wow fadeIn" style="margin: 30px;">
         <div class="col-md-5 mb-4">
 
@@ -136,22 +268,35 @@
               </div> <br> <br>
               <h3 style="font-weight: 600;">General Info</h3> 
               <div style="font-size: 20px;">
-               <span style="font-weight: 500; margin-bottom: 20px;"> Address</span> : {{object.Adress}}
+                {% if object.user.adress %}
+               <span style="font-weight: 500; margin-bottom: 20px;"> Address</span> : {{object.user.adress}}
+               {%endif%}
               </div>
               <div style="font-size: 20px;">
-              <span style="font-weight: 500; margin-bottom: 20px;">Email </span>  : {{object.email}}
+              <span style="font-weight: 500; margin-bottom: 20px;">Email </span>  : {{object.user.email}}
               </div> 
               <div style="font-size: 20px;">
                <span style="font-weight: 500;"> Phone </span>: {{object.phone}}
               </div> <br> <br>
 
               <h3 style="font-weight: 600;">Social Media Presence</h3> 
-              <img src="{%static 'instagram.png'%}" alt="" srcset="" style="height: 6.5%;width: 6.5%;margin-top: 15px;margin-right: 2px;margin-left: 5px;">
-              <img src="{%static 'face2.png'%}" alt="" srcset="" style="height: 10%;width: 10%;margin-top: 10px;">
-              <img src="{%static 'twitter.png'%}" alt="" srcset="" style="height: 10%;width: 10%;margin-top: 10px;">
             
-  
+                <div class="container">
+              <div class="social" style="display: inline-block; margin: 15px;" >
+              <a href="{{object.instagram}}">
+                <i class="fab fa-instagram" style="font-size: 40px;margin: 15px;"></i>
+
+             </a>
+            <a href="{{object.facebook}}">
+              <i class="fab fa-facebook-f" style="font-size: 40px;margin: 15px;"></i>
+            </a>
+
+          <a href="{{object.tweeter}}">
+            <i class="fab fa-twitter" style="font-size: 40px;margin: 15px;"></i>
+            </a>
             
+          </div>
+        </div>
           
   
             </div>
@@ -159,13 +304,13 @@
   
           </div>
 
-        <!--Grid column-->
+        
         <div class="col-md-6 ">
 
           <img src="{{object.image_artist.url}}" class="img-fluid" alt="" style="height:100%; width: 100%;" >
 
         </div>
-        <!--Grid column-->
+      
 
        
        
@@ -176,10 +321,9 @@
 
       <hr>
 
-      <!--Grid row-->
       <div class="row d-flex justify-content-center wow fadeIn">
 
-        <!--Grid column-->
+       
         <div class="col-md-6 text-center">
 
           <h1 style="font-weight: 600;font-size: 55px;" > Works by {{object.first_name}} {{object.last_name}}</h1>
@@ -187,19 +331,17 @@
         
 
         </div>
-        <!--Grid column-->
+      
 
       </div>
-      <!--Grid row-->
-
-      <!--Grid row-->
+    
       <div class="row wow fadeIn" style="margin: 20px;margin-top: -10px;">
 
         {% for item  in products %}
 
         {% if item.artist.first_name == object.first_name %}
 
-        <!--Grid column-->
+        
         <div class="col-lg-4 " style="height: 500px; width: 600px;">
           
           <div class="view">
@@ -209,7 +351,7 @@
             <div class="mask rgba-white-slight"></div>
           </div>
           <div class=" text-center" style="margin-top: 10px;">
-            <!--Category & Title-->
+          
             
             <h5>
               <strong>
@@ -245,7 +387,7 @@
 
     </div>
   </main>
-  <div>
+  <div>  -->
     <section class="footer-section">
       <div class="container-fluid">
       

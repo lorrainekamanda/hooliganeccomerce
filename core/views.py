@@ -8,7 +8,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.utils.decorators import method_decorator
-from .forms import CheckoutForm
+from .forms import CheckoutForm,UserProfileForm,UserUpdateForm,UploadForm
 from allauth.account.views import PasswordResetView
 from django.db import models
 from django.conf import settings
@@ -90,13 +90,52 @@ class CreateDetail(LoginRequiredMixin,CreateView):
     model = Item
     template_name = "item.html"
     fields = ['title','price','discount_price','category','label','slug','description','image']
-    
+
+    def load_profile(user):
+        try:
+         return user.artist
+        except:  
+         artist = Artist.objects.create(user=user)
+
 
     def form_valid(self,form):
-        form.instance.username = self.request.user
+        artist= load_profile(self.request.user)
+        
+        form.instance.user = self.request.user
+        
         
         return super().form_valid(form)
+  
+# def load_profile(user):
+#   try:
+#     return user.artist
+#   except:  
+#     artist = Artist.objects.create(user=user)
+#     return artist
 
+# @login_required
+# def CreateDetail(request):
+#     artist= load_profile(request.user)
+#     if request.method == 'POST':
+
+        
+#         form = UploadForm(request.POST,request.FILES,instance = request.user.artist)
+#         form.instance.user = request.user
+
+#         if form.is_valid():
+#             form.save()
+           
+#             return redirect('core:home')
+#     else:
+       
+#         form = UploadForm(instance = request.user.artist)
+#         form.instance.user = request.user
+
+#     context ={
+#         'form':form,
+       
+#     }
+#     return render(request,'item.html',context)
 
 
       
@@ -108,13 +147,55 @@ class homeview(ListView):
     paginate_by = 6
     template_name = "home-page.html"
 
+    def get_context_data(self, **kwargs):
+        context = super(homeview, self).get_context_data(**kwargs)
+        context['products'] = Item.objects.distinct('user')
+        return context
+
+
 
     
 
 class artists(ListView):
-    model = Artist
-    paginate_by = 6
+    model = Item
     template_name = "artist.html"
+    def get_context_data(self, **kwargs):
+        context = super(artists, self).get_context_data(**kwargs)
+        context['products'] = Item.objects.distinct('user')
+        return context
+
+
+def load_profile(user):
+  try:
+    return user.artist
+  except:  
+    artist = Artist.objects.create(user=user)
+    return artist
+
+@login_required
+def myprofile(request):
+    artist= load_profile(request.user)
+    if request.method == 'POST':
+
+        u_form =  UserUpdateForm(request.POST,instance = request.user)
+        p_form = UserProfileForm(request.POST,request.FILES,instance = request.user.artist)
+
+        if u_form.is_valid() and p_form.is_valid():
+            u_form.save()
+            p_form.save()
+            return redirect('core:myprofile')
+    else:
+        u_form =  UserUpdateForm(instance = request.user)
+        p_form = UserProfileForm(instance = request.user.artist)
+    
+
+    context ={
+        'u_form':u_form,
+        'p_form':p_form
+    }
+    return render(request,'myprofile.html',context)
+
+
 
 def paintingsview(request):
 
@@ -146,8 +227,12 @@ def sculptures(request):
    
 class profile(DetailView):
 
-    model = Item
+    model = Artist
     template_name = "profile.html"
+    def get_context_data(self, **kwargs):
+        context = super(profile, self).get_context_data(**kwargs)
+        context['products'] = Item.objects.all()
+        return context
     
     
 

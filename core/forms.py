@@ -7,7 +7,7 @@ from django.conf import settings
 from .models import Item,Artist,Order
 from django.forms import widgets
 from django.forms import ModelChoiceField
-
+from django.contrib.auth import get_user_model
 
 class CustomSignupForm(SignupForm):
     def __init__(self, *args, **kwargs):
@@ -67,9 +67,19 @@ class CheckoutForm(forms.Form):
 
 
 class  UserUpdateForm(forms.ModelForm):
-    fields = ['username','email']
+   
+    class Meta:
+        User = get_user_model()
+        model = User
+        fields = ['first_name','last_name','username']
 
-class updateProfileForm(forms.ModelForm):
+class UserProfileForm(forms.ModelForm):
     class Meta:
         model = Artist
-        fields = ['first_name','last_name',]
+        fields = ['profession','about_your_work','focus','bio','phone','instagram','facebook','tweeter','image_artist'] 
+
+
+class UploadForm(forms.ModelForm):
+    class Meta:
+        model = Item
+        fields = ['title','price','discount_price','category','label','slug','description','image']

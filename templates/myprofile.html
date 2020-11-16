@@ -1,8 +1,8 @@
 {% load static %}
 {% load cart_template_tags%}
+{% load crispy_forms_tags %}
 
 
-{% block content %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,21 +11,61 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
-  <title>Dagallery-Paintings</title>
+  <title>Dagallery-artists</title>
   <link rel="shortcut icon" href="{% static 'logos.png'%}" type="image/4x-icon">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <link href="https://fonts.googleapis.com/css?family=Josefin+Sans:300,300i,400,400i,700,700i" rel="stylesheet">
-
+    
+  <link href="https://fonts.googleapis.com/css2?family=Courgette&display=swap" rel="stylesheet">
   <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
   <!-- Material Design Bootstrap -->
   <link href="{% static 'css/mdb.min.css' %}" rel="stylesheet">
   <!-- Your custom styles (optional) -->
   <link href="{%static 'css/style.min.css'%}" rel="stylesheet">
   <link href="{%static 'css/style.css'%}" rel="stylesheet">
-  <link href="{%static 'css/heroz.css'%}" rel="stylesheet">
+  <link href="{%static 'css/styles2.css'%}" rel="stylesheet">
+  <link href="{%static 'css/hero.css'%}" rel="stylesheet">
   <link href="{%static 'css/navbar.css'%}" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Courgette&display=swap" rel="stylesheet">
+  <style type="text/css">
+    html,
+    body,
+   
+    .carousel {
+     
+      font-family: 'Josefin Sans', sans-serif;
+      scroll-behavior: smooth;
+   
+   
+    }
+    body::-webkit-scrollbar {
+  width: 12px;               /* width of the entire scrollbar */
+}
+body::-webkit-scrollbar-track {
+  background: pink;        /* color of the tracking area */
+}
+body::-webkit-scrollbar-thumb {
+  background-color:lightcoral;    /* color of the scroll thumb */
+  border-radius: 20px;       /* roundness of the scroll thumb */
+  border: 3px solid pink;  /* creates padding around scroll thumb */
+}
+.collapse-content .fab.fa-facebook{
+  color: rgb(72, 134, 170) !important;
+  
+}
+.collapse-content .fab.fa-facebook:hover {
+  color: rgb(0, 217, 255) !important;
+}
+.collapse-content .fab.fa-twitter{
+  color: rgb(0, 140, 255) !important;
+}
+.collapse-content .fab.fa-twitter:hover {
+  color: #0d47a1 !important;
+}
+
+ 
+
+  </style>
 </head>
 
 <body>
@@ -47,12 +87,13 @@
             </form>
           </div>
           <div class="col-xl-4 col-lg-5">
-            <div class="user-panel" style="margin-top: 10px; margin-left: 10px;">
+            <div class="user-panel">
               <div class="up-item">
                 <i class="far fa-user"></i>
                 {% if user.is_authenticated %}
   
                 <a href="{% url 'account_logout'%}">Logout</a>
+                
                 {% else %}
                 <a href="{% url 'account_login'%}">Sign In</a>  or <a href="{% url 'account_signup'%}">Create Account</a>
                 {%endif%}
@@ -63,7 +104,7 @@
                     <i class="fas fa-shopping-bag"></i>
                 
                   
-                  <span>{{request.user|cart_item_count}} </span>
+                  <span style="font-weight: 500;">{{request.user|cart_item_count}} </span>
                 </div>
                Shopping Cart</a>
               </div>
@@ -81,115 +122,151 @@
           <li><a href="/photographs">Photographs</a></li>
           <li><a href="/prints">Prints</a></li>
           <li><a href="/sculptures">Sculptures</a></li>
-       
+          <li><a href="/artists">Artists</a></li>
           {% if user.is_authenticated %}
           <li><a href="/upload" style="background-color:coral;width: 120%;text-align: center;font-weight: 400;">Upload Art!</a></li>
-          <li><a href="/myprofile" style="background: coral;width: 120%;text-align: center;font-weight: 400;"> <i class="far fa-user"></i> Profile</a></li>
           {%endif%}
         </ul>
       </div>
     </nav>
   </header>
-  <!-- Navbar -->
+  <style>
+  content-section {
+  background: #ffffff;
+  padding: 10px 20px;
+  border: 1px solid #dddddd;
+  border-radius: 3px;
+  margin-bottom: 20px;
+  margin: 20px;
+}
 
+.article-title {
+  color: #444444;
+}
 
- 
-    
-    <div class="container-fluid" style="margin-top: 50px;">
-    
-    
+a.article-title:hover {
+  color: #428bca;
+  text-decoration: none;
+}
+
+.article-content {
+  white-space: pre-line;
+}
+
+.article-img {
+  height: 65px;
+  width: 65px;
+  margin-right: 16px;
+}
+
+.article-metadata {
+  padding-bottom: 1px;
+  margin-bottom: 4px;
+  border-bottom: 1px solid #e3e3e3
+}
+
+.article-metadata a:hover {
+  color: #333;
+  text-decoration: none;
+}
+
+.article-svg {
+  width: 25px;
+  height: 25px;
+  vertical-align: middle;
+}
+
+.account-img {
+  height: 125px;
+  width: 125px;
+  margin-right: 20px;
+  margin-bottom: 16px;
+}
+
+.account-heading {
+  font-size: 2.5rem; 
+}
+  </style>
+  <section style="margin: 30px;">
+<div class="content-section" >
+    <div class="media">
      
-      
-     
-      <section class="text-center mb-4">
-
-        <!--Grid row-->
-        <div class="row wow fadeIn" style="margin: 20px;" >
-
-          {% for item in items %}
-
-          
-
-          <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12"style="height: 400px; width: 600px;margin-bottom: 70px;"  >
-            <div class="view">
-            <img src="{{item.image.url}}" class="img-fluid" alt="" style="height: 100%;width: 100%;margin-top: 20px;">
-            <a href="{{item.get_absolute_url}}">
-              <div class="mask rgba-white-slight"></div>
-            </div>
-            <div class=" text-center" style="margin-top:10px;">
-              <!--Category & Title-->
-             
-              <h5>
-                <strong>
-                  <a href="{{item.get_absolute_url}}" class="dark-grey-text">{{item.title}}
-                    <span class="badge badge-pill {{item.get_label_display}}-color">NEW</span>
-                  </a>
-                </strong>
-              </h5>
-  
-              <h4 class="font-weight-bold blue-text">
-                <strong>$  
-                  
-                  
-                  {{item.get_with}}
-  
-           
-                
-                </strong>
-              </h4>
-  
-            </div>
-            </div>
-
-        {% endfor%}
+        <img src="{{user.artist.image_artist.url}}"  class="rounded-circle account-img">
        
 
+        <div class="media-body">
+
+            <h2 class="account-heading">{{user.username|title}}</h2>
+            <p class="text-secondary">{{user.email}}</p>
+            {% if user.artist.bio %}
+          <p>{{user.artist.bio}}</p>
+          {%endif%}
         </div>
        
-
-      </section>
-     
-
-      <!--Pagination-->
-      {% if is_paginated %}
-      <nav class="d-flex justify-content-center wow fadeIn">
-        <ul class="pagination pg-blue">
-
-         {% if page_obj.has_previous %}
-          <li class="page-item">
-            <a class="page-link" href="?page={{page_obj.previous_page_number}}" aria-label="Previous">
-              <span aria-hidden="true">&laquo;</span>
-              <span class="sr-only">Previous</span>
-            </a>
-          </li>
-          {%endif%}
-          <li class="page-item active">
-            <a class="page-link" href="?page={{page_obj.number}}">{{page_obj.number}}
-              <span class="sr-only">(current)</span>
-            </a>
-          </li>
-      
-          {% if page_obj.has_next%}
-
-          <li class="page-item">
-            <a class="page-link" href="?page={{page_obj.next_page_number}}" aria-label="Next">
-              <span aria-hidden="true">&raquo;</span>
-              <span class="sr-only">Next</span>
-            </a>
-          </li>
-          {%endif%}
-        </ul>
-      </nav>
-     {%endif%}
-
     </div>
-  </main>
-  <div>
+    <!-- <form action="" method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+
+      <fieldset class="form-group">
+        <legend class="border-bottom mb-4">User Profile</legend>
+        {{u_form|crispy}}
+        {{p_form|crispy}}
+      </fieldset>
+      <div class="form-group">
+        <button class="btn btn-md btn-outline-danger">Save</button>
+      </div>
+    </form> -->
+  
+    
+    <!-- Modal -->
+   <!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalScrollable">
+  <i class="fas fa-cog"></i> Update Profile
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalScrollable" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalScrollableTitle">My Profile</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+           <form action="" method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+
+      <fieldset class="form-group">
+       
+        {{u_form|crispy}}
+        {{p_form|crispy}}
+      </fieldset>
+  
+      <div class="form-group">
+       
+        <button class="btn btn-md btn-outline-danger">Save</button>
+        <button type="button" class="btn btn-md btn-outline-secondary" data-dismiss="modal">Close</button>
+      </div>
+      </div>
+   
+   
+        
+      
+      </form> 
+      
+    </div>
+  </div>
+</div>
+</div> 
+</section>
+
     <section class="footer-section">
       <div class="container-fluid">
       
         <div class="row">
-  
+    
           <div class="col-lg-3 col-sm-6">
             <div class="footer-widget about-widget">
               <a href="https://hooliganlivefree.com"><img src="{% static 'logo.png'%}" alt="" style="margin-left: 20px;height: 70%; width: 70%;"></a>
@@ -207,12 +284,14 @@
             <div class="footer-widget about-widget">
               <h2>DON'T GET LOST</h2>
               <ul>
-                <li><a href="/">Home</a></li>
-                <li><a href="/photographs">Photographs</a></li>
-                
-                <li><a href="/paintings">Paintings</a></li>
-                <li><a href="/sculptures">Sculptures</a></li>
-                <li><a href="{%url 'core:order-summary'%}">Order Summary</a></li>
+                <ul>
+                  <li><a href="/">Home</a></li>
+                  <li><a href="/photographs">Photographs</a></li>
+                  <li><a href="/artists">Artists</a></li>
+                  <li><a href="/paintings">Paintings</a></li>
+                  <li><a href="/">Sculptures</a></li>
+                  <li><a href="{%url 'core:order-summary'%}">Order Summary</a></li>
+                </ul>
               
               </ul>
               
@@ -224,20 +303,19 @@
               <h2>Contact Info</h2>
               <div class="con-info">
               
-                  
-            <p> <i class="fas fa-home" style="margin-right: 10px;"></i>Hooligan LLC </p>
-          </div>
-          <div class="con-info">
-            
-            <p> <i class="fas fa-map-marker-alt" style="margin-right: 10px;"></i>New York,USA </p>
-          </div>
-          <div class="con-info">
-            
-            <p> <i class="fas fa-phone-alt" style="margin-right: 10px;"></i>+1 347 981 3342</p>
-          </div>
-          <div class="con-info">
-          
-            <p> <i class="far fa-envelope" style="margin-right: 10px;"></i>451hugo@gmail.com</p>
+                <p> <i class="fas fa-home" style="margin-right: 10px;"></i>Hooligan LLC </p>
+              </div>
+              <div class="con-info">
+                
+                <p> <i class="fas fa-map-marker-alt" style="margin-right: 10px;"></i>New York,USA </p>
+              </div>
+              <div class="con-info">
+                
+                <p> <i class="fas fa-phone-alt" style="margin-right: 10px;"></i>+1 347 981 3342</p>
+              </div>
+              <div class="con-info">
+              
+                <p> <i class="far fa-envelope" style="margin-right: 10px;"></i>451hugo@gmail.com</p>
               </div>
             </div>
           </div>
@@ -248,38 +326,38 @@
           <div class="social-links">
             <a href="https://www.instagram.com/hooliganlivefree/?hl=en" class="instagram"><i class="fab fa-instagram"></i><span>instagram</span></a>
         
-            <a href="https://www.facebook.com/HooliganLLC/" class="facebook"><i class="fab fa-facebook-f"></i><span>facebook</span></a>
+            <a href="https://www.facebook.com/HooliganLLC/" class="facebook"><i class="fab fa-facebook"></i><span>facebook</span></a>
             <a href="https://twitter.com/HooliganLLC" class="twitter"><i class="fab fa-twitter"></i><span>twitter</span></a>
           
           </div>
-  
-  
-  
+    
+    
+    
         </div>
       </div>
     </section>
-  
-  
-  
-  
-  
-  
-  
+    
+    
+    
+    
+    
+    
+    
     <a href="#" class="back-to-top"><i class="fas fa-chevron-up"></i></a>
 
 
-
-
+  <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
   <script type="text/javascript" src="{%static 'js/jquery-3.4.1.min.js'%}"></script>
   <!-- Bootstrap tooltips -->
   <script type="text/javascript" src="{% static 'js/popper.min.js' %}"></script>
   <!-- Bootstrap core JavaScript -->
   <script type="text/javascript" src="{% static 'js/bootstrap.min.js'%}"></script>
+  <script type="text/javascript" src="{% static 'js/jquery.js'%}"></script>
   <!-- MDB core JavaScript -->
   <script type="text/javascript" src="{% static 'js/mdb.min.js' %}"></script>
   <!-- Initializations -->
   <script type="text/javascript">
-    $(window).scroll(function() {
+      $(window).scroll(function() {
     if ($(this).scrollTop() > 100) {
       $('.back-to-top').fadeIn('slow');
     } else {
@@ -292,4 +370,5 @@
 </body>
 
 </html>
-{% endblock content %}
+ 
+

@@ -93,6 +93,7 @@ body::-webkit-scrollbar-thumb {
                 {% if user.is_authenticated %}
   
                 <a href="{% url 'account_logout'%}">Logout</a>
+                
                 {% else %}
                 <a href="{% url 'account_login'%}">Sign In</a>  or <a href="{% url 'account_signup'%}">Create Account</a>
                 {%endif%}
@@ -191,7 +192,7 @@ body::-webkit-scrollbar-thumb {
         <!--Grid row-->
         <div class="row wow fadeIn" style="margin: 20px; margin-bottom: 160px;" >
 
-          {% for item in object_list %}
+          {% for item in products %}
           
           <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 " style="margin-bottom: 30px;" >
            
@@ -200,8 +201,8 @@ body::-webkit-scrollbar-thumb {
 
  
   <div class="view overlay">
-    <img class="card-img-top rounded-0" src="{{item.artist.image_artist.url}}" alt="Card image cap" style="height: 500px;">
-    <a href="{{item.get_absolute_url}}">
+    <img class="card-img-top rounded-0" src="{{item.user.artist.image_artist.url}}" alt="Card image cap" style="height: 500px;">
+    <a href="{{item.user.artist.get_absolute_url}}">
       <div class="mask rgba-white-slight"></div>
     </a>
   </div>
@@ -210,12 +211,11 @@ body::-webkit-scrollbar-thumb {
   <div class="card-body">
 
     <div class="collapse-content">
-     {% if item.user.first_name %}
+  
       <h4 class="card-title font-weight-bold"><a>{{item.user.first_name }} {{item.user.last_name}}</a></h4>
-      {%else%}
-      <h4 class="card-title font-weight-bold"><a>{{item.user.username }}</a></h4>
-      {%endif%}
-      <p class="card-text" >{{item.artist.bio}}</p>
+    
+    
+      <p class="card-text" >{{item.user.artist.bio}}</p>
       <!-- Button -->
       <a href="{{item.artist.get_absolute_url}}" style="float: left;color: red;">Read More</a>
       <a href="{{item.artist.facebook}}">
@@ -240,6 +240,8 @@ body::-webkit-scrollbar-thumb {
        
 
       </section>
+
+      
      
 
     

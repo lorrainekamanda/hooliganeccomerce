@@ -18,19 +18,23 @@ LABEL_CHOICES = (
 
 )
 class Artist(models.Model):
-    
+    user = models.OneToOneField(settings.AUTH_USER_MODEL,on_delete = models.CASCADE,blank = True)
     first_name = models.CharField(max_length = 100,blank = True,null = True)
     last_name = models.CharField(max_length = 100,blank = True,null = True)
-    bio = models.CharField(max_length = 200,blank = True,null = True)
+    profession = models.CharField(max_length = 100,blank = True,null = True)
+    bio = models.TextField(blank = True,null = True)
+    focus = models.CharField(max_length = 100,blank = True,null = True)
+    about_your_work = models.TextField(blank = True,null = True)
     phone = models.CharField(max_length = 200,blank = True,null = True)
     instagram = models.URLField(max_length = 200,blank = True,null = True)
     facebook = models.URLField(max_length = 200,blank = True,null = True)
     tweeter = models.URLField(max_length = 200,blank = True,null = True)
-    image_artist = CloudinaryField("image",default = 'profile.jpg',blank = True,null = True)
-    user = models.OneToOneField(settings.AUTH_USER_MODEL,on_delete = models.CASCADE,null=True,blank=True)
+    image_artist = CloudinaryField("image",default = 'https://res.cloudinary.com/dqj36cjxw/image/upload/v1604673289/n7jrss7ggezuwyb87ipa.jpg')
+    
+    
     
     def __str__(self):
-       return self.first_name
+        return str(self.user.username)
 
     
     def get_absolute_url(self):
@@ -38,21 +42,22 @@ class Artist(models.Model):
 
 
 class Profile(models.Model):
-    first_name = models.CharField(max_length = 100,blank = True,null = True)
-    last_name = models.CharField(max_length = 100,blank = True,null = True)
-    bio = models.CharField(max_length = 200,blank = True,null = True)
-    phone = models.CharField(max_length = 200,blank = True,null = True)
-    instagram = models.URLField(max_length = 200,blank = True,null = True)
-    facebook = models.URLField(max_length = 200,blank = True,null = True)
-    tweeter = models.URLField(max_length = 200,blank = True,null = True)
+    first_name = models.CharField(max_length = 100,blank = True,null = True,default = 'John')
+    last_name = models.CharField(max_length = 100,blank = True,null = True,default = 'Doe')
+    bio = models.CharField(max_length = 200,blank = True,null = True,default ='My mystrey')
+    phone = models.CharField(max_length = 200,blank = True,null = True,default = '222')
+    instagram = models.URLField(max_length = 200,blank = True,null = True,default = 'user@instagram.com')
+    facebook = models.URLField(max_length = 200,blank = True,null = True,default = 'user@instagram.com')
+    tweeter = models.URLField(max_length = 200,blank = True,null = True,verbose_name = "Twitter",default = 'user@twitter.com')
     image_artist = CloudinaryField("image",default = 'profile.jpg',blank = True,null = True)
-    time_stamp = models.DateTimeField(auto_now_add = True)
+  
+   
     
 
     def __str__(self):
         return str(self.user.username)
 
-         
+
     def get_absolute_url(self):
         return reverse ('core:profile', kwargs = {'pk':self.pk})
 
@@ -62,9 +67,11 @@ class Item(models.Model):
    discount_price = models.FloatField(default = 0,blank = True,null = True)
    category = models.CharField(choices = CATEGORY_CHOICES,max_length = 2)
    label= models.CharField(choices = LABEL_CHOICES,max_length = 2)
-   slug = models.SlugField()
+   slug = models.SlugField(verbose_name = "Tag")
    description = models.TextField()
-   image = CloudinaryField("image")
+   image = CloudinaryField("image") 
+   artist = models.ForeignKey(Artist,on_delete = models.CASCADE,null = True)
+   user = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete = models.CASCADE,null = True)
    
 
    def __str__(self):
