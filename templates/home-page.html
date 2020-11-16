@@ -430,7 +430,7 @@ body::-webkit-scrollbar-thumb {
               <div class="card card-block" id = "card">
 
             <img src="{{item.user.artist.image_artist.url}}" alt="Photo of sunset" style="height:350px;">
-                <h2 class="card-title mt-3 mb-3" style="font-weight: 500; font-size: 20px;color: #000;">{{item.user.first_name}} {{item.user.last_name}}</h2>
+                <h2 class="card-title mt-3 mb-3" style="font-weight: 500; font-size: 20px;color: #000;">{{item.user.username|title}}</h2>
                
           </div>
         </a>

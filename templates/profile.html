@@ -132,7 +132,7 @@
                 <img src="{{object.image_artist.url}}" class="img-raised rounded-circle img-fluid" alt="" style="height:100%; width: 100%;" >
               </div>
               <div class="name" style="text-align: center;">
-                <h1 class="title"> {{object.first_name}} {{object.last_name}}</h1>
+                <h1 class="title"> {{object.user.username|title}} </h1>
                 {%if object.profession%}
                 <h3 class="title">{{object.profession}}</h3>
                 {%else%}
