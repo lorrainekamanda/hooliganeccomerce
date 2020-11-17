@@ -133,13 +133,13 @@ body::-webkit-scrollbar-thumb {
           <!-- logo -->
          <img src="{% static 'logos.png'%}" alt="" srcset="" style="height: 90px;width: 90px;">
         </div>
-        <div class="col-xl-6 col-lg-5">
+        <div class="col-xl-6 col-lg-5" style="margin-top: 20px;">
           <form class="header-search-form" role="search" action="{% url 'core:search_results' %}">
             <input type="text" placeholder="Search product ...." name="title" style="border: 1px solid coral;">
             <button><i class="fas fa-search"></i></button>
           </form>
         </div>
-        <div class="col-xl-4 col-lg-5">
+        <div class="col-xl-4 col-lg-5" style="margin-top: 20px;">
           <div class="user-panel"  style="margin-top: 10px; margin-left: 10px;">
             <div class="up-item">
               <i class="far fa-user"></i>
