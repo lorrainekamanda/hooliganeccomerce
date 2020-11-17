@@ -130,6 +130,7 @@ body::-webkit-scrollbar-thumb {
           <li><a href="/artists">Artists</a></li>
           {% if user.is_authenticated %}
           <li><a href="/upload" style="background-color:coral;width: 120%;text-align: center;font-weight: 400;">Upload Art!</a></li>
+          <li><a href="/myprofile" style="background: coral;width: 100%;text-align: center;font-weight: 400;height: 100%;"> Profile</a></li>
           {%endif%}
         </ul>
       </div>
@@ -139,14 +140,27 @@ body::-webkit-scrollbar-thumb {
   <section style="margin: 30px;margin-bottom: 50px;">
    <div class="container" >
       <div class="row user-menu-container square" style="color: black;">
-          <div class="col-md-12 user-details" style="height: 100%;">
+          <div class="col-md-12 " style="height: 100%;">
               <div class="row coralbg white">
-                  <div class="col-md-6 no-pad">
-                      <div class="user-pad">
+                  <div class="col-md-6 ">
+                      <div class="use">
                         <h2 class="account-heading" style="color: black;"> Hi,{{user.username|title}}</h2>
                         <hr>
+                         <h4>Mail</h4>
+                        <h6 style="color: black;">{{user.email}}</h6>
+                        <hr>
+
+                        {% if user.artist.phone %}
+
+                        <h4>Phone</h4>
+
+                        <h6 style="color: black;">{{user.artist.phone}}</h6>
+                        <hr>
+                          {%endif%}
 
                         {% if user.artist.bio %}
+
+
 
                         <h4>Bio</h4>
 
@@ -163,9 +177,10 @@ body::-webkit-scrollbar-thumb {
                       <h6 style="color: black;">{{user.artist.about_your_work}}</h6>
                         <hr>
                         {%endif%}
-                        <h4>Social Media Presence </h4>
+                       
                         <h5 style="color: blue; font-size: 30px;">
                           {% if user.artist.tweeter%}
+                          <h4>Social Media Presence </h4>
                           <a href="{{user.artist.tweeter }}"><i class="fab fa-twitter"></i></a>
                           {%endif%}
                           {% if user.artist.facebook %}
@@ -176,9 +191,11 @@ body::-webkit-scrollbar-thumb {
                           <a href="{{user.artist.instagram}}"><i class="fab fa-instagram"></i></a>
                           {%endif%}
                         </h5>
+                        <h5>
                           <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalScrollable">
                             <i class="fas fa-cog"></i> Update Profile
                           </button>
+                        </h5>
                       </div>
                   </div>
                   <div class="col-md-6 no-pad">
