@@ -132,12 +132,18 @@
                 <img src="{{object.image_artist.url}}" class="img-raised rounded-circle img-fluid" alt="" style="height:100%; width: 100%;" >
               </div>
               <div class="name" style="text-align: center;">
-                <h1 class="title"> {{object.user.username|title}} </h1>
+                <h2 class="title"> {{object.user.username|title}} </h2>
+                <h3 > {{object.user.email}} </h3>
                 {%if object.profession%}
-                <h3 class="title">{{object.profession}}</h3>
+                <h3 >{{object.profession}}</h3>
                 {%else%}
                 <h4 class="title">Artist</h4>
                 {%endif%}
+                <div class="description text-center">
+                  {% if object.bio %}
+                <h4>{{object.bio}}</h4>
+                  {%endif%}
+                </div>
               
                 {%if object.instagram %}
                 <a href="{{object.instagram}}"><i class="fab fa-instagram" style="font-size: 20px;margin: 15px;"></i></a>
@@ -154,11 +160,7 @@
           </div>
         </div>
 
-        <div class="description text-center">
-          {% if object.bio %}
-        <h5>{{object.bio}}</h5>
-          {%endif%}
-        </div>
+       
 
         <div class="tab-content tab-space">
           <div class="tab-pane work active show" id="work">
@@ -168,13 +170,14 @@
                 <div class="row collections">
                   {% for item  in products %}
 
-                
+                  <!-- https://codepen.io/jasondavis/pen/rWbGwj -->
+
 
                   {% if item.artist.user.username == object.username.username %}
                   <div class="col-md-6">
-                    <div class="card " style="height: 400px;">
+                    <div class="card ">
                       <a href="{{item.get_absolute_url}}">
-                      <img src="{{item.image.url}}" class="responsive" style="height: 300px;" >
+                      <img src="{{item.image.url}}" class="responsive" >
                       </a>
 
                       <div class=" text-center" style="margin-top: 10px;">
@@ -251,149 +254,6 @@
 
 
 
- 
-
-<!-- 
-  <main class="mt-5 ">
-    <div class="container-fluid dark-grey-text mt-5">
-
-      
-      <div class="row wow fadeIn" style="margin: 30px;">
-        <div class="col-md-5 mb-4">
-
-            <h3 style="font-weight: 500;">{{object.title}}  <span class="badge purple mr-1 mb-3" style="font-size: 12px;">{{object.get_category_display}}</span></h4>
-            <div class="p-4">
-  
-              <h1 style="font-weight: 600;font-size: 55px;" >{{object.first_name}} {{object.last_name}}</h1>
-              <div style="display: inline-flex;">
-                <p style="font-size: 20px;"> {{object.bio}}</p>
-
-                
-
-                
-              </div> <br> <br>
-              <h3 style="font-weight: 600;">General Info</h3> 
-              <div style="font-size: 20px;">
-                {% if object.user.adress %}
-               <span style="font-weight: 500; margin-bottom: 20px;"> Address</span> : {{object.user.adress}}
-               {%endif%}
-              </div>
-              <div style="font-size: 20px;">
-              <span style="font-weight: 500; margin-bottom: 20px;">Email </span>  : {{object.user.email}}
-              </div> 
-              <div style="font-size: 20px;">
-               <span style="font-weight: 500;"> Phone </span>: {{object.phone}}
-              </div> <br> <br>
-
-              <h3 style="font-weight: 600;">Social Media Presence</h3> 
-            
-                <div class="container">
-              <div class="social" style="display: inline-block; margin: 15px;" >
-              <a href="{{object.instagram}}">
-                <i class="fab fa-instagram" style="font-size: 40px;margin: 15px;"></i>
-
-             </a>
-            <a href="{{object.facebook}}">
-              <i class="fab fa-facebook-f" style="font-size: 40px;margin: 15px;"></i>
-            </a>
-
-          <a href="{{object.tweeter}}">
-            <i class="fab fa-twitter" style="font-size: 40px;margin: 15px;"></i>
-            </a>
-            
-          </div>
-        </div>
-          
-  
-            </div>
-          
-  
-          </div>
-
-        
-        <div class="col-md-6 ">
-
-          <img src="{{object.image_artist.url}}" class="img-fluid" alt="" style="height:100%; width: 100%;" >
-
-        </div>
-      
-
-       
-       
-       
-
-      </div>
-    
-
-      <hr>
-
-      <div class="row d-flex justify-content-center wow fadeIn">
-
-       
-        <div class="col-md-6 text-center">
-
-          <h1 style="font-weight: 600;font-size: 55px;" > Works by {{object.first_name}} {{object.last_name}}</h1>
-
-        
-
-        </div>
-      
-
-      </div>
-    
-      <div class="row wow fadeIn" style="margin: 20px;margin-top: -10px;">
-
-        {% for item  in products %}
-
-        {% if item.artist.first_name == object.first_name %}
-
-        
-        <div class="col-lg-4 " style="height: 500px; width: 600px;">
-          
-          <div class="view">
-          <img src="{{item.image.url}}" class="responsive"   alt="" style="height: 400px; width: 100%;"  >
-
-          <a href="{{item.get_absolute_url}}">
-            <div class="mask rgba-white-slight"></div>
-          </div>
-          <div class=" text-center" style="margin-top: 10px;">
-          
-            
-            <h5>
-              <strong>
-                <a href="{{item.get_absolute_url}}" class="dark-grey-text">{{item.title}}
-                  <span class="badge badge-pill {{item.get_label_display}}-color">{{item.get_category_display}}</span>
-                </a>
-              </strong>
-            </h5>
-
-            <h4 class="font-weight-bold blue-text">
-              <strong>$  
-              
-                
-                {{item.get_with}}
-
-              
-              
-              </strong>
-            </h4>
-
-          </div>
-          </div>
-          {%endif%}
-          {% endfor%}
-        
-        </div>
-
-       
-     
-
-      </div>
-    
-
-    </div>
-  </main>
-  <div>  -->
     <section class="footer-section">
       <div class="container-fluid">
       
