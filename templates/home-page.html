@@ -199,10 +199,11 @@ body::-webkit-scrollbar-thumb {
    <div class="carousel-item active">
      <div class="view" id = view1 >
       <div class="row wow fadeIn">
-        <div class=" text-white" style="margin-top: 50px;margin-left: 50px; width: 480px; opacity: .9;"> <br>
+        <div class="col-md-12" style="color: white;text-align: center;margin-top: 50px;vertical-align: middle;" >
         
-          <h1 style="font-weight: 600; margin-left: 10px;"> HOOLIGAN LLC, <br> <span style="color: greenyellow;border-bottom: black solid 1px;">ART</span></h1>
-          <p style="margin-left: 10px;font-size: 25px;">Welcome to Hooligan LLC<br> we represent artists from all over <br>the world find amazing  photographs,<br>paintings,sculptures and prints. <br> </p>
+          <h1 style="font-size: 50px;">Da Gallery</h1>
+          <p style="font-size: 20px;">Welcome to Da Gallery at Hooligan! <br> A place where all artists can collaborate</p>
+          <p style="font-size: 20px;">This is a creative space to showcase and sell your pieces. <br>it's a place where patrons can discover, commission, and collect art.<br>it is a place for artists to network and collaborate. Most importantly it is a home</p>
           
           <a href="#explore" class="site-btn sb-line" style="color: white; font-size: 13px;">
             <button class="btn btn-danger btn-md "> DISCOVER MORE</button>
@@ -315,7 +316,7 @@ body::-webkit-scrollbar-thumb {
         <div class="feature-1 text-center">
           <div class="wrap-icon icon-1" >
             
-            <span class="fas fa-users" style="font-size: 30px;margin-top: 30px;"></span>
+            <span class="fas fa-users" style="font-size: 30px;margin-top: 40px;color: white;"></span>
           </div>
           <h3 class="mb-3" style="font-weight: 500;">Diversity</h3>
           <p style="text-align: center;color: #000;">Meet and support artists from all over the world.</p>
@@ -325,9 +326,9 @@ body::-webkit-scrollbar-thumb {
         <div class="feature-1 text-center">
           <div class="wrap-icon icon-1">
          
-            <span class="fas fa-chart-area" style="font-size: 30px;margin-top: 30px;"></span>
+            <span class="fas fa-chart-area" style="font-size: 40px;margin-top: 30px;color: white;"></span>
           </div>
-          <h3 class="mb-3" style="font-weight: 500;">Find unique Art</h3>
+          <h3 class="mb-3" style="font-weight: 500;">Find Unique Art</h3>
           <p style="text-align: center;color: #000;">Find unique paintings,sculptures,photographs and prints</p>
         </div>
       </div>
@@ -335,7 +336,7 @@ body::-webkit-scrollbar-thumb {
         <div class="feature-1 text-center">
           <div class="wrap-icon icon-1">
            
-            <span class="fab fa-cc-visa" style="font-size: 30px;margin-top: 30px;"></span>
+            <span class="fab fa-cc-visa" style="font-size: 40px;margin-top: 30px;color: white;"></span>
           </div>
           <h3 class="mb-3" style="font-weight: 500;">Safe Transaction</h3>
           <p style="text-align: center;color: #000;">We ensure safe transactions.Full peace of mind and swift delivery</p>
@@ -372,7 +373,7 @@ body::-webkit-scrollbar-thumb {
       <div class="container-fluid">
        
           <div class="row" style="margin: 30px;">
-            <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12" style="margin-bottom: 20px;" >
+            <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12" style="margin-bottom: 20px;text-align: center;" >
               <a href="/photographs">
               <div class="card card-block" id = "card">
             
@@ -382,7 +383,7 @@ body::-webkit-scrollbar-thumb {
           </div>
         </a>
             </div>
-            <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12" style="margin-bottom: 20px;" >
+            <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12" style="margin-bottom: 20px;text-align: center;" >
               <a href="/prints">
               <div class="card card-block" id = "card">
               
@@ -392,7 +393,7 @@ body::-webkit-scrollbar-thumb {
           </div>
         </a>
             </div>
-            <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12" style="margin-bottom: 20px;" >
+            <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12" style="margin-bottom: 20px;text-align: center;" >
               <a href="/paintings">
               <div class="card card-block" id = "card">
             
@@ -402,7 +403,7 @@ body::-webkit-scrollbar-thumb {
           </div>
         </a>
             </div>
-            <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12" style="margin-bottom: 20px;" >
+            <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12" style="margin-bottom: 20px;text-align: center;" >
               <a href="/sculptures">
               <div class="card card-block" id = "card">
         
@@ -425,7 +426,7 @@ body::-webkit-scrollbar-thumb {
 
           <div class="row" style="margin: 30px;">
             {% for item in products %}
-            <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12" style="margin-bottom: 20px;" >
+            <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12" style="margin-bottom: 20px;text-align: center;" >
               <a href="{{item.user.artist.get_absolute_url}}">
               <div class="card card-block" id = "card">
 

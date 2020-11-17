@@ -125,7 +125,7 @@ body::-webkit-scrollbar-thumb {
     
   </div>
  {% csrf_token %}
-    <form method="post" action="{% url 'account_signup' %}" class="form" >
+    <form method="post" action="{% url 'account_signup' %}" class="form"  >
       {% csrf_token %}
       
        <div class="form-holder">
@@ -164,14 +164,15 @@ body::-webkit-scrollbar-thumb {
         <span>{% trans "Sign Up" %}</span>
       
       </button>
+      <div style="text-align: center;z-index: 99;">
+        <p style="color: black;font-size: 18px;">
+          Already have an account? <a href="{% url 'account_login'%}" >
+       Sign In
+      </p>
+    </div>
  
     </form>
-    <div style="text-align: center;">
-      <p style="color: black;font-size: 20px;">
-        Already have an account ? <a href="{% url 'account_login'%}" >
-     Sign In
-    </p>
-  </div>
+
   
   </div>
   

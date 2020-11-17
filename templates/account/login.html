@@ -151,17 +151,19 @@ body::-webkit-scrollbar-thumb {
         <span>{% trans "Log In" %}</span>
       
       </button>
+
+      <div style="text-align: center;font-size: 18px;">
+        <a  href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a>
+      </div>
+        <div style="text-align: center;">
+          <p style="color: black;font-size: 18px;">
+            Don't have  an account ? <a href="{% url 'account_signup'%}" >
+         Sign Up
+        </p>
+      </div>
  
     </form>
-    <div style="text-align: center;font-size: 18px;">
-    <a  href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a>
-  </div>
-    <div style="text-align: center;">
-      <p style="color: black;font-size: 20px;">
-        Don't have  an account ? <a href="{% url 'account_signup'%}" >
-     Sign Up
-    </p>
-  </div>
+
   
   </div>
   
