@@ -27,6 +27,11 @@
   <link href="{%static 'css/styles2.css'%}" rel="stylesheet">
   <link href="{%static 'css/hero.css'%}" rel="stylesheet">
   <link href="{%static 'css/navbar.css'%}" rel="stylesheet">
+ 
+
+
+<link href="http://fontawesome.io/assets/font-awesome/css/font-awesome.css" rel="stylesheet" media="screen"> 
+  <link href="{%static 'css/myprofile.css'%}" rel="stylesheet">
   <style type="text/css">
     html,
     body,
@@ -130,99 +135,67 @@ body::-webkit-scrollbar-thumb {
       </div>
     </nav>
   </header>
-  <style>
-  content-section {
-  background: #ffffff;
-  padding: 10px 20px;
-  border: 1px solid #dddddd;
-  border-radius: 3px;
-  margin-bottom: 20px;
-  margin: 20px;
-}
 
-.article-title {
-  color: #444444;
-}
+  <section style="margin: 30px;margin-bottom: 50px;">
+   <div class="container" >
+      <div class="row user-menu-container square" style="color: black;">
+          <div class="col-md-12 user-details" style="height: 100%;">
+              <div class="row coralbg white">
+                  <div class="col-md-6 no-pad">
+                      <div class="user-pad">
+                        <h2 class="account-heading" style="color: black;"> Hi,{{user.username|title}}</h2>
+                        <hr>
 
-a.article-title:hover {
-  color: #428bca;
-  text-decoration: none;
-}
+                        {% if user.artist.bio %}
 
-.article-content {
-  white-space: pre-line;
-}
+                        <h4>Bio</h4>
 
-.article-img {
-  height: 65px;
-  width: 65px;
-  margin-right: 16px;
-}
+                      <h6 style="color: black;">{{user.artist.bio}}</h6>
+                      <hr>
+                        {%endif%}
+                        {% if user.artist.focus %}
+                        <h4>Focus</h4>
+                      <h5 class="badge badge-rose" style="color:black ; background-color: coral;">{{user.artist.focus}}</h4>
+                        <hr>
+                        {%endif%}
+                        {% if user.artist.about_your_work %}
+                        <h4>About Your Work</h4>
+                      <h6 style="color: black;">{{user.artist.about_your_work}}</h6>
+                        <hr>
+                        {%endif%}
+                        <h4>Social Media Presence </h4>
+                        <h5 style="color: blue; font-size: 30px;">
+                          {% if user.artist.tweeter%}
+                          <a href="{{user.artist.tweeter }}"><i class="fab fa-twitter"></i></a>
+                          {%endif%}
+                          {% if user.artist.facebook %}
+                          <a href="{{user.artist.facebook}}"><i class="fab fa-facebook"></i></a>
+                          {%endif%}
+                          {% if user.artist.instagram %}
 
-.article-metadata {
-  padding-bottom: 1px;
-  margin-bottom: 4px;
-  border-bottom: 1px solid #e3e3e3
-}
+                          <a href="{{user.artist.instagram}}"><i class="fab fa-instagram"></i></a>
+                          {%endif%}
+                        </h5>
+                          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalScrollable">
+                            <i class="fas fa-cog"></i> Update Profile
+                          </button>
+                      </div>
+                  </div>
+                  <div class="col-md-6 no-pad">
+                      <div class="use">
+                          <img src="{{user.artist.image_artist.url}}" class="img-responsive thumbnail" style="height: 100%;">
+                      </div>
+                  </div>
+              </div>
+             
+          </div>
+         
+   
+  </div>
 
-.article-metadata a:hover {
-  color: #333;
-  text-decoration: none;
-}
 
-.article-svg {
-  width: 25px;
-  height: 25px;
-  vertical-align: middle;
-}
 
-.account-img {
-  height: 125px;
-  width: 125px;
-  margin-right: 20px;
-  margin-bottom: 16px;
-}
 
-.account-heading {
-  font-size: 2.5rem; 
-}
-  </style>
-  <section style="margin: 30px;">
-<div class="content-section" >
-    <div class="media">
-     
-        <img src="{{user.artist.image_artist.url}}"  class="rounded-circle account-img">
-       
-
-        <div class="media-body">
-
-            <h2 class="account-heading">{{user.username|title}}</h2>
-            <p class="text-secondary">{{user.email}}</p>
-            {% if user.artist.bio %}
-          <p>{{user.artist.bio}}</p>
-          {%endif%}
-        </div>
-       
-    </div>
-    <!-- <form action="" method="post" enctype="multipart/form-data">
-      {% csrf_token %}
-
-      <fieldset class="form-group">
-        <legend class="border-bottom mb-4">User Profile</legend>
-        {{u_form|crispy}}
-        {{p_form|crispy}}
-      </fieldset>
-      <div class="form-group">
-        <button class="btn btn-md btn-outline-danger">Save</button>
-      </div>
-    </form> -->
-  
-    
-    <!-- Modal -->
-   <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalScrollable">
-  <i class="fas fa-cog"></i> Update Profile
-</button>
 
 <!-- Modal -->
 <div class="modal fade" id="exampleModalScrollable" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
@@ -259,7 +232,6 @@ a.article-title:hover {
     </div>
   </div>
 </div>
-</div> 
 </section>
 
     <section class="footer-section">
@@ -355,6 +327,7 @@ a.article-title:hover {
   <script type="text/javascript" src="{% static 'js/jquery.js'%}"></script>
   <!-- MDB core JavaScript -->
   <script type="text/javascript" src="{% static 'js/mdb.min.js' %}"></script>
+  <script type="text/javascript" src="{% static 'js/myprofile.js' %}"></script>
   <!-- Initializations -->
   <script type="text/javascript">
       $(window).scroll(function() {

@@ -108,8 +108,8 @@
           <li><a href="/sculptures">Sculptures</a></li>
           <li><a href="/artists">Artists</a></li>
           {% if user.is_authenticated %}
-          <li><a href="/upload" style="background-color:coral;width: 120%;text-align: center;font-weight: 400;">Upload Art!</a></li>
-          <li><a href="/myprofile" style="background: coral;width: 120%;text-align: center;font-weight: 400;"> <i class="far fa-user"></i> Profile</a></li>
+          <li style="margin-right: 50px;"><a href="/upload" style="background: coral;width: 100%;text-align: center;font-weight: 400;height: 100%;">Upload Art!</a></li>
+          <li><a href="/myprofile" style="background: coral;width: 100%;text-align: center;font-weight: 400;height: 100%;"> Profile</a></li>
           {%endif%}
         </ul>
       </div>
@@ -137,11 +137,17 @@
                 <h3 class="title">{{object.profession}}</h3>
                 {%else%}
                 <h4 class="title">Artist</h4>
-
                 {%endif%}
+              
+                {%if object.instagram %}
                 <a href="{{object.instagram}}"><i class="fab fa-instagram" style="font-size: 20px;margin: 15px;"></i></a>
+                {%endif%}
+                {%if object.facebook%}
                 <a href="{{object.facebook}}"><i class="fab fa-facebook-f" style="font-size: 20px;margin: 15px;"></i></a>
+                {%endif%}
+                {%if object.tweeter%}
                 <a href="{{object.tweeter}}"><i class="fab fa-twitter" style="font-size: 20px;margin: 15px;"></i> </a>
+                {%endif%}
               </div>
             </div>
           
@@ -166,9 +172,9 @@
 
                   {% if item.artist.user.username == object.username.username %}
                   <div class="col-md-6">
-                    <div class="card " >
+                    <div class="card " style="height: 400px;">
                       <a href="{{item.get_absolute_url}}">
-                      <img src="{{item.image.url}}" class="responsive"   alt="" >
+                      <img src="{{item.image.url}}" class="responsive" style="height: 300px;" >
                       </a>
 
                       <div class=" text-center" style="margin-top: 10px;">
