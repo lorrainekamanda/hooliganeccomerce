@@ -35,10 +35,17 @@
     <link href="{%static 'css/style.css'%}" rel="stylesheet">
     <link href="{%static 'css/hero.css'%}" rel="stylesheet">
     <link href="{%static 'css/responsive.css'%}" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,200;0,300;1,200&display=swap" rel="stylesheet">
+
+   
 
 </head>
 
 <style>
+  body{
+    font-family: 'Spectral', serif;
+  }
       body::-webkit-scrollbar {
   width: 12px;               /* width of the entire scrollbar */
 }
@@ -114,7 +121,7 @@ body::-webkit-scrollbar-thumb {
  }
 </style>
 
-<body class="grey lighten-3">
+<body>
 
   <!-- {% if messages %}
 <ul class="messages">
@@ -128,28 +135,38 @@ body::-webkit-scrollbar-thumb {
 <header class="header-section">
   <div class="header-top">
     <div class="container">
-      <div class="row">
+      <div class="row" style="align-items: center ;">
         <div class="col-lg-2 text-center text-lg-left">
           <!-- logo -->
-         <img src="{% static 'logos.png'%}" alt="" srcset="" style="height: 120px;width: 120px;">
+          <a href="/">
+            <img src="{% static 'logos.png'%}" alt="" srcset="" style="height: 120px;width: 120px;">
+          </a>
+         
         </div>
-        <div class="col-xl-6 col-lg-5" style="margin-top: 30px;">
+        <div class="col-xl-6 col-lg-5 "  >
           <form class="header-search-form" role="search" action="{% url 'core:search_results' %}">
             <input type="text" placeholder="Search product ...." name="title" style="border: 1px solid coral;">
             <button><i class="fas fa-search"></i></button>
           </form>
         </div>
-        <div class="col-xl-4 col-lg-5" style="margin-top: 30px;">
-          <div class="user-panel"  style="margin-top: 10px; margin-left: 10px;">
-            <div class="up-item">
-              <i class="far fa-user"></i>
-              {% if user.is_authenticated %}
+        <div class="col-xl-4 col-lg-5 " >
+          <div class="user-panel" >
+            <div class="up-item dropdown">
+              
+             <span style="font-size: 15px;display: inline-flexbox;" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class=" dropdown-toggle" >  <i class="far fa-user" > </i> Account</span>
+              
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                {% if user.is_authenticated %}
+              <a class="dropdown-item"  href="{% url 'account_logout'%}">Logout</a>
+              <a href="/myprofile"> Account Details</a>
 
-              <a href="{% url 'account_logout'%}">Logout</a>
            
               {% else %}
-              <a href="{% url 'account_login'%}">Sign In</a>  or <a href="{% url 'account_signup'%}">Create Account</a>
+              <a  class="dropdown-item" href="{% url 'account_login'%}">Sign In</a>  
+              
+              <a class="dropdown-item"  href="{% url 'account_signup'%}">Create Account</a>
               {%endif%}
+            </div>
             </div>
             <div class="up-item">
               <div class="shopping-card">
@@ -170,7 +187,7 @@ body::-webkit-scrollbar-thumb {
     <div class="container">
       <!-- menu -->
       <ul class="main-menu">
-        <li><a href="/">Home</a></li>
+      
         <li><a href="/paintings">Paintings</a></li>
         <li><a href="/photographs">Photographs</a></li>
         <li><a href="/prints">Prints</a></li>
@@ -180,7 +197,7 @@ body::-webkit-scrollbar-thumb {
         
         {% if user.is_authenticated %}
         <li style="margin-right: 50px;"><a href="/upload" style="background: coral;width: 100%;text-align: center;font-weight: 400;height: 100%;">Upload Art!</a></li>
-        <li><a href="/myprofile" style="background: coral;width: 100%;text-align: center;font-weight: 400;height: 100%;"> Profile</a></li>
+     
         
         {%endif%}
    
@@ -190,14 +207,14 @@ body::-webkit-scrollbar-thumb {
 </header>
 <!-- Header section end -->
 
-   <div id="carousel-example-1z" class="carousel slide carousel-fade pt-4" data-ride="carousel" style="margin-top: -22px;" > 
+   <div id="carousel-example-1z" class="carousel slide carousel-fade pt-4" data-ride="carousel" style="margin-top: -25px;" > 
  <div class="overlay" >
  <div class="carousel-inner" role="listbox"  id = "down">
 
    <div class="carousel-item active">
-     <div class="view" id = view1 >
-      <div class="row wow fadeIn">
-        <div class="col-md-12" style="color: white;text-align: center;margin-top: 50px;vertical-align: middle;" >
+     <div class="view" id = view1  style="align-items: center;">
+      <div class="row wow fadeIn" style="align-items: center;">
+        <div class="col-md-12" style="color: white;text-align: center;margin-top: 50px;align-items: center;" >
         
           <h1 style="font-size: 50px;">Da Gallery</h1>
           <p style="font-size: 20px;">Welcome to Da Gallery at Hooligan! <br> A place where all artists can collaborate</p>
@@ -305,7 +322,7 @@ body::-webkit-scrollbar-thumb {
 
     <div class="row  mb-5">
       <div class="col-md-5" >
-        <h2 class="section-heading" style="text-align: left;">Explore Dagallarey</h2>
+        <h2 class="section-heading" style="text-align: left;">Explore Da Gallery</h2>
       </div>
     </div>
 
@@ -316,7 +333,7 @@ body::-webkit-scrollbar-thumb {
             
             <span class="fas fa-users" style="font-size: 30px;margin-top: 40px;color: white;"></span>
           </div>
-          <h3 class="mb-3" style="font-weight: 500;">Diversity</h3>
+          <h3 class="mb-3" style="font-weight: 700;">Diversity</h3>
           <p style="text-align: center;color: #000;">Meet and support artists from all over the world.</p>
         </div>
       </div>
@@ -326,7 +343,7 @@ body::-webkit-scrollbar-thumb {
          
             <span class="fas fa-chart-area" style="font-size: 40px;margin-top: 30px;color: white;"></span>
           </div>
-          <h3 class="mb-3" style="font-weight: 500;">Find Unique Art</h3>
+          <h3 class="mb-3" style="font-weight: 700;">Find Unique Art</h3>
           <p style="text-align: center;color: #000;">Find unique paintings,sculptures,photographs and prints</p>
         </div>
       </div>
@@ -336,7 +353,7 @@ body::-webkit-scrollbar-thumb {
            
             <span class="fab fa-cc-visa" style="font-size: 40px;margin-top: 30px;color: white;"></span>
           </div>
-          <h3 class="mb-3" style="font-weight: 500;">Safe Transaction</h3>
+          <h3 class="mb-3" style="font-weight: 700;">Safe Transaction</h3>
           <p style="text-align: center;color: #000;">We ensure safe transactions.Full peace of mind and swift delivery</p>
         </div>
       </div>

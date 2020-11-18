@@ -2,12 +2,9 @@
 
 
 html,
-body {
-	
-	font-family: 'Josefin Sans', sans-serif;
-	
-
-}
+  body{
+    font-family: 'Spectral', serif;
+  }
 
 
 
@@ -242,6 +239,7 @@ ol {
 
 .main-navbar {
 	background: #282828;
+	margin-top: -60px;
 }
 
 .slicknav_menu {
@@ -780,6 +778,7 @@ section {
 	}
 	.main-menu {
 		text-align: center;
+		margin-top: 90px;
 	}
 	.sub-menu {
 		text-align: left;
@@ -842,10 +841,12 @@ section {
 	}
 	.slicknav_btn {
 		background-color: #565656;
+		text-align: left;
 	}
 	.slicknav_menu {
 		background: #282828;
 		display: block;
+		text-align: left;
 	}
 	.slicknav_menu .new {
 		font-size: 10px;
