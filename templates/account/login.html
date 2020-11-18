@@ -41,6 +41,42 @@
 
   <link href="{%static 'css/sign.css'%}" rel="stylesheet">
   <style type="text/css">
+  @media only screen and (max-width: 767px) {
+	.site-logo {
+		margin-bottom: 20px;
+	}
+	.header-search-form {
+		margin-bottom: 15px;
+	}
+	.user-panel {
+		text-align: center;
+	}
+	.main-menu {
+		display: none;
+	}
+	.slicknav_btn {
+		background-color: #565656;
+		text-align: left;
+	}
+	.slicknav_menu {
+		background: #282828;
+		display: block;
+		text-align: left;
+		margin-top: 70px;
+	}
+	.slicknav_menu .new {
+		font-size: 10px;
+		font-weight: 700;
+		color: #fff;
+		background: #f51167;
+		line-height: 1;
+		text-transform: uppercase;
+		padding: 5px 9px 1px;
+		border-radius: 15px;
+		width: 42px;
+		margin-left: 5px;
+	}
+	
   
     html,
     body,
@@ -65,73 +101,72 @@ body::-webkit-scrollbar-thumb {
 
   </style>
 
-<header class="header-section">
-  <div class="header-top">
-    <div class="container">
-      <div class="row" style="align-items: center ;">
-        <div class="col-lg-2 text-center text-lg-left">
-          <!-- logo -->
-          <a href="/">
-            <img src="{% static 'logos.png'%}" alt="" srcset="" style="height: 120px;width: 120px;">
-          </a>
-         
-        </div>
-        <div class="col-xl-6 col-lg-5 "  >
-          <form class="header-search-form" role="search" action="{% url 'core:search_results' %}">
-            <input type="text" placeholder="Search product ...." name="title" style="border: 1px solid coral;">
-            <button><i class="fas fa-search"></i></button>
-          </form>
-        </div>
-        <div class="col-xl-4 col-lg-5 " >
-          <div class="user-panel" >
-            <div class="up-item dropdown">
-              
-             <span style="font-size: 15px;display: inline-flexbox;" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class=" dropdown-toggle" >  <i class="far fa-user" > </i> Account</span>
-              
-              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                {% if user.is_authenticated %}
-              <a class="dropdown-item"  href="{% url 'account_logout'%}">Logout</a>
-              <a href="/myprofile"> Account Details</a>
+<div class="header-top">
+  <div class="container">
+    <div class="row" >
+      <div class="col-lg-2 text-center text-lg-left">
+        <!-- logo -->
+        <a href="/">
+          <img src="{% static 'logos.png'%}" alt="" srcset="" style="height: 140px;width: 140px;">
+        </a>
+       
+      </div>
+      <div class="col-xl-6 col-lg-5 " style="align-items: center;margin-top: 15px;" >
+        <form class="header-search-form" role="search" action="{% url 'core:search_results' %}">
+          <input type="text" placeholder="Search product ...." name="title" style="border: 1px solid coral;">
+          <button><i class="fas fa-search"></i></button>
+        </form>
+      </div>
+      <div class="col-xl-4 col-lg-5 " style="align-items: center;margin-top: 20px;"  >
+        <div class="user-panel" >
+          <div class="up-item dropdown">
+            
+           <span style="font-size: 15px;display: inline-flexbox;" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class=" dropdown-toggle" >  <i class="far fa-user" > </i> Account</span>
+            
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              {% if user.is_authenticated %}
+            <a class="dropdown-item"  href="{% url 'account_logout'%}">Logout</a>
+            <a href="/myprofile"> Account Details</a>
 
-           
-              {% else %}
-              <a  class="dropdown-item" href="{% url 'account_login'%}">Sign In</a>  
+         
+            {% else %}
+            <a  class="dropdown-item" href="{% url 'account_login'%}">Sign In</a>  
+            
+            <a class="dropdown-item"  href="{% url 'account_signup'%}">Create Account</a>
+            {%endif%}
+          </div>
+          </div>
+          <div class="up-item">
+            <div class="shopping-card">
+              <a href="{%url 'core:order-summary'%}">
+                <i class="fas fa-shopping-bag"></i>
+            
               
-              <a class="dropdown-item"  href="{% url 'account_signup'%}">Create Account</a>
-              {%endif%}
+              <span style="font-weight: 500;">{{request.user|cart_item_count}} </span>
             </div>
-            </div>
-            <div class="up-item">
-              <div class="shopping-card">
-                <a href="{%url 'core:order-summary'%}">
-                  <i class="fas fa-shopping-bag"></i>
-              
-                
-                <span style="font-weight: 500;">{{request.user|cart_item_count}} </span>
-              </div>
-             Shopping Cart</a>
-            </div>
+           Shopping Cart</a>
           </div>
         </div>
       </div>
     </div>
   </div>
-  <nav class="main-navbar" style="text-align: center;" >
-    <div class="container">
-      <!-- menu -->
-      <ul class="main-menu">
+</div>
+<nav class="main-navbar" style="text-align: center;" >
+  <div class="container">
+    <!-- menu -->
+    <ul class="main-menu">
+    
+      <li><a href="/paintings">Paintings</a></li>
+      <li><a href="/photographs">Photographs</a></li>
+      <li><a href="/prints">Prints</a></li>
+      <li><a href="/sculptures">Sculptures</a></li>
+      <li><a href="/artists">Artists</a></li>
       
-        <li><a href="/paintings">Paintings</a></li>
-        <li><a href="/photographs">Photographs</a></li>
-        <li><a href="/prints">Prints</a></li>
-        <li><a href="/sculptures">Sculptures</a></li>
-        <li><a href="/artists">Artists</a></li>
-        
-     
+      
    
-      </ul>
-    </div>
-  </nav>
+    </ul>
+  </div>
+</nav>
 </header>
 <div class="wrapper" style="margin-top: 30px;">
   <div class="inner" style="border: solid black 2px;"> <br> <br>
