@@ -30,7 +30,8 @@
   <link href="{%static 'css/style.min.css'%}" rel="stylesheet">
   <link href="{%static 'css/style.css'%}" rel="stylesheet">
   <link href="{%static 'css/hero.css'%}" rel="stylesheet">
-  
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,200;0,300;1,200&display=swap" rel="stylesheet">
   <link href="{%static 'css/styles2.css'%}" rel="stylesheet">
   <link href="{%static 'css/navbar.css'%}" rel="stylesheet">
   <style type="text/css">
@@ -274,12 +275,7 @@ a:hover {
           <li><a href="/sculptures">Sculptures</a></li>
           <li><a href="/artists">Artists</a></li>
           
-          
-          {% if user.is_authenticated %}
-          <li style="margin-right: 50px;"><a href="/upload" style="background: coral;width: 100%;text-align: center;font-weight: 400;height: 100%;">Upload Art!</a></li>
        
-          
-          {%endif%}
      
         </ul>
       </div>
