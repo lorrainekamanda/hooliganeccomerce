@@ -200,7 +200,7 @@ body::-webkit-scrollbar-thumb {
               <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                 {% if user.is_authenticated %}
               <a class="dropdown-item"  href="{% url 'account_logout'%}">Logout</a>
-              <a href="/myprofile"> Account Details</a>
+              <a href="/myprofile" class="dropdown-item" > Account </a>
 
            
               {% else %}
