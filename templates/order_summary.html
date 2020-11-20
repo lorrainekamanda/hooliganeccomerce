@@ -276,7 +276,7 @@ a:hover {
               <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                 {% if user.is_authenticated %}
               <a class="dropdown-item"  href="{% url 'account_logout'%}">Logout</a>
-              <a href="/myprofile"> Account Details</a>
+              <a href="/myprofile"  class="dropdown-item" > Account </a>
 
            
               {% else %}
@@ -327,7 +327,7 @@ a:hover {
                     <div class="col">
                         <h4><b>Shopping Cart</b></h4>
                     </div>
-                    <div class="col align-self-center text-right text-muted">{{request.user|cart_item_count}} Items</div>
+                    <div class="col align-self-center text-right text-muted">{{request.user|cart_item_count}} Item(s)</div>
                 </div>
             </div>
             {% for order_item in object.items.all %}
@@ -345,7 +345,7 @@ a:hover {
                     <span class="badge badge-primary"> saved ${{order_item.get_total_discount_item_price}} </span> 
           
                       {% else %}
-          
+                      
                       ${{order_item.get_total_item_price}}
                     
                       {%endif%} </div>
@@ -413,7 +413,7 @@ a:hover {
       <div class="col-lg-3 col-sm-6">
         <div class="footer-widget about-widget">
           <h2>About Us</h2>
-          <p>Welcome to Hooligan LLC we represent artists from all over the world find amazing photographs,paintings,sculptures and prints.</p>
+          <p >Welcome to Hooligan LLC, We <br> represent artists from all over  the <br>  world find amazing photographs, <br>paintings,sculptures and prints.</p>
           <img src="{% static 'cards.png' %}" alt="" style="height: 50%;width: 50%;">
         </div>
       </div>
@@ -458,7 +458,7 @@ a:hover {
   </div>
   <div class="social-links-warp">
     <div class="container">
-      <div class="social-links">
+      <div class="social-links" style="text-align: center;">
         <a href="https://www.instagram.com/hooliganlivefree/?hl=en" class="instagram"><i class="fab fa-instagram"></i><span>instagram</span></a>
         
         <a href="https://www.facebook.com/HooliganLLC/" class="facebook"><i class="fab fa-facebook-f"></i><span>facebook</span></a>
