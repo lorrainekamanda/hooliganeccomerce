@@ -423,3 +423,9 @@ class ItemList(APIView):
         all_items= Item.objects.all()
         serializers = ItemSerializer(all_items, many=True)
         return Response(serializers.data)
+
+class ArtistList(APIView):
+    def get(self, request, format=None):
+        all_items= Item.objects.all()
+        serializers = ArtistSerializer(all_items, many=True)
+        return Response(serializers.data)
