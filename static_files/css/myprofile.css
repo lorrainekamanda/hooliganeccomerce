@@ -219,5 +219,8 @@ div.user-menu div.user-menu-content:not(.active){
     .user-image {
         max-height: 400px;
     }
+    section{
+        margin-left: 20px;
+    }
 }
 

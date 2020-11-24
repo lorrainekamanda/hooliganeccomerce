@@ -25,6 +25,7 @@
   <link href="{%static 'css/navbar.css'%}" rel="stylesheet">
   <link href="{%static 'css/style.css'%}" rel="stylesheet">
   <link href="{%static 'css/heroz.css'%}" rel="stylesheet">
+  <link href="{%static 'css/responsive.css'%}" rel="stylesheet">
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,200;0,300;1,200&display=swap" rel="stylesheet">
 </head>
@@ -159,7 +160,7 @@
 
           
 
-          <div class="col-lg-4 " style="height: 500px; width: 600px;">
+          <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12" style="height: 500px; width: 600px;">
           
             <div class="view">
             <img src="{{item.image.url}}" class="responsive"   alt="" style="height: 400px; width: 100%;"  >
@@ -191,6 +192,9 @@
   
             </div>
             </div>
+            {% empty %}
+
+            <h1>Oops No Photographs in stock!</h1>
 
         {% endfor%}
        

@@ -299,7 +299,7 @@ body::-webkit-scrollbar-thumb {
         <div class="col-lg-3 col-sm-6">
           <div class="footer-widget about-widget">
             <h2>About Us</h2>
-            <p>Welcome to Hooligan LLC we represent artists from all over the world find amazing photographs,paintings,sculptures and prints.</p>
+            <p >Welcome to Hooligan LLC, We <br> represent artists from all over  the <br>  world find amazing photographs, <br>paintings,sculptures and prints.</p>
             <img src="{% static 'cards.png' %}" alt="" style="height: 50%;width: 50%;">
           </div>
         </div>
@@ -310,7 +310,7 @@ body::-webkit-scrollbar-thumb {
             <ul>
               <li><a href="/">Home</a></li>
               <li><a href="/photographs">Photographs</a></li>
-              
+              <li><a href="/artists">Artists</a></li>
               <li><a href="/paintings">Paintings</a></li>
               <li><a href="/sculptures">Sculptures</a></li>
               <li><a href="{%url 'core:order-summary'%}">Order Summary</a></li>
@@ -346,7 +346,7 @@ body::-webkit-scrollbar-thumb {
     </div>
     <div class="social-links-warp">
       <div class="container">
-        <div class="social-links">
+        <div class="social-links" style="text-align: center;">
           <a href="https://www.instagram.com/hooliganlivefree/?hl=en" class="instagram"><i class="fab fa-instagram"></i><span>instagram</span></a>
       
           <a href="https://www.facebook.com/HooliganLLC/" class="facebook"><i class="fab fa-facebook-f"></i><span>facebook</span></a>

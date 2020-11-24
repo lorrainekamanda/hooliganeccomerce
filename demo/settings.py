@@ -30,7 +30,8 @@ INSTALLED_APPS = [
     'django_countries',
     'stripe',
     'social_django',
-    'cloudinary'
+    'cloudinary',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -69,7 +70,7 @@ TEMPLATES = [
 ]
 
 LANGUAGE_CODE = 'en-us'
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Africa/Nairobi'
 USE_I18N = True
 USE_L10N = True
 USE_TZ = True

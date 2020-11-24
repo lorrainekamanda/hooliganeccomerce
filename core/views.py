@@ -20,6 +20,10 @@ from django.urls import reverse
 from django.utils.safestring import mark_safe
 from django.forms import widgets
 from django.conf import settings
+from rest_framework import serializers
+from rest_framework.response import Response
+from rest_framework.views import APIView
+from .serializer import UserSerializer,ArtistSerializer,ItemSerializer
 
 import stripe
 
@@ -106,36 +110,6 @@ class CreateDetail(LoginRequiredMixin,CreateView):
         
         return super().form_valid(form)
   
-# def load_profile(user):
-#   try:
-#     return user.artist
-#   except:  
-#     artist = Artist.objects.create(user=user)
-#     return artist
-
-# @login_required
-# def CreateDetail(request):
-#     artist= load_profile(request.user)
-#     if request.method == 'POST':
-
-        
-#         form = UploadForm(request.POST,request.FILES,instance = request.user.artist)
-#         form.instance.user = request.user
-
-#         if form.is_valid():
-#             form.save()
-           
-#             return redirect('core:home')
-#     else:
-       
-#         form = UploadForm(instance = request.user.artist)
-#         form.instance.user = request.user
-
-#     context ={
-#         'form':form,
-       
-#     }
-#     return render(request,'item.html',context)
 
 
       
@@ -444,3 +418,8 @@ def search_results(request):
 
 
 
+class ItemList(APIView):
+    def get(self, request, format=None):
+        all_items= Item.objects.all()
+        serializers = ItemSerializer(all_items, many=True)
+        return Response(serializers.data)

@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import homeview,itemdetailview,add_to_cart,remove_from_cart,OrderSummaryView,remove_single_item_from_cart,CheckoutView,PaymentView,search_results,productview,paintingsview,photographsview,prints,profile,artists,CreateDetail,sculptures,myprofile
+from .views import homeview,itemdetailview,add_to_cart,remove_from_cart,OrderSummaryView,remove_single_item_from_cart,CheckoutView,PaymentView,search_results,productview,paintingsview,photographsview,prints,profile,artists,CreateDetail,sculptures,myprofile,ItemList
 from django.conf import settings
 from django.conf.urls.static import static
 from . import views
@@ -25,6 +25,7 @@ urlpatterns = [
     path('payment/<payment_option>/',PaymentView.as_view(),name = 'payment'),
     path('search/',views.search_results, name='search_results'),
     path('upload/', CreateDetail.as_view(), name = 'upload'),
+    path('api-item/', ItemList.as_view(), name = 'api-item'),
     
 ]
 if settings.DEBUG:

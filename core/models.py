@@ -3,6 +3,8 @@ from django.conf import settings
 from django.shortcuts import reverse
 from cloudinary.models import CloudinaryField
 from django_countries.fields import CountryField
+from datetime import datetime
+from django.utils import timezone
 
 CATEGORY_CHOICES = (
     ('Pa','Painting'),
@@ -72,7 +74,7 @@ class Item(models.Model):
    image = CloudinaryField("image") 
    artist = models.ForeignKey(Artist,on_delete = models.CASCADE,null = True)
    user = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete = models.CASCADE,null = True)
-   
+   date = models.DateTimeField(default=timezone.now)
 
    def __str__(self):
        return self.title

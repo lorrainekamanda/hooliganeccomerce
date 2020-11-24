@@ -200,9 +200,9 @@
             <hr>
             <p class="lead font-weight-bold">Details</p>
            <p>
-            This  {{object.get_category_display}} was uploaded by Lorraine Kamanda on date 12/4/23
+            This  {{object.get_category_display}} was uploaded by {{object.user.username}} on  {{ object.date| date:"M d,Y " }}
 
-            The painting is 40cm long and 15cm wide
+  
             
            </p> 
             <img src="{% static 'cards.png' %}" alt="" style="height: 50%;width: 50%;">
@@ -261,7 +261,7 @@
         {% for item  in products %}
 
         <!--Grid column-->
-        <div class="col-lg-4 " style="height: 500px; width: 600px;">
+        <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12" style="height: 500px; width: 600px;">
           
           <div class="view">
           <img src="{{item.image.url}}" class="responsive"   alt="" style="height: 400px; width: 100%;"  >

@@ -158,7 +158,7 @@
           {% for item in items %}
 
           
-          <div class="col-lg-4 " style="height: 500px; width: 600px;">
+          <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12" style="height: 500px; width: 600px;">
           
             <div class="view">
             <img src="{{item.image.url}}" class="responsive"   alt="" style="height: 400px; width: 100%;"  >
@@ -190,7 +190,9 @@
   
             </div>
             </div>
+            {% empty %}
 
+            <h1>Oops No Prints in stock!</h1>
 
         {% endfor%}
        

@@ -101,6 +101,8 @@ body::-webkit-scrollbar-thumb {
   color: #0d47a1 !important;
 }
 
+
+
  
 
   </style>
@@ -176,14 +178,14 @@ body::-webkit-scrollbar-thumb {
       </div>
     </nav>
   </header>
-  <section style="margin: 35px;margin-bottom: 50px;margin-left: 10px;">
+  <section style="margin: 35px;margin-bottom: 50px;margin-left: 40px;" >
    <div class="container" >
       <div class="row user-menu-container square" style="color: black;">
           <div class="col-md-12 " style="height: 100%;">
               <div class="row coralbg white">
                   <div class="col-md-6 ">
-                      <div class="use">
-                        <h2 class="account-heading" style="color: black;"> Hi,{{user.username|title}}</h2>
+                      <div class="use" style="margin-left: 30px;">
+                      <h2 class="account-heading" style="color: black;"> Hi,{{user.username|title}}</h2>
                         <hr>
                          <h4>Mail</h4>
                         <h6 style="color: black;">{{user.email}}</h6>
@@ -217,24 +219,27 @@ body::-webkit-scrollbar-thumb {
                         <hr>
                         {%endif%}
                        
-                        <h5 style="color: blue; font-size: 30px;">
+                        <h2 style="color: blue; font-size: 50px; width: 100%;">
                           {% if user.artist.tweeter%}
                           <h4>Social Media Presence </h4>
-                          <a href="{{user.artist.tweeter }}"><i class="fab fa-twitter"></i></a>
+                          <a href="{{user.artist.tweeter }}"><i class="fab fa-twitter" style="font-size: 30px;margin-right: 5px;"></i></a>
                           {%endif%}
                           {% if user.artist.facebook %}
-                          <a href="{{user.artist.facebook}}"><i class="fab fa-facebook"></i></a>
+                          <a href="{{user.artist.facebook}}"><i class="fab fa-facebook" style="font-size: 30px;margin-right: 5px;"></i></a>
                           {%endif%}
                           {% if user.artist.instagram %}
 
-                          <a href="{{user.artist.instagram}}"><i class="fab fa-instagram"></i></a>
+                          <a href="{{user.artist.instagram}}"><i class="fab fa-instagram" style="font-size: 30px;margin-right: 5px;"></i></a>
+                          <hr>
                           {%endif%}
-                        </h5>
+                        </h2>
+                        <div>
                         <h5>
-                          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalScrollable">
+                          <button type="button" class="btn btn-primary btn-md" data-toggle="modal" data-target="#exampleModalScrollable">
                             <i class="fas fa-cog"></i> Update Profile
                           </button>
                         </h5>
+                      </div>
                       </div>
                   </div>
                   <div class="col-md-6 no-pad">
@@ -303,7 +308,7 @@ body::-webkit-scrollbar-thumb {
           <div class="col-lg-3 col-sm-6">
             <div class="footer-widget about-widget">
               <h2>About Us</h2>
-              <p>Welcome to Hooligan LLC we represent artists from all over the world find amazing photographs,paintings,sculptures and prints.</p>
+              <p >Welcome to Hooligan LLC, We <br> represent artists from all over  the <br>  world find amazing photographs, <br>paintings,sculptures and prints.</p>
               <img src="{% static 'cards.png' %}" alt="" style="height: 50%;width: 50%;">
             </div>
           </div>
@@ -351,7 +356,7 @@ body::-webkit-scrollbar-thumb {
       </div>
       <div class="social-links-warp">
         <div class="container">
-          <div class="social-links">
+          <div class="social-links" style="text-align: center;">
             <a href="https://www.instagram.com/hooliganlivefree/?hl=en" class="instagram"><i class="fab fa-instagram"></i><span>instagram</span></a>
         
             <a href="https://www.facebook.com/HooliganLLC/" class="facebook"><i class="fab fa-facebook"></i><span>facebook</span></a>

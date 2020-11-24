@@ -174,10 +174,10 @@ body::-webkit-scrollbar-thumb {
 {% endif %} -->
 
 
-<header class="header-section">
+<header class="header-section" > 
   <div class="header-top">
     <div class="container">
-      <div class="row" >
+      <div class="row"  >
         <div class="col-lg-2 text-center text-lg-left">
           <!-- logo -->
           <a href="/">
@@ -185,13 +185,13 @@ body::-webkit-scrollbar-thumb {
           </a>
          
         </div>
-        <div class="col-xl-6 col-lg-5 " style="align-items: center;margin-top: 15px;" >
-          <form class="header-search-form" role="search" action="{% url 'core:search_results' %}">
-            <input type="text" placeholder="Search product ...." name="title" style="border: 1px solid coral;">
+        <div class="col-xl-6 col-lg-5" style="align-items: center;margin-top: 15px;"  >
+          <form class="header-search-form" role="search" action="{% url 'core:search_results' %}" style="width: 80%;">
+            <input type="text" placeholder="Search product ...." name="title" style="border: 1px solid black;border-radius: 0;">
             <button><i class="fas fa-search"></i></button>
           </form>
         </div>
-        <div class="col-xl-4 col-lg-5 " style="align-items: center;margin-top: 20px;"  >
+        <div class="col-xl-4 col-lg-5 " style="margin-top: 20px;"  >
           <div class="user-panel" >
             <div class="up-item dropdown">
               
@@ -225,10 +225,10 @@ body::-webkit-scrollbar-thumb {
       </div>
     </div>
   </div>
-  <nav class="main-navbar" style="text-align: center;" >
+  <nav class="main-navbar" style="text-align: center;"   >
     <div class="container">
       <!-- menu -->
-      <ul class="main-menu">
+      <ul class="main-menu" >
       
         <li><a href="/paintings">Paintings</a></li>
         <li><a href="/photographs">Photographs</a></li>
@@ -249,9 +249,9 @@ body::-webkit-scrollbar-thumb {
  <div class="carousel-inner" role="listbox"  id = "down">
 
    <div class="carousel-item active">
-     <div class="view" id = view1  style="align-items: center;">
-      <div class="row wow fadeIn" style="align-items: center;">
-        <div class="col-md-12" style="color: white;text-align: center;margin-top: 50px;align-items: center;" >
+     <div class="view" id = view1  >
+      <div class="row wow fadeIn" style="align-items: center;margin: 15px;">
+        <div class="col-md-12" style="color: white;text-align: left;margin-top: 50px;align-content: center;" >
         
           <h1 style="font-size: 50px;">Da Gallery</h1>
           <p style="font-size: 20px;">Welcome to Da Gallery at Hooligan! <br> A place where all artists can collaborate</p>
@@ -514,11 +514,14 @@ body::-webkit-scrollbar-thumb {
          
 
           {% for item in object_list %}
+
+      
+
   
-          <div class="col-lg-4 " style="height: 500px; width: 600px;">
+          <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12" style="margin-bottom: auto;height: 500px; width: 600px;" >
           
             <div class="view">
-            <img src="{{item.image.url}}" class="responsive"   alt="" style="height: 400px; width: 100%;"  >
+            <img src="{{item.image.url}}" class="responsive" style="height: 400px; width: 100%;"    >
 
             <a href="{{item.get_absolute_url}}">
               <div class="mask rgba-white-slight"></div>
@@ -649,7 +652,7 @@ body::-webkit-scrollbar-thumb {
 							<p> <i class="fas fa-phone" style="margin-right: 10px;"></i>+1 347 981 3342</p>
 						</div>
 						<div class="con-info">
-						
+
 							<p> <i class="far fa-envelope" style="margin-right: 10px;"></i>451hugo@gmail.com</p>
 						</div>
 					</div>
