@@ -43,15 +43,20 @@
 </head>
 
 <style>
+  @media only screen and (min-width: 768px) and (max-width: 991px) {
+  	.main-navbar {
+		
+		margin-top: 20px;
+	}
+
+  }
   /* Large Mobile :480px. */
 
 @media only screen and (max-width: 767px) {
 	.site-logo {
 		margin-bottom: 20px;
 	}
-	.header-search-form {
-		margin-bottom: 15px;
-	}
+
 	.user-panel {
 		text-align: center;
 	}
@@ -161,6 +166,13 @@ body::-webkit-scrollbar-thumb {
    display: none;
    float: right;
  }
+ @media only screen and (max-width: 990px) {
+  .header-search-form {
+		margin-bottom: 15px;
+    margin-right: auto;
+	}
+
+ }
 </style>
 
 <body>
@@ -174,9 +186,9 @@ body::-webkit-scrollbar-thumb {
 {% endif %} -->
 
 
-<header class="header-section" > 
+<header class="header-section" style="text-align: center;align-content: center;" > 
   <div class="header-top">
-    <div class="container">
+    <div class="container-fluid">
       <div class="row"  >
         <div class="col-lg-2 text-center text-lg-left">
           <!-- logo -->
@@ -186,7 +198,7 @@ body::-webkit-scrollbar-thumb {
          
         </div>
         <div class="col-xl-6 col-lg-5" style="align-items: center;margin-top: 15px;"  >
-          <form class="header-search-form" role="search" action="{% url 'core:search_results' %}" style="width: 80%;">
+          <form class="header-search-form" role="search" action="{% url 'core:search_results' %}" style="width: 70%;margin-left: auto;">
             <input type="text" placeholder="Search product ...." name="title" style="border: 1px solid black;border-radius: 0;">
             <button><i class="fas fa-search"></i></button>
           </form>
@@ -225,15 +237,15 @@ body::-webkit-scrollbar-thumb {
       </div>
     </div>
   </div>
-  <nav class="main-navbar" style="text-align: center;"   >
+  <nav class="main-navbar" style="text-align: center;"  >
     <div class="container">
       <!-- menu -->
-      <ul class="main-menu" >
+      <ul class="main-menu" style = "margin: auto;"  >
       
-        <li><a href="/paintings">Paintings</a></li>
-        <li><a href="/photographs">Photographs</a></li>
-        <li><a href="/prints">Prints</a></li>
-        <li><a href="/sculptures">Sculptures</a></li>
+        <li style="margin-right: 30px;"><a href="/paintings">Paintings</a></li>
+        <li style="margin-right: 30px;"><a href="/photographs">Photographs</a></li>
+        <li style="margin-right: 30px;"><a href="/prints">Prints</a></li>
+        <li style="margin-right: 30px;"><a href="/sculptures">Sculptures</a></li>
         <li><a href="/artists">Artists</a></li>
         
         

@@ -39,13 +39,11 @@
       
       font-family: 'Spectral', serif;
     }
-  @media only screen and (max-width: 767px) {
+    @media only screen and (max-width: 767px) {
 	.site-logo {
 		margin-bottom: 20px;
 	}
-	.header-search-form {
-		margin-bottom: 15px;
-	}
+
 	.user-panel {
 		text-align: center;
 	}
@@ -74,7 +72,15 @@
 		width: 42px;
 		margin-left: 5px;
 	}
+	
 }
+@media only screen and (max-width: 990px) {
+  .header-search-form {
+		margin-bottom: 15px;
+    margin-right: auto;
+	}
+
+ }
     html,
     body,
     header,
@@ -103,10 +109,10 @@ body::-webkit-scrollbar-thumb {
    font-family: 'Spectral', serif;
  }
  </style>
-<header class="header-section">
+<header class="header-section" style="text-align: center;align-content: center;" > 
   <div class="header-top">
-    <div class="container">
-      <div class="row" >
+    <div class="container-fluid">
+      <div class="row"  >
         <div class="col-lg-2 text-center text-lg-left">
           <!-- logo -->
           <a href="/">
@@ -114,13 +120,13 @@ body::-webkit-scrollbar-thumb {
           </a>
          
         </div>
-        <div class="col-xl-6 col-lg-5 " style="align-items: center;margin-top: 15px;" >
-          <form class="header-search-form" role="search" action="{% url 'core:search_results' %}">
-            <input type="text" placeholder="Search product ...." name="title" style="border: 1px solid coral;">
+        <div class="col-xl-6 col-lg-5" style="align-items: center;margin-top: 15px;"  >
+          <form class="header-search-form" role="search" action="{% url 'core:search_results' %}" style="width: 70%;margin-left: auto;">
+            <input type="text" placeholder="Search product ...." name="title" style="border: 1px solid black;border-radius: 0;">
             <button><i class="fas fa-search"></i></button>
           </form>
         </div>
-        <div class="col-xl-4 col-lg-5 " style="align-items: center;margin-top: 20px;"  >
+        <div class="col-xl-4 col-lg-5 " style="margin-top: 20px;"  >
           <div class="user-panel" >
             <div class="up-item dropdown">
               
@@ -154,15 +160,15 @@ body::-webkit-scrollbar-thumb {
       </div>
     </div>
   </div>
-  <nav class="main-navbar" style="text-align: center;" >
+  <nav class="main-navbar" style="text-align: center;"  >
     <div class="container">
       <!-- menu -->
-      <ul class="main-menu">
+      <ul class="main-menu"  >
       
-        <li><a href="/paintings">Paintings</a></li>
-        <li><a href="/photographs">Photographs</a></li>
-        <li><a href="/prints">Prints</a></li>
-        <li><a href="/sculptures">Sculptures</a></li>
+        <li style="margin-right: 30px;"><a href="/paintings">Paintings</a></li>
+        <li style="margin-right: 30px;"><a href="/photographs">Photographs</a></li>
+        <li style="margin-right: 30px;"><a href="/prints">Prints</a></li>
+        <li style="margin-right: 30px;"><a href="/sculptures">Sculptures</a></li>
         <li><a href="/artists">Artists</a></li>
         
         
