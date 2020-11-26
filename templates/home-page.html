@@ -43,19 +43,48 @@
 </head>
 
 <style>
-  @media only screen and (min-width: 768px) and (max-width: 991px) {
+  @media only screen and (min-width: 768px) and (max-width: 1193px) {
   	.main-navbar {
 		
 		margin-top: 20px;
+    
 	}
+  .main-menu{
+    margin-left: 120px;
+  }
 
   }
-  /* Large Mobile :480px. */
+  @media only screen and (min-width: 990px) and (max-width: 1242px) {
+ 
+  .main-menu{
+    margin-left: 170px;
+  }
 
-@media only screen and (max-width: 767px) {
+  }
+  @media only screen and (min-width: 768px) and (max-width: 1180px) {
+ 
+  .main-navbar{
+   margin-top: -70px;
+  }
+
+ }
+ @media only screen and (min-width: 990px) {
+ 
+ .images{
+ margin-left: 120px;
+ }
+
+}
+
+
+ @media only screen and (max-width: 767px) {
 	.site-logo {
 		margin-bottom: 20px;
 	}
+ 
+  /* Large Mobile :480px. */
+
+
 
 	.user-panel {
 		text-align: center;
@@ -186,14 +215,14 @@ body::-webkit-scrollbar-thumb {
 {% endif %} -->
 
 
-<header class="header-section" style="text-align: center;align-content: center;" > 
+<header class="header-section" style="text-align: center;align-items: center;" > 
   <div class="header-top">
-    <div class="container-fluid">
-      <div class="row"  >
-        <div class="col-lg-2 text-center text-lg-left">
+    <div class="main-container">
+      <div class="row" >
+        <div class="col-lg-2 " id = "images">
           <!-- logo -->
           <a href="/">
-            <img src="{% static 'logos.png'%}" alt="" srcset="" style="height: 140px;width: 140px;">
+            <img src="{% static 'logos.png'%}" alt="" srcset="" style="height: 140px;width: 140px;" class="images">
           </a>
          
         </div>
@@ -237,16 +266,16 @@ body::-webkit-scrollbar-thumb {
       </div>
     </div>
   </div>
-  <nav class="main-navbar" style="text-align: center;"  >
+  <nav class="main-navbar"  >
     <div class="container">
       <!-- menu -->
-      <ul class="main-menu" style = "margin: auto;"  >
+      <ul class="main-menu"  >
       
-        <li style="margin-right: 30px;"><a href="/paintings">Paintings</a></li>
-        <li style="margin-right: 30px;"><a href="/photographs">Photographs</a></li>
-        <li style="margin-right: 30px;"><a href="/prints">Prints</a></li>
-        <li style="margin-right: 30px;"><a href="/sculptures">Sculptures</a></li>
-        <li><a href="/artists">Artists</a></li>
+        <li style="margin-right: 12px;"><a href="/paintings">PAINTINSGS</a></li>
+        <li style="margin-right: 12px;"><a href="/photographs">PHOTOGRAPHS</a></li>
+        <li style="margin-right: 12px;"><a href="/prints">PRINTS</a></li>
+        <li style="margin-right: 12px;"><a href="/sculptures">SCULPTUTES</a></li>
+        <li><a href="/artists">ARTISTS</a></li>
         
         
      
