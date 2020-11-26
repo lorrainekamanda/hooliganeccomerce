@@ -221,4 +221,123 @@
 }
 
 
-	  
+@media only screen and (min-width: 768px) and (max-width: 1193px) {
+    .main-navbar {
+      
+      margin-top: 20px;
+  
+  }
+.main-menu{
+  margin-left: 120px;
+}
+
+}
+@media only screen and (min-width: 990px) and (max-width: 1300px) {
+
+.main-menu{
+  margin-left: 170px;
+}
+
+}
+@media only screen and (min-width: 768px) and (max-width: 1190px) {
+
+.main-navbar{
+ margin-top: -70px;
+}
+
+}
+@media only screen and (min-width: 990px) and (max-width: 992px) {
+
+.main-navbar{
+margin-top: 10px;
+}
+.header-search-form{
+ margin-right: 100px;
+}
+
+}
+
+@media only screen and (min-width: 989px) and (max-width: 991px) {
+
+.main-navbar{
+margin-top: -70px;
+}
+
+
+}
+
+
+@media only screen and (min-width: 990px) {
+
+.images{
+margin-left: 120px;
+}
+
+}
+
+
+@media only screen and (max-width: 767px) {
+  .site-logo {
+      margin-bottom: 20px;
+  }
+
+/* Large Mobile :480px. */
+
+
+
+  .user-panel {
+      text-align: center;
+  }
+  .main-menu {
+      display: none;
+  }
+  .slicknav_btn {
+      background-color: #565656;
+      text-align: left;
+  }
+  .slicknav_menu {
+      background: #282828;
+      display: block;
+      text-align: left;
+      margin-top: 70px;
+  }
+  .slicknav_menu .new {
+      font-size: 10px;
+      font-weight: 700;
+      color: #fff;
+      background: #f51167;
+      line-height: 1;
+      text-transform: uppercase;
+      padding: 5px 9px 1px;
+      border-radius: 15px;
+      width: 42px;
+      margin-left: 5px;
+  }
+  
+}
+/* Medium Mobile :480px. */
+
+
+body{
+  font-family: 'Spectral', serif;
+}
+    body::-webkit-scrollbar {
+width: 12px;               /* width of the entire scrollbar */
+}
+body::-webkit-scrollbar-track {
+background: pink;        /* color of the tracking area */
+}
+body::-webkit-scrollbar-thumb {
+background-color:lightcoral;    /* color of the scroll thumb */
+border-radius: 20px;       /* roundness of the scroll thumb */
+border: 3px solid pink;  /* creates padding around scroll thumb */
+}
+
+
+@media only screen and (max-width: 990px) {
+.header-search-form {
+      margin-bottom: 15px;
+  margin-right: auto;
+  }
+
+}  

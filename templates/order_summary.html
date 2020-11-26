@@ -34,7 +34,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,200;0,300;1,200&display=swap" rel="stylesheet">
  
   <link href="{%static 'css/navbar.css'%}" rel="stylesheet">
-  <link href="{%static 'css/responsive.css'%}" rel="stylesheet">
+  <link href="{%static 'css/home.css'%}" rel="stylesheet">
+  <link href="{%static 'css/order.css'%}" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,200;0,300;1,200&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,200;0,300;1,200&display=swap" rel="stylesheet">
   <style type="text/css">
@@ -47,229 +48,28 @@
       
       scroll-behavior: smooth;
     }
-    @media only screen and (max-width: 767px) {
-	.site-logo {
-		margin-bottom: 20px;
-	}
+  
 
-	.user-panel {
-		text-align: center;
-	}
-	.main-menu {
-		display: none;
-	}
-	.slicknav_btn {
-		background-color: #565656;
-		text-align: left;
-	}
-	.slicknav_menu {
-		background: #282828;
-		display: block;
-		text-align: left;
-		margin-top: 70px;
-	}
-	.slicknav_menu .new {
-		font-size: 10px;
-		font-weight: 700;
-		color: #fff;
-		background: #f51167;
-		line-height: 1;
-		text-transform: uppercase;
-		padding: 5px 9px 1px;
-		border-radius: 15px;
-		width: 42px;
-		margin-left: 5px;
-	}
-	
-}
-@media only screen and (max-width: 990px) {
-  .header-search-form {
-		margin-bottom: 15px;
-    margin-right: auto;
-	}
-  .main-menu{
-    margin-left: 10px;
-  }
-
- }
-
-    body::-webkit-scrollbar {
-  width: 12px;               /* width of the entire scrollbar */
-}
-body::-webkit-scrollbar-track {
-  background: pink;        /* color of the tracking area */
-}
-body::-webkit-scrollbar-thumb {
-  background-color:lightcoral;    /* color of the scroll thumb */
-  border-radius: 20px;       /* roundness of the scroll thumb */
-  border: 3px solid pink;  
-}
-
-.card {
-    margin: auto;
-    max-width: 1050px;
-    width: 100%;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    border-radius: 1rem;
-    border: transparent
-}
-
-@media(max-width:767px) {
-    .card {
-        margin: 3vh auto
-    }
-}
-
-.cart {
-    background-color: #fff;
-    padding: 4vh 5vh;
-    border-bottom-left-radius: 1rem;
-    border-top-left-radius: 1rem
-}
-
-@media(max-width:767px) {
-    .cart {
-        padding: 4vh;
-        border-bottom-left-radius: unset;
-        border-top-right-radius: 1rem
-    }
-}
-
-.summary {
-    background-color: #ddd;
-    border-top-right-radius: 1rem;
-    border-bottom-right-radius: 1rem;
-    padding: 4vh;
-    
-}
-
-@media(max-width:767px) {
-    .summary {
-        border-top-right-radius: unset;
-        border-bottom-left-radius: 1rem
-    }
-}
-
-.summary .col-2 {
-    padding: 0
-}
-
-.summary .col-10 {
-    padding: 0
-}
-
-
-
-.title b {
-    font-size: 1.5rem
-}
-
-.main {
-    margin: 0;
-    padding: 2vh 0;
-    width: 100%
-}
-
-
-
-a {
-    padding: 0 1vh
-}
-
-.close {
-    margin-left: auto;
-    font-size: 0.7rem
-}
-
-img {
-    width: 3.5rem
-}
-
-.back-to-shop {
-    margin-top: 4.5rem
-}
-
-h5 {
-    margin-top: 4vh
-}
-
-hr {
-    margin-top: 1.25rem
-}
-
-
-
-select {
-    border: 1px solid rgba(0, 0, 0, 0.137);
-    padding: 1.5vh 1vh;
-    margin-bottom: 4vh;
-    outline: none;
-    width: 100%;
-    background-color: rgb(247, 247, 247)
-}
-
-
-
-.btn {
-    background-color: #2F5D84;
-    border-color: #000;
-    color: white;
-    width: 100%;
-    font-size: 0.7rem;
-    margin-top: 4vh;
-    padding: 1vh;
-    border-radius: 0
-}
-
-.btn:focus {
-    box-shadow: none;
-    outline: none;
-    box-shadow: none;
-    color: white;
-    -webkit-box-shadow: none;
-    -webkit-user-select: none;
-    transition: none
-}
-
-.btn:hover {
-    color: white
-}
-
-a {
-    color: black
-}
-
-a:hover {
-    color: black;
-    text-decoration: none
-}
-
-#code {
-    
-    background-repeat: no-repeat;
-    background-position-x: 95%;
-    background-position-y: center
-}
 
 
   </style>
 </head>
 
 <body>
-  <header class="header-section" style="text-align: center;align-content: center;margin-top: -10px;" > 
+  <header class="header-section" style="text-align: center;align-items: center;" > 
     <div class="header-top">
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-lg-2 text-center text-lg-left">
+      <div class="main-container">
+        <div class="row" >
+          <div class="col-lg-2 " id = "images">
             <!-- logo -->
             <a href="/">
-              <img src="{% static 'logos.png'%}" alt="" srcset="" style="height: 140px;width: 140px;">
+              <img src="{% static 'logos.png'%}" alt="" srcset="" style="height: 140px;width: 140px;" class="images">
             </a>
            
           </div>
           <div class="col-xl-6 col-lg-5" style="align-items: center;margin-top: 15px;"  >
             <form class="header-search-form" role="search" action="{% url 'core:search_results' %}" style="width: 70%;margin-left: auto;">
-              <input type="text" placeholder="Search product ...." name="title" style="border: 1px solid black;border-radius: 0;">
+              <input type="text" placeholder="Search product ...." name="title" style="border: 1px solid black;border-radius: 0;background-color: transparent;">
               <button><i class="fas fa-search"></i></button>
             </form>
           </div>
@@ -307,16 +107,16 @@ a:hover {
         </div>
       </div>
     </div>
-    <nav class="main-navbar" style="text-align: center;"  >
+    <nav class="main-navbar"  >
       <div class="container">
         <!-- menu -->
         <ul class="main-menu"  >
         
-          <li style="margin-right: 30px;"><a href="/paintings">Paintings</a></li>
-          <li style="margin-right: 30px;"><a href="/photographs">Photographs</a></li>
-          <li style="margin-right: 30px;"><a href="/prints">Prints</a></li>
-          <li style="margin-right: 30px;"><a href="/sculptures">Sculptures</a></li>
-          <li><a href="/artists">Artists</a></li>
+          <li style="margin-right: 12px;"><a href="/paintings">PAINTINSGS</a></li>
+          <li style="margin-right: 12px;"><a href="/photographs">PHOTOGRAPHS</a></li>
+          <li style="margin-right: 12px;"><a href="/prints">PRINTS</a></li>
+          <li style="margin-right: 12px;"><a href="/sculptures">SCULPTUTES</a></li>
+          <li><a href="/artists">ARTISTS</a></li>
           
           
        

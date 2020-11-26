@@ -23,55 +23,13 @@
     <!-- Your custom styles (optional) -->
     <link href="{%static 'css/style.min.css'%}" rel="stylesheet">
     <link href="{%static 'css/style.css'%}" rel="stylesheet">
-    <link href="{%static 'css/heroz.css'%}" rel="stylesheet">
+    <link href="{%static 'css/home.css'%}" rel="stylesheet">
     <link href="{%static 'css/navbar.css'%}" rel="stylesheet">
     <title>Dagallaery-Confirmemail</title>
 </head>
 <body>
   <style>
-   @media only screen and (max-width: 767px) {
-	.site-logo {
-		margin-bottom: 20px;
-	}
-	.header-search-form {
-		margin-bottom: 15px;
-	}
-	.user-panel {
-		text-align: center;
-	}
-	.main-menu {
-		display: none;
-	}
-	.slicknav_btn {
-		background-color: #565656;
-		text-align: left;
-	}
-	.slicknav_menu {
-		background: #282828;
-		display: block;
-		text-align: left;
-		margin-top: 70px;
-	}
-	.slicknav_menu .new {
-		font-size: 10px;
-		font-weight: 700;
-		color: #fff;
-		background: #f51167;
-		line-height: 1;
-		text-transform: uppercase;
-		padding: 5px 9px 1px;
-		border-radius: 15px;
-		width: 42px;
-		margin-left: 5px;
-	}
-}
-@media only screen and (max-width: 990px) {
-  .header-search-form {
-		margin-bottom: 15px;
-    margin-right: auto;
-	}
-
- }
+  
     html,
     body,
    
@@ -82,34 +40,24 @@
    
    
     }
-    body::-webkit-scrollbar {
-  width: 12px;               /* width of the entire scrollbar */
-}
-body::-webkit-scrollbar-track {
-  background: pink;        /* color of the tracking area */
-}
-body::-webkit-scrollbar-thumb {
-  background-color:lightcoral;    /* color of the scroll thumb */
-  border-radius: 20px;       /* roundness of the scroll thumb */
-  border: 3px solid pink;  /* creates padding around scroll thumb */
-}
+   
   
   </style>
     <!-- Navbar -->
-    <header class="header-section" style="text-align: center;align-content: center;" > 
+    <header class="header-section" style="text-align: center;align-items: center;" > 
       <div class="header-top">
-        <div class="container-fluid">
-          <div class="row"  >
-            <div class="col-lg-2 text-center text-lg-left">
+        <div class="main-container">
+          <div class="row" >
+            <div class="col-lg-2 " id = "images">
               <!-- logo -->
               <a href="/">
-                <img src="{% static 'logos.png'%}" alt="" srcset="" style="height: 140px;width: 140px;">
+                <img src="{% static 'logos.png'%}" alt="" srcset="" style="height: 140px;width: 140px;" class="images">
               </a>
              
             </div>
             <div class="col-xl-6 col-lg-5" style="align-items: center;margin-top: 15px;"  >
               <form class="header-search-form" role="search" action="{% url 'core:search_results' %}" style="width: 70%;margin-left: auto;">
-                <input type="text" placeholder="Search product ...." name="title" style="border: 1px solid black;border-radius: 0;">
+                <input type="text" placeholder="Search product ...." name="title" style="border: 1px solid black;border-radius: 0;background-color: transparent;">
                 <button><i class="fas fa-search"></i></button>
               </form>
             </div>
@@ -147,16 +95,16 @@ body::-webkit-scrollbar-thumb {
           </div>
         </div>
       </div>
-      <nav class="main-navbar" style="text-align: center;"  >
+      <nav class="main-navbar"  >
         <div class="container">
           <!-- menu -->
           <ul class="main-menu"  >
           
-            <li style="margin-right: 30px;"><a href="/paintings">Paintings</a></li>
-            <li style="margin-right: 30px;"><a href="/photographs">Photographs</a></li>
-            <li style="margin-right: 30px;"><a href="/prints">Prints</a></li>
-            <li style="margin-right: 30px;"><a href="/sculptures">Sculptures</a></li>
-            <li><a href="/artists">Artists</a></li>
+            <li style="margin-right: 12px;"><a href="/paintings">PAINTINSGS</a></li>
+            <li style="margin-right: 12px;"><a href="/photographs">PHOTOGRAPHS</a></li>
+            <li style="margin-right: 12px;"><a href="/prints">PRINTS</a></li>
+            <li style="margin-right: 12px;"><a href="/sculptures">SCULPTUTES</a></li>
+            <li><a href="/artists">ARTISTS</a></li>
             
             
          
@@ -164,7 +112,6 @@ body::-webkit-scrollbar-thumb {
         </div>
       </nav>
     </header>
-
 <h1>{% trans "Confirm E-mail Address" %}</h1>
 
 {% if confirmation %}

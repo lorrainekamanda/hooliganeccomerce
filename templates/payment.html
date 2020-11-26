@@ -21,7 +21,8 @@
   <link href="{% static 'css/mdb.min.css' %}" rel="stylesheet">
   <!-- Your custom styles (optional) -->
   <link href="{%static 'css/style.min.css'%}" rel="stylesheet">
-  <link href="{%static 'css/hero.css'%}" rel="stylesheet">
+  <link href="{%static 'css/home.css'%}" rel="stylesheet">
+  <link href="{%static 'css/payment.css'%}" rel="stylesheet">
   <link href="{%static 'css/navbar.css'%}" rel="stylesheet">
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,200;0,300;1,200&display=swap" rel="stylesheet">
@@ -36,78 +37,26 @@
       font-family: 'Spectral', serif;
       scroll-behavior: smooth;
     }
-    body::-webkit-scrollbar {
-  width: 12px;               /* width of the entire scrollbar */
-}
-body::-webkit-scrollbar-track {
-  background: pink;        /* color of the tracking area */
-}
-body::-webkit-scrollbar-thumb {
-  background-color:lightcoral;    /* color of the scroll thumb */
-  border-radius: 20px;       /* roundness of the scroll thumb */
-  border: 3px solid pink;  /* creates padding around scroll thumb */
-}
-@media only screen and (max-width: 767px) {
-	.site-logo {
-		margin-bottom: 20px;
-	}
 
-	.user-panel {
-		text-align: center;
-	}
-	.main-menu {
-		display: none;
-	}
-	.slicknav_btn {
-		background-color: #565656;
-		text-align: left;
-	}
-	.slicknav_menu {
-		background: #282828;
-		display: block;
-		text-align: left;
-		margin-top: 70px;
-	}
-	.slicknav_menu .new {
-		font-size: 10px;
-		font-weight: 700;
-		color: #fff;
-		background: #f51167;
-		line-height: 1;
-		text-transform: uppercase;
-		padding: 5px 9px 1px;
-		border-radius: 15px;
-		width: 42px;
-		margin-left: 5px;
-	}
-	
-}
-@media only screen and (max-width: 990px) {
-  .header-search-form {
-		margin-bottom: 15px;
-    margin-right: auto;
-	}
-
- }
   
 
   </style>
 </head>
 
-<header class="header-section" style="text-align: center;align-content: center;" > 
+<header class="header-section" style="text-align: center;align-items: center;" > 
   <div class="header-top">
-    <div class="container-fluid">
-      <div class="row"  >
-        <div class="col-lg-2 text-center text-lg-left">
+    <div class="main-container">
+      <div class="row" >
+        <div class="col-lg-2 " id = "images">
           <!-- logo -->
           <a href="/">
-            <img src="{% static 'logos.png'%}" alt="" srcset="" style="height: 140px;width: 140px;">
+            <img src="{% static 'logos.png'%}" alt="" srcset="" style="height: 140px;width: 140px;" class="images">
           </a>
          
         </div>
         <div class="col-xl-6 col-lg-5" style="align-items: center;margin-top: 15px;"  >
           <form class="header-search-form" role="search" action="{% url 'core:search_results' %}" style="width: 70%;margin-left: auto;">
-            <input type="text" placeholder="Search product ...." name="title" style="border: 1px solid black;border-radius: 0;">
+            <input type="text" placeholder="Search product ...." name="title" style="border: 1px solid black;border-radius: 0;background-color: transparent;">
             <button><i class="fas fa-search"></i></button>
           </form>
         </div>
@@ -145,16 +94,16 @@ body::-webkit-scrollbar-thumb {
       </div>
     </div>
   </div>
-  <nav class="main-navbar" style="text-align: center;"  >
+  <nav class="main-navbar"  >
     <div class="container">
       <!-- menu -->
       <ul class="main-menu"  >
       
-        <li style="margin-right: 30px;"><a href="/paintings">Paintings</a></li>
-        <li style="margin-right: 30px;"><a href="/photographs">Photographs</a></li>
-        <li style="margin-right: 30px;"><a href="/prints">Prints</a></li>
-        <li style="margin-right: 30px;"><a href="/sculptures">Sculptures</a></li>
-        <li><a href="/artists">Artists</a></li>
+        <li style="margin-right: 12px;"><a href="/paintings">PAINTINSGS</a></li>
+        <li style="margin-right: 12px;"><a href="/photographs">PHOTOGRAPHS</a></li>
+        <li style="margin-right: 12px;"><a href="/prints">PRINTS</a></li>
+        <li style="margin-right: 12px;"><a href="/sculptures">SCULPTUTES</a></li>
+        <li><a href="/artists">ARTISTS</a></li>
         
         
      
@@ -162,99 +111,7 @@ body::-webkit-scrollbar-thumb {
     </div>
   </nav>
 </header>
-  <style>
 
-    #stripeBtnLabel {
-    
-      font-size: 16px;
-      font-variant: normal;
-      padding: 0;
-      margin: 0;
-      -webkit-font-smoothing: antialiased;
-      font-weight: 500;
-      display: block;
-    }
-    
-    #stripeBtn {
-      border: none;
-      border-radius: 4px;
-      outline: none;
-      text-decoration: none;
-      color: #fff;
-      background: #32325d;
-      white-space: nowrap;
-      display: inline-block;
-      height: 40px;
-      line-height: 40px;
-      box-shadow: 0 4px 6px rgba(50, 50, 93, .11), 0 1px 3px rgba(0, 0, 0, .08);
-      border-radius: 4px;
-      font-size: 15px;
-      font-weight: 600;
-      letter-spacing: 0.025em;
-      text-decoration: none;
-      -webkit-transition: all 150ms ease;
-      transition: all 150ms ease;
-     
-      width: 100%
-    }
-    
-    button:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 7px 14px rgba(50, 50, 93, .10), 0 3px 6px rgba(0, 0, 0, .08);
-      background-color: #43458b;
-    }
-    
-    .stripe-form {
-      padding: 5px 30px;
-    }
-    
-    #card-errors {
-      height: 20px;
-      padding: 4px 0;
-      color: #fa755a;
-    }
-    
-    .stripe-form-row {
-      width: 100%;
-      float: left;
-      margin-top: 5px;
-      margin-bottom: 5px;
-    }
-    
-  
-    .StripeElement {
-      box-sizing: border-box;
-    
-      height: 40px;
-    
-      padding: 10px 12px;
-    
-      border: 1px solid transparent;
-      border-radius: 4px;
-      background-color: white;
-    
-      box-shadow: 0 1px 3px 0 #e6ebf1;
-      -webkit-transition: box-shadow 150ms ease;
-      transition: box-shadow 150ms ease;
-    }
-    
-    .StripeElement--focus {
-      box-shadow: 0 1px 3px 0 #cfd7df;
-    }
-    
-    .StripeElement--invalid {
-      border-color: #fa755a;
-    }
-    
-    .StripeElement--webkit-autofill {
-      background-color: #fefde5 !important;
-    }
-    
-    .current-card-form {
-      display: none;
-    }
-    
-    </style>
     <div style="margin-top: 75px;">
  <h2 class="my-5 h2 text-center" >Payment</h2>
 </div>
