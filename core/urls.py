@@ -28,7 +28,7 @@ urlpatterns = [
     path('api-item/', ItemList.as_view(), name = 'api-item'),
     path('api-item/<int:pk>/', views.ItemDetail.as_view()),
     path('api-user/', UserList.as_view(), name = 'api-user'),
-    path('api-user<int:pk>/', views.UserDetail.as_view()),
+    path('api-user/<int:pk>/', views.UserDetail.as_view()),
     path('api-artist/', ArtistList.as_view(), name = 'api-artist'),
 ]
 if settings.DEBUG:
