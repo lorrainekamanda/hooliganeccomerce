@@ -23,8 +23,12 @@ from django.conf import settings
 from rest_framework import serializers
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import status
+from django.http import Http404
 from .serializer import UserSerializer,ArtistSerializer,ItemSerializer
-
+from rest_framework import generics
+from django.contrib.auth import get_user_model
 import stripe
 
 stripe.api_key =  settings.STRIPE_SECRET_KEY
@@ -418,11 +422,40 @@ def search_results(request):
 
 
 
-class ItemList(APIView):
-    def get(self, request, format=None):
-        all_items= Item.objects.all()
-        serializers = ItemSerializer(all_items, many=True)
-        return Response(serializers.data)
+# class ItemList(APIView):
+#     def get(self, request, format=None):
+#         all_items= Item.objects.all()
+#         serializers = ItemSerializer(all_items, many=True)
+#         return Response(serializers.data)
+
+#     def post(self, request, format=None):
+#         serializers = ItemSerializer(data=request.data)
+#         if serializers.is_valid():
+#             serializers.save()
+#             return Response(serializers.data, status=status.HTTP_201_CREATED)
+#         return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+
+class ItemList(generics.ListCreateAPIView):
+    queryset = Item.objects.all()
+    serializer_class = ItemSerializer
+
+
+class   ItemDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Item.objects.all()
+    serializer_class = ItemSerializer
+
+class UserList(generics.ListCreateAPIView):
+    User =  get_user_model()
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
+
+class UserDetail(generics.RetrieveUpdateDestroyAPIView):
+    User =  get_user_model()
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
 
 class ArtistList(APIView):
     def get(self, request, format=None):
