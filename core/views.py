@@ -1,7 +1,7 @@
 from django.shortcuts import render,get_object_or_404,redirect
 from django.conf import settings
 from django.utils import timezone
-from .models import Order,OrderItem,Item,BillingAdress,Payment,Artist,PaymentDetails,Thread, ChatMessage,Chat
+from .models import Order,OrderItem,Item,BillingAdress,Payment,Artist,PaymentDetails,Chat
 from django.views.generic import ListView,DetailView,View
 from django.contrib import messages
 from django.core.exceptions import ObjectDoesNotExist
