@@ -34,7 +34,7 @@ from django.views import View
 from django.shortcuts import render_to_response
 import json
 from django.views import generic
-from braces.views import LoginRequiredMixin
+
 from django.views.generic.edit import FormMixin
 from django.contrib.auth.mixins import LoginRequiredMixin
 try:
