@@ -6,13 +6,13 @@ from django_countries.fields import CountryField
 from datetime import datetime
 from django.utils import timezone
 from django.db import models
-from model_utils.models import TimeStampedModel, SoftDeletableModel
+
 from django.conf import settings
-from django.template.defaultfilters import date as dj_date
-from django.utils.translation import ugettext as _
+
+
 from django.utils.timezone import localtime
 from django.db import models
-from django.db.models import Q
+
 
 CATEGORY_CHOICES = (
     ('Pa','Painting'),
