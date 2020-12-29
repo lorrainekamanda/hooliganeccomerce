@@ -28,7 +28,9 @@
   <link href="{%static 'css/home.css'%}" rel="stylesheet">
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,200;0,300;1,200&display=swap" rel="stylesheet">
-  <link href="{%static 'css/myprofile.css'%}" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/5.3.45/css/materialdesignicons.css" integrity="sha256-NAxhqDvtY0l4xn+YVa6WjAcmd94NNfttjNsDmNatFVc=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css" integrity="sha256-2XFplPlrFClt0bIdPgpz8H7ojnk10H69xRqd9+uTShA=" crossorigin="anonymous" />
+  <link href="{%static 'css/newprofile.css'%}" rel="stylesheet">
   <style type="text/css">
   
 
@@ -39,16 +41,44 @@
      
       font-family: 'Spectral', serif;
       scroll-behavior: smooth;
-   
+      
    
     }
   
-
+    .nav-pills>li>a, .nav-tabs>li>a {
+    color: black;
+    font-weight: 600;
+}
 
 
  
 
   </style>
+
+     
+<script type="text/javascript">
+
+  let user = '{{request.user}}'
+  function getCookie(name) {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                const cookies = document.cookie.split(';');
+                for (let i = 0; i < cookies.length; i++) {
+                    const cookie = cookies[i].trim();
+                    // Does this cookie string begin with the name we want?
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+  
+        const csrftoken = getCookie('csrftoken');
+  
+  
+  </script>
 </head>
 
 <body>
@@ -120,122 +150,272 @@
       </div>
     </nav>
   </header>
-  <section style="margin: 35px;margin-bottom: 50px;margin-left: 40px;" >
-   <div class="container" >
-      <div class="row user-menu-container square" style="color: black;">
-          <div class="col-md-12 " style="height: 100%;">
-              <div class="row coralbg white">
-                  <div class="col-md-6 ">
-                      <div class="use" style="margin-left: 30px;">
-                      <h2 class="account-heading" style="color: black;"> Hi,{{user.username|title}}</h2>
-                        <hr>
-                         <h4>Mail</h4>
-                        <h6 style="color: black;">{{user.email}}</h6>
-                        <hr>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/5.3.45/css/materialdesignicons.css" integrity="sha256-NAxhqDvtY0l4xn+YVa6WjAcmd94NNfttjNsDmNatFVc=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css" integrity="sha256-2XFplPlrFClt0bIdPgpz8H7ojnk10H69xRqd9+uTShA=" crossorigin="anonymous" />
+<div class="container" style="margin-top: 30px;">
+<div class="row">
+    <div class="col-lg-4 col-xl-4">
+        <div class="card-box text-center">
+            <img src="{{user.artist.image_artist.url}}" class="rounded-circle avatar-xl img-thumbnail" alt="profile-image" style="height:200px ; width: 200px;">
 
-                        {% if user.artist.phone %}
+            <h4 class="mb-0">{{user.first_name}} {{user.last_name}}</h4>
+            <hr>
 
-                        <h4>Phone</h4>
+            <ul class="nav nav-pills navtab-bg" style="display: inline-block;">
+              <li class="nav-item" style="background-color: transparent;">
+                  <a href="#payment" data-toggle="tab" aria-expanded="true" class="nav-link ml-0 " style="background-color: transparent;">
+                      <i class="mdi mdi-face-profilce mr-1"></i>Payment Information
+                  </a>
+              </li>
+              <hr>
+              <li class="nav-item">
+                  <a href="#favourites" data-toggle="tab" aria-expanded="false" class="nav-link" style="background-color: transparent;">
+                      <i class="mdi mdi-settings-outline mr-1"></i>Favourites
+                  </a>
+              </li>
+              <hr>
+              <li class="nav-item">
+                <a href="#sell" data-toggle="tab" aria-expanded="false" class="nav-link" style="background-color: transparent;">
+                    <i class="mdi mdi-settings-outline mr-1"></i>Seller Account
+                </a>
+            </li>
+            <hr>
+              <li class="nav-item">
+                <a href="{% url 'account_logout'%}" data-toggle="tab" aria-expanded="false" class="nav-link" style="background-color: transparent;">
+                    <i class="mdi mdi-settings-outline mr-1"></i>Logout
+                </a>
+            </li>
 
-                        <h6 style="color: black;">{{user.artist.phone}}</h6>
-                        <hr>
-                          {%endif%}
+            
+          </ul>
+           
+          
+            
+           
 
-                        {% if user.artist.bio %}
+            <ul class="social-list list-inline mt-3 mb-0">
+                <li class="list-inline-item">
+                    <a href="javascript: void(0);" class="social-list-item border-purple text-purple"><i class="fab fa-facebook"></i></a>
+                </li>
+                <li class="list-inline-item">
+                    <a href="javascript: void(0);" class="social-list-item border-danger text-danger"><i class="fab fa-google"></i></a>
+                </li>
+                <li class="list-inline-item">
+                    <a href="javascript: void(0);" class="social-list-item border-info text-info"><i class="fab fa-twitter"></i></a>
+                </li>
+                <li class="list-inline-item">
+                    <a href="javascript: void(0);" class="social-list-item border-secondary text-secondary"><i class="fab fa-github"></i></a>
+                </li>
+            </ul>
+        </div> <!-- end card-box -->
 
+     
 
+    </div> <!-- end col-->
 
-                        <h4>Bio</h4>
-
-                      <h6 style="color: black;">{{user.artist.bio}}</h6>
-                      <hr>
-                        {%endif%}
-                        {% if user.artist.focus %}
-                        <h4>Focus</h4>
-                      <h5 class="badge badge-rose" style="color:black ; background-color: coral;">{{user.artist.focus}}</h4>
-                        <hr>
-                        {%endif%}
-                        {% if user.artist.about_your_work %}
-                        <h4>About Your Work</h4>
-                      <h6 style="color: black;">{{user.artist.about_your_work}}</h6>
-                        <hr>
-                        {%endif%}
-                       
-                        <h2 style="color: blue; font-size: 50px; width: 100%;">
-                          {% if user.artist.tweeter%}
-                          <h4>Social Media Presence </h4>
-                          <a href="{{user.artist.tweeter }}"><i class="fab fa-twitter" style="font-size: 30px;margin-right: 5px;"></i></a>
-                          {%endif%}
-                          {% if user.artist.facebook %}
-                          <a href="{{user.artist.facebook}}"><i class="fab fa-facebook" style="font-size: 30px;margin-right: 5px;"></i></a>
-                          {%endif%}
-                          {% if user.artist.instagram %}
-
-                          <a href="{{user.artist.instagram}}"><i class="fab fa-instagram" style="font-size: 30px;margin-right: 5px;"></i></a>
-                          <hr>
-                          {%endif%}
-                        </h2>
-                        <div>
-                        <h5>
-                          <button type="button" class="btn btn-primary btn-md" data-toggle="modal" data-target="#exampleModalScrollable">
-                            <i class="fas fa-cog"></i> Update Profile
-                          </button>
-                        </h5>
-                      </div>
-                      </div>
-                  </div>
-                  <div class="col-md-6 no-pad">
-                      <div class="use">
-                          <img src="{{user.artist.image_artist.url}}" class="img-responsive thumbnail" style="height: 100%;">
-                      </div>
-                  </div>
-              </div>
+    <div class="col-lg-8 col-xl-8">
+        <div class="car">
+            <ul class="nav nav-pills navtab-bg">
+                <li class="nav-item" style="background-color: transparent;">
+                    <a href="#about-me" data-toggle="tab" aria-expanded="true" class="nav-link ml-0 active" style="background-color: transparent;">
+                        <i class="mdi mdi-face-profilce mr-1"></i>Account Information
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#settings" data-toggle="tab" aria-expanded="false" class="nav-link" style="background-color: transparent;">
+                        <i class="mdi mdi-settings-outline mr-1"></i>Orders
+                    </a>
+                </li>
              
-          </div>
-         
-   
-  </div>
+                <li class="nav-item">
+                  <a href="#settings" data-toggle="tab" aria-expanded="false" class="nav-link" style="background-color: transparent;">
+                      <i class="mdi mdi-settings-outline mr-1"></i>Messages
+                  </a>
+              </li>
+           
+              
+            </ul>
+            <hr>
 
+            <div class="tab-content">
+                
+                <div class="tab-pane show active" id="about-me">
+                  <form method="post" action="" enctype="multipart/form-data" >
+                    {% csrf_token %}
+                    <div class="card-box">
+                    <h5 class="mb-3 text-uppercase "><i class="mdi mdi-account-circle mr-1"></i> Personal Info</h5>
+                    
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                {{u_form|crispy}}
+                            </div>
+                        </div>
 
+                       
+                    </div> 
+                  </div>
 
+                  <div class="card-box">
+                    <h5 class="mb-3 text-uppercase "><i class="mdi mdi-earth mr-1"></i> Account Information</h5>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                {{p_form|crispy}}
+                            </div>
+                        </div>
+                    
+                    </div> 
+                  </div>
+                   
 
+                   
+                    <div class="text-right">
+                        <button type="submit" class="btn btn-black waves-effect waves-light mt-2"><i class="mdi mdi-content-save"></i> Save</button>
+                    </div>
+                </form>
 
-<!-- Modal -->
-<div class="modal fade" id="exampleModalScrollable" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-scrollable" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalScrollableTitle">My Profile</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-           <form action="" method="post" enctype="multipart/form-data">
-      {% csrf_token %}
+                   
+                </div>
+               
+                <div class="tab-pane" id="settings">
+                 
 
-      <fieldset class="form-group">
-       
-        {{u_form|crispy}}
-        {{p_form|crispy}}
-      </fieldset>
-  
-      <div class="form-group">
-       
-        <button class="btn btn-md btn-outline-danger">Save</button>
-        <button type="button" class="btn btn-md btn-outline-secondary" data-dismiss="modal">Close</button>
-      </div>
-      </div>
-   
-   
-        
-      
-      </form> 
-      
+                    <h5 class="mb-3 mt-4 text-uppercase"><i class="mdi mdi-cards-variant mr-1"></i>
+                        Order History</h5>
+                    <div class="table-responsive">
+                        <table class="table table-borderless mb-0">
+                            <!-- <thead class="thead-light">
+                                <tr>
+                                    <th>#</th>
+                                    <th>Project Name</th>
+                                    <th>Start Date</th>
+                                    <th>Due Date</th>
+                                    <th>Status</th>
+                                    <th>Clients</th>
+                                </tr>
+                            </thead> -->
+                            <tbody>
+                              {% for  order_item in object%}
+                                <tr>
+                                 
+                                    <td><img src="{{order_item.item.image.url}}" alt="" srcset="" style="height: 80px;width: 80px;"> </td>
+                                    <td>{{order_item.item.title}}</td>
+                                   
+                                    <td> $ {{order_item.item.get_with}}</td>
+                                  
+                                    <td><span class="badge badge-info">{{order_item.item.status}}</span></td>
+                                    <td>{{order_item.item.user.first_name}} {{order_item.item.user.last_name}}</td>
+                                </tr>
+                                {%endfor%}
+                                
+                                
+
+                            </tbody>
+                        </table>
+                    </div>
+
+                  
+                </div>
+                <div class="tab-pane" id="sell">
+                 
+
+                  <h5 class="mb-3 mt-4 text-uppercase"><i class="mdi mdi-cards-variant mr-1"></i>
+                      Upload Information</h5>
+                
+
+                
+              </div>
+
+                <div class="tab-pane" id="favourites">
+                 
+
+                  <h5 class="mb-3 mt-4 text-uppercase"><i class="mdi mdi-cards-variant mr-1"></i>
+                      Favourites</h5>
+                  <div class="table-responsive">
+                      <table class="table table-borderless mb-0">
+                          <!-- <thead class="thead-light">
+                              <tr>
+                                  <th>#</th>
+                                  <th>Project Name</th>
+                                  <th>Start Date</th>
+                                  <th>Due Date</th>
+                                  <th>Status</th>
+                                  <th>Clients</th>
+                              </tr>
+                          </thead> -->
+                          <tbody>
+                           
+                            {% for  order_item in products %}
+                              
+                          
+                           
+                              <tr>
+                               
+                                  <td><img src="{{order_item.image.url}}" alt="" srcset="" style="height: 100px;width: 150px;"> </td>
+                                  <td>{{order_item.item.title}}</td>
+                                 
+                                  <td> $ {{order_item.get_with}}</td>
+                                
+                                  <td><span class="badge badge-info">{{order_item.status}}</span></td>
+                                  <td>{{order_item.item.user.first_name}} {{order_item.user.last_name}}</td>
+                              </tr>
+                             
+                              {%endfor%}
+                             
+                              
+                              
+
+                          </tbody>
+                      </table>
+                  </div>
+
+                
+              </div>
+
+                <div class="tab-pane" id="payment">
+                 
+
+                  <h5 class="mb-3 mt-4 ">
+                      Fill In the following details to qualify for a seller account</h5>
+                      <form method="post" action="" enctype="multipart/form-data" >
+                        {% csrf_token %}
+                        <div class="card-box">
+                        <h5 class="mb-3 text-uppercase "><i class="mdi mdi-account-circle mr-1"></i> Payment Details</h5>
+                        
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    {{d_form|crispy}}
+                                </div>
+                            </div>
+    
+                           
+                        </div> 
+                      </div>
+    
+                       
+    
+                       
+                        <div class="text-right">
+                            <button type="submit" class="btn btn-black waves-effect waves-light mt-2"><i class="mdi mdi-content-save"></i> Save</button>
+                        </div>
+                    </form>
+    
+
+                
+              </div>
+               
+
+            </div>
+        </div>
+
     </div>
-  </div>
 </div>
-</section>
+</div> 
+
+
+  
 
     <section class="footer-section">
       <div class="container-fluid">
@@ -334,6 +514,7 @@
     <script type="text/javascript" src="{% static 'js/mdb.min.js' %}"></script>
     
     <script src="{% static 'js/script.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
 
   <!-- Initializations -->
   <script type="text/javascript">
@@ -351,4 +532,27 @@
 
 </html>
  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

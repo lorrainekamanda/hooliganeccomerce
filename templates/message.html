@@ -1,0 +1,441 @@
+
+      
+      {% load static %}
+      {% load cart_template_tags%}   
+      {% load crispy_forms_tags %}
+      <!DOCTYPE html>
+      <html class=''>
+      <head>
+        <title>Messages</title>
+      <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700,300' rel='stylesheet' type='text/css'>
+      <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+      <script src="https://use.typekit.net/hoy3lrg.js"></script>
+      <link href="{%static 'css/navbar.css'%}" rel="stylesheet">
+      <link href="{%static 'css/home.css'%}" rel="stylesheet">
+      <link href="{%static 'css/chat.css'%}" rel="stylesheet">
+      <link rel="shortcut icon" href="{% static 'logos.png'%}" type="image/4x-icon">
+      <link href="https://fonts.googleapis.com/css2?family=Courgette&display=swap" rel="stylesheet">
+      <link href="https://cdnjs.cloudflare.com/ajax/libs/SlickNav/1.0.10/slicknav.min.css" rel="stylesheet">
+      <link rel="stylesheet" href="/static_files/css/slicknav.min.css">
+      <link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,200;0,300;1,200&display=swap" rel="stylesheet">
+      <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+      <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+      <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<link href="{%static 'css/responsive.css'%}" rel="stylesheet">
+      <script>try{Typekit.load({ async: true });}catch(e){}</script>
+      <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css'><link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.2/css/font-awesome.min.css'>
+      <style type="text/css">
+        body{
+        
+        font-family: 'Spectral', serif;
+      }
+      @media only screen and (min-width: 768px) and (max-width: 1193px) {
+    .main-navbar {
+      
+      margin-top: 20px;
+  
+  }
+.main-menu{
+  margin-left: 120px;
+}
+
+}
+@media only screen and (min-width: 990px) and (max-width: 1300px) {
+
+.main-menu{
+  margin-left: 170px;
+}
+
+}
+@media only screen and (min-width: 768px) and (max-width: 1190px) {
+
+.main-navbar{
+ margin-top: -70px;
+}
+
+}
+@media only screen and (min-width: 990px) and (max-width: 992px) {
+
+.main-navbar{
+margin-top: 10px;
+}
+.header-search-form{
+ margin-right: 100px;
+}
+
+}
+
+@media only screen and (min-width: 989px) and (max-width: 991px) {
+
+.main-navbar{
+margin-top: -70px;
+}
+
+
+}
+
+
+@media only screen and (min-width: 990px) {
+
+.images{
+margin-left: 120px;
+}
+
+}
+
+
+@media only screen and (max-width: 767px) {
+  .site-logo {
+      margin-bottom: 20px;
+  }
+
+/* Large Mobile :480px. */
+
+
+
+  .user-panel {
+      text-align: center;
+  }
+  .main-menu {
+      display: none;
+  }
+  .slicknav_btn {
+      background-color: #565656;
+      text-align: left;
+  }
+  .slicknav_menu {
+      background: #282828;
+      display: block;
+      text-align: left;
+      margin-top: 70px;
+  }
+  .slicknav_menu .new {
+      font-size: 10px;
+      font-weight: 700;
+      color: #fff;
+      background: #f51167;
+      line-height: 1;
+      text-transform: uppercase;
+      padding: 5px 9px 1px;
+      border-radius: 15px;
+      width: 42px;
+      margin-left: 5px;
+  }
+  
+}
+/* Medium Mobile :480px. */
+
+.dis{
+ display: none;
+ float: right;
+}
+@media only screen and (max-width: 990px) {
+.header-search-form {
+      margin-bottom: 15px;
+  margin-right: auto;
+  }
+
+}
+     
+  
+   
+  
+    </style>
+    
+      </head>
+      <body>
+        <header class="header-section" style="text-align: center;align-items: center;" > 
+            <div class="header-top">
+              <div class="main-container">
+                <div class="row" >
+                  <div class="col-lg-2 " id = "images">
+                    <!-- logo -->
+                    <a href="/">
+                      <img src="{% static 'logos.png'%}" alt="" srcset="" style="height: 140px;width: 140px;" class="images">
+                    </a>
+                   
+                  </div>
+                  <div class="col-xl-6 col-lg-5" style="align-items: center;margin-top: 15px;"  >
+                    <form class="header-search-form" role="search" action="{% url 'core:search_results' %}" style="width: 70%;margin-left: auto;">
+                      <input type="text" placeholder="Search product ...." name="title" style="border: 1px solid black;border-radius: 0;background-color: transparent;">
+                      <button><i class="fas fa-search"></i></button>
+                    </form>
+                  </div>
+                  <div class="col-xl-4 col-lg-5 " style="margin-top: 20px;"  >
+                    <div class="user-panel" >
+                      <div class="up-item dropdown">
+                        
+                       <span style="font-size: 15px;display: inline-flexbox;" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class=" dropdown-toggle" >  <i class="far fa-user" > </i> Account</span>
+                        
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                          {% if user.is_authenticated %}
+                        <a class="dropdown-item"  href="{% url 'account_logout'%}">Logout</a>
+                        <a href="/myprofile" class="dropdown-item" > Account </a>
+          
+                     
+                        {% else %}
+                        <a  class="dropdown-item" href="{% url 'account_login'%}">Sign In</a>  
+                        
+                        <a class="dropdown-item"  href="{% url 'account_signup'%}">Create Account</a>
+                        {%endif%}
+                      </div>
+                      </div>
+                      <div class="up-item">
+                        <div class="shopping-card">
+                          <a href="{%url 'core:order-summary'%}">
+                            <i class="fas fa-shopping-bag"></i>
+                        
+                          
+                          <span style="font-weight: 500;">{{request.user|cart_item_count}} </span>
+                        </div>
+                       Shopping Cart</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <nav class="main-navbar"  >
+              <div class="container">
+                <!-- menu -->
+                <ul class="main-menu"  >
+                
+                  <li style="margin-right: 12px;"><a href="/paintings">PAINTINSGS</a></li>
+                  <li style="margin-right: 12px;"><a href="/photographs">PHOTOGRAPHS</a></li>
+                  <li style="margin-right: 12px;"><a href="/prints">PRINTS</a></li>
+                  <li style="margin-right: 12px;"><a href="/sculptures">SCULPTUTES</a></li>
+                  <li><a href="/artists">ARTISTS</a></li>
+                  
+                  
+               
+                </ul>
+              </div>
+            </nav>
+          </header>
+      
+      <div id="frame" style="margin-top: 30px;">
+          <div id="sidepanel">
+              <div id="profile">
+                  <div class="wrap">
+                      <img  src="{{user.artist.image_artist.url}}" class="online img-rounded" style="height: 50px; width: 50px;" alt="profile" >
+                      <p>{{user.first_name}} {{user.last_name}}</p>
+                      <!-- <i class="fa fa-chevron-down expand-button" aria-hidden="true"></i> -->
+                      <div id="status-options">
+                          <ul>
+                              <li id="status-online" class="active"><span class="status-circle"></span> <p>Online</p></li>
+                              <li id="status-away"><span class="status-circle"></span> <p>Away</p></li>
+                              <li id="status-busy"><span class="status-circle"></span> <p>Busy</p></li>
+                              <li id="status-offline"><span class="status-circle"></span> <p>Offline</p></li>
+                          </ul>
+                      </div>
+                      <!-- <div id="expanded">
+                          <label for="twitter"><i class="fa fa-facebook fa-fw" aria-hidden="true"></i></label>
+                          <input name="twitter" type="text" value="mikeross" />
+                          <label for="twitter"><i class="fa fa-twitter fa-fw" aria-hidden="true"></i></label>
+                          <input name="twitter" type="text" value="ross81" />
+                          <label for="twitter"><i class="fa fa-instagram fa-fw" aria-hidden="true"></i></label>
+                          <input name="twitter" type="text" value="mike.ross" />
+                      </div> -->
+                  </div>
+              </div> <br>
+            
+              <div id="contacts">
+                  <ul>
+                    <li class="contact">
+                      <div class="wrap">
+                          <span class="contact-status busy"></span>
+                         
+                         
+                            <div style="display: inline-flex;">
+                             
+                              <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" style="margin-right: 10px;" fill="currentColor" class="bi bi-brush-fill" viewBox="0 0 16 16">
+                                <path d="M15.825.12a.5.5 0 0 1 .132.584c-1.53 3.43-4.743 8.17-7.095 10.64a6.067 6.067 0 0 1-2.373 1.534c-.018.227-.06.538-.16.868-.201.659-.667 1.479-1.708 1.74a8.117 8.117 0 0 1-3.078.132 3.658 3.658 0 0 1-.563-.135 1.382 1.382 0 0 1-.465-.247.714.714 0 0 1-.204-.288.622.622 0 0 1 .004-.443c.095-.245.316-.38.461-.452.393-.197.625-.453.867-.826.094-.144.184-.297.287-.472l.117-.198c.151-.255.326-.54.546-.848.528-.739 1.2-.925 1.746-.896.126.007.243.025.348.048.062-.172.142-.38.238-.608.261-.619.658-1.419 1.187-2.069 2.175-2.67 6.18-6.206 9.117-8.104a.5.5 0 0 1 .596.04z"/>
+                              </svg>
+                              <div class="meta" >
+                              <p class="name"> <br>  Compose </p>
+                            </div> 
+                            
+                         
+                      </div>
+                  </li><br>
+                      <li class="contact active">
+                          <div class="wrap">
+                              <span class="contact-status online"></span>
+                             
+                             
+                                <div style="display: inline-flex;">
+                                 
+                                  <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" style="margin-right: 10px;" fill="currentColor" class="bi bi-chat-right-text" viewBox="0 0 16 16">
+                                    <path d="M2 1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h9.586a2 2 0 0 1 1.414.586l2 2V2a1 1 0 0 0-1-1H2zm12-1a2 2 0 0 1 2 2v12.793a.5.5 0 0 1-.854.353l-2.853-2.853a1 1 0 0 0-.707-.293H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h12z"/>
+                                    <path d="M3 3.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zM3 6a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9A.5.5 0 0 1 3 6zm0 2.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5z"/>
+                                  </svg> 
+                                  <div class="meta" >
+                                  <p class="name">Inbox</p>
+                                  <p class="preview">View Your Inbox.</p>
+                                </div> 
+                                
+                             
+                          </div>
+                      </li>
+                      <br>
+                      <li class="contact ">
+                          <div class="wrap">
+                              <span class="contact-status busy"></span>
+                              <div style="display: inline-flex;">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" style="margin-right: 10px;" fill="currentColor" class="bi bi-chat-right-text-fill" viewBox="0 0 16 16">
+                                  <path d="M16 2a2 2 0 0 0-2-2H2a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h9.586a1 1 0 0 1 .707.293l2.853 2.853a.5.5 0 0 0 .854-.353V2zM3.5 3h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1 0-1zm0 2.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1 0-1zm0 2.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1 0-1z"/>
+                                </svg>
+                              <div class="meta">
+                                  <p class="name">Sent</p>
+                                  <p class="preview">View Sent Mail.</p>
+                              </div>
+                            </div>
+                          </div>
+                      </li>
+                     
+                  </ul>
+              </div>
+           
+          </div>
+          <div class="content">
+ 
+              <div class="messages">
+                  <ul>
+                      <li class="sent" style="background-color: white;border-radius: 20px;"> 
+                        {% for chat in chats %}
+    
+                        {% if chat.reciever.username == user.username %}
+                       <img src="{{chat.user.artist.image_artist.url}}" alt="" style="height: 80px; width: 80px;" />
+                       <div style="display: inline-block;">
+                       <p style="background-color: transparent;color: #000;">{{chat.user.first_name}} {{chat.user.last_name}}  <span style="background-color: transparent;" > <p style="float: right;background-color: transparent; color: #000;margin-right: 0;">{{chat.timestamp|date:'D,d M,Y'}}</p> </span></p> <br>
+                          <p>{{chat.message}}</p>
+                        </div>
+                      </li>
+                      {%endif%}
+                      {% endfor%}
+              
+                  </ul>
+              </div>
+              <div class="message-input">
+                  <div class="wrap">
+                  <input type="text" placeholder="Write your message..." />
+                  <i class="fa fa-paperclip attachment" aria-hidden="true"></i>
+                  <button class="submit"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
+                  </div>
+              </div>
+          </div>
+      </div>
+      <script src='//production-assets.codepen.io/assets/common/stopExecutionOnTimeout-b2a7b3fe212eaa732349046d8416e00a9dec26eb7fd347590fbced3ab38af52e.js'></script><script src='https://code.jquery.com/jquery-2.2.4.min.js'></script>
+      <script >$(".messages").animate({ scrollTop: $(document).height() }, "fast");
+      
+      $("#profile-img").click(function() {
+          $("#status-options").toggleClass("active");
+      });
+      
+      $(".expand-button").click(function() {
+        $("#profile").toggleClass("expanded");
+          $("#contacts").toggleClass("expanded");
+      });
+      
+      $("#status-options ul li").click(function() {
+          $("#profile-img").removeClass();
+          $("#status-online").removeClass("active");
+          $("#status-away").removeClass("active");
+          $("#status-busy").removeClass("active");
+          $("#status-offline").removeClass("active");
+          $(this).addClass("active");
+          
+          if($("#status-online").hasClass("active")) {
+              $("#profile-img").addClass("online");
+          } else if ($("#status-away").hasClass("active")) {
+              $("#profile-img").addClass("away");
+          } else if ($("#status-busy").hasClass("active")) {
+              $("#profile-img").addClass("busy");
+          } else if ($("#status-offline").hasClass("active")) {
+              $("#profile-img").addClass("offline");
+          } else {
+              $("#profile-img").removeClass();
+          };
+          
+          $("#status-options").removeClass("active");
+      });
+      
+      function newMessage() {
+          message = $(".message-input input").val();
+          if($.trim(message) == '') {
+              return false;
+          }
+          $('<li class="sent"><img src="http://emilcarlsson.se/assets/mikeross.png" alt="" /><p>' + message + '</p></li>').appendTo($('.messages ul'));
+          $('.message-input input').val(null);
+          $('.contact.active .preview').html('<span>You: </span>' + message);
+          $(".messages").animate({ scrollTop: $(document).height() }, "fast");
+      };
+      
+      $('.submit').click(function() {
+        newMessage();
+      });
+      
+      $(window).on('keydown', function(e) {
+        if (e.which == 13) {
+          newMessage();
+          return false;
+        }
+      });
+      $(window).scroll(function() {
+          if ($(this).scrollTop() > 100) {
+            $('.back-to-top').fadeIn('slow');
+          } else {
+            $('.back-to-top').fadeOut('slow');
+          }
+        });
+          new WOW().init();
+      //# sourceURL=pen.js
+      </script>
+          <script src="/static_files/js/jquery.slicknav.min.js"></script>
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/TweenMax.min.js"></script>
+          <script type="text/javascript" src="{%static 'js/jquery-3.4.1.min.js'%}"></script>
+          <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+          <!-- Bootstrap tooltips -->
+          <script type="text/javascript" src="{% static 'js/popper.min.js' %}"></script>
+          <!-- Bootstrap core JavaScript -->
+          <script type="text/javascript" src="{% static 'js/bootstrap.min.js'%}"></script>
+          
+          <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/SlickNav/1.0.10/jquery.slicknav.min.js"></script>
+          <!-- MDB core JavaScript -->
+          <script type="text/javascript" src="{% static 'js/mdb.min.js' %}"></script>
+          
+          <script src="{% static 'js/script.js' %}"></script>
+       
+      </body></html>
+
+
+
+    <!-- <form action="" method="post">
+        {% csrf_token %}
+        {{form|crispy}}
+        <button type="submit">Submit</button>
+    </form>
+      <h1>Inbox</h1> 
+ 
+    {% for chat in chats %}
+    {% if chat.reciever.username == user.username %}
+
+    <p>{{chat.message}}</p>
+
+    {%endif%}
+
+    {% endfor%}
+    <h1>Sent</h1> 
+    {% for chat in chats %}
+    {% if chat.user.username == user.username %}
+
+    <p>{{chat.message}}</p>
+
+    {%endif%}
+
+    {% endfor%} -->

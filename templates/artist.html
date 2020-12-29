@@ -36,7 +36,7 @@
       
       font-family: 'Spectral', serif;
     }
-  
+   
 
  
 
@@ -169,28 +169,27 @@
 
 </div>
 
-   <div class="container-fluid" style="margin-top: 10px;">
+    <div class="container-fluid" style="margin-top: 10px;">
     <section class="text-center mb-4" style="margin-bottom: 200px;">
 
-        <!--Grid row-->
+       
         <div class="row wow fadeIn" style="margin: 20px; margin-bottom: 160px;" >
 
           {% for item in products %}
           
-          <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 " style="margin-bottom: 30px;" >
-           
-           <!-- Card -->
-<div class="card promoting-card">
+          <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 " style="margin-bottom: 30px; height:  500px auto;" >
+         
+<div class="card promoting-card" >
 
  
   <div class="view overlay">
-    <img class="card-img-top rounded-0" src="{{item.user.artist.image_artist.url}}" alt="Card image cap">
+    <img class="card-img-top rounded-0" src="{{item.user.artist.image_artist.url}}" alt="Card image cap" style="height: 500px auto;" >
     <a href="{{item.user.artist.get_absolute_url}}">
       <div class="mask rgba-white-slight"></div>
     </a>
   </div>
 
-  <!-- Card content -->
+  
   <div class="card-body">
 
     <div class="collapse-content">
@@ -199,7 +198,7 @@
     
     
       <p class="card-text" >{{item.user.artist.bio}}</p>
-      <!-- Button -->
+   
       <a href="{{item.artist.get_absolute_url}}" style="float: left;color: red;">Read More</a>
       <a href="{{item.artist.facebook}}">
       <i class="fab fa-facebook text-muted float-right p-1 my-1" data-toggle="tooltip" data-placement="top" title="my facebook"></i>
@@ -222,7 +221,10 @@
         </div>
        
 
-      </section>
+      </section> 
+
+   
+      
 
       
      

@@ -16,12 +16,7 @@
   <!-- Font Awesome -->
   <link href="https://fonts.googleapis.com/css?family=Josefin+Sans:300,300i,400,400i,700,700i" rel="stylesheet">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
-  <!-- Bootstrap core CSS -->
-  <!-- <link rel="stylesheet" href="../static/css/bootstrap.min.css">
-  <link rel="stylesheet" href="../static/css/mdb.min.css">
-  <link rel="stylesheet" href="../static/css/style.min.css">
-  <link rel="stylesheet" href="../static/css/bootstrap.min.css"> -->
-   
+
   <link href="https://fonts.googleapis.com/css2?family=Courgette&display=swap" rel="stylesheet">
   <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
   <!-- Material Design Bootstrap -->
@@ -151,7 +146,7 @@
           
                       {% else %}
                       
-                      ${{order_item.get_total_item_price}}
+                      {{order_item.get_total_item_price}}
                     
                       {%endif%} </div>
                       <div class="col"><a href="{% url 'core:remove-from-cart' order_item.item.slug%}"><i class="fas fa-trash float-left"  style="color: red;"></i></a></div>
@@ -185,7 +180,7 @@
             </form> -->
             <div class="row" style="border-top: 1px solid rgba(0,0,0,.1); padding: 2vh 0;">
                 <div class="col">TOTAL PRICE</div>
-                <div class="col text-right">&dollar;; {{object.get_total}}</div>
+                <div class="col text-right">&dollar; {{object.get_total}}</div>
             </div>  <a href="/checkout"><button class="btn">CHECKOUT</button></a>
             <div class="row" style="border-top: 1px solid rgba(0,0,0,.1); padding: 2vh 0;">
             <div class="col">

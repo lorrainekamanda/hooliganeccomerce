@@ -1,19 +1,19 @@
 from django.shortcuts import render,get_object_or_404,redirect
 from django.conf import settings
 from django.utils import timezone
-from .models import Order,OrderItem,Item,BillingAdress,Payment,CATEGORY_CHOICES,Artist
+from .models import Order,OrderItem,Item,BillingAdress,Payment,Artist,PaymentDetails,Thread, ChatMessage,Chat
 from django.views.generic import ListView,DetailView,View
 from django.contrib import messages
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.utils.decorators import method_decorator
-from .forms import CheckoutForm,UserProfileForm,UserUpdateForm,UploadForm
+from .forms import CheckoutForm,UserProfileForm,UserUpdateForm,UploadForm,AdressForm,PaymentForm,ComposeForm,ChatForm
 from allauth.account.views import PasswordResetView
 from django.db import models
 from django.conf import settings
 from django.dispatch import receiver
-from django.http import HttpRequest
+from django.http import HttpRequest,Http404,HttpResponseRedirect,JsonResponse,HttpResponseForbidden
 from django.middleware.csrf import get_token
 from django.views.generic import ListView,DetailView,CreateView,UpdateView,DeleteView
 from django.urls import reverse
@@ -25,11 +25,30 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from django.http import Http404
 from .serializer import UserSerializer,ArtistSerializer,ItemSerializer
 from rest_framework import generics
 from django.contrib.auth import get_user_model
 import stripe
+from django.views.generic import TemplateView,DetailView, ListView
+from django.views import View
+from django.shortcuts import render_to_response
+import json
+from django.views import generic
+from braces.views import LoginRequiredMixin
+from django.views.generic.edit import FormMixin
+from django.contrib.auth.mixins import LoginRequiredMixin
+try:
+    from django.urls import reverse
+except ImportError:
+    from django.core.urlresolvers import reverse
+from . import models
+
+from django.shortcuts import get_object_or_404
+from django.db.models import Q
+from django.utils.safestring import mark_safe
+import json
+
+
 
 stripe.api_key =  settings.STRIPE_SECRET_KEY
 def is_users(item_user, logged_user):
@@ -117,6 +136,31 @@ class CreateDetail(LoginRequiredMixin,CreateView):
 
 
       
+def like(request):
+
+
+    data = json.loads(request.body)
+
+    itemId = data['itemId']
+    action = data['action'] 
+    item = Item.objects.get(id =itemId)
+    data = {}
+
+    if item.likes.filter(id = request.user.id).exists():
+        item.likes.remove(request.user)
+        data = {'is_liked':False}
+          
+        
+    else:
+        item.likes.add(request.user)
+        data = {'is_liked':True}
+
+
+    print(itemId)
+    print(action)
+
+
+    return JsonResponse(data)
 
 
 
@@ -130,6 +174,12 @@ class homeview(ListView):
         context['products'] = Item.objects.distinct('user')
         return context
 
+    def latest_artwork (self):
+        
+        return Item.objects.latest('date')
+
+    
+
 
 
     
@@ -142,6 +192,8 @@ class artists(ListView):
         context['products'] = Item.objects.distinct('user')
         return context
 
+    
+
 
 def load_profile(user):
   try:
@@ -150,30 +202,64 @@ def load_profile(user):
     artist = Artist.objects.create(user=user)
     return artist
 
-@login_required
-def myprofile(request):
-    artist= load_profile(request.user)
-    if request.method == 'POST':
+def load_payment(user):
+  try:
+    return user.paymentdetails
+  except:  
+   paymentdetails = PaymentDetails.objects.create(user=user)
+   return paymentdetails
+class myprofile(View):
 
-        u_form =  UserUpdateForm(request.POST,instance = request.user)
-        p_form = UserProfileForm(request.POST,request.FILES,instance = request.user.artist)
+    
+    template_name = 'myprofile.html'
+   
 
-        if u_form.is_valid() and p_form.is_valid():
-            u_form.save()
-            p_form.save()
-            return redirect('core:myprofile')
-    else:
+    def get(self, request): 
+        artist= load_profile(request.user)
+        paymentdetails = load_payment(request.user)
         u_form =  UserUpdateForm(instance = request.user)
         p_form = UserProfileForm(instance = request.user.artist)
-    
+        d_form = PaymentForm(instance = request.user.paymentdetails)
+        a_form = UploadForm(instance = request.user)
+       
+        products = Item.objects.filter(likes = self.request.user)
+        order_items = OrderItem.objects.filter(user = self.request.user,ordered = True)
+         
+        return render(request, self.template_name, {'u_form': u_form,'p_form': p_form,'d_form': d_form,'object':order_items,'products':products,'a_form':a_form}) 
 
-    context ={
-        'u_form':u_form,
-        'p_form':p_form
-    }
-    return render(request,'myprofile.html',context)
 
 
+    def post(self, request): 
+        artist= load_profile(request.user)
+        paymentdetails = load_payment(request.user)
+        u_form = UserUpdateForm(request.POST,instance = request.user)
+
+        d_form = PaymentForm(request.POST,instance = request.user.paymentdetails)
+        p_form = UserProfileForm(request.POST,request.FILES,instance = request.user.artist)
+        if u_form.is_valid() and p_form.is_valid(): 
+            # Success! We can use form.cleaned_data now 
+            u_form.save()
+            p_form.save()
+            return redirect('core:myprofile') 
+
+        elif d_form.is_valid(): 
+            
+            d_form.save()
+            return redirect('core:myprofile')
+
+        else:
+            d_form = PaymentForm(request.POST,instance = request.user.paymentdetails)
+
+
+       
+            return render_to_response(request, 'myprofile.html', {'d_form':d_form})
+            
+
+    def get_context_data(self, **kwargs):
+        context = super(myprofile, self).get_context_data(**kwargs)
+        context['products'] = Item.objects.all()
+        return context
+   
 
 def paintingsview(request):
 
@@ -422,18 +508,6 @@ def search_results(request):
 
 
 
-# class ItemList(APIView):
-#     def get(self, request, format=None):
-#         all_items= Item.objects.all()
-#         serializers = ItemSerializer(all_items, many=True)
-#         return Response(serializers.data)
-
-#     def post(self, request, format=None):
-#         serializers = ItemSerializer(data=request.data)
-#         if serializers.is_valid():
-#             serializers.save()
-#             return Response(serializers.data, status=status.HTTP_201_CREATED)
-#         return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 
@@ -446,6 +520,13 @@ class   ItemDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Item.objects.all()
     serializer_class = ItemSerializer
 
+class ArtistList(APIView):
+    def get(self, request, format=None):
+        all_items= Item.objects.all()
+        serializers = ArtistSerializer(all_items, many=True)
+        return Response(serializers.data)
+
+
 class UserList(generics.ListCreateAPIView):
     User =  get_user_model()
     queryset = User.objects.all()
@@ -457,8 +538,73 @@ class UserDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
 
-class ArtistList(APIView):
-    def get(self, request, format=None):
-        all_items= Item.objects.all()
-        serializers = ArtistSerializer(all_items, many=True)
-        return Response(serializers.data)
+
+
+
+class InboxView(LoginRequiredMixin, ListView):
+    template_name = 'inbox.html'
+    def get_queryset(self):
+        return Thread.objects.by_user(self.request.user)
+
+
+class ThreadView(LoginRequiredMixin, FormMixin, DetailView):
+    template_name = 'thread.html'
+    form_class = ComposeForm
+    success_url = './'
+
+    def get_queryset(self):
+        return Thread.objects.by_user(self.request.user)
+
+    def get_object(self):
+        other_username  = self.kwargs.get("username")
+        obj, created    = Thread.objects.get_or_new(self.request.user, other_username)
+        if obj == None:
+            raise Http404
+        return obj
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['form'] = self.get_form()
+        return context
+
+    def post(self, request, *args, **kwargs):
+        if not request.user.is_authenticated:
+            return HttpResponseForbidden()
+        self.object = self.get_object()
+        form = self.get_form()
+        if form.is_valid():
+            return self.form_valid(form)
+        else:
+            return self.form_invalid(form)
+
+    def form_valid(self, form):
+        thread = self.get_object()
+        user = self.request.user
+        message = form.cleaned_data.get("message")
+        ChatMessage.objects.create(user=user, thread=thread, message=message)
+        return super().form_valid(form)
+
+
+
+class MessageView(View):
+    def get(self,request):
+        form = ChatForm()
+        form.instance.user = self.request.user
+        chats = Chat.objects.all()
+        context = {
+            'form':form,
+            'chats':chats
+        }
+     
+        return render(self.request,'message.html',context)
+        
+        
+    def post(self,request):
+        form = ChatForm(self.request.POST or None)
+        form.instance.user = self.request.user
+        chats = Chat.objects.all()
+        if form.is_valid():
+            
+            form.save()
+            return redirect('core:message')
+

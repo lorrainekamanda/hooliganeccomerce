@@ -40,7 +40,29 @@
 <link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,200;0,300;1,200&display=swap" rel="stylesheet">
 
    
+<script type="text/javascript">
 
+let user = '{{request.user}}'
+function getCookie(name) {
+          let cookieValue = null;
+          if (document.cookie && document.cookie !== '') {
+              const cookies = document.cookie.split(';');
+              for (let i = 0; i < cookies.length; i++) {
+                  const cookie = cookies[i].trim();
+                  // Does this cookie string begin with the name we want?
+                  if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                      cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                      break;
+                  }
+              }
+          }
+          return cookieValue;
+      }
+
+      const csrftoken = getCookie('csrftoken');
+
+
+</script>
 </head>
 <style>
   body{
@@ -51,13 +73,13 @@
 
 <body>
 
-  <!-- {% if messages %}
+   {% if messages %}
 <ul class="messages">
     {% for message in messages %}
     <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
     {% endfor %}
 </ul>
-{% endif %} -->
+{% endif %} 
 
 
 <header class="header-section" style="text-align: center;align-items: center;" > 
@@ -83,11 +105,13 @@
               
              <span style="font-size: 15px;display: inline-flexbox;" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class=" dropdown-toggle" >  <i class="far fa-user" > </i> Account</span>
               
-              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" >
                 {% if user.is_authenticated %}
               <a class="dropdown-item"  href="{% url 'account_logout'%}">Logout</a>
               <a href="/myprofile" class="dropdown-item" > Account </a>
-
+              <a href="/myprofile" class="dropdown-item" > Favourites </a>
+              <a href="/myprofile" class="dropdown-item" > Orders </a>
+              <a href="/myprofile" class="dropdown-item" > Messages</a>
            
               {% else %}
               <a  class="dropdown-item" href="{% url 'account_login'%}">Sign In</a>  
@@ -235,12 +259,12 @@
 
   </div>
 
-</div>    <br> <br> <br>
+</div>    
 
 
 
 
-<section class="section" style="margin-top: -100px;" id = "explore">
+<section class="section" id = "explore">
   <div class="container">
 
     <div class="row  mb-5">
@@ -377,7 +401,34 @@
             {% endfor %}
           </div>
 
+          <div class="row  wow fadeIn" style="margin-left: 50px; margin-top: 90px;">
+            <div class="col-md-5" >
+              <h2 class="section-heading" style="text-align: left;margin-left: 20px;">Latest Product</h2>
+            </div>
+          </div>
 
+          <section class="text-center mb-4" >
+     
+            <div class="row wow fadeIn"  >
+    
+             
+    
+              
+    
+          
+    
+      
+              <div class="col-lg-12" style="height: 400px;margin: 20px;text-align: center;">
+               <img src="{{view.latest_artwork.image.url}}" alt="" srcset="" style="align-items: center;" >
+            
+                </div>
+        
+             
+    
+          
+            </div> 
+
+          </section>
         
      
         <div class="row  wow fadeIn" style="margin-left: 50px; margin-top: 90px;">
@@ -393,9 +444,9 @@
         
      
       
-     <section class="text-center mb-4" style="margin: auto;">
+     <section  style="margin: auto;">
      
-        <div class="row wow fadeIn" style="margin: 20px;" >
+        <div class="row " style="margin: 20px;" >
 
          
 
@@ -404,35 +455,49 @@
       
 
   
-          <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12" style="margin-bottom: auto;height: 500px; width: 600px;" >
+          <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12" style="margin-bottom: 30px;height: 500px; width: 600px;" >
           
             <div class="view">
-            <img src="{{item.image.url}}" class="responsive" style="height: 400px; width: 100%;"    >
-
+             <h5 style="margin-top: 30px;margin-bottom: -20px;">{{item.title}}</h5>
+                 {% if request.user in item.likes.all %}
+                  
+            <i class="fas fa-heart favourites" style="float: right;color:red;z-index: 2;margin-bottom: 10px;" data-item = "{{item.id}}" data-action = "like"></i>
+            {%else%}
+            <i class="fas fa-heart favourites" style="float:right;z-index: 2;margin-bottom: 10px;" data-item = "{{item.id}}" data-action = "like"></i>
+            {%endif%} 
             <a href="{{item.get_absolute_url}}">
-              <div class="mask rgba-white-slight"></div>
+            <img src="{{item.image.url}}"  style="height: 400px; width: 100%;z-index: 0;"    >
+          </a>
+           
+       
             </div>
-            <div class=" text-center" style="margin-top: 10px;">
+            <div  style="margin-top: 5px;">
               <!--Category & Title-->
-              
-              <h5>
+           
+            <div >
+              <div style="float: left;">
+              <h5  > 
+
                 <strong>
-                  <a href="{{item.get_absolute_url}}" class="dark-grey-text">{{item.title}}
-                    <span class="badge badge-pill {{item.get_label_display}}-color">{{item.get_category_display}}</span>
+                  <img src="{{item.user.artist.image_artist.url}}" alt="" srcset="" class="img-rounded" style="height: 50px;width: 50px; border-radius: 50px;">
+                  <a href="{{item.get_absolute_url}}" class="dark-grey-text">{{item.user.first_name}} {{item.user.last_name}}
+                   
                   </a>
                 </strong>
-              </h5>
-  
-              <h4 class="font-weight-bold blue-text">
-                <strong>$  
-                
+              </div>
+              
+                <span class="font-weight-bold blue-text" style="float: right;text-align: right; margin-top: 10px;" >
+                    
+                    $ {{item.get_with}}
+      
+                    
+                    
                   
-                  {{item.get_with}}
-  
                 
-                
-                </strong>
-              </h4>
+                </span>
+              </h5>
+           
+            </div>
   
             </div>
             </div>
@@ -440,7 +505,7 @@
          
 
         {% endfor%}
-        <div class="clearfix"></div>
+      
         </div> 
        
 
@@ -573,7 +638,7 @@
 
 
 </body>
-<script src="/static_files/js/jquery.slicknav.min.js"></script>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/TweenMax.min.js"></script>
 <script type="text/javascript" src="{%static 'js/jquery-3.4.1.min.js'%}"></script>
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
@@ -587,6 +652,7 @@
 <script type="text/javascript" src="{% static 'js/mdb.min.js' %}"></script>
 
 <script src="{% static 'js/script.js' %}"></script>
+<script src="{% static 'js/main.js' %}"></script>
 <!-- Initializations -->
 <script type="text/javascript">
 $(window).scroll(function() {

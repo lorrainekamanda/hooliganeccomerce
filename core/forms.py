@@ -4,10 +4,11 @@ from django_countries.fields import CountryField
 from django_countries.widgets import CountrySelectWidget
 from django.db import models
 from django.conf import settings
-from .models import Item,Artist,Order
+from .models import Item,Artist,Order,BillingAdress,PaymentDetails,Chat
 from django.forms import widgets
 from django.forms import ModelChoiceField
 from django.contrib.auth import get_user_model
+from django.contrib.admin import widgets
 
 class CustomSignupForm(SignupForm):
     def __init__(self, *args, **kwargs):
@@ -76,10 +77,40 @@ class  UserUpdateForm(forms.ModelForm):
 class UserProfileForm(forms.ModelForm):
     class Meta:
         model = Artist
-        fields = ['profession','about_your_work','focus','bio','phone','instagram','facebook','tweeter','image_artist'] 
+        fields = ['profession','about_your_work','focus','bio','phone','instagram','facebook','twitter'] 
 
+class UserImageForm(forms.ModelForm):
+    class Meta:
+        model = Artist
+        fields = ['image_artist'] 
 
 class UploadForm(forms.ModelForm):
     class Meta:
         model = Item
         fields = ['title','price','discount_price','category','label','slug','description','image']
+
+class AdressForm(forms.ModelForm):
+    class Meta:
+        model = BillingAdress
+        fields = ['street_adress','apartment_adress','zip','country']
+
+class PaymentForm(forms.ModelForm):
+    class Meta:
+        model = PaymentDetails
+        fields = ['name','cardno','expiry_date','billing_adress','CITY']
+        def __init__(self, *args, **kwargs):
+            super(PaymentForm, self).__init__(*args, **kwargs)
+            self.fields['expiry_date'].widget = widgets.AdminSplitDateTime()
+
+
+class ComposeForm(forms.Form):
+    message = forms.CharField(
+            widget=forms.TextInput(
+                attrs={"class": "form-control"}
+                )
+            )
+class ChatForm(forms.ModelForm):
+   class Meta:
+        model = Chat
+        fields = ['reciever','message']
+

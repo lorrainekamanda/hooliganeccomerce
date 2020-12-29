@@ -13,7 +13,10 @@ SECRET_KEY = '-05sgp9!deq=q1nltm@^^2cc+v29i(tyybv3v2t77qi66czazj'
 ALLOWED_HOSTS = []
 
 
+
+
 INSTALLED_APPS = [
+   
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -32,6 +35,10 @@ INSTALLED_APPS = [
     'social_django',
     'cloudinary',
     'rest_framework',
+    
+    
+
+    
 ]
 
 MIDDLEWARE = [
@@ -47,6 +54,10 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'demo.urls'
+
+
+
+
 
 TEMPLATES = [
     {
@@ -151,7 +162,7 @@ LOGIN_REDIRECT_URL = '/'
 SOCIAL_AUTH_FACEBOOK_KEY  = '326790765061673'
 SOCIAL_AUTH_FACEBOOK_SECRET  = 'd240a5a03c150413ff4e7176db9535de'
 SOCIAL_AUTH_FACEBOOK_API_VERSION = 'v8.0'
-STRIPE_SECRET_KEY = "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"
+STRIPE_SECRET_KEY = "sk_test_51HU7HPATp1v4gLugytqZnJbNtnM8eh13ddYUEBd8JSjfD8RpprmWtoDUrdNy3NkIOm5Pn7F7qB2KuBlx5Zp1dWbs00zVkD0Rme"
 
 id = '989850233242-8ggt05kq646pokp9bqotdhndm4hd903r.apps.googleusercontent.com'
 MESSAGE_STORAGE = 'django.contrib.messages.storage.cookie.CookieStorage'
@@ -189,3 +200,10 @@ cloudinary.config(
   api_key = "916162855945684", 
   api_secret = "8D2h4MB2jmA6_Twft8yemnYN2dY" 
 )
+
+
+
+
+
+
+

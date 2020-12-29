@@ -5,6 +5,14 @@ from cloudinary.models import CloudinaryField
 from django_countries.fields import CountryField
 from datetime import datetime
 from django.utils import timezone
+from django.db import models
+from model_utils.models import TimeStampedModel, SoftDeletableModel
+from django.conf import settings
+from django.template.defaultfilters import date as dj_date
+from django.utils.translation import ugettext as _
+from django.utils.timezone import localtime
+from django.db import models
+from django.db.models import Q
 
 CATEGORY_CHOICES = (
     ('Pa','Painting'),
@@ -19,6 +27,8 @@ LABEL_CHOICES = (
     ('D','danger')
 
 )
+
+
 class Artist(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL,on_delete = models.CASCADE,blank = True)
     first_name = models.CharField(max_length = 100,blank = True,null = True)
@@ -30,8 +40,8 @@ class Artist(models.Model):
     phone = models.CharField(max_length = 200,blank = True,null = True)
     instagram = models.URLField(max_length = 200,blank = True,null = True)
     facebook = models.URLField(max_length = 200,blank = True,null = True)
-    tweeter = models.URLField(max_length = 200,blank = True,null = True)
-    image_artist = CloudinaryField("image",default = 'https://res.cloudinary.com/dqj36cjxw/image/upload/v1604673289/n7jrss7ggezuwyb87ipa.jpg')
+    twitter = models.URLField(max_length = 200,blank = True,null = True)
+    image_artist = CloudinaryField("image",default = 'https://res.cloudinary.com/dqj36cjxw/image/upload/v1607600679/Rectangle_52_jiszkm.png')
     
     
     
@@ -52,7 +62,7 @@ class Profile(models.Model):
     facebook = models.URLField(max_length = 200,blank = True,null = True,default = 'user@instagram.com')
     tweeter = models.URLField(max_length = 200,blank = True,null = True,verbose_name = "Twitter",default = 'user@twitter.com')
     image_artist = CloudinaryField("image",default = 'profile.jpg',blank = True,null = True)
-  
+    
    
     
 
@@ -75,10 +85,20 @@ class Item(models.Model):
    artist = models.ForeignKey(Artist,on_delete = models.CASCADE,null = True)
    user = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete = models.CASCADE,null = True)
    date = models.DateTimeField(default=timezone.now)
-
+   likes = models.ManyToManyField(settings.AUTH_USER_MODEL,related_name='likes' , blank =True)
+   
    def __str__(self):
        return self.title
-    
+
+
+   def all_likes(self):
+        return self.likes.count()
+
+
+
+
+
+
    def get_absolute_url(self):
        return reverse("core:product",kwargs = {'slug':self.slug})
 
@@ -100,6 +120,7 @@ class OrderItem(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete = models.CASCADE)
     ordered = models.BooleanField(default = False)
     item = models.ForeignKey(Item,on_delete = models.CASCADE)
+    status = models.BooleanField(default = False)
     quantity = models.IntegerField(default =1)
 
   
@@ -129,13 +150,15 @@ class OrderItem(models.Model):
         return self.get_total_item_price()
 
 
-         
+       
+    
+
     
 class Order(models.Model):
     
     user = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete = models.CASCADE,null=True, blank=True)
     items = models.ManyToManyField(OrderItem)
-    start_date = models.DateTimeField(auto_now_add = True)
+    start_date = models.DateTimeField(auto_now_add = True) 
     date_ordered = models.DateTimeField()
     ordered = models.BooleanField(default = False)
     billing_adress = models.ForeignKey('BillingAdress',on_delete = models.SET_NULL,blank=True,null= True)
@@ -162,15 +185,97 @@ class BillingAdress(models.Model):
    def __str__(self):
        return self.user.username
 
+class PaymentDetails(models.Model):
+    user = models.OneToOneField(settings.AUTH_USER_MODEL,on_delete = models.SET_NULL,blank = True,null = True)
+    name = models.CharField(max_length = 100,blank = True,null = True)
+    cardno = models.CharField(max_length = 100,blank = True,null = True)
+    expiry_date = models.CharField(max_length = 100,blank = True,null = True)
+    billing_adress = models.CharField(max_length = 100,blank = True,null = True)
+    CITY= models.CharField(max_length = 100,blank = True,null = True)
+
+    
+
+    def __str__(self):
+        return str(self.name)
 
 class Payment(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete = models.SET_NULL,blank = True,null = True)
     stripe_charge_id = models.CharField(max_length = 100)
     amount = models.FloatField()
-    time_stamp = models.DateTimeField(auto_now_add = True)
+    time_stamp = models.DateTimeField(auto_now_add = False)
     billing_adress = models.ForeignKey('BillingAdress',on_delete = models.SET_NULL,blank=True,null= True)
 
     def __str__(self):
         return str(self.amount)
 
 
+
+class ThreadManager(models.Manager):
+    def by_user(self, user):
+        qlookup = Q(first=user) | Q(second=user)
+        qlookup2 = Q(first=user) & Q(second=user)
+        qs = self.get_queryset().filter(qlookup).exclude(qlookup2).distinct()
+        return qs
+
+    def get_or_new(self, user, other_username): # get_or_create
+        username = user.username
+        if username == other_username:
+            return None
+        qlookup1 = Q(first__username=username) & Q(second__username=other_username)
+        qlookup2 = Q(first__username=other_username) & Q(second__username=username)
+        qs = self.get_queryset().filter(qlookup1 | qlookup2).distinct()
+        if qs.count() == 1:
+            return qs.first(), False
+        elif qs.count() > 1:
+            return qs.order_by('timestamp').first(), False
+        else:
+            Klass = user.__class__
+            user2 = Klass.objects.get(username=other_username)
+            if user != user2:
+                obj = self.model(
+                        first=user, 
+                        second=user2
+                    )
+                obj.save()
+                return obj, True
+            return None, False
+
+
+class Thread(models.Model):
+    first        = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='chat_thread_first')
+    second       = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='chat_thread_second')
+    updated      = models.DateTimeField(auto_now=True)
+    timestamp    = models.DateTimeField(auto_now_add=True)
+    
+    objects      = ThreadManager()
+
+    @property
+    def room_group_name(self):
+        return f'chat_{self.id}'
+
+    def broadcast(self, msg=None):
+        if msg is not None:
+            broadcast_msg_to_chat(msg, group_name=self.room_group_name, user='admin')
+            return True
+        return False
+
+
+class ChatMessage(models.Model):
+    thread      = models.ForeignKey(Thread, null=True, blank=True, on_delete=models.SET_NULL)
+    user        = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name='sender', on_delete=models.CASCADE)
+    message     = models.TextField()
+    timestamp   = models.DateTimeField(auto_now_add=True)
+
+
+
+
+class Chat(models.Model):
+    reciever = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='send_to', on_delete=models.CASCADE,null=True)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='sender', on_delete=models.CASCADE,null=True)
+    message = models.TextField( null=True, blank=True)
+    timestamp = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+       return self.message
+
+    

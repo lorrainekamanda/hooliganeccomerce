@@ -1,5 +1,5 @@
-from django.urls import path
-from .views import homeview,itemdetailview,add_to_cart,remove_from_cart,OrderSummaryView,remove_single_item_from_cart,CheckoutView,PaymentView,search_results,productview,paintingsview,photographsview,prints,profile,artists,CreateDetail,sculptures,myprofile,ItemList,ArtistList,ItemDetail,UserList,UserDetail
+from django.urls import path,re_path
+from .views import homeview,itemdetailview,add_to_cart,remove_from_cart,OrderSummaryView,remove_single_item_from_cart,CheckoutView,PaymentView,search_results,productview,paintingsview,photographsview,prints,profile,artists,CreateDetail,sculptures,myprofile,ItemList,ArtistList,ItemDetail,UserList,UserDetail,ThreadView, InboxView,MessageView
 from django.conf import settings
 from django.conf.urls.static import static
 from . import views
@@ -15,7 +15,7 @@ urlpatterns = [
     path('prints/',prints,name = 'prints'),
     path('profile/<int:pk>/',profile.as_view(),name = 'profile'),
     path('photographs/',photographsview,name = 'phtotographs'),
-    path('myprofile/',myprofile,name = 'myprofile'),
+    path('myprofile/',myprofile.as_view(),name = 'myprofile'),
     path('sculptures/',sculptures,name = 'sculptures'),
     path('order-summary/',OrderSummaryView.as_view(),name = 'order-summary'),
     path('product/<slug>/',itemdetailview.as_view(),name = 'product'),
@@ -30,6 +30,9 @@ urlpatterns = [
     path('api-user/', UserList.as_view(), name = 'api-user'),
     path('api-user/<int:pk>/', views.UserDetail.as_view()),
     path('api-artist/', ArtistList.as_view(), name = 'api-artist'),
+    path('like/', views.like , name= 'like'),
+    path('message/', MessageView.as_view() , name= 'message'),
+
 ]
 if settings.DEBUG:
     urlpatterns+= static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
