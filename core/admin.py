@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Order,OrderItem,Item,BillingAdress,Payment,Artist,Profile,PaymentDetails,Chat
+from .models import Order,OrderItem,Item,BillingAdress,Payment,Artist,Profile,PaymentDetails,Chat,Show
 
 class OrderAdmin(admin.ModelAdmin):
     list_display = ['user','ordered']
@@ -20,3 +20,4 @@ admin.site.register(Payment)
 admin.site.register(Artist)
 admin.site.register(PaymentDetails)
 admin.site.register(Chat)
+admin.site.register(Show)

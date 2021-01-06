@@ -1,5 +1,5 @@
 from django.urls import path,re_path
-from .views import homeview,itemdetailview,add_to_cart,remove_from_cart,OrderSummaryView,remove_single_item_from_cart,CheckoutView,PaymentView,search_results,productview,paintingsview,photographsview,prints,profile,artists,CreateDetail,sculptures,myprofile,ItemList,ArtistList,ItemDetail,UserList,UserDetail,ThreadView, InboxView,MessageView
+from .views import homeview,itemdetailview,add_to_cart,remove_from_cart,OrderSummaryView,remove_single_item_from_cart,CheckoutView,PaymentView,search_results,productview,paintingsview,photographsview,prints,profile,artists,CreateDetail,sculptures,myprofile,ItemList,ArtistList,ItemDetail,UserList,UserDetail,ThreadView, InboxView,MessageView,CreateShow,UpdateDetail,ItemDelete,UpdateShow,ShowDelete
 from django.conf import settings
 from django.conf.urls.static import static
 from . import views
@@ -8,7 +8,7 @@ app_name = 'core'
 
 urlpatterns = [
     path('',homeview.as_view(),name = 'home'),
-     path('artists/',artists.as_view(),name = 'artists'),
+    path('artists/',artists.as_view(),name = 'artists'),
     path('items',productview,name = 'items'),
     path('checkout/',CheckoutView.as_view(),name = 'checkout'),
     path('paintings/',paintingsview,name = 'paintings'),
@@ -25,6 +25,7 @@ urlpatterns = [
     path('payment/<payment_option>/',PaymentView.as_view(),name = 'payment'),
     path('search/',views.search_results, name='search_results'),
     path('upload/', CreateDetail.as_view(), name = 'upload'),
+    path('show/', CreateShow.as_view(), name = 'show'),
     path('api-item/', ItemList.as_view(), name = 'api-item'),
     path('api-item/<int:pk>/', views.ItemDetail.as_view()),
     path('api-user/', UserList.as_view(), name = 'api-user'),
@@ -32,6 +33,10 @@ urlpatterns = [
     path('api-artist/', ArtistList.as_view(), name = 'api-artist'),
     path('like/', views.like , name= 'like'),
     path('message/', MessageView.as_view() , name= 'message'),
+    path('product/<slug>/update', UpdateDetail.as_view(), name = 'product-update'),
+    path('product/<slug>/delete',ItemDelete.as_view(), name = 'product-delete'),
+    path('<int:pk>/update', UpdateShow.as_view(), name = 'show-update'),
+    path('<int:pk>/delete', ShowDelete.as_view(), name = 'show-delete'),
 
 ]
 if settings.DEBUG:

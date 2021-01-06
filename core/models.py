@@ -41,7 +41,7 @@ class Artist(models.Model):
     instagram = models.URLField(max_length = 200,blank = True,null = True)
     facebook = models.URLField(max_length = 200,blank = True,null = True)
     twitter = models.URLField(max_length = 200,blank = True,null = True)
-    image_artist = CloudinaryField("image",default = 'https://res.cloudinary.com/dqj36cjxw/image/upload/v1607600679/Rectangle_52_jiszkm.png')
+    image_artist = CloudinaryField("Profile",default = 'https://res.cloudinary.com/dqj36cjxw/image/upload/v1607600679/Rectangle_52_jiszkm.png')
     
     
     
@@ -74,12 +74,12 @@ class Profile(models.Model):
         return reverse ('core:profile', kwargs = {'pk':self.pk})
 
 class Item(models.Model):
-   title = models.CharField(max_length = 100)
+   title = models.CharField(max_length = 100,unique = True)
    price = models.FloatField()
    discount_price = models.FloatField(default = 0,blank = True,null = True)
    category = models.CharField(choices = CATEGORY_CHOICES,max_length = 2)
    label= models.CharField(choices = LABEL_CHOICES,max_length = 2)
-   slug = models.SlugField(verbose_name = "Tag")
+   slug = models.SlugField(verbose_name = "Tag",unique = True)
    description = models.TextField()
    image = CloudinaryField("image") 
    artist = models.ForeignKey(Artist,on_delete = models.CASCADE,null = True)
@@ -209,13 +209,8 @@ class Payment(models.Model):
         return str(self.amount)
 
 
-
-
-
-
-
 class Chat(models.Model):
-    reciever = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='send_to', on_delete=models.CASCADE,null=True)
+    reciever = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name = "To",related_name='send_to',  on_delete=models.CASCADE,null=True)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='sender', on_delete=models.CASCADE,null=True)
     message = models.TextField( null=True, blank=True)
     timestamp = models.DateTimeField(auto_now_add=True)
@@ -223,4 +218,21 @@ class Chat(models.Model):
     def __str__(self):
        return self.message
 
+class Show(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE,null=True)
+    title = models.CharField(max_length = 100)
+    date = models.DateField()
+    time = models.TimeField()
+    location =  models.CharField(max_length = 100)
+    RSVP = models.CharField(max_length = 100)
+    poster = CloudinaryField("Poster",default = "https://res.cloudinary.com/dqj36cjxw/image/upload/v1609854605/uis0nvmmwdkfkhydtenu.jpg")
+
+    def __str__(self):
+       return self.title 
+
     
+
+    
+
+
+

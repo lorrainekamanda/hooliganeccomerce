@@ -156,36 +156,39 @@
 <div class="row">
     <div class="col-lg-4 col-xl-4">
         <div class="card-box text-center">
+          <!-- <a class="btn btn-block btn-primary" data-toggle="modal" data-target="#compose-modal"><i class="fa fa-pencil"></i>Edit</a> -->
             <img src="{{user.artist.image_artist.url}}" class="rounded-circle avatar-xl img-thumbnail" alt="profile-image" style="height:200px ; width: 200px;">
 
             <h4 class="mb-0">{{user.first_name}} {{user.last_name}}</h4>
             <hr>
+            
 
             <ul class="nav nav-pills navtab-bg" style="display: inline-block;">
-              <li class="nav-item" style="background-color: transparent;">
-                  <a href="#payment" data-toggle="tab" aria-expanded="true" class="nav-link ml-0 " style="background-color: transparent;">
-                      <i class="mdi mdi-face-profilce mr-1"></i>Payment Information
-                  </a>
-              </li>
-              <hr>
               <li class="nav-item">
-                  <a href="#favourites" data-toggle="tab" aria-expanded="false" class="nav-link" style="background-color: transparent;">
-                      <i class="mdi mdi-settings-outline mr-1"></i>Favourites
-                  </a>
-              </li>
-              <hr>
-              <li class="nav-item">
-                <a href="#sell" data-toggle="tab" aria-expanded="false" class="nav-link" style="background-color: transparent;">
-                    <i class="mdi mdi-settings-outline mr-1"></i>Seller Account
+                <a href="/message"  class="nav-link" style="background-color: transparent;">
+                    <i class="mdi mdi-settings-outline mr-1"></i> Messages
                 </a>
             </li>
             <hr>
+              <li class="nav-item" style="background-color: transparent;">
+                  <a href="/upload"  style="background-color: transparent;">
+                      <i class="mdi mdi-face-profilce mr-1"></i>Upload Art
+                  </a>
+              </li>
+              <hr>
+          
               <li class="nav-item">
-                <a href="{% url 'account_logout'%}" data-toggle="tab" aria-expanded="false" class="nav-link" style="background-color: transparent;">
+                  <a href="/show"  class="nav-link" style="background-color: transparent;">
+                      <i class="mdi mdi-settings-outline mr-1"></i> Upload Gallery Show
+                  </a>
+              </li>
+              <hr>
+              <li class="nav-item">
+                <a href="{% url 'account_logout'%}" class="nav-link" style="background-color: transparent;">
                     <i class="mdi mdi-settings-outline mr-1"></i>Logout
                 </a>
             </li>
-
+           
             
           </ul>
            
@@ -193,20 +196,7 @@
             
            
 
-            <ul class="social-list list-inline mt-3 mb-0">
-                <li class="list-inline-item">
-                    <a href="javascript: void(0);" class="social-list-item border-purple text-purple"><i class="fab fa-facebook"></i></a>
-                </li>
-                <li class="list-inline-item">
-                    <a href="javascript: void(0);" class="social-list-item border-danger text-danger"><i class="fab fa-google"></i></a>
-                </li>
-                <li class="list-inline-item">
-                    <a href="javascript: void(0);" class="social-list-item border-info text-info"><i class="fab fa-twitter"></i></a>
-                </li>
-                <li class="list-inline-item">
-                    <a href="javascript: void(0);" class="social-list-item border-secondary text-secondary"><i class="fab fa-github"></i></a>
-                </li>
-            </ul>
+   
         </div> <!-- end card-box -->
 
      
@@ -226,12 +216,25 @@
                         <i class="mdi mdi-settings-outline mr-1"></i>Orders
                     </a>
                 </li>
-             
-                <li class="nav-item">
-                  <a href="#settings" data-toggle="tab" aria-expanded="false" class="nav-link" style="background-color: transparent;">
-                      <i class="mdi mdi-settings-outline mr-1"></i>Messages
+                <li class="nav-item" style="background-color: transparent;">
+                  <a href="#payment" data-toggle="tab" aria-expanded="true" class="nav-link ml-0 " style="background-color: transparent;">
+                      <i class="mdi mdi-face-profilce mr-1"></i>Payment Information
                   </a>
               </li>
+            
+              <li class="nav-item">
+                  <a href="#favourites" data-toggle="tab" aria-expanded="false" class="nav-link" style="background-color: transparent;">
+                      <i class="mdi mdi-settings-outline mr-1"></i>Favourites
+                  </a>
+              </li>
+            
+              <!-- <li class="nav-item">
+                <a href="#sell" data-toggle="tab" aria-expanded="false" class="nav-link" style="background-color: transparent;">
+                    <i class="mdi mdi-settings-outline mr-1"></i>Seller Account
+                </a>
+            </li> -->
+             
+            
            
               
             </ul>
@@ -306,7 +309,12 @@
                                   
                                     <td><span class="badge badge-info">{{order_item.item.status}}</span></td>
                                     <td>{{order_item.item.user.first_name}} {{order_item.item.user.last_name}}</td>
+                                    
                                 </tr>
+
+                                {% empty %}  
+
+                                <p>No Orders</p>
                                 {%endfor%}
                                 
                                 
@@ -334,16 +342,7 @@
                       Favourites</h5>
                   <div class="table-responsive">
                       <table class="table table-borderless mb-0">
-                          <!-- <thead class="thead-light">
-                              <tr>
-                                  <th>#</th>
-                                  <th>Project Name</th>
-                                  <th>Start Date</th>
-                                  <th>Due Date</th>
-                                  <th>Status</th>
-                                  <th>Clients</th>
-                              </tr>
-                          </thead> -->
+                         
                           <tbody>
                            
                             {% for  order_item in products %}
@@ -360,6 +359,9 @@
                                   <td><span class="badge badge-info">{{order_item.status}}</span></td>
                                   <td>{{order_item.item.user.first_name}} {{order_item.user.last_name}}</td>
                               </tr>
+
+                              {% empty %}
+                              <p>You have Favourites click on like button to add to favourites</p>
                              
                               {%endfor%}
                              
@@ -413,6 +415,8 @@
     </div>
 </div>
 </div> 
+
+
 
 
   

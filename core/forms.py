@@ -4,11 +4,14 @@ from django_countries.fields import CountryField
 from django_countries.widgets import CountrySelectWidget
 from django.db import models
 from django.conf import settings
-from .models import Item,Artist,Order,BillingAdress,PaymentDetails,Chat
+from .models import Item,Artist,Order,BillingAdress,PaymentDetails,Chat,Show
 from django.forms import widgets
 from django.forms import ModelChoiceField
 from django.contrib.auth import get_user_model
 from django.contrib.admin import widgets
+from bootstrap_datepicker_plus import DatePickerInput,TimePickerInput
+
+
 
 class CustomSignupForm(SignupForm):
     def __init__(self, *args, **kwargs):
@@ -77,7 +80,7 @@ class  UserUpdateForm(forms.ModelForm):
 class UserProfileForm(forms.ModelForm):
     class Meta:
         model = Artist
-        fields = ['profession','about_your_work','focus','bio','phone','instagram','facebook','twitter'] 
+        fields = ['profession','about_your_work','focus','bio','phone','instagram','facebook','twitter','image_artist'] 
 
 class UserImageForm(forms.ModelForm):
     class Meta:
@@ -114,3 +117,16 @@ class ChatForm(forms.ModelForm):
         model = Chat
         fields = ['reciever','message']
 
+
+class DateInput(forms.DateInput):
+    input_type = 'date'
+
+class ShowForm(forms.ModelForm):
+   class Meta:
+        model = Show
+        fields = ['title','date','time','location','RSVP','poster']
+        widgets = {
+            'date':  DateInput(attrs={'type': 'date'}),
+            'time':  forms.TimeInput(attrs={'type': 'time'})
+           
+        }

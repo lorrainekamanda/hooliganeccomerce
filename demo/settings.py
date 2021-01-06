@@ -35,9 +35,7 @@ INSTALLED_APPS = [
     'social_django',
     'cloudinary',
     'rest_framework',
-    
-    
-
+    'bootstrap_datepicker_plus',
     
 ]
 
@@ -201,6 +199,9 @@ cloudinary.config(
   api_secret = "8D2h4MB2jmA6_Twft8yemnYN2dY" 
 )
 
+BOOTSTRAP4 = {
+    'include_jquery': True,
+}
 
 
 

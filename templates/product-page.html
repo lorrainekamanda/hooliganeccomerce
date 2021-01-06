@@ -127,12 +127,16 @@
 
         <!--Grid column-->
         <div class="col-md-5 ">
+          {% if object.user.username == user.username %}
+          <a href="{% url 'core:product-update' object.slug  %} ">  <i class="fas fa-pen-fancy" style="margin-left: 200px; margin-top: -100px;">  Edit </i> </a>    
+          <a href="{% url 'core:product-delete' object.slug %} "> <i class="fas fa-trash-alt">  Clear </i> </a>   
+         {%endif%}
 
           <h3 style="font-weight: 500;">{{object.title}}  <span class="badge purple mr-1 mb-3" 
             style="font-size: 12px;">{{object.get_category_display}}</span></h4>
           <div class="p-4">
 
-           
+          
 
             <p class="lead">
              

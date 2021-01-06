@@ -68,6 +68,59 @@ function getCookie(name) {
   body{
   font-family: 'Spectral', serif;
 }
+blog-home2 .text-themecolor {
+  color: #316ce8;
+  border-radius: 50px;
+}
+
+.blog-home2 h5 {
+  line-height: 22px;
+  font-size: 18px;
+}
+
+.blog-home2 a.link {
+  color: #3e4555;
+}
+
+.blog-home2 a.link:hover {
+  color: #316ce8;
+}
+
+.blog-home2 .on-hover {
+  -webkit-transition: 0.2s ease-in;
+  -o-transition: 0.2s ease-in;
+  transition: 0.2s ease-in;
+}
+
+.blog-home2 .on-hover:hover {
+  -webkit-transform: translateY(-10px);
+  -ms-transform: translateY(-10px);
+  transform: translateY(-10px);
+}
+
+.blog-home2 .date-pos {
+  right: 10px;
+  top: 10px;
+}
+
+.blog-home2 .date-pos span {
+  font-size: 30px;
+  line-height: 30px;
+}
+.blog-home2 .bg-info-gradiant {
+    
+    background: #188ef4;
+    background: -webkit-linear-gradient(legacy-direction(to right), #188ef4 0%, #316ce8 100%);
+    background: -webkit-gradient(linear, left top, right top, from(#188ef4), to(#316ce8));
+    background: -webkit-linear-gradient(left, #188ef4 0%, #316ce8 100%);
+    background: -o-linear-gradient(left, #188ef4 0%, #316ce8 100%);
+    background: linear-gradient(to right, #188ef4 0%, #316ce8 100%);
+    
+}
+.bg-info-gradiant{
+  border-radius: 100px;
+
+}
 </style>
 
 
@@ -378,17 +431,18 @@ function getCookie(name) {
           </div>
           
         </div>
-
+        {% if products %}
         <div class="cont" >
           <div class="row  wow fadeIn" style="margin-left: 50px; margin-top: 90px;">
             <div class="col-md-5" >
               <h2 class="section-heading" style="text-align: left;margin-left: 10px;">Shop by Artist</h2>
             </div>
           </div>
+          {%endif%}
 
           <div class="row" style="margin: 30px;">
             {% for item in products %}
-            <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12" style="margin-bottom: 20px;text-align: center;" >
+            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12" style="margin-bottom: 20px;text-align: center;" >
               <a href="{{item.user.artist.get_absolute_url}}">
               <div class="card card-block" id = "card">
 
@@ -401,112 +455,146 @@ function getCookie(name) {
             {% endfor %}
           </div>
 
-          <div class="row  wow fadeIn" style="margin-left: 50px; margin-top: 90px;">
-            <div class="col-md-5" >
-              <h2 class="section-heading" style="text-align: left;margin-left: 20px;">Latest Product</h2>
-            </div>
-          </div>
-
-          <section class="text-center mb-4" >
-     
-            <div class="row wow fadeIn"  >
-    
-             
-    
-              
-    
-          
-    
-      
-              <div class="col-lg-12" style="height: 400px;margin: 20px;text-align: center;">
-               <img src="{{view.latest_artwork.image.url}}" alt="" srcset="" style="align-items: center;" >
-            
-                </div>
+         
         
-             
-    
-          
-            </div> 
-
-          </section>
-        
-     
+        {% if object_list %}
         <div class="row  wow fadeIn" style="margin-left: 50px; margin-top: 90px;">
           <div class="col-md-5" >
             <h2 class="section-heading" style="text-align: left;margin-left: 20px;">Featured Products</h2>
           </div>
         </div>
 
-
+       {%endif%}
         
         
         <!-- End Portfolio Section -->
         
      
       
-     <section  style="margin: auto;">
+     <section >
      
-        <div class="row " style="margin: 20px;" >
+        <div class="row "" >
 
          
 
-          {% for item in object_list %}
-
-      
-
-  
-          <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12" style="margin-bottom: 30px;height: 500px; width: 600px;" >
-          
-            <div class="view">
-             <h5 style="margin-top: 30px;margin-bottom: -20px;">{{item.title}}</h5>
-                 {% if request.user in item.likes.all %}
-                  
-            <i class="fas fa-heart favourites" style="float: right;color:red;z-index: 2;margin-bottom: 10px;" data-item = "{{item.id}}" data-action = "like"></i>
-            {%else%}
-            <i class="fas fa-heart favourites" style="float:right;z-index: 2;margin-bottom: 10px;" data-item = "{{item.id}}" data-action = "like"></i>
-            {%endif%} 
-            <a href="{{item.get_absolute_url}}">
-            <img src="{{item.image.url}}"  style="height: 400px; width: 100%;z-index: 0;"    >
-          </a>
-           
-       
-            </div>
-            <div  style="margin-top: 5px;">
-              <!--Category & Title-->
-           
-            <div >
-              <div style="float: left;">
-              <h5  > 
-
-                <strong>
-                  <img src="{{item.user.artist.image_artist.url}}" alt="" srcset="" class="img-rounded" style="height: 50px;width: 50px; border-radius: 50px;">
-                  <a href="{{item.get_absolute_url}}" class="dark-grey-text">{{item.user.first_name}} {{item.user.last_name}}
-                   
-                  </a>
-                </strong>
-              </div>
-              
-                <span class="font-weight-bold blue-text" style="float: right;text-align: right; margin-top: 10px;" >
-                    
-                    $ {{item.get_with}}
-      
-                    
-                    
-                  
-                
-                </span>
-              </h5>
-           
-            </div>
-  
-            </div>
-            </div>
-    
-         
-
-        {% endfor%}
       
         </div> 
+        <div class="blog-home2 py-5">
+          <div class="container-fluid">
+            <!-- Row  -->
+            <div class="row justify-content-center">
+              <!-- Column -->
+            
+              <!-- Column -->
+              <!-- Column -->
+            </div>
+            <div class="row mt-4">
+              <!-- Column -->
+              {% for item in object_list %}
+              
+              <div class="col-md-4 ">
+                <h2>{{item.title}}</h2>
+                <div class="card border-0 mb-4">
+                  <a href="{{item.get_absolute_url}}"><img class="card-img-top" src="{{item.image.url}}" alt="wrappixel kit"></a>
+                  <div class="date-pos  p-2 d-inline-block text-center rounded text-white position-absolute" style="border-radius: 100px;">
+                    {% if request.user in item.likes.all %}
+                  
+                    <i class="fas fa-heart favourites p-2"  style="float: right;color:red;z-index: 2;margin-bottom: 10px;background: linear-gradient(-45deg, #3db3c5, #274685);border-radius: 50px;" data-item = "{{item.id}}" data-action = "like"></i>
+                    {%else%}
+                    <i class="fas fa-heart favourites p-2" style="float:right;z-index: 2;margin-bottom: 10px;background: linear-gradient(-45deg, #3db3c5, #274685);border-radius: 50px;" data-item = "{{item.id}}" data-action = "like"></i>
+                    {%endif%} 
+                  </div>
+               
+                </div>
+                <div  style="margin-top: 5px;">
+                  <!--Category & Title-->
+               
+                <div >
+                  <div style="float: left;">
+                  <h5  > 
+    
+                    <strong>
+                      <img src="{{item.user.artist.image_artist.url}}" alt="" srcset="" class="img-rounded" style="height: 50px;width: 50px; border-radius: 50px;">
+                      <a href="{{item.get_absolute_url}}" class="dark-grey-text">{{item.user.first_name}} {{item.user.last_name}}
+                       
+                      </a>
+                    </strong>
+                  </div>
+                  
+                    <span class="font-weight-bold blue-text" style="float: right;text-align: right; margin-top: 10px;" >
+                        
+                        $ {{item.get_with}}
+          
+                        
+                        
+                      
+                    
+                    </span>
+                  </h5>
+               
+                </div>
+      
+                </div>
+              </div>
+              
+         {% endfor%}
+              <!-- Column -->
+            
+            </div>
+          </div>
+        </div>
+
+
+
+
+
+<!-- endof trial -->
+
+        <div class="blog-home2 py-5">
+          <div class="container">
+            <!-- Row  -->
+            <div class="row justify-content-center">
+              <!-- Column -->
+              <div class="col-md-8 text-center">
+                {% if shows %}
+                <h3 class="my-3">Upcoming Events</h3>
+                <!-- <h6 class="subtitle font-weight-normal">You can relay on our amazing features list and also our customer services will be great experience for you without doubt</h6> -->
+              {%endif%}
+              </div>
+              <!-- Column -->
+              <!-- Column -->
+            </div>
+            <div class="row mt-4">
+              <!-- Column -->
+              {% for show in shows %}
+              <div class="col-md-4 on-hover">
+                <div class="card border-0 mb-4">
+                  <a href="#"><img class="card-img-top" src="{{show.user.artist.image_artist.url}}" alt="wrappixel kit"></a>
+                  <div class="date-pos bg-info-gradiant p-2 d-inline-block text-center rounded text-white position-absolute"><span class="d-block" style="font-size: 18px;">{{show.date|date:"M d"}} <br> {{show.date|date:" Y"}}</span></div>
+                  <h4 style="font-weight: 500;">{{show.title|title}}</h4>
+                
+                  <h5 style="display: inline-flex;">Location:{{show.location}}<h5>
+
+                    <h5 style="display: inline-flex;">Time:{{show.time}}<h5></h5>
+                  <H5>
+                    RSVP:<a href="#" class="text-decoration-none linking text-themecolor mt-2"> {{show.RSVP}}</a>
+
+                  </H5>
+                  
+                </div>
+                {% if show.user.username == user.username %}
+                <i class="fas fa-pen-fancy" style="margin-top: -100px;">  <a href="{% url 'core:show-update' show.id %} "> Edit</a> </i>    
+                <a href="{% url 'core:show-delete' show.id %} "> <i class="fas fa-trash-alt">  Clear </i> </a>   
+               {%endif%}
+              </div>
+           
+              {% endfor%}
+         
+              <!-- Column -->
+            
+            </div>
+          </div>
+        </div>
        
 
     
@@ -552,7 +640,7 @@ function getCookie(name) {
 
     </div>
   </main> 
-    <h1></h1>
+    
 
    <section class="footer-section" style="margin-top: 50px;">
 		<div class="container-fluid">

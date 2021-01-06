@@ -1,14 +1,14 @@
 from django.shortcuts import render,get_object_or_404,redirect
 from django.conf import settings
 from django.utils import timezone
-from .models import Order,OrderItem,Item,BillingAdress,Payment,Artist,PaymentDetails,Chat
+from .models import Order,OrderItem,Item,BillingAdress,Payment,Artist,PaymentDetails,Chat,Show
 from django.views.generic import ListView,DetailView,View
 from django.contrib import messages
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.utils.decorators import method_decorator
-from .forms import CheckoutForm,UserProfileForm,UserUpdateForm,UploadForm,AdressForm,PaymentForm,ComposeForm,ChatForm
+from .forms import CheckoutForm,UserProfileForm,UserUpdateForm,UploadForm,AdressForm,PaymentForm,ComposeForm,ChatForm,ShowForm,UserImageForm
 from allauth.account.views import PasswordResetView
 from django.db import models
 from django.conf import settings
@@ -47,6 +47,12 @@ from django.shortcuts import get_object_or_404
 from django.db.models import Q
 from django.utils.safestring import mark_safe
 import json
+from django.views.generic import ListView,DetailView,CreateView,UpdateView,DeleteView
+from django.contrib.auth.mixins import LoginRequiredMixin,UserPassesTestMixin
+from django.contrib.admin import widgets
+from bootstrap_datepicker_plus import DatePickerInput,TimePickerInput
+from django import forms
+from django.forms.widgets import SelectDateWidget
 
 
 
@@ -132,7 +138,8 @@ class CreateDetail(LoginRequiredMixin,CreateView):
         
         
         return super().form_valid(form)
-  
+
+
 
 
       
@@ -172,6 +179,7 @@ class homeview(ListView):
     def get_context_data(self, **kwargs):
         context = super(homeview, self).get_context_data(**kwargs)
         context['products'] = Item.objects.distinct('user')
+        context['shows'] = Show.objects.all()
         return context
 
     def latest_artwork (self):
@@ -191,6 +199,11 @@ class artists(ListView):
         context = super(artists, self).get_context_data(**kwargs)
         context['products'] = Item.objects.distinct('user')
         return context
+
+    def latest_artwork (self):
+        
+        return Item.objects.latest('date')
+
 
     
 
@@ -218,6 +231,7 @@ class myprofile(View):
         artist= load_profile(request.user)
         paymentdetails = load_payment(request.user)
         u_form =  UserUpdateForm(instance = request.user)
+        
         p_form = UserProfileForm(instance = request.user.artist)
         d_form = PaymentForm(instance = request.user.paymentdetails)
         a_form = UploadForm(instance = request.user)
@@ -233,7 +247,7 @@ class myprofile(View):
         artist= load_profile(request.user)
         paymentdetails = load_payment(request.user)
         u_form = UserUpdateForm(request.POST,instance = request.user)
-
+       
         d_form = PaymentForm(request.POST,instance = request.user.paymentdetails)
         p_form = UserProfileForm(request.POST,request.FILES,instance = request.user.artist)
         if u_form.is_valid() and p_form.is_valid(): 
@@ -247,9 +261,12 @@ class myprofile(View):
             d_form.save()
             return redirect('core:myprofile')
 
+        
+
         else:
             d_form = PaymentForm(request.POST,instance = request.user.paymentdetails)
-
+            
+       
 
        
             return render_to_response(request, 'myprofile.html', {'d_form':d_form})
@@ -296,7 +313,10 @@ class profile(DetailView):
     def get_context_data(self, **kwargs):
         context = super(profile, self).get_context_data(**kwargs)
         context['products'] = Item.objects.all()
+        context['shows'] = Show.objects.all()
         return context
+
+  
     
     
 
@@ -608,3 +628,82 @@ class MessageView(View):
             form.save()
             return redirect('core:message')
 
+
+class CreateShow(View):
+    def get(self,request):
+        form = ShowForm()
+        form.instance.user = self.request.user
+       
+        context = {
+            'form':form,
+           
+        }
+     
+        return render(self.request,'show.html',context)
+        
+        
+    def post(self,request):
+        form = ShowForm(self.request.POST or None)
+        form.instance.user = self.request.user
+        
+        if form.is_valid():
+            
+            form.save()
+            return redirect('/')
+
+        else:
+            return render(request, 'show.html', {'form':form})
+
+
+class UpdateDetail(LoginRequiredMixin,UpdateView):
+    model = Item
+    template_name = 'uitem.html'
+    fields = ['title','price','discount_price','category','label','slug','description','image']
+    def test_func(self):
+        item = self.get_object()
+        
+
+
+    def form_valid(self,form):
+        form.instance.username = self.request.user
+        return super().form_valid(form)
+
+
+class ItemDelete(LoginRequiredMixin, DeleteView):
+    model = Item
+    template_name = 'ditem.html'
+    context_object_name = 'image'
+    success_url = '/'
+
+    def test_func(self):
+        return is_users(self.get_object().username, self.request.user)
+
+
+
+
+
+
+class UpdateShow(LoginRequiredMixin,UpdateView):
+    model = Show
+    template_name = 'ushow.html'
+    
+    form_class = ShowForm
+    success_url = '/'
+   
+    def test_func(self):
+        item = self.get_object()
+        
+
+
+    def form_valid(self,form):
+        form.instance.username = self.request.user
+        return super().form_valid(form)
+
+class ShowDelete(LoginRequiredMixin, DeleteView):
+    model = Show
+    template_name = 'dshow.html'
+    context_object_name = 'image'
+    success_url = '/'
+
+    def test_func(self):
+        return is_users(self.get_object().username, self.request.user)

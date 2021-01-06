@@ -4,151 +4,268 @@
       {% load cart_template_tags%}   
       {% load crispy_forms_tags %}
       <!DOCTYPE html>
-      <html class=''>
+      <html lang="en">
       <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
         <title>Messages</title>
-      <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700,300' rel='stylesheet' type='text/css'>
-      <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
-      <script src="https://use.typekit.net/hoy3lrg.js"></script>
-      <link href="{%static 'css/navbar.css'%}" rel="stylesheet">
-      <link href="{%static 'css/home.css'%}" rel="stylesheet">
-      <link href="{%static 'css/chat.css'%}" rel="stylesheet">
-      <link rel="shortcut icon" href="{% static 'logos.png'%}" type="image/4x-icon">
-      <link href="https://fonts.googleapis.com/css2?family=Courgette&display=swap" rel="stylesheet">
-      <link href="https://cdnjs.cloudflare.com/ajax/libs/SlickNav/1.0.10/slicknav.min.css" rel="stylesheet">
-      <link rel="stylesheet" href="/static_files/css/slicknav.min.css">
-      <link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,200;0,300;1,200&display=swap" rel="stylesheet">
-      <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-      <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-      <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<!------ Include the above in your HEAD tag ---------->
-
-<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-<link href="{%static 'css/responsive.css'%}" rel="stylesheet">
-      <script>try{Typekit.load({ async: true });}catch(e){}</script>
-      <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css'><link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.2/css/font-awesome.min.css'>
-      <style type="text/css">
-        body{
+        <link rel="shortcut icon" href="{% static 'logos.png'%}" type="image/4x-icon">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+        <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:wght@700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+        <link href="https://fonts.googleapis.com/css?family=Josefin+Sans:300,300i,400,400i,700,700i" rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="{%static 'css/navbar.css'%}" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Courgette&display=swap" rel="stylesheet">
         
-        font-family: 'Spectral', serif;
-      }
-      @media only screen and (min-width: 768px) and (max-width: 1193px) {
-    .main-navbar {
-      
-      margin-top: 20px;
-  
-  }
-.main-menu{
-  margin-left: 120px;
+        <link href="{%static 'css/style.min.css'%}" rel="stylesheet">
+        <link href="{%static 'css/style.css'%}" rel="stylesheet">
+        <link href="{%static 'css/home.css'%}" rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,200;0,300;1,200&display=swap" rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,200;0,300;1,200&display=swap" rel="stylesheet">
+        <link href="{%static 'css/chat.css'%}" rel="stylesheet">
+        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,200;0,300;1,200&display=swap" rel="stylesheet">
+          <style>
+            
+
+
+body{
+    margin-top:20px;
+    background:#eee;
+    font-family: 'Spectral', serif;
+}
+/* EMAIL */
+.email {
+    padding: 20px 10px 15px 10px;
+	font-size: 1em;
 }
 
-}
-@media only screen and (min-width: 990px) and (max-width: 1300px) {
-
-.main-menu{
-  margin-left: 170px;
+.email .btn.search {
+	font-size: 0.9em;
 }
 
-}
-@media only screen and (min-width: 768px) and (max-width: 1190px) {
-
-.main-navbar{
- margin-top: -70px;
+.email h2 {
+	margin-top: 0;
+	padding-bottom: 8px;
 }
 
-}
-@media only screen and (min-width: 990px) and (max-width: 992px) {
-
-.main-navbar{
-margin-top: 10px;
-}
-.header-search-form{
- margin-right: 100px;
+.email .nav.nav-pills > li > a {
+	border-top: 3px solid transparent;
 }
 
+.email .nav.nav-pills > li > a > .fa {
+	margin-right: 5px;
 }
 
-@media only screen and (min-width: 989px) and (max-width: 991px) {
+.email .nav.nav-pills > li.active > a,
+.email .nav.nav-pills > li.active > a:hover {
+	background-color: #f6f6f6;
+	border-top-color: #3c8dbc;
+}
 
-.main-navbar{
-margin-top: -70px;
+.email .nav.nav-pills > li.active > a {
+	font-weight: 600;
+}
+
+.email .nav.nav-pills > li > a:hover {
+	background-color: #f6f6f6;
+}
+
+.email .nav.nav-pills.nav-stacked > li > a {
+	color: #666;
+	border-top: 0;
+	border-left: 3px solid transparent;
+	border-radius: 0px;
+}
+
+.email .nav.nav-pills.nav-stacked > li.active > a,
+.email .nav.nav-pills.nav-stacked > li.active > a:hover {
+	background-color: #f6f6f6;
+	border-left-color: #3c8dbc;
+	color: #444;
+}
+
+.email .nav.nav-pills.nav-stacked > li.header {
+	color: #777;
+	text-transform: uppercase;
+	position: relative;
+	padding: 0px 0 10px 0;
+}
+
+.email table {
+	font-weight: 600;
+}
+
+.email table a {
+	color: #666;
+}
+
+.email table tr.read > td {
+	background-color: #f6f6f6;
+}
+
+.email table tr.read > td {
+	font-weight: 400;
+}
+
+.email table tr td > i.fa {
+	font-size: 1.2em;
+	line-height: 1.5em;
+	text-align: center;
+}
+
+.email table tr td > i.fa-star {
+	color: #f39c12;
+}
+
+.email table tr td > i.fa-bookmark {
+	color: #e74c3c;
+}
+
+.email table tr > td.action {
+	padding-left: 0px;
+	padding-right: 2px;
+}
+
+.grid {
+    position: relative;
+    width: 100%;
+    background: #fff;
+    color: #666666;
+    border-radius: 2px;
+    margin-bottom: 25px;
+    box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);
 }
 
 
+
+.grid .grid-header:after {
+    clear: both;
 }
 
-
-@media only screen and (min-width: 990px) {
-
-.images{
-margin-left: 120px;
+.grid .grid-header span,
+.grid .grid-header > .fa {
+    display: inline-block;
+    margin: 0;
+    font-weight: 300;
+    font-size: 1.5em;
+    float: left;
 }
 
+.grid .grid-header span {
+    padding: 0 5px;
 }
 
-
-@media only screen and (max-width: 767px) {
-  .site-logo {
-      margin-bottom: 20px;
-  }
-
-/* Large Mobile :480px. */
-
-
-
-  .user-panel {
-      text-align: center;
-  }
-  .main-menu {
-      display: none;
-  }
-  .slicknav_btn {
-      background-color: #565656;
-      text-align: left;
-  }
-  .slicknav_menu {
-      background: #282828;
-      display: block;
-      text-align: left;
-      margin-top: 70px;
-  }
-  .slicknav_menu .new {
-      font-size: 10px;
-      font-weight: 700;
-      color: #fff;
-      background: #f51167;
-      line-height: 1;
-      text-transform: uppercase;
-      padding: 5px 9px 1px;
-      border-radius: 15px;
-      width: 42px;
-      margin-left: 5px;
-  }
-  
+.grid .grid-header > .fa {
+    padding: 5px 10px 0 0;
 }
-/* Medium Mobile :480px. */
 
-.dis{
- display: none;
- float: right;
+.grid .grid-header > .grid-tools {
+    padding: 4px 10px;
 }
-@media only screen and (max-width: 990px) {
-.header-search-form {
-      margin-bottom: 15px;
-  margin-right: auto;
-  }
 
+.grid .grid-header > .grid-tools a {
+    color: #999999;
+    padding-left: 10px;
+    cursor: pointer;
 }
-     
-  
-   
-  
-    </style>
+
+.grid .grid-header > .grid-tools a:hover {
+    color: #666666;
+}
+
+.grid .grid-body {
+    padding: 15px 20px 15px 20px;
+    font-size: 0.9em;
+    line-height: 1.9em;
+}
+
+.grid .full {
+    padding: 0 !important;
+}
+
+.grid .transparent {
+    box-shadow: none !important;
+    margin: 0px !important;
+    border-radius: 0px !important;
+}
+
+.grid.top.black > .grid-header {
+    border-top-color: #000000 !important;
+}
+
+.grid.bottom.black > .grid-body {
+    border-bottom-color: #000000 !important;
+}
+
+.grid.top.blue > .grid-header {
+    border-top-color: #007be9 !important;
+}
+
+.grid.bottom.blue > .grid-body {
+    border-bottom-color: #007be9 !important;
+}
+
+.grid.top.green > .grid-header {
+    border-top-color: #00c273 !important;
+}
+
+.grid.bottom.green > .grid-body {
+    border-bottom-color: #00c273 !important;
+}
+
+.grid.top.purple > .grid-header {
+    border-top-color: #a700d3 !important;
+}
+
+.grid.bottom.purple > .grid-body {
+    border-bottom-color: #a700d3 !important;
+}
+
+.grid.top.red > .grid-header {
+    border-top-color: #dc1200 !important;
+}
+
+.grid.bottom.red > .grid-body {
+    border-bottom-color: #dc1200 !important;
+}
+
+.grid.top.orange > .grid-header {
+    border-top-color: #f46100 !important;
+}
+
+.grid.bottom.orange > .grid-body {
+    border-bottom-color: #f46100 !important;
+}
+
+.grid.no-border > .grid-header {
+    border-bottom: 0px !important;
+}
+
+.grid.top > .grid-header {
+    border-top-width: 4px !important;
+    border-top-style: solid !important;
+}
+
+.grid.bottom > .grid-body {
+    border-bottom-width: 4px !important;
+    border-bottom-style: solid !important;
+}
+          </style>
     
       </head>
       <body>
+      
+    
+
+
+
+
+
         <header class="header-section" style="text-align: center;align-items: center;" > 
             <div class="header-top">
               <div class="main-container">
@@ -218,119 +335,214 @@ margin-left: 120px;
             </nav>
           </header>
       
-      <div id="frame" style="margin-top: 30px; align-items: center;">
-          <div id="sidepanel">
-              <div id="profile">
-                  <div class="wrap">
-                      <img  src="{{user.artist.image_artist.url}}" class="online img-rounded" style="height: 50px; width: 50px;" alt="profile" >
-                      <p>{{user.first_name}} {{user.last_name}}</p>
-                      <!-- <i class="fa fa-chevron-down expand-button" aria-hidden="true"></i> -->
-                      <div id="status-options">
-                          <ul>
-                              <li id="status-online" class="active"><span class="status-circle"></span> <p>Online</p></li>
-                              <li id="status-away"><span class="status-circle"></span> <p>Away</p></li>
-                              <li id="status-busy"><span class="status-circle"></span> <p>Busy</p></li>
-                              <li id="status-offline"><span class="status-circle"></span> <p>Offline</p></li>
-                          </ul>
-                      </div>
-                      <!-- <div id="expanded">
-                          <label for="twitter"><i class="fa fa-facebook fa-fw" aria-hidden="true"></i></label>
-                          <input name="twitter" type="text" value="mikeross" />
-                          <label for="twitter"><i class="fa fa-twitter fa-fw" aria-hidden="true"></i></label>
-                          <input name="twitter" type="text" value="ross81" />
-                          <label for="twitter"><i class="fa fa-instagram fa-fw" aria-hidden="true"></i></label>
-                          <input name="twitter" type="text" value="mike.ross" />
-                      </div> -->
-                  </div>
-              </div> <br>
-            
-              <div id="contacts">
-                  <ul>
-                    <li class="contact">
-                      <div class="wrap">
-                          <span class="contact-status busy"></span>
-                         
-                         
-                            <div style="display: inline-flex;">
-                             
-                              <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" style="margin-right: 10px;" fill="currentColor" class="bi bi-brush-fill" viewBox="0 0 16 16">
-                                <path d="M15.825.12a.5.5 0 0 1 .132.584c-1.53 3.43-4.743 8.17-7.095 10.64a6.067 6.067 0 0 1-2.373 1.534c-.018.227-.06.538-.16.868-.201.659-.667 1.479-1.708 1.74a8.117 8.117 0 0 1-3.078.132 3.658 3.658 0 0 1-.563-.135 1.382 1.382 0 0 1-.465-.247.714.714 0 0 1-.204-.288.622.622 0 0 1 .004-.443c.095-.245.316-.38.461-.452.393-.197.625-.453.867-.826.094-.144.184-.297.287-.472l.117-.198c.151-.255.326-.54.546-.848.528-.739 1.2-.925 1.746-.896.126.007.243.025.348.048.062-.172.142-.38.238-.608.261-.619.658-1.419 1.187-2.069 2.175-2.67 6.18-6.206 9.117-8.104a.5.5 0 0 1 .596.04z"/>
-                              </svg>
-                              <div class="meta" >
-                              <p class="name"> <br>  Compose </p>
-                            </div> 
-                            
-                         
-                      </div>
-                  </li><br>
-                      <li class="contact active">
-                          <div class="wrap">
-                              <span class="contact-status online"></span>
-                             
-                             
-                                <div style="display: inline-flex;">
-                                 
-                                  <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" style="margin-right: 10px;" fill="currentColor" class="bi bi-chat-right-text" viewBox="0 0 16 16">
-                                    <path d="M2 1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h9.586a2 2 0 0 1 1.414.586l2 2V2a1 1 0 0 0-1-1H2zm12-1a2 2 0 0 1 2 2v12.793a.5.5 0 0 1-.854.353l-2.853-2.853a1 1 0 0 0-.707-.293H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h12z"/>
-                                    <path d="M3 3.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zM3 6a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9A.5.5 0 0 1 3 6zm0 2.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5z"/>
-                                  </svg> 
-                                  <div class="meta" >
-                                  <p class="name">Inbox</p>
-                                  <p class="preview">View Your Inbox.</p>
-                                </div> 
-                                
-                             
-                          </div>
-                      </li>
-                      <br>
-                      <li class="contact ">
-                          <div class="wrap">
-                              <span class="contact-status busy"></span>
-                              <div style="display: inline-flex;">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" style="margin-right: 10px;" fill="currentColor" class="bi bi-chat-right-text-fill" viewBox="0 0 16 16">
-                                  <path d="M16 2a2 2 0 0 0-2-2H2a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h9.586a1 1 0 0 1 .707.293l2.853 2.853a.5.5 0 0 0 .854-.353V2zM3.5 3h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1 0-1zm0 2.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1 0-1zm0 2.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1 0-1z"/>
-                                </svg>
-                              <div class="meta">
-                                  <p class="name">Sent</p>
-                                  <p class="preview">View Sent Mail.</p>
-                              </div>
-                            </div>
-                          </div>
-                      </li>
-                     
-                  </ul>
-              </div>
+
+      
+<div class="container">
+<div class="row">
+	<!-- BEGIN INBOX -->
+	<div class="col-md-12">
+		<div class="grid email">
+			<div class="grid-body">
+				<div class="row">
+					<!-- BEGIN INBOX MENU -->
+					<div class="col-md-3">
+						<h2 class="grid-title"><i class="fa fa-inbox"></i> Inbox</h2>
+						<a class="btn btn-block btn-primary" data-toggle="modal" data-target="#compose-modal"><i class="fa fa-pencil"></i>&nbsp;&nbsp;NEW MESSAGE</a>
+
+						<hr>
+
+						<div>
+							<ul class="nav nav-pills navtab-bg nav-stacked" style="display: inline-block;">
+								<li class="header">Folders</li>
+								<li class="nav-item"><a  href="#about-me" data-toggle="tab" aria-expanded="true" class="nav-link ml-0 active"><i class="fa fa-inbox"></i> Inbox (14)</a></li>
+							
+								<li><a href="#settings" data-toggle="tab" aria-expanded="false" class="nav-link"><i class="fa fa-mail-forward"></i> Sent</a></li>
+								
+							</ul>
+						</div>
+					</div>
+					<!-- END INBOX MENU -->
+					
+          <!-- BEGIN INBOX CONTENT -->
+         
+					<div class="col-md-9 tab-content" >
+				
+						
+			
+						
+						<div class="table-responsive tab-pane show active" id="about-me">
+							<table class="table" >
+								<tbody>
+                  <h1>Inbox Messages</h1>
+                  {% for chat in chats %}
+
+                  {% if chat.reciever.username == user.username %}
+                  <tr>
+								
+									<td class="action"><i class="fa fa-star-o"></i></td>
+									<td class="action"><img src="{{chat.user.artist.image_artist.url}}" alt="" style="height: 30px; width: 30px;" /></td>
+									<td class="name"><a href="#">{{chat.user.username}}</a></td>
+									<td class="subject">{{chat.message}}</td>
+									<td class="time">{{chat.timestamp}}</td>
+                </tr>
+                {%endif%}
+                {% empty %}
+
+                <h1>No Inbox</h1>
+                {%endfor%}
+						
+					
+						
+					
+					
+							</tbody></table>
+            </div>
            
+              <!-- nice -->
+               
+            <div class="table-responsive tab-pane " id="settings">
+              <h1>Sent Messages</h1>
+							<table class="table" >
+								<tbody>
+                  {% for chat in chats %}
+
+                  {% if chat.user.username == user.username %}
+
+                  <tr>
+							
+									<td class="action"><i class="fa fa-star-o"></i></td>
+                  <td class="action"><img src="{{chat.reciever.artist.image_artist.url}}" alt="" style="height: 30px; width: 30px;" /></td>
+									<td class="name"><a href="#">{{chat.reciever.username}}</a></td>
+									<td class="subject">{{chat.message}}</td>
+									<td class="time">{{chat.timestamp}}</td>
+                </tr>
+                {%endif%}
+                {% empty %}
+
+                <h1>No sent Messages</h1>
+							{%endfor%}
+					
+						
+					
+					
+							</tbody></table>
+						</div>
+
+									
+					</div>
+					<!-- END INBOX CONTENT -->
+					
+					<!-- BEGIN COMPOSE MESSAGE -->
+
+          <div class="modal fade" id="compose-modal" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+              <div class="modal-content">
+                
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLongTitle" style="color: black;">Compose Message</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                    <form action="" method="post">
+            {% csrf_token %}
+          {{ form.reciever|as_crispy_field }}
+            {{ form.message|as_crispy_field }}
+            
+            <button type="submit" class="btn btn-danger btn-lg"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
+        </form>
+                </div>
+            
+              </div>
+            </div>
           </div>
-          <div class="content">
- 
-              <div class="messages">
-                  <ul>
-                      <li class="sent" style="background-color: white;border-radius: 20px;"> 
-                        {% for chat in chats %}
+
+
+					<!-- END COMPOSE MESSAGE -->
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- END INBOX -->
+</div>
+</div>
+      <section class="footer-section" style="margin-top: 50px;font-weight: 500;color: white;">
+        <div class="container-fluid">
+        
+          <div class="row">
     
-                        {% if chat.reciever.username == user.username %}
-                       <img src="{{chat.user.artist.image_artist.url}}" alt="" style="height: 80px; width: 80px;" />
-                       <div style="display: inline-block;">
-                       <p style="background-color: transparent;color: #000;">{{chat.user.first_name}} {{chat.user.last_name}}  <span style="background-color: transparent;" > <p style="float: right;background-color: transparent; color: #000;margin-right: 0;">{{chat.timestamp|date:'D,d M,Y'}}</p> </span></p> <br>
-                          <p>{{chat.message}}</p>
-                        </div>
-                      </li>
-                      {%endif%}
-                      {% endfor%}
-              
-                  </ul>
+            <div class="col-lg-3 col-sm-6">
+              <div class="footer-widget about-widget">
+                <a href="https://hooliganlivefree.com" target="_blank"><img src="{% static 'logo.png'%}" alt="" style="margin-left: 20px;height: 70%; width: 70%;"></a>
               </div>
-              <div class="message-input">
-                  <div class="wrap">
-                  <input type="text" placeholder="Write your message..." />
-                  <i class="fa fa-paperclip attachment" aria-hidden="true"></i>
-                  <button class="submit"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
-                  </div>
+            </div>
+            <div class="col-lg-3 col-sm-6">
+              <div class="footer-widget about-widget">
+                <h2>About Us</h2>
+                <p  style="color: white;">Welcome to Hooligan LLC, We <br> represent artists from all over  the <br>  world find amazing photographs, <br>paintings,sculptures and prints.</p>
+                <img src="{% static 'cards.png' %}" alt="" style="height: 50%;width: 50%;">
               </div>
+            </div>
+          
+            <div class="col-lg-3 col-sm-6">
+              <div class="footer-widget about-widget">
+                <h2>DON'T GET LOST</h2>
+                <ul>
+                  <li style="color: white;"><a href="/" style="color: white;">Home</a></li>
+                  <li style="color: white;"><a href="/photographs" style="color: white;">Photographs</a></li>
+                  <li style="color: white;"><a href="/artists" style="color: white;">Artists</a></li>
+                  <li style="color: white;"><a href="/paintings" style="color: white;">Paintings</a></li>
+                  <li style="color: white;"><a href="/sculptures" style="color: white;">Sculptures</a></li>
+                  <li style="color: white;"><a href="{%url 'core:order-summary'%}" style="color: white;">Order Summary</a></li>
+                </ul>
+                
+              </div>
+            </div>
+          
+            <div class="col-lg-3 col-sm-6">
+              <div class="footer-widget contact-widget" style="color: white;">
+                <h2>Contact Info</h2>
+                <div class="con-info">
+                
+                  <p style="color: white;">  <i class="fas fa-home" style="margin-right: 10px;color: white;"></i>Hooligan LLC </p>
+                </div>
+                <div class="con-info">
+                  
+                  <p style="color: white;"> <i class="fas fa-map-marker-alt" style="margin-right: 10px;"></i>New York,USA </p>
+                </div>
+                <div class="con-info">
+                  
+                  <p style="color: white;"> <i class="fas fa-phone" style="margin-right: 10px;"></i>+1 347 981 3342</p>
+                </div>
+                <div class="con-info">
+    
+                  <p style="color: white;"> <i class="far fa-envelope" style="margin-right: 10px;"></i>451hugo@gmail.com</p>
+                </div>
+              </div>
+            </div>
           </div>
-      </div>
-      <script src='//production-assets.codepen.io/assets/common/stopExecutionOnTimeout-b2a7b3fe212eaa732349046d8416e00a9dec26eb7fd347590fbced3ab38af52e.js'></script><script src='https://code.jquery.com/jquery-2.2.4.min.js'></script>
+        </div>
+        <div class="social-links-warp">
+          <div class="container">
+            <div class="social-links" style="text-align: center;">
+              <a href="https://www.instagram.com/hooliganlivefree/?hl=en" class="instagram"><i class="fab fa-instagram"></i><span>instagram</span></a>
+            
+              <a href="https://www.facebook.com/HooliganLLC/" class="facebook"><i class="fab fa-facebook"></i><span>facebook</span></a>
+              <a href="https://twitter.com/HooliganLLC" class="twitter"><i class="fab fa-twitter"></i><span>twitter</span></a>
+            
+            </div>
+            
+    
+          </div>
+        </div>
+        <div>
+    
+        </div>
+      </section>
+   
+      
+    
       <script >$(".messages").animate({ scrollTop: $(document).height() }, "fast");
       
       $("#profile-img").click(function() {
