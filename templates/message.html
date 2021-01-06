@@ -291,8 +291,11 @@ body{
                         
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                           {% if user.is_authenticated %}
-                        <a class="dropdown-item"  href="{% url 'account_logout'%}">Logout</a>
-                        <a href="/myprofile" class="dropdown-item" > Account </a>
+                          <a class="dropdown-item"  href="{% url 'account_logout'%}">Logout</a>
+              <a href="/myprofile" class="dropdown-item" > Account </a>
+              <a href="/myprofile" class="dropdown-item" > Favourites </a>
+              <a href="/myprofile" class="dropdown-item" > Orders </a>
+              <a href="/message" class="dropdown-item" > Messages</a>
           
                      
                         {% else %}
