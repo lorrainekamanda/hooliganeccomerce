@@ -1,7 +1,7 @@
 {% load static %}
-
 {% load cart_template_tags%}
 {% load crispy_forms_tags %}
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -11,104 +11,76 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
-  <title>Dagallery-upload Art</title>
+  <title>Dagallery-Upload Art</title>
   <link rel="shortcut icon" href="{% static 'logos.png'%}" type="image/4x-icon">
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <link href="https://fonts.googleapis.com/css?family=Josefin+Sans:300,300i,400,400i,700,700i" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Courgette&display=swap" rel="stylesheet">
-  <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,200;0,300;1,200&display=swap" rel="stylesheet">
-  <!-- Material Design Bootstrap -->
 
+  <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+  <!-- Material Design Bootstrap -->
+  <link href="{% static 'css/mdb.min.css' %}" rel="stylesheet">
   <!-- Your custom styles (optional) -->
   <link href="{%static 'css/style.min.css'%}" rel="stylesheet">
-  <link href="{%static 'css/home.css'%}" rel="stylesheet">
+  <link href="{%static 'css/style.css'%}" rel="stylesheet">
+  <link href="{%static 'css/heroz.css'%}" rel="stylesheet">
   <link href="{%static 'css/navbar.css'%}" rel="stylesheet">
-  <link href="{%static 'css/global.css'%}" rel="stylesheet">
-<style>
+  <link href="{%static 'css/home.css'%}" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,200;0,300;1,200&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/5.3.45/css/materialdesignicons.css" integrity="sha256-NAxhqDvtY0l4xn+YVa6WjAcmd94NNfttjNsDmNatFVc=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css" integrity="sha256-2XFplPlrFClt0bIdPgpz8H7ojnk10H69xRqd9+uTShA=" crossorigin="anonymous" />
+  <link href="{%static 'css/newprofile.css'%}" rel="stylesheet">
+  <style type="text/css">
+  
 
-.back-to-top {
-  position: fixed;
-  display: none;
-  right: 15px;
-  bottom: 15px;
-  z-index: 3;
-  scroll-behavior: smooth;
-  text-decoration: none;
-  }
+    html,
+    body,
+   
+    .carousel {
+     
+      font-family: 'Spectral', serif;
+      scroll-behavior: smooth;
+      
+   
+    }
   
-  .back-to-top i {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 24px;
-  width: 40px;
-  height: 40px;
-  border-radius: 4px;
-  background:rgb(238, 35, 69);
-  color: #fff;
-  transition: all 0.4s;
-  text-decoration: none;
-  }
-  
-  .back-to-top i:hover {
-  background:rgb(151, 41, 41);
-  color: #fff;
-  text-decoration: none;
-  
-  }
-  @media only screen and (max-width: 767px) {
-	.site-logo {
-		margin-bottom: 20px;
-	}
-
-	.user-panel {
-		text-align: center;
-	}
-	.main-menu {
-		display: none;
-	}
-	.slicknav_btn {
-		background-color: #565656;
-		text-align: left;
-	}
-	.slicknav_menu {
-		background: #282828;
-		display: block;
-		text-align: left;
-		margin-top: 70px;
-	}
-	.slicknav_menu .new {
-		font-size: 10px;
-		font-weight: 700;
-		color: #fff;
-		background: #f51167;
-		line-height: 1;
-		text-transform: uppercase;
-		padding: 5px 9px 1px;
-		border-radius: 15px;
-		width: 42px;
-		margin-left: 5px;
-	}
-	
+    .nav-pills>li>a, .nav-tabs>li>a {
+    color: black;
+    font-weight: 600;
 }
-@media only screen and (max-width: 990px) {
-  .header-search-form {
-		margin-bottom: 15px;
-    margin-right: auto;
-	}
 
- }
- body{
-  font-family: 'Spectral', serif;
-}
-</style>
 
  
 
+  </style>
+
+     
+<script type="text/javascript">
+
+  let user = '{{request.user}}'
+  function getCookie(name) {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                const cookies = document.cookie.split(';');
+                for (let i = 0; i < cookies.length; i++) {
+                    const cookie = cookies[i].trim();
+                    // Does this cookie string begin with the name we want?
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+  
+        const csrftoken = getCookie('csrftoken');
+  
+  
+  </script>
 </head>
+
 <body>
   <header class="header-section" style="text-align: center;align-items: center;" > 
     <div class="header-top">
@@ -136,10 +108,10 @@
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                   {% if user.is_authenticated %}
                   <a class="dropdown-item"  href="{% url 'account_logout'%}">Logout</a>
-              <a href="/myprofile" class="dropdown-item" > Account </a>
-              <a href="/myprofile" class="dropdown-item" > Favourites </a>
-              <a href="/myprofile" class="dropdown-item" > Orders </a>
-              <a href="/message" class="dropdown-item" > Messages</a>
+                  <a href="/myprofile" class="dropdown-item" > Account </a>
+                  <a href="/myprofile" class="dropdown-item" > Favourites </a>
+                  <a href="/myprofile" class="dropdown-item" > Orders </a>
+                  <a href="/message" class="dropdown-item" > Messages</a>
   
              
                 {% else %}
@@ -181,155 +153,193 @@
       </div>
     </nav>
   </header>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/5.3.45/css/materialdesignicons.css" integrity="sha256-NAxhqDvtY0l4xn+YVa6WjAcmd94NNfttjNsDmNatFVc=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css" integrity="sha256-2XFplPlrFClt0bIdPgpz8H7ojnk10H69xRqd9+uTShA=" crossorigin="anonymous" />
+<div class="container" style="margin-top: 30px;">
+<div class="row">
+    <div class="col-lg-4 col-xl-4">
+        <div class="card-box text-center">
+          <!-- <a class="btn btn-block btn-primary" data-toggle="modal" data-target="#compose-modal"><i class="fa fa-pencil"></i>Edit</a> -->
+            <img src="{{user.artist.image_artist.url}}" class="rounded-circle avatar-xl img-thumbnail" alt="profile-image" style="height:200px ; width: 200px;">
 
-   <section  class="hero-section" style="margin-top: 30px;">
-  
-
-
-<div class="page-wrapper bg-gra-03 p-t-45 p-b-50">
-  <div class="wrapper wrapper--w790">
-      <div class="card card-5">
-          <div class="card-heading">
-              <h2 class="title">Upload Art</h2>
-          </div>
-          <div class="card-body">
-              <form method="POST" enctype="multipart/form-data">
+            <h4 class="mb-0">{{user.first_name}} {{user.last_name}}</h4>
+            <hr>
             
-                {% csrf_token %}
-                  <div class="form-row">
-                     
-                      <div class="value">
-                         
-                            {{ form|crispy }}
-                          
-                      </div>
+
+            <ul class="nav nav-pills navtab-bg" style="display: inline-block;text-align: left;">
+
+              <li class="nav-item" style="background-color: transparent;">
+                <a href="#about-me" data-toggle="tab" aria-expanded="true" class="nav-link ml-0 active" style="background-color: transparent;">
+                    <i class="mdi mdi-face-profilce mr-1"></i>Upload Art
+                </a>
+            </li>
+            <hr>
+        </ul>
+           </div> 
+           </div> 
+
+    <div class="col-lg-8 col-xl-8">
+        <div class="car">
+            <div class="tab-pane  show active" id="about-me">
+                  <form method="post" action="" enctype="multipart/form-data" >
+                    {% csrf_token %}
+                    <div class="card-box">
+                    <h5 class="mb-3 text-uppercase "><i class="mdi mdi-account-circle mr-1"></i> Upload Art</h5>
+                    
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                {{form|crispy}}
+                            </div>
+                        </div>
+                       
+                       
+                    </div> 
+                    <div class="text-right">
+                      <button type="submit" class="btn btn-black waves-effect waves-light mt-2"><i class="mdi mdi-content-save"></i> Save</button>
                   </div>
-                
-                  
-                      <button class="btn btn-danger btn-sm" type="submit">Upload</button>
                   </div>
-              </form>
-          </div>
-      </div>
-  </div>
-</div>                                </div>
-                      </div>
-                  </div>
+                </form>
+
                  
 
+                   
+                </div>
+               
+                
+                
+              
 
-<section class="footer-section">
-  <div class="container-fluid">
+              
+               
+
+            </div>
+        </div>
+
+    </div>
+</div>
+</div> 
+
+
+
+
   
-    <div class="row">
 
-      <div class="col-lg-3 col-sm-6">
-        <div class="footer-widget about-widget">
-          <a href="https://hooliganlivefree.com" target="_blank"><img src="{% static 'logo.png'%}" alt="" style="margin-left: 20px;height: 70%; width: 70%;"></a>
-        </div>
-      </div>
-      <div class="col-lg-3 col-sm-6">
-        <div class="footer-widget about-widget">
-          <h2>About Us</h2>
-          <p>Welcome to Hooligan LLC we represent artists from all over the world find amazing photographs,paintings,sculptures and prints.</p>
-          <img src="{% static 'cards.png' %}" alt="" style="height: 50%;width: 50%;">
-        </div>
-      </div>
+    <section class="footer-section">
+      <div class="container-fluid">
       
-      <div class="col-lg-3 col-sm-6">
-        <div class="footer-widget about-widget">
-          <h2>DON'T GET LOST</h2>
-          <ul>
-            <li><a href="/">Home</a></li>
-            <li><a href="/photographs">Photographs</a></li>
-           
-            <li><a href="/paintings">Paintings</a></li>
-            <li><a href="/sculpures">Sculptures</a></li>
-            <li><a href="{%url 'core:order-summary'%}">Order Summary</a></li>
-          
-          </ul>
-          
-        </div>
-      </div>
+        <div class="row">
     
-      <div class="col-lg-3 col-sm-6">
-        <div class="footer-widget contact-widget">
-          <h2>Contact Info</h2>
-          <div class="con-info">
-            <p> <i class="fas fa-home" style="margin-right: 10px;"></i>Hooligan LLC </p>
+          <div class="col-lg-3 col-sm-6">
+            <div class="footer-widget about-widget">
+              <a href="https://hooliganlivefree.com"><img src="{% static 'logo.png'%}" alt="" style="margin-left: 20px;height: 70%; width: 70%;"></a>
+            </div>
           </div>
-          <div class="con-info">
-            
-            <p> <i class="fas fa-map-marker-alt" style="margin-right: 10px;"></i>New York,USA </p>
+          <div class="col-lg-3 col-sm-6">
+            <div class="footer-widget about-widget">
+              <h2>About Us</h2>
+              <p >Welcome to Hooligan LLC, We <br> represent artists from all over  the <br>  world find amazing photographs, <br>paintings,sculptures and prints.</p>
+              <img src="{% static 'cards.png' %}" alt="" style="height: 50%;width: 50%;">
+            </div>
           </div>
-          <div class="con-info">
-            
-            <p> <i class="fas fa-phone-alt" style="margin-right: 10px;"></i>+1 347 981 3342</p>
-          </div>
-          <div class="con-info">
           
-            <p> <i class="far fa-envelope" style="margin-right: 10px;"></i>451hugo@gmail.com</p>
+          <div class="col-lg-3 col-sm-6">
+            <div class="footer-widget about-widget">
+              <h2>DON'T GET LOST</h2>
+              <ul>
+                <ul>
+                  <li><a href="/">Home</a></li>
+                  <li><a href="/photographs">Photographs</a></li>
+                  <li><a href="/artists">Artists</a></li>
+                  <li><a href="/paintings">Paintings</a></li>
+                  <li><a href="/">Sculptures</a></li>
+                  <li><a href="{%url 'core:order-summary'%}">Order Summary</a></li>
+                </ul>
+              
+              </ul>
+              
+            </div>
+          </div>
+        
+          <div class="col-lg-3 col-sm-6">
+            <div class="footer-widget contact-widget">
+              <h2>Contact Info</h2>
+              <div class="con-info">
+              
+                <p> <i class="fas fa-home" style="margin-right: 10px;"></i>Hooligan LLC </p>
+              </div>
+              <div class="con-info">
+                
+                <p> <i class="fas fa-map-marker-alt" style="margin-right: 10px;"></i>New York,USA </p>
+              </div>
+              <div class="con-info">
+                
+                <p> <i class="fas fa-phone-alt" style="margin-right: 10px;"></i>+1 347 981 3342</p>
+              </div>
+              <div class="con-info">
+              
+                <p> <i class="far fa-envelope" style="margin-right: 10px;"></i>451hugo@gmail.com</p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </div>
-  <div class="social-links-warp">
-    <div class="container">
-      <div class="social-links">
-        <a href="https://www.instagram.com/hooliganlivefree/?hl=en" class="instagram"><i class="fab fa-instagram"></i><span>instagram</span></a>
+      <div class="social-links-warp">
+        <div class="container">
+          <div class="social-links" style="text-align: center;">
+            <a href="https://www.instagram.com/hooliganlivefree/?hl=en" class="instagram"><i class="fab fa-instagram"></i><span>instagram</span></a>
         
-        <a href="https://www.facebook.com/HooliganLLC/" class="facebook"><i class="fab fa-facebook-f"></i><span>facebook</span></a>
-        <a href="https://twitter.com/HooliganLLC" class="twitter"><i class="fab fa-twitter"></i><span>twitter</span></a>
-      
+            <a href="https://www.facebook.com/HooliganLLC/" class="facebook"><i class="fab fa-facebook"></i><span>facebook</span></a>
+            <a href="https://twitter.com/HooliganLLC" class="twitter"><i class="fab fa-twitter"></i><span>twitter</span></a>
+          
+          </div>
+    
+    
+    
+        </div>
       </div>
+    </section>
+    
+    
+    
+    
+    
+    
+    
+    <a href="#" class="back-to-top"><i class="fas fa-chevron-up"></i></a>
 
+    <script src="/static_files/js/jquery.slicknav.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/TweenMax.min.js"></script>
+    <script type="text/javascript" src="{%static 'js/jquery-3.4.1.min.js'%}"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+    <!-- Bootstrap tooltips -->
+    <script type="text/javascript" src="{% static 'js/popper.min.js' %}"></script>
+    <!-- Bootstrap core JavaScript -->
+    <script type="text/javascript" src="{% static 'js/bootstrap.min.js'%}"></script>
+    
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/SlickNav/1.0.10/jquery.slicknav.min.js"></script>
+    <!-- MDB core JavaScript -->
+    <script type="text/javascript" src="{% static 'js/mdb.min.js' %}"></script>
+    
+    <script src="{% static 'js/scripts.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
 
-
-    </div>
-  </div>
-</section>
-
-
-
-
-
-
-
-<a href="#" class="back-to-top"><i class="fas fa-chevron-up"></i></a>
-
-
-</body>
-<script src="vendor/jquery/jquery.min.js"></script>
-    <!-- Vendor JS-->
-    <script src="vendor/select2/select2.min.js"></script>
-    <script src="vendor/datepicker/moment.min.js"></script>
-    <script src="vendor/datepicker/daterangepicker.js"></script>
-<script src="/static_files/js/jquery.slicknav.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/TweenMax.min.js"></script>
-<script type="text/javascript" src="{%static 'js/jquery-3.4.1.min.js'%}"></script>
-<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
-<!-- Bootstrap tooltips -->
-<script type="text/javascript" src="{% static 'js/popper.min.js' %}"></script>
-<!-- Bootstrap core JavaScript -->
-<script type="text/javascript" src="{% static 'js/bootstrap.min.js'%}"></script>
-
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/SlickNav/1.0.10/jquery.slicknav.min.js"></script>
-<!-- MDB core JavaScript -->
-<script type="text/javascript" src="{% static 'js/mdb.min.js' %}"></script>
-
-<script src="{% static 'js/script.js' %}"></script>
-<!-- Initializations -->
-<script type="text/javascript">
-$(window).scroll(function() {
+  <!-- Initializations -->
+  <script type="text/javascript">
+      $(window).scroll(function() {
     if ($(this).scrollTop() > 100) {
       $('.back-to-top').fadeIn('slow');
     } else {
       $('.back-to-top').fadeOut('slow');
     }
   });
-  // Animations initialization
-  new WOW().init();
+    new WOW().init();
 
-</script>
+  </script>
+</body>
+
 </html>
+ 
+
+
+

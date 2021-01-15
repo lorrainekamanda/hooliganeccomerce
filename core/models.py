@@ -29,15 +29,16 @@ LABEL_CHOICES = (
 )
 
 
+ACCOUNT_CHOICES = (
+    ('By','Buyer'),
+    ('Sl','Seller')
+   
+)
+
+
 class Artist(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL,on_delete = models.CASCADE,blank = True)
-    first_name = models.CharField(max_length = 100,blank = True,null = True)
-    last_name = models.CharField(max_length = 100,blank = True,null = True)
-    profession = models.CharField(max_length = 100,blank = True,null = True)
-    bio = models.TextField(blank = True,null = True)
-    focus = models.CharField(max_length = 100,blank = True,null = True)
-    about_your_work = models.TextField(blank = True,null = True)
-    phone = models.CharField(max_length = 200,blank = True,null = True)
+    mailing_address = models.CharField(max_length = 100, verbose_name = "Mailing_Address",blank = True,null = True)
     instagram = models.URLField(max_length = 200,blank = True,null = True)
     facebook = models.URLField(max_length = 200,blank = True,null = True)
     twitter = models.URLField(max_length = 200,blank = True,null = True)
@@ -53,25 +54,7 @@ class Artist(models.Model):
         return reverse ('core:profile', kwargs = {'pk':self.pk})
 
 
-class Profile(models.Model):
-    first_name = models.CharField(max_length = 100,blank = True,null = True,default = 'John')
-    last_name = models.CharField(max_length = 100,blank = True,null = True,default = 'Doe')
-    bio = models.CharField(max_length = 200,blank = True,null = True,default ='My mystrey')
-    phone = models.CharField(max_length = 200,blank = True,null = True,default = '222')
-    instagram = models.URLField(max_length = 200,blank = True,null = True,default = 'user@instagram.com')
-    facebook = models.URLField(max_length = 200,blank = True,null = True,default = 'user@instagram.com')
-    tweeter = models.URLField(max_length = 200,blank = True,null = True,verbose_name = "Twitter",default = 'user@twitter.com')
-    image_artist = CloudinaryField("image",default = 'profile.jpg',blank = True,null = True)
-    
-   
-    
 
-    def __str__(self):
-        return str(self.user.username)
-
-
-    def get_absolute_url(self):
-        return reverse ('core:profile', kwargs = {'pk':self.pk})
 
 class Item(models.Model):
    title = models.CharField(max_length = 100,unique = True)
@@ -93,11 +76,6 @@ class Item(models.Model):
 
    def all_likes(self):
         return self.likes.count()
-
-
-
-
-
 
    def get_absolute_url(self):
        return reverse("core:product",kwargs = {'slug':self.slug})
@@ -188,10 +166,10 @@ class BillingAdress(models.Model):
 class PaymentDetails(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL,on_delete = models.SET_NULL,blank = True,null = True)
     name = models.CharField(max_length = 100,blank = True,null = True)
-    cardno = models.CharField(max_length = 100,blank = True,null = True)
-    expiry_date = models.CharField(max_length = 100,blank = True,null = True)
+    cardno = models.CharField(max_length = 100,blank = True,null = True,verbose_name = "Card Number")
+    expiry_date = models.DateField(blank = True,null = True)
     billing_adress = models.CharField(max_length = 100,blank = True,null = True)
-    CITY= models.CharField(max_length = 100,blank = True,null = True)
+    CITY= models.CharField(max_length = 100,blank = True,null = True,verbose_name = "City")
 
     
 
@@ -202,7 +180,7 @@ class Payment(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete = models.SET_NULL,blank = True,null = True)
     stripe_charge_id = models.CharField(max_length = 100)
     amount = models.FloatField()
-    time_stamp = models.DateTimeField(auto_now_add = False)
+    
     billing_adress = models.ForeignKey('BillingAdress',on_delete = models.SET_NULL,blank=True,null= True)
 
     def __str__(self):
@@ -218,6 +196,10 @@ class Chat(models.Model):
     def __str__(self):
        return self.message
 
+    @property
+    def number_of_chats(self):
+        return Chat.objects.all().count()
+
 class Show(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE,null=True)
     title = models.CharField(max_length = 100)
@@ -229,6 +211,48 @@ class Show(models.Model):
 
     def __str__(self):
        return self.title 
+
+
+class Account(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE,null=True)
+    buyer = models.BooleanField(default = False)
+    seller = models.BooleanField(default = False)
+    
+
+    def __str__(self):
+       return self.user.username
+
+
+class Gallery(models.Model):
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE,null=True)
+    host_name = models.CharField(max_length = 100,blank = True,null = True)
+    gallery_email = models.CharField(max_length = 100,blank = True,null = True)
+    gallery_number = models.CharField(max_length = 100,blank = True,null = True)
+    gallery_address = models.CharField(max_length = 100,blank = True,null = True)
+    city_state_zip_code = models.CharField(max_length = 100,blank = True,null = True)
+    gallery_website = models.CharField(max_length = 100,blank = True,null = True)
+    
+    
+
+    def __str__(self):
+       return self.host_name
+
+
+
+class Seller(models.Model):
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE,null=True)
+    name = models.CharField(max_length = 100,blank = True,null = True)
+    phone = models.CharField(max_length = 100,blank = True,null = True)
+    address = models.CharField(max_length = 100,blank = True,null = True)
+    description = models.TextField(max_length = 100,blank = True,null = True)
+    country = CountryField(multiple = False,blank = True,null = True)
+
+    def __str__(self):
+       return self.name
+
+   
+    
+
 
     
 

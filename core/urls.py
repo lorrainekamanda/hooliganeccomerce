@@ -1,5 +1,5 @@
 from django.urls import path,re_path
-from .views import homeview,itemdetailview,add_to_cart,remove_from_cart,OrderSummaryView,remove_single_item_from_cart,CheckoutView,PaymentView,search_results,productview,paintingsview,photographsview,prints,profile,artists,CreateDetail,sculptures,myprofile,ItemList,ArtistList,ItemDetail,UserList,UserDetail,ThreadView, InboxView,MessageView,CreateShow,UpdateDetail,ItemDelete,UpdateShow,ShowDelete
+from .views import homeview,itemdetailview,add_to_cart,remove_from_cart,OrderSummaryView,remove_single_item_from_cart,CheckoutView,PaymentView,search_results,productview,paintingsview,photographsview,prints,profile,artists,CreateDetail,sculptures,myprofile,ItemList,ArtistList,ItemDetail,UserList,UserDetail,MessageView,CreateShow,UpdateDetail,ItemDelete,UpdateShow,ShowDelete,Account,SummaryView
 from django.conf import settings
 from django.conf.urls.static import static
 from . import views
@@ -37,6 +37,9 @@ urlpatterns = [
     path('product/<slug>/delete',ItemDelete.as_view(), name = 'product-delete'),
     path('<int:pk>/update', UpdateShow.as_view(), name = 'show-update'),
     path('<int:pk>/delete', ShowDelete.as_view(), name = 'show-delete'),
+    path('seller-account/',Account.as_view() , name= 'seller-account'),
+    path('summary-view/',SummaryView.as_view() , name= 'summary-view'),
+    
 
 ]
 if settings.DEBUG:

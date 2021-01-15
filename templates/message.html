@@ -357,7 +357,7 @@ body{
 						<div>
 							<ul class="nav nav-pills navtab-bg nav-stacked" style="display: inline-block;">
 								<li class="header">Folders</li>
-								<li class="nav-item"><a  href="#about-me" data-toggle="tab" aria-expanded="true" class="nav-link ml-0 active"><i class="fa fa-inbox"></i> Inbox (14)</a></li>
+								<li class="nav-item"><a  href="#about-me" data-toggle="tab" aria-expanded="true" class="nav-link ml-0 active"><i class="fa fa-inbox"></i> Inbox </a></li>
 							
 								<li><a href="#settings" data-toggle="tab" aria-expanded="false" class="nav-link"><i class="fa fa-mail-forward"></i> Sent</a></li>
 								
@@ -624,33 +624,10 @@ body{
           <!-- MDB core JavaScript -->
           <script type="text/javascript" src="{% static 'js/mdb.min.js' %}"></script>
           
-          <script src="{% static 'js/script.js' %}"></script>
+          <script src="{% static 'js/scripts.js' %}"></script>
        
       </body></html>
 
 
 
-    <!-- <form action="" method="post">
-        {% csrf_token %}
-        {{form|crispy}}
-        <button type="submit">Submit</button>
-    </form>
-      <h1>Inbox</h1> 
- 
-    {% for chat in chats %}
-    {% if chat.reciever.username == user.username %}
 
-    <p>{{chat.message}}</p>
-
-    {%endif%}
-
-    {% endfor%}
-    <h1>Sent</h1> 
-    {% for chat in chats %}
-    {% if chat.user.username == user.username %}
-
-    <p>{{chat.message}}</p>
-
-    {%endif%}
-
-    {% endfor%} -->

@@ -11,7 +11,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
-  <title>Dagallery-update Art</title>
+  <title>Dagallery-upload Art</title>
   <link rel="shortcut icon" href="{% static 'logos.png'%}" type="image/4x-icon">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
@@ -27,7 +27,6 @@
   <link href="{%static 'css/home.css'%}" rel="stylesheet">
   <link href="{%static 'css/navbar.css'%}" rel="stylesheet">
   <link href="{%static 'css/global.css'%}" rel="stylesheet">
-
 <style>
 
 .back-to-top {
@@ -141,7 +140,6 @@
                   <a href="/myprofile" class="dropdown-item" > Favourites </a>
                   <a href="/myprofile" class="dropdown-item" > Orders </a>
                   <a href="/message" class="dropdown-item" > Messages</a>
-  
              
                 {% else %}
                 <a  class="dropdown-item" href="{% url 'account_login'%}">Sign In</a>  
@@ -190,13 +188,13 @@
 <div class="page-wrapper bg-gra-03 p-t-45 p-b-50">
   <div class="wrapper wrapper--w790">
       <div class="card card-5">
-          <div class="card-heading">
-              <h2 class="title">Update Art</h2>
-          </div>
+          <!-- <div class="card-heading">
+              <h2 class="title">Upload Show</h2>
+          </div> -->
           <div class="card-body">
               <form method="POST" enctype="multipart/form-data">
-            
                 {% csrf_token %}
+                
                   <div class="form-row">
                      
                       <div class="value">
@@ -207,7 +205,7 @@
                   </div>
                 
                   
-                      <button class="btn  btn-sm" type="submit" style="background-color: black;color: white;">Save Changes</button>
+                      <button class="btn btn-danger btn-sm" type="submit">Upload</button>
                   </div>
               </form>
           </div>
@@ -319,7 +317,7 @@
 <!-- MDB core JavaScript -->
 <script type="text/javascript" src="{% static 'js/mdb.min.js' %}"></script>
 
-<script src="{% static 'js/scripts.js' %}"></script>
+<script src="{% static 'js/script.js' %}"></script>
 <!-- Initializations -->
 <script type="text/javascript">
 $(window).scroll(function() {

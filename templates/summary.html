@@ -11,7 +11,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
-  <title>Dagallery-update Art</title>
+  <title>0rder-Summary</title>
   <link rel="shortcut icon" href="{% static 'logos.png'%}" type="image/4x-icon">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
@@ -27,7 +27,6 @@
   <link href="{%static 'css/home.css'%}" rel="stylesheet">
   <link href="{%static 'css/navbar.css'%}" rel="stylesheet">
   <link href="{%static 'css/global.css'%}" rel="stylesheet">
-
 <style>
 
 .back-to-top {
@@ -141,7 +140,6 @@
                   <a href="/myprofile" class="dropdown-item" > Favourites </a>
                   <a href="/myprofile" class="dropdown-item" > Orders </a>
                   <a href="/message" class="dropdown-item" > Messages</a>
-  
              
                 {% else %}
                 <a  class="dropdown-item" href="{% url 'account_login'%}">Sign In</a>  
@@ -183,39 +181,28 @@
     </nav>
   </header>
 
-   <section  class="hero-section" style="margin-top: 30px;">
-  
+ <section>
+   <div class="container">
+     <div class="intro" style="text-align: center;">
+         <h1>Thank You</h1>
+         <br>
 
+         <h4>Your Order</h4>
+     </div>
+  <div class = "row">
 
-<div class="page-wrapper bg-gra-03 p-t-45 p-b-50">
-  <div class="wrapper wrapper--w790">
-      <div class="card card-5">
-          <div class="card-heading">
-              <h2 class="title">Update Art</h2>
-          </div>
-          <div class="card-body">
-              <form method="POST" enctype="multipart/form-data">
-            
-                {% csrf_token %}
-                  <div class="form-row">
-                     
-                      <div class="value">
-                         
-                            {{ form|crispy }}
-                          
-                      </div>
-                  </div>
-                
-                  
-                      <button class="btn  btn-sm" type="submit" style="background-color: black;color: white;">Save Changes</button>
-                  </div>
-              </form>
-          </div>
-      </div>
+    <div class="col-md-12">
+      <h3>Thank You for your support !</h4>   <br>
+      <h4>A copy of the receipt will be sent to your email adress</h4>   
+    </div>
   </div>
-</div>                                </div>
-                      </div>
-                  </div>
+  <br>
+  <br>
+  <hr>
+
+
+</div>
+ </section>
                  
 
 

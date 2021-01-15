@@ -11,7 +11,7 @@ class UserSerializer(serializers.ModelSerializer):
 class ArtistSerializer(serializers.ModelSerializer):
     class Meta:
         model = Artist
-        fields = ('user','profession','bio','focus','about_your_work','phone','instagram','facebook','tweeter')
+        fields = ('user''instagram','facebook','tweeter')
 
 
 

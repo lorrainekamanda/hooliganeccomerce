@@ -1,15 +1,417 @@
-{% extends 'base.html' %}
+{% load static %}
+{% load cart_template_tags%}
+{% load crispy_forms_tags %}
 
 
-{% block content %}
+<!DOCTYPE html>
+<html lang="en">
 
-<h1>I AM ALIVE</h1>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>Dagallery-payment</title>
+  <!-- Font Awesome -->
+  <link rel="shortcut icon" href="{% static 'logos.png'%}" type="image/4x-icon">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+  <link href="https://fonts.googleapis.com/css?family=Josefin+Sans:300,300i,400,400i,700,700i" rel="stylesheet">
+  <!-- Bootstrap core CSS -->
+  <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+  <!-- Material Design Bootstrap -->
+  <link href="{% static 'css/mdb.min.css' %}" rel="stylesheet">
+  <!-- Your custom styles (optional) -->
+  <link href="{%static 'css/style.min.css'%}" rel="stylesheet">
+  <link href="{%static 'css/home.css'%}" rel="stylesheet">
+  <link href="{%static 'css/payment.css'%}" rel="stylesheet">
+  <link href="{%static 'css/navbar.css'%}" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,200;0,300;1,200&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,200;0,300;1,200&display=swap" rel="stylesheet">
+  <link href="{%static 'css/home.css'%}" rel="stylesheet">
+  <style type="text/css">
+    html,
+    body,
+    header,
+    .carousel {
+     
+      font-family: 'Spectral', serif;
+      scroll-behavior: smooth;
+    }
 
-{% for item in items %}
+  
 
-<h3>{{item.title}},{{item.price}}</h3>
-{% endfor%}
+  </style>
+</head>
 
-{% endblock %}
+<header class="header-section" style="text-align: center;align-items: center;" > 
+  <div class="header-top">
+    <div class="main-container">
+      <div class="row" >
+        <div class="col-lg-2 " id = "images">
+          <!-- logo -->
+          <a href="/">
+            <img src="{% static 'logos.png'%}" alt="" srcset="" style="height: 140px;width: 140px;" class="images">
+          </a>
+         
+        </div>
+        <div class="col-xl-6 col-lg-5" style="align-items: center;margin-top: 15px;"  >
+          <form class="header-search-form" role="search" action="{% url 'core:search_results' %}" style="width: 70%;margin-left: auto;">
+            <input type="text" placeholder="Search product ...." name="title" style="border: 1px solid black;border-radius: 0;background-color: transparent;">
+            <button><i class="fas fa-search"></i></button>
+          </form>
+        </div>
+        <div class="col-xl-4 col-lg-5 " style="margin-top: 20px;"  >
+          <div class="user-panel" >
+            <div class="up-item dropdown">
+              
+             <span style="font-size: 15px;display: inline-flexbox;" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class=" dropdown-toggle" >  <i class="far fa-user" > </i> Account</span>
+              
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                {% if user.is_authenticated %}
+                <a class="dropdown-item"  href="{% url 'account_logout'%}">Logout</a>
+                <a href="/myprofile" class="dropdown-item" > Account </a>
+                <a href="/myprofile" class="dropdown-item" > Favourites </a>
+                <a href="/myprofile" class="dropdown-item" > Orders </a>
+                <a href="/message" class="dropdown-item" > Messages</a>
+
+           
+              {% else %}
+              <a  class="dropdown-item" href="{% url 'account_login'%}">Sign In</a>  
+              
+              <a class="dropdown-item"  href="{% url 'account_signup'%}">Create Account</a>
+              {%endif%}
+            </div>
+            </div>
+            <div class="up-item">
+              <div class="shopping-card">
+                <a href="{%url 'core:order-summary'%}">
+                  <i class="fas fa-shopping-bag"></i>
+              
+                
+                <span style="font-weight: 500;">{{request.user|cart_item_count}} </span>
+              </div>
+             Shopping Cart</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <nav class="main-navbar"  >
+    <div class="container">
+      <!-- menu -->
+      <ul class="main-menu"  >
+      
+        <li style="margin-right: 12px;"><a href="/paintings">PAINTINSGS</a></li>
+        <li style="margin-right: 12px;"><a href="/photographs">PHOTOGRAPHS</a></li>
+        <li style="margin-right: 12px;"><a href="/prints">PRINTS</a></li>
+        <li style="margin-right: 12px;"><a href="/sculptures">SCULPTUTES</a></li>
+        <li><a href="/artists">ARTISTS</a></li>
+        
+        
+     
+      </ul>
+    </div>
+  </nav>
+</header>
+
+    <div style="margin-top: 75px;">
+ <h2 class="my-5 h2 text-center" >Payment</h2>
+</div>
+      <main >
+        <div class="container wow fadeIn">
+    
+          
+    
+          <div class="row">
+    
+            <div class="col-md-12 mb-4">
+              <div class="card">
+    
+                {% if card %}
+                  <div style="padding: 5px 30px;">
+                    <div class="custom-control custom-checkbox">
+                      <input type="checkbox" class="custom-control-input" name="use_default_card" id="use_default_card">
+                      <label class="custom-control-label" for="use_default_card">Use default card:
+                        **** **** **** {{ card.last4 }} 
+                      <span>Exp: {{ card.exp_month }}/{{ card.exp_year }}</span></label>
+                    </div>
+                  </div>
+                {% endif %}
+    
+                <div class="current-card-form">
+                  <form action="." method="post" class="stripe-form">
+                      {% csrf_token %}
+                      <input type="hidden" name="use_default" value="true">
+                      <div class="stripe-form-row">
+                        <button id="stripeBtn" class="btn btn-md">Submit Payment</button>
+                      </div>
+                      <div id="card-errors" role="alert"></div>
+                  </form>
+                </div>
+    
+                <div class="new-card-form">
+                  <form action="." method="post" class="stripe-form" id="stripe-form">
+                      {% csrf_token %}
+                      <div class="stripe-form-row" id="creditCard">
+                          <label for="card-element" id="stripeBtnLabel">
+                              Credit or debit card
+                          </label>
+                          <div id="card-element" class="StripeElement StripeElement--empty"><div class="__PrivateStripeElement" style="margin: 0px !important; padding: 0px !important; border: none !important; display: block !important; background: transparent !important; position: relative !important; opacity: 1 !important;"><iframe frameborder="0" allowtransparency="true" scrolling="no" name="__privateStripeFrame5" allowpaymentrequest="true" src="https://js.stripe.com/v3/elements-inner-card-19066928f2ed1ba3ffada645e45f5b50.html#style[base][color]=%2332325d&amp;style[base][fontFamily]=%22Helvetica+Neue%22%2C+Helvetica%2C+sans-serif&amp;style[base][fontSmoothing]=antialiased&amp;style[base][fontSize]=16px&amp;style[base][::placeholder][color]=%23aab7c4&amp;style[invalid][color]=%23fa755a&amp;style[invalid][iconColor]=%23fa755a&amp;componentName=card&amp;wait=false&amp;rtl=false&amp;keyMode=test&amp;origin=https%3A%2F%2Fstripe.com&amp;referrer=https%3A%2F%2Fstripe.com%2Fdocs%2Fstripe-js&amp;controllerId=__privateStripeController1" title="Secure payment input frame" style="border: none !important; margin: 0px !important; padding: 0px !important; width: 1px !important; min-width: 100% !important; overflow: hidden !important; display: block !important; height: 19.2px;"></iframe><input class="__PrivateStripeElement-input" aria-hidden="true" aria-label=" " autocomplete="false" maxlength="1" style="border: none !important; display: block !important; position: absolute !important; height: 1px !important; top: 0px !important; left: 0px !important; padding: 0px !important; margin: 0px !important; width: 100% !important; opacity: 0 !important; background: transparent !important; pointer-events: none !important; font-size: 16px !important;"></div></div>
+                      </div>
+                      <div class="stripe-form-row">
+                        <button id="stripeBtn"  >Submit Payment</button>
+                      </div>
+                      <div class="stripe-form-row">
+                        <div class="custom-control custom-checkbox">
+                          <input type="checkbox" class="custom-control-input" name="save" id="save_card_info">
+                          <label class="custom-control-label" for="save_card_info">Save for future purchases</label>
+                        </div>
+                      </div>
+                      <div id="card-errors" role="alert">
+                       
+                      </div>
+                  </form>
+                </div>
+    
+              </div>
+            </div>
+    
+            <div class="col-md-12 mb-4">
+              <h4 class="d-flex justify-content-between align-items-center mb-3">
+              <span class="text-muted">Your cart</span>
+              <span class="badge badge-secondary badge-pill">{{ order.items.count }}</span>
+              </h4>
+              <ul class="list-group mb-3 z-depth-1">
+              {% for order_item in order.items.all %}
+              <li class="list-group-item d-flex justify-content-between lh-condensed">
+                  <div>
+                  <h6 class="my-0">{{ order_item.quantity }} x {{ order_item.item.title}}</h6>
+                  <small class="text-muted">{{ order_item.item.description}}</small>
+                  </div>
+                  <span class="text-muted">${{ order_item.get_final_price }}</span>
+              </li>
+              {% endfor %}
+              {% if order.coupon %}
+              <li class="list-group-item d-flex justify-content-between bg-light">
+                  <div class="text-success">
+                  <h6 class="my-0">Promo code</h6>
+                  <small>{{ order.coupon.code }}</small>
+                  </div>
+                  <span class="text-success">-${{ order.coupon.amount }}</span>
+              </li>
+              {% endif %}
+              <li class="list-group-item d-flex justify-content-between">
+                  <span>Total (USD)</span>
+                  <strong>${{ order.get_total }}</strong>
+              </li>
+              </ul>
+          
+            
+          
+          </div>
+    
+          </div>
+    
+        </div>
+      </main>
+
+      <section class="footer-section" style="color: white;">
+        <div class="container-fluid">
+        
+          <div class="row">
+      
+            <div class="col-lg-3 col-sm-6">
+              <div class="footer-widget about-widget">
+               
+                <a href="https://hooliganlivefree.com" target="_blank"><img src="{% static 'logo.png'%}" alt="" style="margin-left: 20px;height: 70%; width: 70%;"></a>
+              </div>
+            </div>
+            <div class="col-lg-3 col-sm-6">
+              <div class="footer-widget about-widget">
+                <h2>About Us</h2>
+                <p >Welcome to Hooligan LLC, We <br> represent artists from all over  the <br>  world find amazing photographs, <br>paintings,sculptures and prints.</p>
+                <img src="{% static 'cards.png' %}" alt="" style="height: 50%;width: 50%;">
+              </div>
+            </div>
+            
+            <div class="col-lg-3 col-sm-6">
+              <div class="footer-widget about-widget">
+                <h2>DON'T GET LOST</h2>
+                <ul>
+                  <li><a href="/">Home</a></li>
+                  <li><a href="/photographs">Photographs</a></li>
+                  
+                  <li><a href="/paintings">Paintings</a></li>
+                  <li><a href="/sculptures">Sculptures</a></li>
+                  <li><a href="{%url 'core:order-summary'%}">Order Summary</a></li>
+                
+                </ul>
+                
+              </div>
+            </div>
+          
+            <div class="col-lg-3 col-sm-6">
+              <div class="footer-widget contact-widget">
+                <h2>Contact Info</h2>
+                <div class="con-info">
+                
+                  <p> <i class="fas fa-home" style="margin-right: 10px;"></i>Hooligan LLC </p>
+              </div>
+              <div class="con-info">
+                
+                <p> <i class="fas fa-map-marker-alt" style="margin-right: 10px;"></i>New York,USA </p>
+              </div>
+              <div class="con-info">
+                
+                <p> <i class="fas fa-phone-alt" style="margin-right: 10px;"></i>+1 347 981 3342</p>
+              </div>
+              <div class="con-info">
+              
+                <p> <i class="far fa-envelope" style="margin-right: 10px;"></i>451hugo@gmail.com</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="social-links-warp">
+          <div class="container">
+            <div class="social-links" style="text-align: center;">
+              <a href="https://www.instagram.com/hooliganlivefree/?hl=en" class="instagram"><i class="fab fa-instagram"></i><span>instagram</span></a>
+            
+              <a href="https://www.facebook.com/HooliganLLC/" class="facebook"><i class="fab fa-facebook-f"></i><span>facebook</span></a>
+              <a href="https://twitter.com/HooliganLLC" class="twitter"><i class="fab fa-twitter"></i><span>twitter</span></a>
+            
+            </div>
+      
+      
+      
+          </div>
+        </div>
+      </section>
+      
+      
+      
+      
+      
+      
+      
+      <a href="#" class="back-to-top"><i class="fas fa-chevron-up"></i></a>
+
+  
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/TweenMax.min.js"></script>
+      <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
+      <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+    
+    
+    <script src="https://js.stripe.com/v3/"></script>
+    <script >
+      // Create a Stripe client.
+      var stripe = Stripe('pk_test_51I8OnPE4J5N0ITOGosq23Va7G5zqHo98IMSm32KdTWlEzwg1UjF6rP6NevnkNWMeBnIrwYYuWeEJepx6Aija01HE00tiBKTkrO');
+    
+      
+  // Create an instance of Elements.
+  var elements = stripe.elements();
+
+// Custom styling can be passed to options when creating an Element.
+// (Note that this demo uses a wider set of styles than the guide below.)
+var style = {
+  base: {
+    color: '#32325d',
+    fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
+    fontSmoothing: 'antialiased',
+    fontSize: '16px',
+    '::placeholder': {
+      color: '#aab7c4'
+    }
+  },
+  invalid: {
+    color: '#fa755a',
+    iconColor: '#fa755a'
+  }
+};
+
+// Create an instance of the card Element.
+var card = elements.create('card', {style: style});
+
+// Add an instance of the card Element into the `card-element` <div>.
+card.mount('#card-element');
+
+// Handle real-time validation errors from the card Element.
+card.addEventListener('change', function(event) {
+  var displayError = document.getElementById('card-errors');
+  if (event.error) {
+    displayError.textContent = event.error.message;
+  } else {
+    displayError.textContent = '';
+  }
+});
+
+
+
+// Submit the form with the token ID.
+function stripeTokenHandler(token) {
+  // Insert the token ID into the form so it gets submitted to the server
+  var form = document.getElementById('stripe-form');
+  var hiddenInput = document.createElement('input');
+  hiddenInput.setAttribute('type', 'hidden');
+  hiddenInput.setAttribute('name', 'stripeToken');
+  hiddenInput.setAttribute('value', token.id);
+  form.appendChild(hiddenInput);
+
+  // Submit the form
+  form.submit();
+}
+
+var currentCardForm = $('.current-card-form');
+var newCardForm = $('.new-card-form');
+var use_default_card = document.querySelector("input[name=use_default_card]");
+use_default_card.addEventListener('change', function() {
+  if (this.checked) {
+    newCardForm.hide();
+    currentCardForm.show()
+  } else {
+    newCardForm.show();
+    currentCardForm.hide()
+  }
+})
+
+
+
+$(window).scroll(function() {
+    if ($(this).scrollTop() > 100) {
+      $('.back-to-top').fadeIn('slow');
+    } else {
+      $('.back-to-top').fadeOut('slow');
+    }
+  });
+    new WOW().init();
+
+</script>
+
+
+<!-- Bootstrap tooltips -->
+<script type="text/javascript" src="{% static 'js/popper.min.js' %}"></script>
+<!-- Bootstrap core JavaScript -->
+<script type="text/javascript" src="{% static 'js/bootstrap.min.js'%}"></script>
+
+
+<!-- MDB core JavaScript -->
+<script type="text/javascript" src="{% static 'js/mdb.min.js' %}"></script>
+
+<script src="{% static 'js/scripts.js' %}"></script>
+
+</body>
+
+</html>
+    
+ 
+
+
+
+
+
+
 
 

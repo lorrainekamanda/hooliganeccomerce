@@ -1,14 +1,14 @@
 from django.shortcuts import render,get_object_or_404,redirect
 from django.conf import settings
 from django.utils import timezone
-from .models import Order,OrderItem,Item,BillingAdress,Payment,Artist,PaymentDetails,Chat,Show
+from .models import Order,OrderItem,Item,BillingAdress,Payment,Artist,PaymentDetails,Chat,Show,Account,Seller,Gallery
 from django.views.generic import ListView,DetailView,View
 from django.contrib import messages
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.utils.decorators import method_decorator
-from .forms import CheckoutForm,UserProfileForm,UserUpdateForm,UploadForm,AdressForm,PaymentForm,ComposeForm,ChatForm,ShowForm,UserImageForm
+from .forms import CheckoutForm,UserProfileForm,UserUpdateForm,UploadForm,AdressForm,PaymentForm,ComposeForm,ChatForm,ShowForm,UserImageForm,AccountForm,SellerForm,GalleryForm
 from allauth.account.views import PasswordResetView
 from django.db import models
 from django.conf import settings
@@ -140,6 +140,10 @@ class CreateDetail(LoginRequiredMixin,CreateView):
         return super().form_valid(form)
 
 
+    
+    
+
+
 
 
       
@@ -188,10 +192,6 @@ class homeview(ListView):
 
     
 
-
-
-    
-
 class artists(ListView):
     model = Item
     template_name = "artist.html"
@@ -201,7 +201,6 @@ class artists(ListView):
         return context
 
     def latest_artwork (self):
-        
         return Item.objects.latest('date')
 
 
@@ -221,6 +220,23 @@ def load_payment(user):
   except:  
    paymentdetails = PaymentDetails.objects.create(user=user)
    return paymentdetails
+
+
+def load_seller(user):
+  try:
+    return user.seller
+  except:  
+   seller = Seller.objects.create(user=user)
+   return seller
+
+def load_gallery(user):
+  try:
+    return user.gallery
+  except:  
+   gallery = Gallery.objects.create(user=user)
+   return gallery
+
+
 class myprofile(View):
 
     
@@ -235,31 +251,48 @@ class myprofile(View):
         p_form = UserProfileForm(instance = request.user.artist)
         d_form = PaymentForm(instance = request.user.paymentdetails)
         a_form = UploadForm(instance = request.user)
+  
        
         products = Item.objects.filter(likes = self.request.user)
         order_items = OrderItem.objects.filter(user = self.request.user,ordered = True)
+
+
+        has_seller_account = Seller.objects.filter(user = request.user).exists()
          
-        return render(request, self.template_name, {'u_form': u_form,'p_form': p_form,'d_form': d_form,'object':order_items,'products':products,'a_form':a_form}) 
+        return render(request, self.template_name, {'u_form': u_form,'a_form': a_form,'has_seller_account':has_seller_account,'p_form': p_form,'d_form': d_form,'object':order_items,'products':products,'a_form':a_form}) 
 
 
 
     def post(self, request): 
+      
+
+        order = Item.objects.get(user = self.request.user)
         artist= load_profile(request.user)
         paymentdetails = load_payment(request.user)
         u_form = UserUpdateForm(request.POST,instance = request.user)
-       
+        a_form = UploadForm(request.POST,request.FILES,instance = request.user)
         d_form = PaymentForm(request.POST,instance = request.user.paymentdetails)
         p_form = UserProfileForm(request.POST,request.FILES,instance = request.user.artist)
-        if u_form.is_valid() and p_form.is_valid(): 
+        if u_form.is_valid() : 
             # Success! We can use form.cleaned_data now 
             u_form.save()
-            p_form.save()
+           
             return redirect('core:myprofile') 
+
+        elif p_form.is_valid(): 
+            
+            p_form.save()
+            return redirect('core:myprofile')
 
         elif d_form.is_valid(): 
             
             d_form.save()
             return redirect('core:myprofile')
+
+        elif a_form.is_valid(): 
+             a_form.save()
+             return redirect('core:myprofile')
+
 
         
 
@@ -429,7 +462,9 @@ def remove_single_item_from_cart(request,slug):
 
 
 class PaymentView(View):
+
     def get(self,*args,**kwargs):
+        
         order = Order.objects.get(user=self.request.user,ordered = False)
 
         context = {
@@ -468,7 +503,7 @@ class PaymentView(View):
          order.payment = payment
          order.save()
          messages.success(self.request,'Your order was succesful')
-         return redirect('/')
+         return redirect('core:summary-view')
            
         except stripe.error.CardError as e:
        
@@ -483,7 +518,7 @@ class PaymentView(View):
           return redirect('/')
          
         except stripe.error.InvalidRequestError as e:
-          messages.error(self.request,'Invalid Parameters')
+          messages.warning(self.request, str(e))
           return redirect('/')
         # Invalid parameters were supplied to Stripe's API
           
@@ -506,7 +541,7 @@ class PaymentView(View):
     
         except Exception as e:
         # Something else happened, completely unrelated to Stripe
-           messages.error(self.request,'A  serious error occured,we have been notified')
+           messages.warning(self.request, str(e))
            return redirect('/')
    
 
@@ -557,53 +592,6 @@ class UserDetail(generics.RetrieveUpdateDestroyAPIView):
     User =  get_user_model()
     queryset = User.objects.all()
     serializer_class = UserSerializer
-
-
-
-
-class InboxView(LoginRequiredMixin, ListView):
-    template_name = 'inbox.html'
-    def get_queryset(self):
-        return Thread.objects.by_user(self.request.user)
-
-
-class ThreadView(LoginRequiredMixin, FormMixin, DetailView):
-    template_name = 'thread.html'
-    form_class = ComposeForm
-    success_url = './'
-
-    def get_queryset(self):
-        return Thread.objects.by_user(self.request.user)
-
-    def get_object(self):
-        other_username  = self.kwargs.get("username")
-        obj, created    = Thread.objects.get_or_new(self.request.user, other_username)
-        if obj == None:
-            raise Http404
-        return obj
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['form'] = self.get_form()
-        return context
-
-    def post(self, request, *args, **kwargs):
-        if not request.user.is_authenticated:
-            return HttpResponseForbidden()
-        self.object = self.get_object()
-        form = self.get_form()
-        if form.is_valid():
-            return self.form_valid(form)
-        else:
-            return self.form_invalid(form)
-
-    def form_valid(self, form):
-        thread = self.get_object()
-        user = self.request.user
-        message = form.cleaned_data.get("message")
-        ChatMessage.objects.create(user=user, thread=thread, message=message)
-        return super().form_valid(form)
-
 
 
 class MessageView(View):
@@ -707,3 +695,50 @@ class ShowDelete(LoginRequiredMixin, DeleteView):
 
     def test_func(self):
         return is_users(self.get_object().username, self.request.user)
+
+class Account(View):
+    def get(self,request):
+        
+        form = SellerForm(instance = request.user.seller)
+        
+        form.instance.user = self.request.user
+       
+        context = {
+            'form':form,
+           
+           
+        }
+     
+        return render(self.request,'account.html',context)
+        
+        
+    def post(self,request):
+        form = SellerForm(self.request.POST or None,instance = request.user.seller)
+        
+        form.instance.user = self.request.user
+        
+        if form.is_valid():
+            
+            form.save()
+            return redirect('core:seller-account')
+
+        elif g_form.is_valid():
+            
+            g_form.save()
+            return redirect('core:seller-account')
+
+        else:
+            return render(request, 'account.html', {'form':form,'g_form':gform})
+
+
+class SummaryView(LoginRequiredMixin,View):
+    def get(self,request):
+         
+         orders = Order.objects.filter(user = self.request.user,ordered = True)
+         context = {
+              
+               'orders':orders
+         }
+        
+         return render(self.request,'summary.html',context)
+    

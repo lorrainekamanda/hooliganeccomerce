@@ -25,8 +25,10 @@
   <link href="{%static 'css/style.min.css'%}" rel="stylesheet">
   <link href="{%static 'css/style.css'%}" rel="stylesheet">
   <link href="{%static 'css/styles2.css'%}" rel="stylesheet">
-  <link href="{%static 'css/home.css'%}" rel="stylesheet">
+ 
   <link href="{%static 'css/navbar.css'%}" rel="stylesheet">
+  <link href="{%static 'css/artist.css'%}" rel="stylesheet">
+  <link href="{%static 'css/home.css'%}" rel="stylesheet">
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,200;0,300;1,200&display=swap" rel="stylesheet">
@@ -184,99 +186,29 @@
 
           </section> 
 
-    <div class="container-fluid" style="margin-top: 10px;">
-    <section class="text-center mb-4" style="margin-bottom: 200px;">
-
-       
-        <div class="row wow fadeIn" style="margin: 20px; margin-bottom: 160px;" >
-
-          {% for item in products %}
-          
-          <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 " style="margin-bottom: 30px; height:  500px auto;" >
-         
-<div class="card promoting-card" >
-
- 
-  <div class="view overlay">
-    <img class="card-img-top rounded-0" src="{{item.user.artist.image_artist.url}}" alt="Card image cap" style="height: 500px auto;" >
-    <a href="{{item.user.artist.get_absolute_url}}">
-      <div class="mask rgba-white-slight"></div>
-    </a>
-  </div>
-
-  
-  <div class="card-body">
-
-    <div class="collapse-content">
-  
-      <h4 class="card-title font-weight-bold"><a>{{item.user.username|title}} </a></h4>
-    
-    
-      <p class="card-text" >{{item.user.artist.bio}}</p>
    
-      <a href="{{item.artist.get_absolute_url}}" style="float: left;color: red;">Read More</a>
-      <a href="{{item.artist.facebook}}">
-      <i class="fab fa-facebook text-muted float-right p-1 my-1" data-toggle="tooltip" data-placement="top" title="my facebook"></i>
-    </a>
-
-    <a href="{{item.artist.tweeter}}">
-      <i class="fab fa-twitter text-muted float-right p-1 my-1 mr-3" data-toggle="tooltip" data-placement="top" title="my twitter"></i>
-    </a>
-    </div>
-
-  </div>
-
-</div>
-
-            </div>
-        
-
-        {% endfor%}
-
+    <div class="container" style="margin-top: 30px;margin-bottom: 30px;">
+      <div class="row  wow fadeIn" style="margin-left: 50px; margin-top: 90px;">
+        <div class="col-md-5" >
+          <h2 class="section-heading" style="text-align: left;margin-left: 10px;">Featured Artists</h2>
         </div>
-       
-
-      </section> 
-
-   
-      
-
-      
+      </div>
+      <div class="row">
+        {% for item in products %}
+          <div class="col-md-4">
+              <div class="content"> <a href="{{item.user.artist.get_absolute_url}}">
+                      <div class="content-overlay"></div> <img class="content-image" src="{{item.user.artist.image_artist.url}}">
+                      <div class="content-details fadeIn-bottom">
+                          <h3 class="content-title">{{item.user.username|title}} </h3>
+                          <p class="content-text"><i class="fa fa-map-marker"></i> {{item.user.seller.country.name}} </p>
+                      </div>
+                  </a> </div>
+                  
+          </div>
+          {%endfor%}
      
-
-    
-      {% if is_paginated %}
-      <nav class="d-flex justify-content-center wow fadeIn">
-        <ul class="pagination pg-blue">
-
-         {% if page_obj.has_previous %}
-          <li class="page-item">
-            <a class="page-link" href="?page={{page_obj.previous_page_number}}" aria-label="Previous">
-              <span aria-hidden="true">&laquo;</span>
-              <span class="sr-only">Previous</span>
-            </a>
-          </li>
-          {%endif%}
-          <li class="page-item active">
-            <a class="page-link" href="?page={{page_obj.number}}">{{page_obj.number}}
-              <span class="sr-only">(current)</span>
-            </a>
-          </li>
-      
-          {% if page_obj.has_next%}
-
-          <li class="page-item">
-            <a class="page-link" href="?page={{page_obj.next_page_number}}" aria-label="Next">
-              <span aria-hidden="true">&raquo;</span>
-              <span class="sr-only">Next</span>
-            </a>
-          </li>
-          {%endif%}
-        </ul>
-      </nav>
-     {%endif%}
-
-    </div>
+      </div>
+  </div>
 
     <section class="footer-section">
       <div class="container-fluid">
@@ -375,7 +307,7 @@
     <!-- MDB core JavaScript -->
     <script type="text/javascript" src="{% static 'js/mdb.min.js' %}"></script>
     
-    <script src="{% static 'js/script.js' %}"></script>
+    <script src="{% static 'js/scripts.js' %}"></script>
   <script type="text/javascript">
       $(window).scroll(function() {
     if ($(this).scrollTop() > 100) {
