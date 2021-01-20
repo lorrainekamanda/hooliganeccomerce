@@ -254,8 +254,6 @@ class myprofile(LoginRequiredMixin,View):
        
         products = Item.objects.filter(likes = self.request.user)
         order_items = OrderItem.objects.filter(user = self.request.user,ordered = True)
-
-
         has_seller_account = Seller.objects.filter(user = request.user).exists()
          
         return render(request, self.template_name, {'u_form': u_form,'a_form': a_form,'has_seller_account':has_seller_account,'p_form': p_form,'d_form': d_form,'object':order_items,'products':products,'a_form':a_form}) 
@@ -545,26 +543,6 @@ class PaymentView(LoginRequiredMixin,View):
    
 
 
-       
-        
-def search_results(request):
-
-    if 'title' in request.GET and request.GET["title"]:
-        search_term = request.GET.get("title")
-        searched_items = Item.search_by_title(search_term)
-        message = f"{search_term}"
-
-        return render(request, 'search.html',{"message":message,"items": searched_items})
-
-    else:
-        message = "You haven't searched for any term"
-        return render(request, 'search.html',{"message":message})
-
-
-
-
-
-
 class ItemList(generics.ListCreateAPIView):
     queryset = Item.objects.all()
     serializer_class = ItemSerializer
@@ -818,9 +796,9 @@ class DeleteComments(LoginRequiredMixin, DeleteView):
 
     def test_func(self):
         return is_users(self.get_object().username, self.request.user)
-  
-    
-def search_result(request):
+
+
+def search_results(request):
 
     if 'title' in request.GET and request.GET["title"]:
         search_term = request.GET.get("title")
@@ -832,4 +810,18 @@ def search_result(request):
     else:
         message = "You haven't searched for any term"
         return render(request, 'search.html',{"message":message})
+  
+    
+def search_result(request):
+
+    if 'subject' in request.GET and request.GET["subject"]:
+        search_term = request.GET.get("subject")
+        searched_items = Blog.search_by_subject(search_term)
+        posts = Blog.objects.all().order_by('-id')[:5]
+        message = f"{search_term}"
+        return render(request, 'blog-search.html',{"message":message,"blogs": searched_items,'posts':posts})
+
+    else:
+        message = "You haven't searched for any blog"
+        return render(request, 'blog-search.html',{"message":message})
     

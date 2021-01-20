@@ -269,6 +269,11 @@ class Blog(models.Model):
     def number_of_comments(self):
         return Comments.objects.filter(blog=self).count()
 
+    @classmethod
+    def search_by_subject(cls,search_term):
+        blog = cls.objects.filter(subject__icontains=search_term)
+        return blog
+
 
 class Comments(models.Model):
     comments = models.TextField(max_length =1160,null = True)
@@ -282,10 +287,7 @@ class Comments(models.Model):
     def get_absolute_url(self):
         return reverse ('core:blog')
 
-    @classmethod
-    def search_by_subject(cls,search_term):
-        blog = cls.objects.filter(subject__icontains=search_term)
-        return blog
+ 
 
 
     

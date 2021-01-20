@@ -43,6 +43,7 @@ urlpatterns = [
     path('blog/<int:pk>/', BlogDetail.as_view(), name = 'blog-detail'),
     path('blog/<int:pk>/update', UpdateBlog.as_view(), name = 'update-blog'),
     path('blog/<int:pk>/delete', DeleteBlog.as_view(), name = 'delete-blog'),
+    path('searches/',views.search_result, name='search_result'),
     
 
 ]

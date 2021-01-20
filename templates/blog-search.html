@@ -125,130 +125,85 @@
   </nav>
 </header>
 
-<section id="blog" class="blog">
-    <div class="container">
-
-      <div class="row">
-
-        <div class="col-lg-8 entries">
-
-          <article class="entry entry-single" data-aos="fade-up">
-
-            <div class="entry-img">
-              <img src="assets/img/blog-1.jpg" alt="" class="img-fluid">
-            </div>
-
-            <h2 class="entry-title">
-              {{blog.subject}}
-            </h2>
-
-            <div class="entry-meta">
-              <ul>
-                <li class="d-flex align-items-center"><i class="icofont-user"></i> <a href="blog-single.html">{{blog.user.first_name}} {{blog.user.last_name}}</a></li>
-                <li class="d-flex align-items-center"><i class="icofont-wall-clock"></i> <a href="blog-single.html"><time datetime="2020-01-01">{{blog.timestamp| date:"M d,Y "}}</time></a></li>
-                <li class="d-flex align-items-center"><i class="icofont-comment"></i> <a href="blog-single.html">{{ blog.number_of_comments }} Comment(s)</a></li>
-              </ul>
-            </div>
-
-            <div class="entry-content">
-            
-              <img src="{{blog.image.url}}" class="img-fluid" alt=""> <br>
-
-           
-              <p> 
-            {% if blog.image %}
-                  
-            <br>
-            {%endif%}
-             {{blog.message}}
-            </p>
-           
-
-            </div>
-
-            <div class="entry-footer clearfix">
-              <div class="float-left">
-              
-               
-
-              
-              </div>
-
-              <div class="float-right share">
-                <a href="" title="Share on Twitter"><i class="icofont-twitter"></i></a>
-                <a href="" title="Share on Facebook"><i class="icofont-facebook"></i></a>
-                <a href="" title="Share on Instagram"><i class="icofont-instagram"></i></a>
-              </div>
-
-            </div>
-
-            {% if blog.user.username == user.username %}
-            <a href="{% url 'core:update-blog' blog.id  %} ">  <i class="fas fa-pen-fancy" style=" margin-top: -100px;color: black;">  </i> </a>    
-            <a href="{% url 'core:delete-blog' blog.id %} "> <i class="fas fa-trash-alt" style="color: black;margin-left: 10px;">  </i> </a>   
-           {%endif%}
+<main id="main">
   
 
-          </article><!-- End blog entry -->
+  
 
-        
-
-          <div class="blog-comments" data-aos="fade-up">
-
-            <h4 class="comments-count">{{ blog.number_of_comments }} Comment(s)</h4>
-            {% for comment in comments %}
-
-            <div id="comment-1" class="comment clearfix">
-              <img src="{{comment.user.artist.image_artist.url}}" class="comment-img  float-left" alt="">
-              <h5><a href="">{{comment.user.first_name }} {{comment.user.last_name }}</a> </h5>
-              <time datetime="2020-01-01">{{comment.timestamp| date:"M d,Y "}}</time>
-              <p>
-               {{comment.comments}}
-              </p>
-
-            </div><!-- End comment #1 -->
-             {%endfor%}
+    <!-- ======= Blog Section ======= -->
+    <section id="blog" class="blog">
+      <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+            {% if blogs %}
+              <h2>  Found  {{ blogs|length }} result(s) for {{message}} </h2>
           
+        </div>
+          </div>
+       
+        <div class="row">
+    
+          <div class="col-lg-8 entries">
+            {% for blog in blogs %}
+            <a href="{% url 'core:blog-detail' blog.id %}">
+            <article class="entry" data-aos="fade-up">
 
-            <div class="reply-form">
-              <h4>Leave a Reply</h4>
+              <div class="entry-img">
+                <img src="{{blog.image.url}}" alt="" class="img-fluid">
+              </div>
           
-              <form action=""  method = "post">
-                {% csrf_token %}
-                <div class="row">
-                  <div class="col-md-10 form-group">
-                    {{form|crispy}}
-                  </div>
-                  
-                </div>
-              
-              
-                <button type="submit" class="btn btn-primary">Post Comment</button>
+              <h2 class="entry-title">
+                <a href="blog-single.html">{{blog.subject}}</a>
+              </h2>
+             
 
-              </form>
+              <div class="entry-meta">
+                <ul>
+                  <li class="d-flex align-items-center"><i class="icofont-user"></i> <a href="blog-single.html">{{blog.user.first_name}} {{blog.user.last_name}}</a></li>
+                  <li class="d-flex align-items-center"><i class="icofont-wall-clock"></i> <a href="blog-single.html"><time datetime="2020-01-01">{{blog.timestamp| date:"M d,Y "}}</time></a></li>
+                   
+                  <li class="d-flex align-items-center"><i class="icofont-comment"></i> <a href="{% url 'core:blog-detail' blog.id %}"> {{ blog.number_of_comments }} Comment(s) </a> </li>
+                
+                </ul>
+              </div>
 
-            </div>
+              <div class="entry-content">
+                {% if blog.message %}
+                <p>
+                  {{blog.message}}
+                </p>
+                {%endif%}
+                <!-- <div class="read-more">
+                  <a href="blog-single.html">Read More</a>
+                </div> -->
+              </div>
 
-          </div><!-- End blog comments -->
-
-        </div><!-- End blog entries list -->
-
-        <div class="col-lg-4">
-
-          <div class="sidebar" data-aos="fade-left">
-
-            <h3 class="sidebar-title">Search</h3>
-            <div class="sidebar-item search-form">
-              <form action="{% url 'core:search_result' %}"  role="search">
-                <input type="text" placeholder="search blog.." name="subject">
-                <button type="submit"><i class="icofont-search"></i></button>
-              </form>
-
-
-            </div><!-- End sidebar search formn-->
+            </article>
+          </a>
+            {%endfor%}
 
 
-            <h3 class="sidebar-title">Recent Posts</h3>
-            <div class="sidebar-item recent-posts">
+
+          </div>
+          
+          <div class="col-lg-4">
+
+            <div class="sidebar" data-aos="fade-left">
+
+              <h3 class="sidebar-title">Search</h3>
+              <div class="sidebar-item search-form">
+                <form action="{% url 'core:search_result' %}"  role="search">
+                    <input type="text" placeholder="search blog.." name="subject">
+                    <button type="submit"><i class="icofont-search"></i></button>
+                  </form>
+  
+
+              </div><!-- End sidebar search formn-->
+
+            
+
+              <h3 class="sidebar-title">Recent Posts</h3>
+              <div class="sidebar-item recent-posts">
                 {% for blog in posts %}
                 <div class="post-item clearfix">
                   {% if blog.image %}
@@ -267,25 +222,35 @@
                 </div>
                 {%endfor%}
 
-            
+                
 
+         
 
-            </div><!-- End sidebar recent posts-->
+                
 
-     
+             
 
-          </div><!-- End sidebar -->
+              </div><!-- End sidebar recent posts-->
 
-        </div><!-- End blog sidebar -->
+             
+              <!-- End sidebar tags-->
+
+            </div><!-- End sidebar -->
+
+          </div><!-- End blog sidebar -->
+
+        </div>
 
       </div>
 
-    </div>
-  </section><!-- End Blog Section -->
+    </section>
+  
+    {% else %}
+<h2> Found 0 items for the search term {{message}}</h2>
+{% endif %}
 
-</main><!-- End #main -->
-
-
+  </main><!-- End #main -->
+</div>
 
    <section class="footer-section" style="margin-top: 50px;">
 		<div class="container-fluid">
