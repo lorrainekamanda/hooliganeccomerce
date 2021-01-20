@@ -151,7 +151,7 @@ AUTH_PASSWORD_VALIDATORS = [
 },
 ]
 
-
+SITE_ID = 5
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
