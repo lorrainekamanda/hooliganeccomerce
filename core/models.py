@@ -38,7 +38,7 @@ ACCOUNT_CHOICES = (
 
 class Artist(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL,on_delete = models.CASCADE,blank = True)
-    mailing_address = models.CharField(max_length = 100, verbose_name = "Mailing_Address",blank = True,null = True)
+    
     instagram = models.URLField(max_length = 200,blank = True,null = True)
     facebook = models.URLField(max_length = 200,blank = True,null = True)
     twitter = models.URLField(max_length = 200,blank = True,null = True)
@@ -251,7 +251,41 @@ class Seller(models.Model):
        return self.name
 
    
+class Blog(models.Model):
     
+    user = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE,blank=True,null = True)
+    subject = models.CharField(max_length = 100,blank = True,null = True)
+    message = models.TextField( null=True, blank=True)
+    timestamp = models.DateTimeField(default = timezone.now) 
+    image = CloudinaryField("Attach Image",null=True, blank=True)
+
+    def __str__(self):
+       return str(self.subject)
+
+    def get_absolute_url(self):
+       return reverse("core:blog")
+
+    @property
+    def number_of_comments(self):
+        return Comments.objects.filter(blog=self).count()
+
+
+class Comments(models.Model):
+    comments = models.TextField(max_length =1160,null = True)
+    user= models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE,null = True)
+    blog = models.ForeignKey(Blog,on_delete=models.CASCADE,null = True)
+    timestamp = models.DateTimeField(default = timezone.now) 
+    
+    def __str__(self):
+       return str(self.comments)
+
+    def get_absolute_url(self):
+        return reverse ('core:blog')
+
+    @classmethod
+    def search_by_subject(cls,search_term):
+        blog = cls.objects.filter(subject__icontains=search_term)
+        return blog
 
 
     

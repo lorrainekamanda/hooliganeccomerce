@@ -4,7 +4,7 @@ from django_countries.fields import CountryField
 from django_countries.widgets import CountrySelectWidget
 from django.db import models
 from django.conf import settings
-from .models import Item,Artist,Order,BillingAdress,PaymentDetails,Chat,Show,Seller,Account,Gallery
+from .models import Item,Artist,Order,BillingAdress,PaymentDetails,Chat,Show,Seller,Account,Gallery,Blog,Comments
 from django.forms import widgets
 from django.forms import ModelChoiceField
 from django.contrib.auth import get_user_model
@@ -188,3 +188,14 @@ class  SellerForm(forms.ModelForm):
     description = forms.CharField(max_length=200, label='',widget = forms.Textarea(attrs = {'placeholder':'Description'}))
     country = CountryField(blank_label = '(select country...)').formfield(widget = CountrySelectWidget(attrs = {'class':'custom-select d-block w-100'}))
 
+class BlogForm(forms.ModelForm):
+    class Meta:
+        
+       
+        model = Blog
+        fields = ['subject','message','image']
+
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comments
+        fields = ['comments']

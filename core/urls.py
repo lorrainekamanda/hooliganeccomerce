@@ -1,5 +1,5 @@
 from django.urls import path,re_path
-from .views import homeview,itemdetailview,add_to_cart,remove_from_cart,OrderSummaryView,remove_single_item_from_cart,CheckoutView,PaymentView,search_results,productview,paintingsview,photographsview,prints,profile,artists,CreateDetail,sculptures,myprofile,ItemList,ArtistList,ItemDetail,UserList,UserDetail,MessageView,CreateShow,UpdateDetail,ItemDelete,UpdateShow,ShowDelete,Account,SummaryView
+from .views import homeview,itemdetailview,add_to_cart,remove_from_cart,OrderSummaryView,remove_single_item_from_cart,CheckoutView,PaymentView,search_results,productview,paintingsview,photographsview,prints,profile,artists,CreateDetail,sculptures,myprofile,ItemList,ArtistList,ItemDetail,UserList,UserDetail,MessageView,CreateShow,UpdateDetail,ItemDelete,UpdateShow,ShowDelete,Account,SummaryView,blog,BlogDetail,UpdateBlog,DeleteBlog
 from django.conf import settings
 from django.conf.urls.static import static
 from . import views
@@ -39,6 +39,10 @@ urlpatterns = [
     path('<int:pk>/delete', ShowDelete.as_view(), name = 'show-delete'),
     path('seller-account/',Account.as_view() , name= 'seller-account'),
     path('summary-view/',SummaryView.as_view() , name= 'summary-view'),
+    path('blog/',blog.as_view() , name= 'blog'),
+    path('blog/<int:pk>/', BlogDetail.as_view(), name = 'blog-detail'),
+    path('blog/<int:pk>/update', UpdateBlog.as_view(), name = 'update-blog'),
+    path('blog/<int:pk>/delete', DeleteBlog.as_view(), name = 'delete-blog'),
     
 
 ]

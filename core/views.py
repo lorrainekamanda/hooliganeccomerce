@@ -1,14 +1,14 @@
 from django.shortcuts import render,get_object_or_404,redirect
 from django.conf import settings
 from django.utils import timezone
-from .models import Order,OrderItem,Item,BillingAdress,Payment,Artist,PaymentDetails,Chat,Show,Account,Seller,Gallery
+from .models import Order,OrderItem,Item,BillingAdress,Payment,Artist,PaymentDetails,Chat,Show,Account,Seller,Gallery,Blog,Comments
 from django.views.generic import ListView,DetailView,View
 from django.contrib import messages
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.utils.decorators import method_decorator
-from .forms import CheckoutForm,UserProfileForm,UserUpdateForm,UploadForm,AdressForm,PaymentForm,ComposeForm,ChatForm,ShowForm,UserImageForm,AccountForm,SellerForm,GalleryForm
+from .forms import CheckoutForm,UserProfileForm,UserUpdateForm,UploadForm,AdressForm,PaymentForm,ComposeForm,ChatForm,ShowForm,UserImageForm,AccountForm,SellerForm,GalleryForm,BlogForm,CommentForm
 from allauth.account.views import PasswordResetView
 from django.db import models
 from django.conf import settings
@@ -42,7 +42,6 @@ try:
 except ImportError:
     from django.core.urlresolvers import reverse
 from . import models
-
 from django.shortcuts import get_object_or_404
 from django.db.models import Q
 from django.utils.safestring import mark_safe
@@ -62,7 +61,7 @@ def is_users(item_user, logged_user):
 
 
 
-class CheckoutView(View):
+class CheckoutView(LoginRequiredMixin,View):
     def get(self,*args,**kwargs):
         form = CheckoutForm()
         order = Order.objects.get(user = self.request.user,ordered = False)
@@ -237,7 +236,7 @@ def load_gallery(user):
    return gallery
 
 
-class myprofile(View):
+class myprofile(LoginRequiredMixin,View):
 
     
     template_name = 'myprofile.html'
@@ -461,7 +460,7 @@ def remove_single_item_from_cart(request,slug):
     return redirect('core:product',slug = slug)
 
 
-class PaymentView(View):
+class PaymentView(LoginRequiredMixin,View):
 
     def get(self,*args,**kwargs):
         
@@ -594,7 +593,7 @@ class UserDetail(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = UserSerializer
 
 
-class MessageView(View):
+class MessageView(LoginRequiredMixin,View):
     def get(self,request):
         form = ChatForm()
         form.instance.user = self.request.user
@@ -617,7 +616,7 @@ class MessageView(View):
             return redirect('core:message')
 
 
-class CreateShow(View):
+class CreateShow(LoginRequiredMixin,View):
     def get(self,request):
         form = ShowForm()
         form.instance.user = self.request.user
@@ -696,7 +695,7 @@ class ShowDelete(LoginRequiredMixin, DeleteView):
     def test_func(self):
         return is_users(self.get_object().username, self.request.user)
 
-class Account(View):
+class Account(LoginRequiredMixin,View):
     def get(self,request):
         
         form = SellerForm(instance = request.user.seller)
@@ -741,4 +740,96 @@ class SummaryView(LoginRequiredMixin,View):
          }
         
          return render(self.request,'summary.html',context)
+
+
+class blog(LoginRequiredMixin,CreateView):
+    
+    model = Blog
+    fields = ['subject','message','image']
+    template_name = 'blog.html'
+    
+
+    def form_valid(self,form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
+
+    def get_context_data(self, **kwargs):
+        context = super(blog, self).get_context_data(**kwargs)
+        context['blogs'] = Blog.objects.all()
+        context['posts'] = Blog.objects.all().order_by('-id')[:5]
+        return context
+
+class BlogDetail(DetailView):
+    model = Blog
+    template_name = 'blog-detail.html'
+    context_object_name = 'blog'
+    
+    def get_context_data(self, **kwargs):
+        data = super().get_context_data(**kwargs)
+        data['posts'] = Blog.objects.all().order_by('-id')[:5]
+        comments_connected = Comments.objects.filter(blog=self.get_object())
+        data['comments'] = comments_connected
+        data['form'] = CommentForm(instance=self.request.user)
+        return data
+
+    def post(self, request, *args, **kwargs):
+        new_comment = Comments(comments=request.POST.get('comments'),
+                              user=self.request.user,
+                              blog=self.get_object())
+        new_comment.save()
+
+        return self.get(self, request, *args, **kwargs)
+
+   
+
+class UpdateBlog(LoginRequiredMixin,UpdateView):
+    model = Blog
+    template_name = 'update-blog.html'
+    fields = ['subject','message','image']
+    def form_valid(self,form):
+        form.instance.username = self.request.user
+        return super().form_valid(form)
+
+
+
+class DeleteBlog(LoginRequiredMixin, DeleteView):
+    model = Blog
+    template_name = 'delete-blog.html'
+    context_object_name = 'blog'
+    success_url = '/'
+
+    def test_func(self):
+        return is_users(self.get_object().username, self.request.user)
+
+
+class UpdateComments(LoginRequiredMixin,UpdateView):
+    model = Comments
+    fields = ['comments']
+    def form_valid(self,form):
+        form.instance.username = self.request.user
+        return super().form_valid(form)
+
+
+class DeleteComments(LoginRequiredMixin, DeleteView):
+    model = Blog
+    template_name = 'dshow.html'
+    context_object_name = 'image'
+    success_url = 'core:blog'
+
+    def test_func(self):
+        return is_users(self.get_object().username, self.request.user)
+  
+    
+def search_result(request):
+
+    if 'title' in request.GET and request.GET["title"]:
+        search_term = request.GET.get("title")
+        searched_items = Item.search_by_title(search_term)
+        message = f"{search_term}"
+
+        return render(request, 'search.html',{"message":message,"items": searched_items})
+
+    else:
+        message = "You haven't searched for any term"
+        return render(request, 'search.html',{"message":message})
     

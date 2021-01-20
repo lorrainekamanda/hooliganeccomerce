@@ -9,7 +9,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Delete art</title>
+    <title>Delete Blog</title>
     <link rel="shortcut icon" href="{% static 'logos.png'%}" type="image/4x-icon">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
@@ -153,18 +153,20 @@
       </header>
       <div class="container">
       <div class="row">
-          <div class="col-md-8 col-sm-12 col-xs-12">
+          <div class="col-md-12 col-sm-12 col-xs-12">
         <form method="POST" class="col-6 no-padding" enctype="multipart/form-data">
             {% csrf_token %}
             <fieldset class="form-group white-important">
                 Do you really want to delete ?
             </fieldset>
             <div class="row">
-                <div class="col-md-6">
-            <h4 style="font-weight: 700;">{{ image.title}}</h4>
+                <div class="col-md-12">
+            <h4 style="font-weight: 700;">{{ blog.subject}}</h4>
+
+            <p>{{ blog.message}}</p>
          
         </div>
-            <img src="{{image.image.url}}" alt="" srcset="" >
+            <img src="{{blog.image.url}}" alt="" srcset="" >
             <div class="form-group"> <br> 
               <div style="display: inline-flexbox;">
                 <button class="btn btn-danger" type="submit" >Yes</button>
@@ -174,9 +176,11 @@
             </div>
         </div>
         </form>
-        <!-- <a href="{{image.get_absolute_url}}">
-          <button class="btn btn-primary"  style="margin-top: 25px;margin-left: 10px;">No Go Back</button> -->
+      
         </div>
+        <!-- <a href="/" style="margin-left: 75px; margin-top: -90px;">
+            <button class="btn btn-primary" style="margin-top: -90px;" >No Go Back</button>
+            </a> -->
     </div>
     </div> 
 </div> 
