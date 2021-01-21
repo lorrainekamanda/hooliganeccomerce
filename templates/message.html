@@ -376,7 +376,9 @@ body{
 						<div class="table-responsive tab-pane show active" id="about-me">
 							<table class="table" >
 								<tbody>
+                  {% if chats %}
                   <h1>Inbox Messages</h1>
+                  {%endif%}
                   {% for chat in chats %}
 
                   {% if chat.reciever.username == user.username %}
@@ -389,9 +391,11 @@ body{
 									<td class="time">{{chat.timestamp}}</td>
                 </tr>
                 {%endif%}
+
                 {% empty %}
 
-                <h1>No Inbox</h1>
+                <h5>No Inbox</h5>
+                
                 {%endfor%}
 						
 					
@@ -404,7 +408,9 @@ body{
               <!-- nice -->
                
             <div class="table-responsive tab-pane " id="settings">
+              {% if chats%}
               <h1>Sent Messages</h1>
+              {%endif%}
 							<table class="table" >
 								<tbody>
                   {% for chat in chats %}
@@ -422,7 +428,7 @@ body{
                 {%endif%}
                 {% empty %}
 
-                <h1>No sent Messages</h1>
+                <h5>No sent Messages</h5>
 							{%endfor%}
 					
 						
@@ -515,14 +521,7 @@ body{
                   
                   <p style="color: white;"> <i class="fas fa-map-marker-alt" style="margin-right: 10px;"></i>New York,USA </p>
                 </div>
-                <div class="con-info">
-                  
-                  <p style="color: white;"> <i class="fas fa-phone" style="margin-right: 10px;"></i>+1 347 981 3342</p>
-                </div>
-                <div class="con-info">
-    
-                  <p style="color: white;"> <i class="far fa-envelope" style="margin-right: 10px;"></i>451hugo@gmail.com</p>
-                </div>
+            
               </div>
             </div>
           </div>
